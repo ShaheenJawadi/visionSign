@@ -30,4 +30,13 @@ public class TestEntity {
     public void setTest2(int test2) {
         this.test2 = test2;
     }
+
+    @Override
+    public String toString() {
+        return "TestEntity{" +
+                "name='" + name + '\'' +
+                ", test=" + test +
+                ", test2=" + test2 +
+                '}';
+    }
 }
