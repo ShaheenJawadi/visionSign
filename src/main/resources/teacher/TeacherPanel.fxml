@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -20,12 +21,12 @@
          <children>
             <BorderPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <top>
-                  <AnchorPane prefHeight="63.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                  <AnchorPane prefHeight="125.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Pane prefHeight="98.0" prefWidth="600.0" style="-fx-background-color: #1f93ff;" AnchorPane.bottomAnchor="-35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Pane prefHeight="99.0" prefWidth="600.0" style="-fx-background-color: #1f93ff;" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <AnchorPane prefHeight="200.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="600.0" AnchorPane.bottomAnchor="67.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
                                     <StackPane prefHeight="150.0" prefWidth="200.0" HBox.hgrow="NEVER">
                                        <children>
@@ -57,8 +58,11 @@
                                  </children>
                               </HBox>
                            </children>
+                           <cursor>
+                              <Cursor fx:constant="DEFAULT" />
+                           </cursor>
                         </AnchorPane>
-                        <HBox alignment="CENTER_LEFT" layoutX="23.0" layoutY="17.0" prefHeight="75.0" prefWidth="550.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="-59.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="60.0">
+                        <HBox alignment="CENTER_LEFT" layoutX="23.0" layoutY="17.0" prefHeight="75.0" prefWidth="550.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="60.0">
                            <children>
                               <Pane prefHeight="88.0" prefWidth="159.0">
                                  <children>
@@ -72,18 +76,30 @@
                                     </ImageView>
                                  </children>
                               </Pane>
-                              <Pane prefHeight="74.0" prefWidth="446.0">
+                              <Pane prefHeight="245.0" prefWidth="419.0">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin>
                                  <children>
                                     <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="421.0" spacing="20.0">
                                        <children>
-                                          <Button fx:id="dashboardBtnId" mnemonicParsing="false" onAction="#openDashboard" style="-fx-background-color: #fff;" text="Tableau de board" />
-                                          <Button mnemonicParsing="false" onAction="#AddCours" style="-fx-background-color: #fff;" text="Cours" />
+                                          <Button fx:id="dashboardBtnId" mnemonicParsing="false" onAction="#openDashboard" style="-fx-background-color: #fff;" text="Tableau de board">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Button>
+                                          <Button mnemonicParsing="false" onAction="#AddCours" style="-fx-background-color: #fff;" text="Cours">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Button>
                                        </children>
+                                       <cursor>
+                                          <Cursor fx:constant="DEFAULT" />
+                                       </cursor>
                                     </HBox>
                                  </children>
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
                               </Pane>
                            </children>
                         </HBox>
