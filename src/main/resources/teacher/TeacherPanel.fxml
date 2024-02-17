@@ -10,6 +10,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teacher.TeacherMainPanel">
    <children>
@@ -19,12 +22,47 @@
                <top>
                   <AnchorPane prefHeight="63.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Pane prefHeight="79.0" prefWidth="200.0" style="-fx-background-color: #1f93ff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                        <HBox layoutX="23.0" layoutY="17.0" prefHeight="74.0" prefWidth="554.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="-20.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="17.0">
+                        <Pane prefHeight="98.0" prefWidth="600.0" style="-fx-background-color: #1f93ff;" AnchorPane.bottomAnchor="-35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <Pane prefHeight="74.0" prefWidth="162.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="61.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <ImageView fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                                    <StackPane prefHeight="150.0" prefWidth="200.0" HBox.hgrow="NEVER">
+                                       <children>
+                                          <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Espace enseignant" StackPane.alignment="CENTER_LEFT">
+                                             <font>
+                                                <Font size="19.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </StackPane>
+                                    <AnchorPane prefHeight="62.0" prefWidth="407.0" HBox.hgrow="ALWAYS" />
+                                    <StackPane alignment="CENTER_RIGHT" prefHeight="150.0" prefWidth="200.0" HBox.hgrow="NEVER">
+                                       <children>
+                                          <HBox alignment="CENTER" prefHeight="62.0" prefWidth="194.0" spacing="5.0" StackPane.alignment="CENTER_RIGHT">
+                                             <children>
+                                                <Circle fill="WHITE" radius="22.0" stroke="WHITE" strokeType="INSIDE" />
+                                                <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Shaheen Jawadi">
+                                                   <font>
+                                                      <Font size="13.0" />
+                                                   </font>
+                                                </Text>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </StackPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                        <HBox alignment="CENTER_LEFT" layoutX="23.0" layoutY="17.0" prefHeight="75.0" prefWidth="550.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="-59.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="60.0">
+                           <children>
+                              <Pane prefHeight="88.0" prefWidth="159.0">
+                                 <children>
+                                    <ImageView fitHeight="52.0" fitWidth="100.0" layoutX="18.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../assets/logo.png" />
                                        </image>
@@ -39,7 +77,7 @@
                                     <Insets />
                                  </HBox.margin>
                                  <children>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="69.0" prefWidth="421.0" spacing="20.0">
+                                    <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="421.0" spacing="20.0">
                                        <children>
                                           <Button fx:id="dashboardBtnId" mnemonicParsing="false" onAction="#openDashboard" style="-fx-background-color: #fff;" text="Tableau de board" />
                                           <Button mnemonicParsing="false" onAction="#AddCours" style="-fx-background-color: #fff;" text="Cours" />
@@ -53,7 +91,7 @@
                   </AnchorPane>
                </top>
                <center>
-                  <StackPane fx:id="spSubScene" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                  <StackPane fx:id="spSubScene" prefHeight="327.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
          </children>
