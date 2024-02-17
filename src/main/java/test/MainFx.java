@@ -11,7 +11,7 @@ public class MainFx  extends Application {
     public void start(Stage primaryStage) throws Exception {
 
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterPersonne.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/MainPage.fxml"));
 
         Parent root= loader.load();
 
