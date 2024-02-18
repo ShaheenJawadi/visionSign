@@ -77,7 +77,7 @@ public class Quiz {
     @Override
     public String toString() {
         return "Quiz{" +
-                "id=" + 5 +
+                "id=" + id +
                 ", nom='" + nom + '\'' +
                 ", duree='" + duree + '\'' +
                 ", coursId=" + coursId +
