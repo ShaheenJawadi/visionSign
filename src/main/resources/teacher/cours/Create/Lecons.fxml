@@ -64,7 +64,7 @@
                         <VBox layoutX="19.924529018924964" layoutY="19.924529018924964" prefHeight="307.0" prefWidth="581.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                             <children>
                                 <Label text="Contenu" />
-                        <HTMLEditor fx:id="leconContent" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" prefHeight="282.0" prefWidth="562.0" />
+                        <HTMLEditor fx:id="leconContent" htmlText="" prefHeight="282.0" prefWidth="562.0" />
                             </children>
                         </VBox>
                     </children>
