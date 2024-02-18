@@ -1,0 +1,42 @@
+
+* {
+    -fx-primary-color: #00aeef;
+    -fx-primary-color-background: rgba(0, 174, 239, 0.25);
+
+    -fx-page-background: #f5f6f8;
+    -fx-error-background : #f46a6a
+}
+
+
+.TForm .inputHolder {
+    -fx-padding: 10px;
+}
+
+.TForm .inputHolder .label{
+    -fx-font-weight: 600;
+    -fx-font-size: 17px;
+
+    -fx-padding: 0 0 10px 0;
+
+}
+
+.TForm .inputHolder  .inputField{
+    -fx-font-size: 18px;
+}
+
+.submitButton {
+    -fx-background-color: -fx-primary-color;
+    -fx-text-fill: #fff;
+    -fx-font-size: 19px;
+}
+
+.cancelButton {
+    -fx-background-color: -fx-error-background ;
+    -fx-text-fill: #fff;
+    -fx-font-size: 19px;
+}
+
+.uploadBtn {
+    -fx-background-color:-fx-primary-color-background ;
+    -fx-text-fill: -fx-primary-color;
+}
