@@ -1,19 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controllers.teacher.TeacherCoursController"
-            prefHeight="400.0" prefWidth="600.0">
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" styleClass="TForm" stylesheets="@../../../styles/Teacher/form.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teacher.TeacherCoursController">
     <children>
-        <Label prefHeight="312.0" prefWidth="541.0" text="Ressources">
-            <font>
-                <Font size="48.0" />
-            </font>
-        </Label>
+        <VBox prefHeight="200.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <AnchorPane prefHeight="41.0" prefWidth="600.0" styleClass="inputHolder">
+                    <children>
+                        <HBox prefHeight="53.0" prefWidth="600.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                            <children>
+                                <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <Label text="Lien" />
+                                        <TextField fx:id="lien" styleClass="inputField">
+                                            <font>
+                                                <Font size="18.0" />
+                                            </font>
+                                        </TextField>
+                                    </children>
+                                </VBox>
+                                <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
+                                    <children>
+                                        <Label text="Type" />
+                                        <TextField fx:id="type" styleClass="inputField" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </HBox>
+                    </children>
+                </AnchorPane>
+            </children>
+        </VBox>
     </children>
 </AnchorPane>
