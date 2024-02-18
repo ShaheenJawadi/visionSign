@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+<VBox xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teacher.CoursItemController">
+   <children>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="test item" wrappingWidth="159.60939407348633" />
+   </children>
+</VBox>
