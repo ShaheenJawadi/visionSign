@@ -1,35 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../styles/add_cours.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teacher.TeacherCoursController">
+<AnchorPane minWidth="600.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@../../../styles/Teacher/add_cours.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teacher.TeacherCoursController">
    <children>
-      <TabPane prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
-        <tabs>
-          <Tab text="Details">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                <fx:include fx:id="detailsTab" source="Details.fxml" />
-              </AnchorPane>
-            </content>
-          </Tab>
-          <Tab text="Ressources">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" >
-                <fx:include fx:id="ressourcesTab" source="Ressources.fxml" />
-              </AnchorPane>
-            </content>
-          </Tab>
-            <Tab text="Lecons">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" >
-                  <fx:include fx:id="lessonTab" source="Lecons.fxml" />
-                </AnchorPane>
-              </content>
-            </Tab>
-        </tabs>
-      </TabPane>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <TabPane prefHeight="569.0" prefWidth="561.0" style="-fx-background-color: #fff;" styleClass="MyTabPane" stylesheets="@../../../styles/Teacher/add_cours.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+              <tabs>
+                <Tab text="Details">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <fx:include fx:id="detailsTab" source="Details.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                    </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Ressources">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                      <fx:include fx:id="ressourcesTab" source="Ressources.fxml" />
+                    </AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Lecons">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <fx:include fx:id="lessonTab" source="Lecons.fxml" />
+                      </AnchorPane>
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+            <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Button" />
+                  <Button mnemonicParsing="false" text="Button" />
+               </children>
+            </HBox>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="NEVER" />
+         </children>
+      </VBox>
    </children>
 </AnchorPane>
