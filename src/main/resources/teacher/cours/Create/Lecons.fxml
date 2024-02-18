@@ -18,7 +18,7 @@
                         <VBox prefHeight="53.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <children>
                                 <Label text="Titre de la lecon" />
-                                <TextField fx:id="nom" styleClass="inputField" />
+                                <TextField fx:id="leconTitle" styleClass="inputField" />
                             </children>
                         </VBox>
                     </children>
@@ -30,19 +30,19 @@
                                 <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
                                     <children>
                                         <Label text="Lien video" />
-                                        <TextField fx:id="niveau" styleClass="inputField" VBox.vgrow="ALWAYS" />
+                                        <TextField fx:id="leconVideo" styleClass="inputField" VBox.vgrow="ALWAYS" />
                                     </children>
                                 </VBox>
                                 <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
                                     <children>
                                         <Label text="Image" />
-                              <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="139.0" styleClass="uploadBtn" text="Ajouter Image" />
+                              <Button fx:id="leconImage" mnemonicParsing="false" prefHeight="38.0" prefWidth="139.0" styleClass="uploadBtn" text="Ajouter Image" />
                                     </children>
                                 </VBox>
                                 <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
                                     <children>
                                         <Label text="Duree de la lecon" />
-                                        <TextField fx:id="categorie" maxHeight="200.0" styleClass="inputField">
+                                        <TextField fx:id="leconDuration" maxHeight="200.0" styleClass="inputField">
                                             <font>
                                                 <Font size="18.0" />
                                             </font>
@@ -52,7 +52,7 @@
                                 <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
                                     <children>
                                         <Label text="Ordre" />
-                                        <TextField fx:id="sousCategorie" maxWidth="200.0" styleClass="inputField" />
+                                        <TextField fx:id="leconOrdre" maxWidth="200.0" styleClass="inputField" />
                                     </children>
                                 </VBox>
                             </children>
@@ -64,7 +64,7 @@
                         <VBox layoutX="19.924529018924964" layoutY="19.924529018924964" prefHeight="307.0" prefWidth="581.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                             <children>
                                 <Label text="Contenu" />
-                        <HTMLEditor htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" prefHeight="282.0" prefWidth="562.0" />
+                        <HTMLEditor fx:id="leconContent" htmlText="&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body contenteditable=&quot;true&quot;&gt;&lt;/body&gt;&lt;/html&gt;" prefHeight="282.0" prefWidth="562.0" />
                             </children>
                         </VBox>
                     </children>
