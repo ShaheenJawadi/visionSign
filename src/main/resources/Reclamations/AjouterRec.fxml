@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Reclamations.AjouterRecController">
+   <children>
+      <Label layoutX="164.0" layoutY="14.0" prefHeight="55.0" prefWidth="270.0" text="Ajouter Reclamation" textFill="#349fd9">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Button layoutX="481.0" layoutY="317.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
+      <TextArea fx:id="desFx" layoutX="122.0" layoutY="127.0" prefHeight="83.0" prefWidth="200.0" promptText="desciption" />
+      <TextField fx:id="typeFx" layoutX="122.0" layoutY="92.0" promptText="type" />
+      <TextField fx:id="statFx" layoutX="122.0" layoutY="220.0" promptText="status" />
+      <DatePicker fx:id="dateFx" layoutX="122.0" layoutY="253.0" promptText="date" />
+      <TextField fx:id="userFx" layoutX="123.0" layoutY="292.0" promptText="id-user" />
+   </children>
+</AnchorPane>

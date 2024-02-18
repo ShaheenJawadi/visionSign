@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Reclamations.ModifierRecController">
+   <children>
+      <TextArea fx:id="desFx" layoutX="132.0" layoutY="137.0" prefHeight="83.0" prefWidth="200.0" promptText="desciption" />
+      <TextField fx:id="typeFx" layoutX="132.0" layoutY="102.0" promptText="type" />
+      <TextField fx:id="statFx" layoutX="132.0" layoutY="230.0" promptText="status" />
+      <DatePicker fx:id="dateFx" layoutX="132.0" layoutY="263.0" promptText="date" />
+      <TextField fx:id="userFx" layoutX="133.0" layoutY="302.0" promptText="id-user" />
+      <Button layoutX="481.0" layoutY="336.0" mnemonicParsing="false" onAction="#modifier" text="modifier" />
+      <TextField fx:id="id" layoutX="134.0" layoutY="65.0" promptText="id" />
+   </children>
+</AnchorPane>
