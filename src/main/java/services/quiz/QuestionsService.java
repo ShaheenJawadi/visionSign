@@ -2,7 +2,7 @@ package services.quiz;
 
 import entities.Questions;
 import entities.Quiz;
-import services.SuggestionService;
+import services.quiz.SuggestionService;
 import utils.MyDatabase;
 
 import java.sql.*;
