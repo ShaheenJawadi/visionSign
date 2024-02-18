@@ -1,0 +1,58 @@
+* {
+    -fx-primary-color: #00aeef;
+    -fx-primary-color-background: rgba(0, 174, 239, 0.25);
+    -fx-secondary-color: #34C38F;
+    -fx-secondary-color-background: rgba(52, 195, 143, 0.25);
+    -fx-third-color: #9016b2;
+    -fx-third-color-background: rgba(144, 22, 178, 0.25);
+    -fx-page-background: #f5f6f8;
+    -fx-error-background : #f46a6a
+}
+
+.s_holder {
+    -fx-padding:2px;
+}
+.s_holder .label{
+    -fx-font-size: 10px;
+
+}
+
+.s_holder  .txt{
+    -fx-font-size: 16px;
+}
+
+.s_holder  .txt.category{
+    -fx-font-size: 12px;
+    -fx-fill: -fx-primary-color;
+
+}
+
+.s_holder  .txt.subcategory{
+
+    -fx-fill: -fx-secondary-color;
+
+}
+
+.s_holder .category_holdr{
+    -fx-border-radius: 50px;
+    -fx-background-color: -fx-prizmary-color-background;
+    -fx-background-radius: 50px;
+    -fx-padding: 2px 10px 2px 10px;
+    -fx-alignment: center;
+
+}
+.s_holder  .sub_category_holdr{
+    -fx-background-color: -fx-secondary-color-background;
+}
+
+
+.s_holder .ressource_holdr{
+    -fx-background-color: -fx-third-color-background;
+
+
+}
+.s_holder  .txt.ressource{
+    -fx-fill: -fx-third-color;
+}
+
+
