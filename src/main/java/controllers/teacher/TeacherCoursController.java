@@ -25,7 +25,7 @@ public class TeacherCoursController {
         try
         {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/cours/Create/NewCours.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/cours/create/NewCours.fxml"));
 
             loader.load();
 
