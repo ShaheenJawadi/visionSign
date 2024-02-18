@@ -1,0 +1,49 @@
+* {
+    -fx-primary-color: #00aeef;
+    -fx-secondary-color: #34C38F;
+    -fx-primary-color-background: rgba(0, 174, 239, 0.25);
+    -fx-page-background: #f5f6f8;
+    -fx-error-background : #f46a6a;
+}
+
+.MyTabPane .tab {
+    -fx-background-color: #e8e8e8;
+    -fx-padding: 10px;
+    -fx-border-color:-fx-page-background ;
+
+    -fx-background-insets: 0 0 0 0;
+    -fx-background-radius: 5 5 0 0;
+}
+
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: -fx-primary-color;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: #f2f2f2;
+
+
+}
+
+
+.tab-pane .tab-header-area .tab-header-background {
+
+    -fx-background-color: -fx-page-background;
+}
+
+
+
+
+
+.tab-pane .tab:selected {
+    -fx-background-color: -fx-primary-color;
+
+}
+
+
+
