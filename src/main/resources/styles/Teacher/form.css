@@ -14,9 +14,9 @@
 
 .TForm .inputHolder .label{
     -fx-font-weight: 600;
-    -fx-font-size: 17px;
+    -fx-font-size: 14px;
 
-    -fx-padding: 0 0 10px 0;
+    -fx-padding: 0 0 4px 0;
 
 }
 
