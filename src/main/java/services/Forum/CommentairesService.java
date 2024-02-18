@@ -17,13 +17,24 @@ public class CommentairesService implements IForum<Commentaires> {
     @Override
     public void addPublicationOrCommentaire(Commentaires commentaires) throws SQLException {
         String sql = "INSERT INTO commentaires (commentaire, date, id_pub, user_id) VALUES (?, ?, ?, ?)";
-        PreparedStatement ps = connection.prepareStatement(sql);
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, commentaires.getCommentaire());
         ps.setTimestamp(2, new Timestamp(commentaires.getDate().getTime()));
         ps.setInt(3, commentaires.getId_pub());
         ps.setInt(4, commentaires.getUserId());
-        ps.executeUpdate();
-    }
+        int affectedRows = ps.executeUpdate();
+
+        if (affectedRows == 0) {
+            throw new SQLException("Creating comment failed, no rows affected.");
+        }
+
+        try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                commentaires.setId(generatedKeys.getInt(1));
+            } else {
+                throw new SQLException("Creating comment failed, no ID obtained.");
+            }
+        }    }
 
     @Override
     public void updatePublicationOrCommentaire(Commentaires commentaires) throws SQLException {

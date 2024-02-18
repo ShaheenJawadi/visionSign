@@ -19,12 +19,24 @@ public class PublicationsService implements IForum<Publications> {
     @Override
     public void addPublicationOrCommentaire(Publications publications) throws SQLException {
         String sql = "INSERT INTO publications (titre, contenu, date_creation,user_id) VALUES (?, ?, ?,?)";
-        PreparedStatement ps = connection.prepareStatement(sql);
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, publications.getTitre());
         ps.setString(2, publications.getContenu());
         ps.setTimestamp(3, new Timestamp(publications.getDate_creation().getTime()));
         ps.setInt(4, publications.getUserId());
-        ps.executeUpdate();
+        int affectedRows = ps.executeUpdate();
+
+        if (affectedRows == 0) {
+            throw new SQLException("Creating publication failed, no rows affected.");
+        }
+
+        try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
+            if (generatedKeys.next()) {
+                publications.setId(generatedKeys.getInt(1));
+            } else {
+                throw new SQLException("Creating publication failed, no ID obtained.");
+            }
+        }
     }
 
     @Override
