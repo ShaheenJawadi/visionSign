@@ -88,7 +88,7 @@
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor></Button>
-                                          <Button mnemonicParsing="false" onAction="#AddCours" style="-fx-background-color: #fff;" text="Cours">
+                                          <Button mnemonicParsing="false" onAction="#openCoursPage" style="-fx-background-color: #fff;" text="Cours">
                                              <cursor>
                                                 <Cursor fx:constant="HAND" />
                                              </cursor></Button>

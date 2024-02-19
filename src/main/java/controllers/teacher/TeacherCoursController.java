@@ -2,15 +2,23 @@ package controllers.teacher;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class TeacherCoursController {
+public class TeacherCoursController{
 
     private @FXML VBox vbRoot;
     private  StackPane spSubScene;
+
+
+
     VBox getVBoxRoot()
     {
         return vbRoot;
@@ -29,10 +37,10 @@ public class TeacherCoursController {
 
             loader.load();
 
-            TeacherCoursController addCourrs = loader.getController();
-            addCourrs.setStackPane(spSubScene);
+            ManageCoursController addCoursPage = loader.getController();
+            addCoursPage.setStackPane(spSubScene);
             spSubScene.getChildren().clear();
-            spSubScene.getChildren().add(addCourrs.getVBoxRoot());
+            spSubScene.getChildren().add(addCoursPage.getVBoxRoot());
         }
         catch (IOException ex)
         {
@@ -44,5 +52,6 @@ public class TeacherCoursController {
 
 
     }
+
 
 }
