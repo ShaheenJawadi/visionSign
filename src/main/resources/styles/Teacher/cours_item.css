@@ -35,7 +35,7 @@
 
 .s_holder .category_holdr{
     -fx-border-radius: 50px;
-    -fx-background-color: -fx-prizmary-color-background;
+    -fx-background-color: -fx-primary-color-background;
     -fx-background-radius: 50px;
     -fx-padding: 2px 10px 2px 10px;
     -fx-alignment: center;
@@ -55,4 +55,9 @@
     -fx-fill: -fx-third-color;
 }
 
+.item {
+    -fx-border-radius: 5;
+    -fx-border-color: -fx-primary-color;
+    -fx-background-color: #fff;
+}
 
