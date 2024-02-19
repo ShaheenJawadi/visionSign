@@ -42,7 +42,7 @@ public class TeacherMainPanelController {
 
     }
 
-    public void AddCours(){
+    public void openCoursPage(){
         try
         {
 
@@ -50,10 +50,10 @@ public class TeacherMainPanelController {
 
             loader.load();
 
-            TeacherCoursController addCourrs = loader.getController();
-            addCourrs.setStackPane(spSubScene);
+            TeacherCoursController coursPage = loader.getController();
+            coursPage.setStackPane(spSubScene);
             spSubScene.getChildren().clear();
-            spSubScene.getChildren().add(addCourrs.getVBoxRoot());
+            spSubScene.getChildren().add(coursPage.getVBoxRoot());
         }
         catch (IOException ex)
         {

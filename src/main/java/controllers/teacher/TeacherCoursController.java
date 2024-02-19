@@ -37,10 +37,10 @@ public class TeacherCoursController{
 
             loader.load();
 
-            TeacherCoursController addCourrs = loader.getController();
-            addCourrs.setStackPane(spSubScene);
+            ManageCoursController addCoursPage = loader.getController();
+            addCoursPage.setStackPane(spSubScene);
             spSubScene.getChildren().clear();
-            spSubScene.getChildren().add(addCourrs.getVBoxRoot());
+            spSubScene.getChildren().add(addCoursPage.getVBoxRoot());
         }
         catch (IOException ex)
         {
