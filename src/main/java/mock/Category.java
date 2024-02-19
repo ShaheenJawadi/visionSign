@@ -1,8 +1,8 @@
 package mock;
 
 public class Category {
-    int id ;
-    String nom  ;
+    private int id ;
+    private String nom  ;
 
     public Category(int id, String nom) {
         this.id = id;
@@ -23,5 +23,10 @@ public class Category {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    @Override
+    public String toString() {
+        return  nom ;
     }
 }

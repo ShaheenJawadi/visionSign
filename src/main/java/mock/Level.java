@@ -24,4 +24,8 @@ public class Level {
     public void setLevel(int level) {
         this.level = level;
     }
+
+    public String toString() {
+        return  String.valueOf(level) ;
+    }
 }

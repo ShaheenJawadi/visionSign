@@ -35,5 +35,7 @@ public class SubCategory {
         this.nom = nom;
     }
 
-
+    public String toString() {
+        return  nom ;
+    }
 }
