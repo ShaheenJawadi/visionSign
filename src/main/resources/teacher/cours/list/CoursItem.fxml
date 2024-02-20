@@ -3,6 +3,8 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -11,23 +13,32 @@
 
 <VBox prefHeight="100.0" prefWidth="300.0" spacing="3.0" styleClass="item" stylesheets="@../../../styles/Teacher/cours_item.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teacher.CoursItemController">
    <children>
+      <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <MenuButton contentDisplay="GRAPHIC_ONLY" graphicTextGap="2.0" mnemonicParsing="false">
+              <items>
+                <MenuItem mnemonicParsing="false" onAction="#editCours" text="Modifier" />
+                <MenuItem mnemonicParsing="false" onAction="#deleteCours" text="Supprimer" />
+              </items>
+            </MenuButton>
+         </children>
+      </HBox>
       <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="300.0" styleClass="s_holder">
          <children>
-            <Label text="Nom" />
-            <TextFlow minHeight="60.0" prefHeight="200.0" prefWidth="200.0">
+            <TextFlow prefWidth="200.0">
                <children>
-                  <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt" text="titre titre titre  titre titre titre titre titre titre titre titre titre titre titre titre titre titre titre " wrappingWidth="269.20751953125" />
+                  <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="txt" text="d" wrappingWidth="269.20751953125" />
                </children>
             </TextFlow>
          </children>
       </VBox>
       <HBox alignment="CENTER_LEFT" prefHeight="0.0" prefWidth="301.0" spacing="5.0" styleClass="s_holder">
          <children>
-            <Label text="Categorie:" />
+            <Label text="Niveau" />
             <Separator HBox.hgrow="ALWAYS" />
             <TextFlow minWidth="150.0" style="-fx-border-radius: 10px;" styleClass="category_holdr" textAlignment="RIGHT" HBox.hgrow="NEVER">
                <children>
-                  <Text fx:id="categorie" strokeType="OUTSIDE" strokeWidth="0.0" text="qsdsqd" wrappingWidth="192.6792061328888">
+                  <Text fx:id="niveau" strokeType="OUTSIDE" strokeWidth="0.0" text="1" wrappingWidth="192.6792061328888">
                      <styleClass>
                         <String fx:value="txt" />
                         <String fx:value="category" />
@@ -41,20 +52,15 @@
          <children>
             <Label text="Sous categorie:" />
             <Separator HBox.hgrow="ALWAYS" />
-            <TextFlow minWidth="150.0" style="-fx-border-radius: 10px;" textAlignment="RIGHT" HBox.hgrow="NEVER">
+            <TextFlow minWidth="150.0" style="-fx-border-radius: 10px;" styleClass="category_holdr" textAlignment="RIGHT" HBox.hgrow="NEVER">
                <children>
                   <Text fx:id="sousCategorie" strokeType="OUTSIDE" strokeWidth="0.0" text="SSous" wrappingWidth="192.6792061328888">
                      <styleClass>
                         <String fx:value="txt" />
                         <String fx:value="category" />
-                        <String fx:value="subcategory" />
                      </styleClass>
                   </Text>
                </children>
-               <styleClass>
-                  <String fx:value="category_holdr" />
-                  <String fx:value="sub_category_holdr" />
-               </styleClass>
             </TextFlow>
          </children>
       </HBox>
@@ -62,20 +68,16 @@
          <children>
             <Label text="Type de ressource:" />
             <Separator HBox.hgrow="ALWAYS" />
-            <TextFlow minWidth="150.0" style="-fx-border-radius: 10px;" textAlignment="RIGHT" HBox.hgrow="NEVER">
+            <TextFlow minWidth="150.0" style="-fx-border-radius: 10px;" styleClass="category_holdr" textAlignment="RIGHT" HBox.hgrow="NEVER">
                <children>
                   <Text fx:id="ressource" strokeType="OUTSIDE" strokeWidth="0.0" text="Lien" wrappingWidth="192.6792061328888">
                      <styleClass>
                         <String fx:value="txt" />
                         <String fx:value="category" />
-                        <String fx:value="ressource" />
+                        <String fx:value="category" />
                      </styleClass>
                   </Text>
                </children>
-               <styleClass>
-                  <String fx:value="category_holdr" />
-                  <String fx:value="ressource_holdr" />
-               </styleClass>
             </TextFlow>
          </children>
       </HBox>

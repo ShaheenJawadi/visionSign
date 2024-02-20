@@ -1,6 +1,7 @@
 package controllers.teacher;
 
 import entities.Cours;
+import entities.Ressource;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import mock.Category;
 import mock.Level;
 import mock.SubCategory;
 import services.cours.CoursService;
+import services.ressource.RessourceService;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -53,7 +55,7 @@ public class ManageCoursController implements Initializable {
     private TextField leconVideo;
 
     @FXML
-    private TextField lien;
+    private TextField ressource_lien;
 
     @FXML
     private ComboBox<Level> niveauSelect;
@@ -68,7 +70,7 @@ public class ManageCoursController implements Initializable {
     private TextField tags;
 
     @FXML
-    private TextField type;
+    private TextField ressource_type;
 
 
 
@@ -77,6 +79,14 @@ public class ManageCoursController implements Initializable {
     @FXML
     void submitCours(ActionEvent event) throws SQLException {
 
+        DbAddCoursDetails();
+        DbAddCoursRessources(1);
+
+    }
+
+
+
+    public void DbAddCoursDetails() throws SQLException{
         Cours  c = new Cours();
         c.setEnseignantId(3);
         c.setNom(nom.getText());
@@ -87,11 +97,17 @@ public class ManageCoursController implements Initializable {
         c.setNiveauId(niveauSelect.getSelectionModel().getSelectedItem().getId());
         CoursService cours=new CoursService();
         cours.add(c);
-
-
-
-
     }
+
+    public void DbAddCoursRessources(int coursId) throws SQLException{
+        Ressource r = new Ressource();
+        r.setLien(ressource_lien.getText());
+        r.setType(ressource_type.getText());
+        r.setCoursId(coursId);
+        RessourceService ressource=new RessourceService();
+        ressource.add(r);
+    }
+
 
 
     VBox getVBoxRoot()
@@ -113,6 +129,8 @@ public class ManageCoursController implements Initializable {
         initLevel();
 
     }
+
+
 
 
     public  void  initCategory(){
