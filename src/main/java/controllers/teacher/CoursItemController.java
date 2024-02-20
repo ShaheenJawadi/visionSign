@@ -1,14 +1,19 @@
 package controllers.teacher;
 
 import entities.Cours;
+import entities.Lesson;
+import entities.Ressource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
 import services.cours.CoursService;
+import services.lesson.LessonService;
+import services.ressource.RessourceService;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class CoursItemController   {
@@ -39,15 +44,37 @@ public class CoursItemController   {
     public void setParentController(CoursGridPane parentController) {
         this.parentController = parentController;
     }
-    public void putData(Cours cours , String coursTitle , String coursRessourceType , String coursNiveau , String coursSubCategory , String coursDuration , String coursNbLessons ) {
+    public void putData(Cours cours) throws SQLException {
             this.cours  =cours ;
 
-        title.setText(coursTitle);
-        sousCategorie.setText(coursSubCategory);
-        ressource.setText(coursRessourceType);
-        nbLecons.setText(coursNbLessons);
-        duree.setText(coursDuration);
-        niveau.setText(coursNiveau);
+        title.setText(cours.getNom());
+        sousCategorie.setText("sous Category");
+       niveau.setText(String.valueOf(cours.getNiveauId()));
+
+        RessourceService ressourceService = new RessourceService();
+
+        Ressource res =ressourceService.getByCours(cours.getId()) ;
+        if(res==null ){
+            res = new Ressource();
+        }
+
+       ressource.setText(res.getType());
+
+        LessonService lessonService = new LessonService();
+        List<Lesson> lessons = lessonService.getByCours(cours.getId());
+
+
+        nbLecons.setText(String.valueOf(lessons.size()));
+
+        int lesson_duree =0 ;
+
+        for(Lesson lesson :lessons){
+            lesson_duree+=lesson.getDuree();
+        }
+
+
+        duree.setText(String.valueOf(lesson_duree));
+
     }
 
 

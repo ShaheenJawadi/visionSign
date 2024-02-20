@@ -30,13 +30,7 @@ public class CoursGridPane  implements Initializable {
             VBox customView = loader.load();
 
             CoursItemController controller = loader.getController();
-            controller.putData(cours ,
-                    cours.getNom(),
-                    "kqs",
-                    String.valueOf(cours.getNiveauId()),
-                    "kqs",
-                    "kqs",
-                    "kqs");
+            controller.putData(cours);
             controller.setParentController(this);
 
             coursGridList.getChildren().add(customView);
