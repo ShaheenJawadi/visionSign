@@ -102,6 +102,28 @@ public class RessourceService  implements IService<Ressource> {
 
 
 
+    public Ressource getByCours(int id) throws SQLException {
+
+        //String sql="select * from "+tableName+" where id = ?";
+        String sql= dbOps.select(tableName , "coursId" , "");
+
+        PreparedStatement ps=connection.prepareStatement(sql);
+        ps.setInt(1,id);
+
+
+        ResultSet rs = ps.executeQuery();
+
+
+        if (rs.next()) {
+
+
+            return ressourceDto.single(rs);
+        } else {
+            return null;
+        }
+    }
+
+
 
 
 

@@ -2,6 +2,7 @@ package services.lesson;
 
 import dtos.LessonDto;
 import entities.Lesson;
+import entities.Ressource;
 import services.IService;
 import utils.DbOps;
 import utils.MyDatabase;
@@ -103,5 +104,21 @@ public class LessonService  implements IService<Lesson> {
         }
     }
 
+
+
+    public List<Lesson>  getByCours(int id) throws SQLException {
+
+        //String sql="select * from "+tableName+" where id = ?";
+        String sql= dbOps.select(tableName , "coursId" , "");
+
+        PreparedStatement ps=connection.prepareStatement(sql);
+        ps.setInt(1,id);
+
+
+        ResultSet rs = ps.executeQuery();
+
+
+        return lessonDto.list(rs);
+    }
 
 }
