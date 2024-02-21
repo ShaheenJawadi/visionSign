@@ -121,7 +121,7 @@
                                                            <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
                                                                <children>
                                                                    <Label text="Lien" />
-                                                                   <TextField fx:id="lien" styleClass="inputField">
+                                                                   <TextField fx:id="ressource_lien" styleClass="inputField">
                                                                        <font>
                                                                            <Font size="18.0" />
                                                                        </font>
@@ -131,7 +131,7 @@
                                                            <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
                                                                <children>
                                                                    <Label text="Type" />
-                                                                   <TextField fx:id="type" styleClass="inputField" />
+                                                                   <TextField fx:id="ressource_type" styleClass="inputField" />
                                                                </children>
                                                            </VBox>
                                                        </children>

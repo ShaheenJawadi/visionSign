@@ -27,11 +27,6 @@
 
 }
 
-.s_holder  .txt.subcategory{
-
-    -fx-fill: -fx-secondary-color;
-
-}
 
 .s_holder .category_holdr{
     -fx-border-radius: 50px;
@@ -41,19 +36,7 @@
     -fx-alignment: center;
 
 }
-.s_holder  .sub_category_holdr{
-    -fx-background-color: -fx-secondary-color-background;
-}
 
-
-.s_holder .ressource_holdr{
-    -fx-background-color: -fx-third-color-background;
-
-
-}
-.s_holder  .txt.ressource{
-    -fx-fill: -fx-third-color;
-}
 
 .item {
     -fx-border-radius: 5;
