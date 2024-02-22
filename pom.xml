@@ -34,6 +34,19 @@
             <artifactId>javafx-web</artifactId>
             <version>21.0.2</version>
         </dependency>
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>9.0.10</version>
+        </dependency>
+        <!-- Thanks for using https://jar-download.com -->
+        <dependency>
+            <groupId>io.github.palexdev</groupId>
+            <artifactId>materialfx</artifactId>
+            <version>11.17.0</version>
+        </dependency>
+        <!-- Thanks for using https://jar-download.com -->
+
 
     </dependencies>
     <build>
