@@ -39,7 +39,7 @@ public class LoginController {
         if(username.isEmpty() || password.isEmpty()) return;
         try {
             if (userService.login(username, password) != null) {
-                System.out.println("currentUser"+userService.get());
+                System.out.println("currentUser"+userService.getCurrent());
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/UserProfile.fxml"));
                 Parent root = loader.load();
                 usernameTF.getScene().setRoot(root);
