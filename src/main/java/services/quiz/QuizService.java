@@ -1,6 +1,5 @@
 package services.quiz;
 
-import entities.Questions;
 import entities.Quiz;
 import utils.MyDatabase;
 
@@ -82,7 +81,6 @@ public class QuizService implements IGestionQuiz<Quiz> {
     }
 
     public Quiz getQuizById(int id) throws SQLException {
-
         String sql = "select * from quiz where id=?";
 
         PreparedStatement ps = connection.prepareStatement(sql);
@@ -100,6 +98,66 @@ public class QuizService implements IGestionQuiz<Quiz> {
         quiz.setQuizQuestions(questionService.getAllQuizQuestionsByQuizId(id));
         }
         return quiz;
+    }
+    public List<Quiz> getQuizByTitle(String titre, int userId) throws SQLException {
+
+        String sql = "SELECT * FROM quiz WHERE nom LIKE ? AND userId=?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, "%" + titre + "%");
+        ps.setInt(2, userId);
+        ResultSet rs = ps.executeQuery();
+
+        List<Quiz> matchingQuizs = new ArrayList<>();
+        while (rs.next()) {
+            Quiz quiz = new Quiz();
+            QuestionsService qs=new QuestionsService();
+            quiz.setId(rs.getInt("id"));
+            quiz.setNom(rs.getString("nom"));
+            quiz.setDuree(rs.getString("duree"));
+            quiz.setCoursId(rs.getInt("coursId"));
+            quiz.setUserId(rs.getInt("userId"));
+            quiz.setQuizQuestions(qs.getAllQuizQuestionsByQuizId(quiz.getId()));
+
+            matchingQuizs.add(quiz);
+        }
+
+        return matchingQuizs;
+    }
+    public List<Quiz> getQuizByUserId(int userId) throws SQLException {
+        List<Quiz> quizzes = new ArrayList<>();
+        String sql = "SELECT * FROM quiz WHERE userId=?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, userId);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Quiz quiz = new Quiz();
+            QuestionsService questionService = new QuestionsService();
+
+            quiz.setId(rs.getInt("id"));
+            quiz.setNom(rs.getString("nom"));
+            quiz.setDuree(rs.getString("duree"));
+            quiz.setUserId(rs.getInt("userId"));
+            quiz.setCoursId(rs.getInt("coursId"));
+            quiz.setQuizQuestions(questionService.getAllQuizQuestionsByQuizId(quiz.getId()));
+
+            quizzes.add(quiz);
+        }
+
+        return quizzes;
+    }
+
+
+    public boolean isQuizNameUnique(String quizName) throws SQLException {
+        String sql = "SELECT COUNT(*) AS count FROM quiz WHERE nom=?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, quizName);
+        ResultSet rs = ps.executeQuery();
+        int count = 0;
+        if (rs.next()) {
+            count = rs.getInt("count");
+        }
+        return count == 0; // Si count est 0, cela signifie que le nom du quiz est unique
     }
 
 }

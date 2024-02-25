@@ -1,8 +1,6 @@
 package services.quiz;
 
 import entities.Questions;
-import entities.Quiz;
-import services.quiz.SuggestionService;
 import utils.MyDatabase;
 
 import java.sql.*;
@@ -96,6 +94,21 @@ public class QuestionsService implements IGestionQuiz<Questions> {
             questions.add(question);
         }
         return questions;
+    }
+
+    public boolean isQuestionUniqueInQuiz(String questionText, int quizId) throws SQLException {
+        String sql = "SELECT COUNT(*) AS count FROM questions WHERE question=? AND quizId=?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, questionText);
+        ps.setInt(2, quizId);
+        ResultSet rs = ps.executeQuery();
+
+        int count = 0;
+        if (rs.next()) {
+            count = rs.getInt("count");
+        }
+
+        return count == 0; // Si count est 0, la question est unique dans le quiz
     }
 
 
