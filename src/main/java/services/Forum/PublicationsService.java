@@ -1,8 +1,6 @@
 package services.Forum;
 
 import entities.Publications;
-import services.Forum.CommentairesService;
-import services.Forum.IForum;
 import utils.MyDatabase;
 
 import java.sql.*;
@@ -32,7 +30,8 @@ public class PublicationsService implements IForum<Publications> {
 
         try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
             if (generatedKeys.next()) {
-                publications.setId(generatedKeys.getInt(1));
+
+               publications.setId(generatedKeys.getInt(1));
             } else {
                 throw new SQLException("Creating publication failed, no ID obtained.");
             }
@@ -147,6 +146,18 @@ public class PublicationsService implements IForum<Publications> {
         }
 
         return userPublications;
+    }
+    public boolean publicationExists(String titre, String contenu,int user_id) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM publications WHERE titre = ? AND contenu = ? AND user_id=?";
+        PreparedStatement ps= connection.prepareStatement(sql);
+        ps.setString(1, titre);
+        ps.setString(2, contenu);
+        ps.setInt(3,user_id);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1) > 0;
+        }
+        return false;
     }
 
 }

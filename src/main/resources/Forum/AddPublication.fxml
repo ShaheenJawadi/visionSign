@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="952.0" style="-fx-background-color: #ECECEC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.studentForum.AddPublicationController">
+   <children>
+      <BorderPane prefHeight="600.0" prefWidth="952.0">
+          <top>
+              <fx:include fx:id="navbar" source="Navbar.fxml" />
+          </top>
+          <Pane layoutX="1.0" layoutY="10.0" prefHeight="71.0" prefWidth="702.0" style="-fx-background-color: white;" />
+         <center>
+            <AnchorPane prefHeight="335.0" prefWidth="952.0" BorderPane.alignment="CENTER">
+                  <Pane layoutX="1.0" layoutY="4.0" prefHeight="71.0" prefWidth="990.0" style="-fx-background-color: white;">
+                     <children>
+                        <Button fx:id="forumBtn" layoutX="342.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleForum" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #E8EFFF; -fx-background-radius: 200; -fx-border-radius: 200;" text="Forum Community" textFill="#2447f9">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Button>
+                        <Button layoutX="494.0" layoutY="17.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: white; -fx-background-radius: 200; -fx-border-radius: 200;" text="Chatbot" textFill="#04cb00">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+               <Pane layoutX="100.0" layoutY="89.0" prefHeight="435.0" prefWidth="801.0" style="-fx-background-color: white;">
+                  <children>
+                     <Text layoutX="30.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter Publication" wrappingWidth="203.10699462890625">
+                        <font>
+                           <Font name="System Bold" size="22.0" />
+                        </font>
+                     </Text>
+                     <Text layoutX="30.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Titre:">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <TextField fx:id="titreId" layoutX="30.0" layoutY="106.0" prefHeight="39.0" prefWidth="350.0" promptText="Titre du publication...." style="-fx-background-color: white; -fx-border-color: #bababa; -fx-background-radius: 200; -fx-border-radius: 200;" />
+                     <Text layoutX="30.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question:">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Text>
+                     <TextField fx:id="questionId" layoutX="30.0" layoutY="198.0" prefHeight="50.0" prefWidth="588.0" promptText="Votre question..." style="-fx-background-color: white; -fx-border-color: #bababa; -fx-background-radius: 200; -fx-border-radius: 200;" />
+                     <Button fx:id="addPubBtn" layoutX="327.0" layoutY="289.0" mnemonicParsing="false" onAction="#handlePublish" prefHeight="47.0" prefWidth="107.0" style="-fx-background-color: #2447F9; -fx-background-radius: 50; -fx-border-radius: 50;" text="Publier" textFill="WHITE">
+                        <font>
+                           <Font name="System Bold" size="18.0" />
+                        </font>
+                        <cursor>
+                           <Cursor fx:constant="HAND" />
+                        </cursor>
+                     </Button>
+                  </children>
+               </Pane>
+
+
+            </AnchorPane>
+         </center>
+
+      </BorderPane>
+   </children>
+</AnchorPane>
