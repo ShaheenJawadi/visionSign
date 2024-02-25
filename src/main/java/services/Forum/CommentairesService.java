@@ -98,5 +98,17 @@ public class CommentairesService implements IForum<Commentaires> {
         }
         return commentaires;
     }
+    public boolean commentaireExists(String commentaire, int id_pub,int user_id) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM commentaires WHERE commentaire = ? AND id_pub = ? AND user_id=?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, commentaire);
+        ps.setInt(2, id_pub);
+        ps.setInt(3,user_id);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt(1) > 0;
+        }
+        return false;
+    }
 
 }
