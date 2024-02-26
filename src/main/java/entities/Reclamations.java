@@ -8,29 +8,43 @@ public class Reclamations {
     private int id_reclamation, id_user;
     private String type, description, status;
     private Date date;
+    private String userName;
+
     private boolean repondre;
 
     public Reclamations() {
-        this.repondre = false; // Valeur par défaut
+        this.date = Date.valueOf(LocalDate.now());
+        this.repondre = true; // Valeur par défaut
     }
 
-    public Reclamations(int id_reclamation, String type, String description, String status, Date date,int id_user) {
+    public Reclamations(int id_reclamation, String type, String description, String status, int idUtilisateur) {
         this.id_reclamation = id_reclamation;
         this.type = type;
         this.description = description;
         this.status = status;
-        this.date = date;
-        this.repondre = false; // Valeur par défaut
-        this.id_user=id_user;
+        this.date = Date.valueOf(LocalDate.now());
+        this.repondre = true; // Valeur par défaut
+        this.id_user=idUtilisateur;
+
     }
 
-    public Reclamations(String type, String description, String status, Date date, int id_user) {
+    public Reclamations(String type, String description, String status,int idUtilisateur) {
         this.type = type;
         this.description = description;
         this.status = status;
         this.date = date;
-        this.repondre = false; // Valeur par défaut
-        this.id_user=id_user;
+        this.date = Date.valueOf(LocalDate.now());
+        this.repondre = true; // Valeur par défaut
+        this.id_user=idUtilisateur;
+
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public int getId_user() {

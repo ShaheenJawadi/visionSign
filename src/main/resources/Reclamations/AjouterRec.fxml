@@ -1,26 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Reclamations.AjouterRecController">
+<AnchorPane prefHeight="620.0" prefWidth="994.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Reclamations.AjouterRecController">
    <children>
-      <Label layoutX="164.0" layoutY="14.0" prefHeight="55.0" prefWidth="270.0" text="Ajouter Reclamation" textFill="#349fd9">
-         <font>
-            <Font size="30.0" />
-         </font>
-      </Label>
-      <Button layoutX="481.0" layoutY="317.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
-      <TextArea fx:id="desFx" layoutX="122.0" layoutY="127.0" prefHeight="83.0" prefWidth="200.0" promptText="desciption" />
-      <TextField fx:id="typeFx" layoutX="122.0" layoutY="92.0" promptText="type" />
-      <TextField fx:id="statFx" layoutX="122.0" layoutY="220.0" promptText="status" />
-      <DatePicker fx:id="dateFx" layoutX="122.0" layoutY="253.0" promptText="date" />
-      <TextField fx:id="userFx" layoutX="123.0" layoutY="292.0" promptText="id-user" />
+      <BorderPane layoutX="4.0" prefHeight="625.0" prefWidth="972.0">
+         <top>
+            <fx:include fx:id="navbar" source="Navbar.fxml" />
+         </top>
+         <center>
+            <Pane prefHeight="560.0" prefWidth="282.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="forumBtn" layoutX="246.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleForum" prefHeight="38.0" prefWidth="314.0" style="-fx-background-color: #E8EFFF; -fx-background-radius: 200; -fx-border-radius: 200;" text="Reclamation" textFill="#2447f9">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <TextField fx:id="statFx" layoutX="99.0" layoutY="293.0" prefHeight="39.0" prefWidth="350.0" promptText="status...." style="-fx-background-color: white; -fx-border-color: #bababa; -fx-background-radius: 200; -fx-border-radius: 200;" />
+                  <TextField fx:id="desFx" layoutX="94.0" layoutY="218.0" prefHeight="50.0" prefWidth="588.0" promptText="Votre Description..." style="-fx-background-color: white; -fx-border-color: #bababa; -fx-background-radius: 200; -fx-border-radius: 200;" />
+                  <Button fx:id="modPubBtn" layoutX="575.0" layoutY="472.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="47.0" prefWidth="107.0" style="-fx-background-color: #2447F9; -fx-background-radius: 50; -fx-border-radius: 50;" text="Ajouter" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Text layoutX="99.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <ComboBox fx:id="typeCombo" layoutX="94.0" layoutY="170.0" prefWidth="350.0" promptText="Type de reclamation" style="-fx-background-color: white; -fx-border-color: #bababa; -fx-background-radius: 200; -fx-border-radius: 200;" />
+                  <Text layoutX="95.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="99.0" layoutY="213.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="84.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter Reclamation" wrappingWidth="217.50701904296875">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="99.0" layoutY="355.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Votre identifiant:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="userid" layoutX="99.0" layoutY="360.0" prefHeight="39.0" prefWidth="350.0" promptText="votre identifiant" style="-fx-background-color: white; -fx-border-color: #bababa; -fx-background-radius: 200; -fx-border-radius: 200;" />
+               </children>
+            </Pane>
+         </center>
+         <left>
+            <Pane prefHeight="200.0" prefWidth="275.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox fx:id="myposts" prefHeight="534.0" prefWidth="270.0" style="-fx-background-color: #FFFFFF;">
+                     <children>
+                        <Text fill="#2447f9" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Vos Reclamation" textAlignment="CENTER" wrappingWidth="171.89178466796875">
+                           <VBox.margin>
+                              <Insets left="50.0" top="8.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Text>
+                        <HBox alignment="CENTER" prefHeight="38.0" prefWidth="245.0">
+                           <children>
+                              <Text style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-fill: #2447f9;" />
+                              <HBox alignment="CENTER_LEFT" spacing="10">
+                                 <children>
+                                    <TextField fx:id="searchField1" onAction="#searchPubByTitle1" prefHeight="30.0" prefWidth="202.0" promptText="Rechercher..." style="-fx-border-color: #2447f9; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 5 10 5 10;" HBox.hgrow="ALWAYS">
+                                       <HBox.margin>
+                                          <Insets right="-42.0" />
+                                       </HBox.margin>
+                                    </TextField>
+                                    <Button prefHeight="30.0" prefWidth="39.0" style="-fx-background-color: #2447F9; -fx-background-radius: 50;" HBox.hgrow="NEVER">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="16" />
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets left="10.0" right="15.0" top="3.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <ScrollPane fitToWidth="true" prefHeight="470.0" prefWidth="254.0" style="-fx-background-color: white;">
+                           <content>
+                              <AnchorPane fx:id="listepubid" minHeight="0.0" minWidth="0.0" prefHeight="447.0" prefWidth="270.0" style="-fx-background-color: #FFFFFF;" />
+                           </content>
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </ScrollPane>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="W_RESIZE" />
+                     </cursor>
+                  </VBox>
+               </children>
+            </Pane>
+         </left></BorderPane>
    </children>
 </AnchorPane>
