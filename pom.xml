@@ -29,11 +29,7 @@
             <artifactId>javafx-controls</artifactId>
             <version>21.0.2</version>
         </dependency>
-        <dependency>
-            <groupId>de.jensd</groupId>
-            <artifactId>fontawesomefx-fontawesome</artifactId>
-            <version>4.7.0-9.1.2</version> <!-- Remplacez la version par la version la plus récente -->
-        </dependency>
+
 
 
     </dependencies>
