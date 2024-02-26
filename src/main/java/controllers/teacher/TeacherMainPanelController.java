@@ -7,7 +7,7 @@ import javafx.scene.layout.StackPane;
 
 import java.io.IOException;
 
-public class TeacherMainPanel {
+public class TeacherMainPanelController {
 
 
     private @FXML StackPane spSubScene;
@@ -19,7 +19,9 @@ public class TeacherMainPanel {
       dashboardBtnId.fire();
     }
 
-
+    public StackPane getSpSubScene() {
+        return spSubScene;
+    }
 
     public void openDashboard(){
         try
@@ -40,7 +42,7 @@ public class TeacherMainPanel {
 
     }
 
-    public void AddCours(){
+    public void openCoursPage(){
         try
         {
 
@@ -48,9 +50,10 @@ public class TeacherMainPanel {
 
             loader.load();
 
-            TeacherCoursController addCourrs = loader.getController();
+            TeacherCoursController coursPage = loader.getController();
+            coursPage.setStackPane(spSubScene);
             spSubScene.getChildren().clear();
-            spSubScene.getChildren().add(addCourrs.getVBoxRoot());
+            spSubScene.getChildren().add(coursPage.getVBoxRoot());
         }
         catch (IOException ex)
         {

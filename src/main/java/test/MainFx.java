@@ -1,13 +1,14 @@
+
 package test;
 
-import controllers.teacher.TeacherMainPanel;
+import controllers.teacher.TeacherMainPanelController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class MainFx  extends Application {
+   public class MainFx  extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -18,7 +19,7 @@ public class MainFx  extends Application {
         Parent root= loader.load();
 
         Scene scene =new Scene(root);
-        TeacherMainPanel mainViewController = loader.getController();
+        TeacherMainPanelController mainViewController = loader.getController();
 
         mainViewController.IntitalState();
         primaryStage.setScene(scene);
@@ -30,7 +31,7 @@ public class MainFx  extends Application {
     }
 
 
-    public  static  void main(String[] args){
+      public  static  void main(String[] args){
         launch(args);
 
     }

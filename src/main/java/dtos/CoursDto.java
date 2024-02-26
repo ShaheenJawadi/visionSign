@@ -13,8 +13,9 @@ public class CoursDto {
 
     public Cours single(ResultSet rs) throws SQLException {
         Cours c = new Cours();
+
         c.setId(rs.getInt("id"));
-        c.setId(rs.getInt("enseignantId"));
+        c.setEnseignantId(rs.getInt("enseignantId"));
         c.setSubCategoryId(rs.getInt("subCategoryId"));
         c.setNiveauId(rs.getInt("niveauId"));
         c.setNom(rs.getString("nom"));

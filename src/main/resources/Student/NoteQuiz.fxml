@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="952.0" style="-fx-background-color: #ECECEC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Student.NoteQuizController">
+    <children>
+
+                <fx:include fx:id="navbar" source="Navbar.fxml" />
+
+           
+
+
+
+        <FontAwesomeIconView layoutX="-8.0" layoutY="308.0" />
+      <Pane layoutX="192.0" layoutY="76.0" prefHeight="514.0" prefWidth="969.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="76.0">
+         <children>
+            <Label layoutX="384.0" layoutY="122.0" text="Votre note est : " textFill="#2447f9">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <Button layoutX="375.0" layoutY="273.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="245.0" style="-fx-background-color: #3B5BFF; -fx-padding: 10 40 10 40; -fx-background-radius: 20; -fx-border-radius: 20;" text="Retour vers l'Accueil" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Text fx:id="notess" layoutX="451.0" layoutY="219.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+    </children>
+
+</AnchorPane>

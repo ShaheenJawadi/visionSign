@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.User.UserProfileController">
+    <children>
+        <VBox prefHeight="730.0" prefWidth="235.0" style="-fx-background-color: #1675bc;">
+            <children>
+                <VBox alignment="CENTER" prefHeight="183.0" prefWidth="235.0" spacing="15.0">
+                    <VBox.margin>
+                        <Insets top="50.0" />
+                    </VBox.margin>
+                    <children>
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@pic.png" />
+                            </image>
+                        </ImageView>
+                        <Label prefHeight="22.0" prefWidth="120.0" text="    Iyed Guezmir" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="15.0" />
+                            </font>
+                        </Label>
+                        <MFXButton prefWidth="90.0" style="-fx-background-radius: 30;" text="Edit Profile">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </MFXButton>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" prefHeight="323.0" prefWidth="235.0" spacing="10.0">
+                    <children>
+                        <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@userIcon.png" />
+                                    </image>
+                                </ImageView>
+                                <Label prefHeight="18.0" prefWidth="74.0" text="Profile">
+                                    <padding>
+                                        <Insets left="15.0" />
+                                    </padding>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@privacyIcon.png" />
+                                    </image>
+                                </ImageView>
+                                <Label prefHeight="18.0" prefWidth="74.0" text="Privacy">
+                                    <padding>
+                                        <Insets left="15.0" />
+                                    </padding>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@settingsIcon.png" />
+                                    </image>
+                                </ImageView>
+                                <Label prefHeight="18.0" prefWidth="74.0" text="Settings">
+                                    <padding>
+                                        <Insets left="15.0" />
+                                    </padding>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@pwdIcon.png" />
+                                    </image>
+                                </ImageView>
+                                <Label prefHeight="18.0" prefWidth="74.0" text="Password">
+                                    <padding>
+                                        <Insets left="15.0" />
+                                    </padding>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0">
+                            <children>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@notifIcon.png" />
+                                    </image>
+                                </ImageView>
+                                <Label prefHeight="18.0" prefWidth="74.0" text="Notifications">
+                                    <padding>
+                                        <Insets left="5.0" />
+                                    </padding>
+                                </Label>
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+        <VBox alignment="CENTER" layoutX="235.0" prefHeight="607.0" prefWidth="565.0" style="-fx-background-color: #081f30;">
+            <children>
+                <Label prefHeight="18.0" prefWidth="298.0" text="Profile Settings" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+                    <padding>
+                        <Insets bottom="30.0" left="50.0" right="50.0" top="30.0" />
+                    </padding>
+                </Label>
+                <VBox prefHeight="200.0" prefWidth="100.0" spacing="45.0">
+                    <children>
+                        <Label prefHeight="42.0" prefWidth="174.0" text="Profile details" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="25.0" />
+                            </font>
+                        </Label>
+                        <HBox prefHeight="50.0" prefWidth="552.0">
+                            <children>
+                                <Label prefHeight="42.0" prefWidth="79.0" text="Name" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="nomTF" prefHeight="38.0" prefWidth="194.0">
+                                    <padding>
+                                        <Insets bottom="18.0" right="20.0" top="-5.0" />
+                                    </padding>
+                                </TextField>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="42.0" prefWidth="552.0">
+                            <children>
+                                <Label prefHeight="38.0" prefWidth="79.0" text="Prename" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="prenomTF" prefHeight="38.0" prefWidth="194.0">
+                                    <padding>
+                                        <Insets bottom="18.0" right="20.0" top="-5.0" />
+                                    </padding>
+                                </TextField>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="42.0" prefWidth="552.0">
+                            <children>
+                                <Label prefHeight="38.0" prefWidth="112.0" text="Username" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="usernameTF" prefHeight="38.0" prefWidth="194.0">
+                                    <padding>
+                                        <Insets bottom="18.0" right="20.0" top="-5.0" />
+                                    </padding>
+                                </TextField>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="42.0" prefWidth="552.0">
+                            <children>
+                                <Label prefHeight="38.0" prefWidth="102.0" text="Date of birth" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                                <DatePicker fx:id="dateTF" promptText="yyyy-mm-dd" />
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="42.0" prefWidth="552.0">
+                            <children>
+                                <Label prefHeight="38.0" prefWidth="102.0" text="Level" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                                <MFXComboBox fx:id="levelTF" />
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="42.0" prefWidth="552.0">
+                            <children>
+                                <Label prefHeight="38.0" prefWidth="112.0" text="Email" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="emailTF" prefHeight="38.0" prefWidth="194.0">
+                                    <padding>
+                                        <Insets bottom="18.0" right="20.0" top="-5.0" />
+                                    </padding>
+                                </TextField>
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="42.0" prefWidth="552.0">
+                            <children>
+                                <Label prefHeight="38.0" prefWidth="112.0" text="Password" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="16.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="pwdTF" prefHeight="38.0" prefWidth="194.0">
+                                    <padding>
+                                        <Insets bottom="18.0" right="20.0" top="-5.0" />
+                                    </padding>
+                                </TextField>
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets left="30.0" />
+                    </padding>
+                </VBox>
+                <MFXButton alignment="CENTER" onAction="#modifier" prefHeight="40.0" prefWidth="154.0" style="-fx-background-radius: 30;" text="Save changes">
+                    <VBox.margin>
+                        <Insets top="30.0" />
+                    </VBox.margin>
+                </MFXButton>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
