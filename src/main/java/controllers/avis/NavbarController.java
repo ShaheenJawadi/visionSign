@@ -1,4 +1,5 @@
-package controllers.Reclamations;
+package controllers.avis;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,11 +13,12 @@ public class NavbarController {
 
     @FXML
     private AnchorPane navbar;
-    @FXML
-    private Button ReclamtionBtn, Avis;
+@FXML
+private Button ReclamtionBtn, Avis;
+
     public void rec(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Reclamations/AfficherRecU.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/reclamtions/AfficherRecU.fxml"));
             Parent root = loader.load();
             ReclamtionBtn.getScene().setRoot(root);
 
@@ -35,6 +37,4 @@ public class NavbarController {
             throw new RuntimeException(e);
         }
     }
-
-
 }
