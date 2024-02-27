@@ -11,14 +11,15 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.HTMLEditor?>
 
-<VBox fx:id="singleLessonBox" prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teacher.SingleLesson">
+<VBox fx:id="singleLessonBox" prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teacher.SingleLessonController">
    <children>
       <AnchorPane prefHeight="44.0" prefWidth="600.0" styleClass="inputHolder">
          <children>
             <VBox prefHeight="53.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label text="Titre de la lecon" />
-                  <TextField fx:id="leconTitle" styleClass="inputField" />
+                  <TextField fx:id="Title" styleClass="inputField" />
+                  <Label fx:id="validateTitle" text="Label" />
                </children>
             </VBox>
          </children>
@@ -30,7 +31,8 @@
                   <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label text="Lien video" />
-                        <TextField fx:id="leconVideo" styleClass="inputField" VBox.vgrow="ALWAYS" />
+                        <TextField fx:id="Video" prefHeight="41.0" prefWidth="142.0" styleClass="inputField" VBox.vgrow="ALWAYS" />
+                        <Label fx:id="validateLink" text="Label" />
                      </children>
                   </VBox>
                   <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
@@ -42,17 +44,19 @@
                   <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label text="Duree de la lecon" />
-                        <TextField fx:id="leconDuration" maxHeight="200.0" styleClass="inputField">
+                        <TextField fx:id="Duration" styleClass="inputField">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </TextField>
+                        <Label fx:id="validateDuration" text="Label" />
                      </children>
                   </VBox>
                   <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label text="Ordre" />
-                        <TextField fx:id="leconOrdre" maxWidth="200.0" styleClass="inputField" />
+                        <TextField fx:id="Order" prefHeight="40.0" prefWidth="143.0" styleClass="inputField" />
+                        <Label fx:id="validateOrder" text="Label" />
                      </children>
                   </VBox>
                </children>
@@ -64,7 +68,8 @@
             <VBox layoutX="19.924529018924964" layoutY="19.924529018924964" prefHeight="307.0" prefWidth="581.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
                <children>
                   <Label text="Contenu" />
-                  <HTMLEditor fx:id="leconContent" htmlText="" prefHeight="283.0" prefWidth="750.0" />
+                  <HTMLEditor fx:id="Content" htmlText="" prefHeight="283.0" prefWidth="750.0" />
+                  <Label fx:id="validateContent" text="Label" />
                </children>
             </VBox>
          </children>

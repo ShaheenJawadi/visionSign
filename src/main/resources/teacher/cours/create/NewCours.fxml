@@ -157,11 +157,7 @@
                             <AnchorPane styleClass="TForm">
                                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <children>
-                                       <VBox fx:id="ListCoursHolder" prefHeight="200.0" prefWidth="100.0">
-                                          <children>
-                                             <fx:include source="SingleLesson.fxml" />
-                                          </children>
-                                       </VBox>
+                                       <VBox fx:id="ListCoursHolder" prefHeight="200.0" prefWidth="100.0" />
                                              <Button fx:id="addLesson" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addLessonClick" prefHeight="25.0" prefWidth="186.0" styleClass="secondaryBtn" text="Ajouter une lecon" />
                                     </children>
                                  </VBox>

@@ -1,27 +1,32 @@
 package controllers.teacher;
 
 import entities.Cours;
+import entities.Lesson;
 import entities.Ressource;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
-import javafx.scene.web.HTMLEditor;
 import mock.Category;
 import mock.Level;
 import mock.SubCategory;
 import services.cours.CoursService;
+import services.lesson.LessonService;
 import services.ressource.RessourceService;
 import validation.ValidateCours;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class ManageCoursController implements Initializable {
@@ -104,31 +109,45 @@ public class ManageCoursController implements Initializable {
     }
 
     @FXML
-    void submitCours(ActionEvent event) throws SQLException {
+    void submitCours(ActionEvent event) throws SQLException, IOException {
 
-     int cours_id =   DbAddCoursDetails();
-     if(cours_id>0)
-        DbAddCoursRessources(cours_id);
+        if(validateCours() && validateRessources() && ValidateLessons())
+        {
+            validationErrorMessage.setVisible(false);
+            int cours_id = DbAddCoursDetails();
+            if (cours_id > 0) {
+                DbAddCoursRessources(cours_id);
+                gatherLessonData(cours_id);
+
+            }
+        }
+        else {
+            validationErrorMessage.setVisible(true);
+        }
 
     }
 
 
+    public boolean validateCours(){
+        boolean isValid   ;
+
+        isValid =   ValidateCours.isNotEmpty(nom ,validateTitleCours , "ee")
+                && ValidateCours.isNotEmptySelectErea(categorieSelect ,validateCategory , "ee")
+                && ValidateCours.isNotEmptySelectErea(subCategorieSelect ,validateSubCategory , "ee")
+                && ValidateCours.isNotEmptySelectErea(niveauSelect ,validateLevel , "ee")
+                && ValidateCours.isNotEmpty(tags ,validateTags , "ee")
+                && ValidateCours.isNotEmptyTextErea(description ,validateDescription , "ee");
+        return  isValid;
+    }
 
     public int DbAddCoursDetails() throws SQLException{
         Cours  c = new Cours();
 
-        boolean isValid   ;
-
-      isValid =   ValidateCours.isNotEmpty(nom ,validateTitleCours , "ee")
-              && ValidateCours.isNotEmptySelectErea(categorieSelect ,validateCategory , "ee")
-              && ValidateCours.isNotEmptySelectErea(subCategorieSelect ,validateSubCategory , "ee")
-              && ValidateCours.isNotEmptySelectErea(niveauSelect ,validateLevel , "ee")
-              && ValidateCours.isNotEmpty(tags ,validateTags , "ee")
-              && ValidateCours.isNotEmptyTextErea(description ,validateDescription , "ee");
 
 
-      if(isValid){
-          validationErrorMessage.setVisible(false);
+
+      if(validateCours()){
+
           System.out.println("valid");
           c.setEnseignantId(3);
           c.setImage("000");
@@ -148,7 +167,7 @@ public class ManageCoursController implements Initializable {
       }
 
       else {
-          validationErrorMessage.setVisible(true);
+
           return 0 ;
       }
 
@@ -156,15 +175,23 @@ public class ManageCoursController implements Initializable {
 
     }
 
-    public void DbAddCoursRessources(int coursId) throws SQLException{
-
+    public boolean validateRessources(){
         boolean isValid   ;
 
         isValid =   ValidateCours.isNotEmpty(ressource_lien ,validateLien , "ee")
                 && ValidateCours.isNotEmpty(ressource_type ,validateType , "ee");
 
-        if(isValid) {
-            validationErrorMessage.setVisible(false);
+        return  isValid;
+    }
+
+    public void DbAddCoursRessources(int coursId) throws SQLException{
+
+        boolean isValid   ;
+
+
+
+        if(validateRessources()) {
+
             Ressource r = new Ressource();
             r.setLien(ressource_lien.getText());
             r.setType(ressource_type.getText());
@@ -173,7 +200,7 @@ public class ManageCoursController implements Initializable {
             ressource.add(r);
         }
         else {
-            validationErrorMessage.setVisible(true);
+
         }
     }
 
@@ -343,8 +370,9 @@ public class ManageCoursController implements Initializable {
 
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/cours/create/SingleLesson.fxml"));
-            loader.load();
-            SingleLesson controller = loader.getController();
+           VBox ll=  loader.load();
+            SingleLessonController controller = loader.getController();
+            ll.getProperties().put("fxmlLoader", loader);
 
 
             ListCoursHolder.getChildren().add(controller.getSingleLessonBox());
@@ -356,6 +384,91 @@ public class ManageCoursController implements Initializable {
 
 
     }
+
+
+    public boolean ValidateLessons()  {
+
+        boolean isValid=true ;
+
+        for (Node node : ListCoursHolder.getChildren()) {
+            if(!isValid){
+                break;
+            }
+            if (node instanceof VBox) {
+
+
+                VBox singleLessonPane = (VBox) node;
+
+
+                FXMLLoader loader = (FXMLLoader) singleLessonPane.getProperties().get("fxmlLoader");
+
+                if (loader != null) {
+
+                    SingleLessonController controller = loader.getController();
+
+                    // Ensure the controller is not null
+                    if (controller != null) {
+
+                        if(!controller.vaidateLessonFields()){
+                                isValid = controller.vaidateLessonFields();
+                                break;
+                        }
+
+
+
+                    } else {
+                        System.out.println("null for SingleLesson.");
+                    }
+                } else {
+                    System.out.println("FXMLLoader is null for SingleLesson.");
+                }
+            }
+
+
+        }
+        System.out.println(isValid+"dskf");
+    return isValid ;
+    }
+
+
+
+    public void gatherLessonData(int cours_id) throws IOException, SQLException {
+            List<Lesson> allLessonData = new ArrayList<>();
+
+        for (Node node : ListCoursHolder.getChildren()) {
+            if (node instanceof VBox) {
+
+
+                VBox singleLessonPane = (VBox) node;
+
+
+                FXMLLoader loader = (FXMLLoader) singleLessonPane.getProperties().get("fxmlLoader");
+
+                if (loader != null) {
+
+                    SingleLessonController controller = loader.getController();
+
+                    if (controller != null) {
+
+                        LessonService lessonService = new LessonService() ;
+                        lessonService.add(controller.getLesson(cours_id));
+
+
+
+
+                    } else {
+                        System.out.println("null for SingleLesson.");
+                    }
+                } else {
+                    System.out.println("FXMLLoader is null for SingleLesson.");
+                }
+            }
+        }
+
+        System.out.println(allLessonData);
+    }
+
+
 }
 
 
