@@ -97,8 +97,7 @@ public class AjouterRecController {
             ObservableList<Reclamations> observableList = FXCollections.observableList(mypub);
             // Définir les réclamations dans la table
             // Définir les cellules pour les colonnes ID et Description
-            idfx.setCellValueFactory(new PropertyValueFactory<>("type"));
-            descfx.setCellValueFactory(new PropertyValueFactory<>("date"));
+
 
             // Charger les IDs utilisateurs dans la combobox
 
@@ -151,7 +150,7 @@ public class AjouterRecController {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/reclamtions/ModifierRec.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Reclamations/ModifierRec.fxml"));
                     Parent root = loader.load();
                     ModifierRecController modifyController = loader.getController();
                     modifyController.setPubId(mypub.get(index).getId_reclamation());
@@ -202,7 +201,7 @@ public class AjouterRecController {
 
     public void handleForum(ActionEvent actionEvent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/reclamtions/AfficherRecU.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Reclamations/AfficherRecU.fxml"));
             Parent root = loader.load();
             forumBtn.getScene().setRoot(root);
 
