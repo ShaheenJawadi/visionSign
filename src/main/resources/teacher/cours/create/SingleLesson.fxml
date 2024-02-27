@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.HTMLEditor?>
+
+<VBox fx:id="singleLessonBox" prefHeight="200.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teacher.SingleLesson">
+   <children>
+      <AnchorPane prefHeight="44.0" prefWidth="600.0" styleClass="inputHolder">
+         <children>
+            <VBox prefHeight="53.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label text="Titre de la lecon" />
+                  <TextField fx:id="leconTitle" styleClass="inputField" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="41.0" prefWidth="600.0" styleClass="inputHolder">
+         <children>
+            <HBox prefHeight="53.0" prefWidth="600.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Lien video" />
+                        <TextField fx:id="leconVideo" styleClass="inputField" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Image" />
+                        <Button fx:id="leconImage" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="38.0" prefWidth="318.0" styleClass="uploadBtn" text="Ajouter Image" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Duree de la lecon" />
+                        <TextField fx:id="leconDuration" maxHeight="200.0" styleClass="inputField">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Ordre" />
+                        <TextField fx:id="leconOrdre" maxWidth="200.0" styleClass="inputField" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="299.0" prefWidth="600.0" styleClass="inputHolder">
+         <children>
+            <VBox layoutX="19.924529018924964" layoutY="19.924529018924964" prefHeight="307.0" prefWidth="581.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+               <children>
+                  <Label text="Contenu" />
+                  <HTMLEditor fx:id="leconContent" htmlText="" prefHeight="283.0" prefWidth="750.0" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <Separator prefWidth="200.0" />
+   </children>
+   <stylesheets>
+      <URL value="@../../../styles/Teacher/style.css" />
+      <URL value="@../../../styles/Teacher/form.css" />
+      <URL value="@../../../styles/Teacher/add_cours.css" />
+      <URL value="@../../../styles/Teacher/style.css" />
+   </stylesheets>
+</VBox>
