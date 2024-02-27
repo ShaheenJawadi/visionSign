@@ -12,15 +12,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.web.HTMLEditor?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-<VBox fx:id="vbRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teacher.ManageCoursController">
+<VBox fx:id="vbRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1280.0" spacing="10.0" stylesheets="@../../../styles/Teacher/form.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teacher.ManageCoursController">
    <children>
-      <AnchorPane minWidth="600.0" prefHeight="692.0" prefWidth="600.0" stylesheets="@../../../styles/Teacher/add_cours.css">
+      <AnchorPane stylesheets="@../../../styles/Teacher/add_cours.css">
          <children>
-            <VBox maxWidth="1000.0" prefHeight="360.0" prefWidth="560.0" stylesheets="@../../../styles/Teacher/form.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <VBox maxWidth="1000.0" stylesheets="@../../../styles/Teacher/form.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                <children>
-                  <TabPane prefHeight="569.0" prefWidth="561.0" style="-fx-background-color: #fff;" styleClass="MyTabPane" stylesheets="@../../../styles/Teacher/add_cours.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                  <TabPane style="-fx-background-color: #fff;" styleClass="MyTabPane" stylesheets="@../../../styles/Teacher/add_cours.css" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                     <tabs>
                       <Tab text="Details">
                         <content>
@@ -33,6 +34,7 @@
                                                 <children>
                                                    <Label text="Titre de cours" />
                                                    <TextField fx:id="nom" styleClass="inputField" />
+                                                   <Label fx:id="validateTitleCours" styleClass="errorLabel" text="Label" />
                                                 </children>
                                              </VBox>
                                           </children>
@@ -49,6 +51,7 @@
                                                                <Insets />
                                                             </opaqueInsets>
                                                          </ComboBox>
+                                                         <Label fx:id="validateCategory" text="Label" />
                                                       </children>
                                                    </VBox>
                                                    <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
@@ -59,6 +62,7 @@
                                                                <Insets />
                                                             </opaqueInsets>
                                                          </ComboBox>
+                                                         <Label fx:id="validateSubCategory" text="Label" />
                                                       </children>
                                                    </VBox>
                                                 </children>
@@ -77,12 +81,14 @@
                                                                <Insets />
                                                             </opaqueInsets>
                                                          </ComboBox>
+                                                         <Label fx:id="validateLevel" text="Label" />
                                                       </children>
                                                    </VBox>
                                                    <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
                                                       <children>
                                                          <Label text="Tags" />
                                                          <TextField fx:id="tags" styleClass="inputField" />
+                                                         <Label fx:id="validateTags" text="Label" />
                                                       </children>
                                                    </VBox>
                                                 </children>
@@ -95,6 +101,7 @@
                                                 <children>
                                                    <Label text="Description" />
                                                    <TextArea fx:id="description" prefHeight="200.0" prefWidth="200.0" styleClass="inputField" />
+                                                   <Label fx:id="validateDescription" text="Label" />
                                                 </children>
                                              </VBox>
                                           </children>
@@ -126,12 +133,14 @@
                                                                            <Font size="18.0" />
                                                                        </font>
                                                                    </TextField>
+                                                         <Label fx:id="validateLien" text="Label" />
                                                                </children>
                                                            </VBox>
                                                            <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
                                                                <children>
                                                                    <Label text="Type" />
                                                                    <TextField fx:id="ressource_type" styleClass="inputField" />
+                                                         <Label fx:id="validateType" text="Label" />
                                                                </children>
                                                            </VBox>
                                                        </children>
@@ -145,87 +154,43 @@
                       </Tab>
                         <Tab text="Lecons">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="744.0" prefWidth="561.0" styleClass="TForm">
-                                   <VBox prefHeight="200.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                       <children>
-                                           <AnchorPane prefHeight="44.0" prefWidth="600.0" styleClass="inputHolder">
-                                               <children>
-                                                   <VBox prefHeight="53.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                                       <children>
-                                                           <Label text="Titre de la lecon" />
-                                                           <TextField fx:id="leconTitle" styleClass="inputField" />
-                                                       </children>
-                                                   </VBox>
-                                               </children>
-                                           </AnchorPane>
-                                           <AnchorPane prefHeight="41.0" prefWidth="600.0" styleClass="inputHolder">
-                                               <children>
-                                                   <HBox prefHeight="53.0" prefWidth="600.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-                                                       <children>
-                                                           <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
-                                                               <children>
-                                                                   <Label text="Lien video" />
-                                                                   <TextField fx:id="leconVideo" styleClass="inputField" VBox.vgrow="ALWAYS" />
-                                                               </children>
-                                                           </VBox>
-                                                           <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
-                                                               <children>
-                                                                   <Label text="Image" />
-                                                         <Button fx:id="leconImage" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="38.0" prefWidth="318.0" styleClass="uploadBtn" text="Ajouter Image" />
-                                                               </children>
-                                                           </VBox>
-                                                           <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
-                                                               <children>
-                                                                   <Label text="Duree de la lecon" />
-                                                                   <TextField fx:id="leconDuration" maxHeight="200.0" styleClass="inputField">
-                                                                       <font>
-                                                                           <Font size="18.0" />
-                                                                       </font>
-                                                                   </TextField>
-                                                               </children>
-                                                           </VBox>
-                                                           <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
-                                                               <children>
-                                                                   <Label text="Ordre" />
-                                                                   <TextField fx:id="leconOrdre" maxWidth="200.0" styleClass="inputField" />
-                                                               </children>
-                                                           </VBox>
-                                                       </children>
-                                                   </HBox>
-                                               </children>
-                                           </AnchorPane>
-                                           <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="299.0" prefWidth="600.0" styleClass="inputHolder">
-                                               <children>
-                                                   <VBox layoutX="19.924529018924964" layoutY="19.924529018924964" prefHeight="307.0" prefWidth="581.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
-                                                       <children>
-                                                           <Label text="Contenu" />
-                                                   <HTMLEditor fx:id="leconContent" htmlText="" prefHeight="283.0" prefWidth="750.0" />
-                                                       </children>
-                                                   </VBox>
-                                               </children>
-                                           </AnchorPane>
-                                           <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="inputHolder">
-                                               <children>
-                                                   <Button alignment="CENTER" contentDisplay="CENTER" layoutX="240.0000086370507" layoutY="18.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="186.0" styleClass="secondaryBtn" text="Ajouter une lecon" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="184.0" />
-                                               </children>
-                                           </AnchorPane>
-                                       </children>
-                                   </VBox>
+                            <AnchorPane styleClass="TForm">
+                                 <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                       <VBox fx:id="ListCoursHolder" prefHeight="200.0" prefWidth="100.0">
+                                          <children>
+                                             <fx:include source="SingleLesson.fxml" />
+                                          </children>
+                                       </VBox>
+                                             <Button fx:id="addLesson" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addLessonClick" prefHeight="25.0" prefWidth="186.0" styleClass="secondaryBtn" text="Ajouter une lecon" />
+                                    </children>
+                                 </VBox>
                             </AnchorPane>
                           </content>
                         </Tab>
                     </tabs>
                   </TabPane>
-                  <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="561.0" spacing="15.0">
-                     <children>
-                        <Button mnemonicParsing="false" styleClass="cancelButton" text="Annuler" />
-                        <Button mnemonicParsing="false" onAction="#submitCours" styleClass="submitButton" text="Enregistrer" />
-                     </children>
-                  </HBox>
                   <AnchorPane prefHeight="0.0" prefWidth="561.0" VBox.vgrow="NEVER" />
                </children>
             </VBox>
          </children>
       </AnchorPane>
+      <TextFlow fx:id="validationErrorMessage" styleClass="error_message" textAlignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="msg" text="Certains champs sont invalides. Veuillez vérifier et corriger les informations saisies avant de procéder à l'insertion." />
+         </children>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </TextFlow>
+      <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="561.0" spacing="15.0">
+         <children>
+            <Button mnemonicParsing="false" styleClass="cancelButton" text="Annuler" />
+            <Button mnemonicParsing="false" onAction="#submitCours" styleClass="submitButton" text="Enregistrer" />
+         </children>
+         <padding>
+            <Insets bottom="20.0" />
+         </padding>
+      </HBox>
    </children>
 </VBox>

@@ -3,6 +3,7 @@ package services.lesson;
 import dtos.LessonDto;
 import entities.Lesson;
 import entities.Ressource;
+import services.GServices;
 import services.IService;
 import utils.DbOps;
 import utils.MyDatabase;
@@ -10,7 +11,7 @@ import utils.MyDatabase;
 import java.sql.*;
 import java.util.List;
 
-public class LessonService  implements IService<Lesson> {
+public class LessonService  extends GServices implements IService<Lesson> {
 
 
     private  String tableName ="lessons" ;
@@ -24,14 +25,14 @@ public class LessonService  implements IService<Lesson> {
         dbOps= new DbOps();
     }
     @Override
-    public void add(Lesson lesson) throws SQLException {
+    public int add(Lesson lesson) throws SQLException {
 
 
 
 
         String sql = "INSERT INTO "+tableName+" (coursId,titre,content,duree,image,video,classement) VALUES(? ,? ,?,?,? ,? ,?)";
 
-        PreparedStatement ps=connection.prepareStatement(sql);
+        PreparedStatement ps=prepareStatementWithGeneratedKeys(connection,sql);;
         ps.setInt(1,lesson.getCoursId());
         ps.setString(2,lesson.getTitre());
         ps.setString(3,lesson.getContent());
@@ -41,6 +42,7 @@ public class LessonService  implements IService<Lesson> {
         ps.setInt(7 , lesson.getClassement());
 
         ps.executeUpdate();
+        return getCurrentId( connection,ps);
 
     }
 
