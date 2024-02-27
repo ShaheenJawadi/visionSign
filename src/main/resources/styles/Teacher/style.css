@@ -1,0 +1,13 @@
+* {
+    -fx-primary-color: #00aeef;
+    -fx-primary-color-background: rgba(0, 174, 239, 0.25);
+    -fx-secondary-color: #34C38F;
+    -fx-page-background: #f5f6f8;
+    -fx-error-background : #f46a6a
+}
+
+
+.btn {
+    -fx-cursor: pointer;
+}
+

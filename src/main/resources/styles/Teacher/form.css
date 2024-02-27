@@ -4,7 +4,11 @@
     -fx-primary-color-background: rgba(0, 174, 239, 0.25);
     -fx-secondary-color: #34C38F;
     -fx-page-background: #f5f6f8;
-    -fx-error-background : #f46a6a
+    -fx-error-background : #f46a6a;
+
+    -fx-error-background-background: rgba(244, 106, 106, 0.25);
+
+
 }
 
 
@@ -46,3 +50,26 @@
     -fx-text-fill: #fff;
     -fx-background-color: -fx-secondary-color;
 }
+
+.error_message{
+    -fx-background-color:  -fx-error-background-background;
+    -fx-border-color:  -fx-error-background;
+    -fx-border-radius: 5px;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-padding: 10px;
+    -fx-start-margin: 15px;
+
+}
+.error_message .msg{
+
+    -fx-fill: -fx-error-background;
+    -fx-font-size: 22px;
+
+
+}
+
+.errorLabel{
+    -fx-text-fill: -fx-error-background;
+}
+
