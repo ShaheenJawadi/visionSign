@@ -47,7 +47,7 @@
                                 <Insets left="-20.0" />
                             </HBox.margin>
                         </ImageView>
-                        <Label alignment="CENTER" text="Iyed Guezmir" textFill="WHITE">
+                        <Label fx:id="userTF" alignment="CENTER" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
@@ -94,5 +94,16 @@
                 </HBox>
             </children>
         </Pane>
+      <Button layoutX="652.0" layoutY="511.0" mnemonicParsing="false" onAction="#modify" prefHeight="26.0" prefWidth="78.0" style="-fx-background-radius: 12;" text="Modify" />
+      <Button layoutX="763.0" layoutY="166.0" mnemonicParsing="false" onAction="#refresh" prefHeight="27.0" prefWidth="42.0">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@refresh-button.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+     
     </children>
 </AnchorPane>

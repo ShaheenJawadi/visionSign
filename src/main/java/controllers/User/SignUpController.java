@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import services.User.UserService;
 
@@ -41,7 +42,7 @@ public class SignUpController {
     @FXML
     private MFXTextField usernameTF;
     @FXML
-    private Hyperlink hpId;
+    private Hyperlink hpId1;
     private final UserService userService=new UserService();
 
 
@@ -54,35 +55,83 @@ public class SignUpController {
 
     @FXML
     void ajouter(ActionEvent event) {
+        String validationError = validateInputs();
+        if(validationError.isEmpty()){
 
         try {
             userService.ajouter(new User(nomTF.getText(),prenomTF.getText(),usernameTF.getText(),emailTF.getText(),pwdTF.getText(),
                     UserRole.valueOf(roleTF.getText().toUpperCase())));
-            Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("sucess");
-            alert.setContentText("person added succesfully");
-            alert.showAndWait();
+            showAlertSuccess("Success","Sign up successful","Account is Ready!");
 
         }
         catch (SQLException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            showAlertError("Error","",e.getMessage());
         }
+          }else
+           {showAlertError("Validation error","",validationError);}
 
 
     }
-/*
+
     @FXML
     void naviguer(ActionEvent event){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login.fxml"));
-            Parent root = loader.load();
-            usernameTF.getScene().setRoot(root);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/Login.fxml"));
+            Parent loginRoot = loader.load();
+            ScrollPane loginScrollPane = new ScrollPane(loginRoot);
+            loginScrollPane.setFitToWidth(true);
+            loginScrollPane.setFitToHeight(true);
+            usernameTF.getScene().setRoot(loginScrollPane);
         }catch(IOException e){
             throw new RuntimeException(e.getMessage());
         }
-    }  */
+    }
+
+    private String validateInputs() {
+        StringBuilder validationError = new StringBuilder();
+
+        if (!nomTF.getText().matches("[a-zA-Z ]+")) {
+            validationError.append("Nom should only contain characters.\n");
+        }
+
+// Check if prenom contains only characters (including spaces)
+        if (!prenomTF.getText().matches("[a-zA-Z ]+")) {
+            validationError.append("Prenom should only contain characters.\n");
+        }
+
+        if (!usernameTF.getText().matches("[a-zA-Z]{4,}[a-zA-Z0-9_ ]*")) {
+            validationError.append("Username should have at least 4 alphabetical characters and can contain numbers, _, and spaces.\n");
+        }
+        String password = pwdTF.getText();
+        if (password.length() < 8 ||
+                !password.matches(".*[a-z].*") ||  // At least one lowercase letter
+                !password.matches(".*[A-Z].*") ||  // At least one uppercase letter
+                !password.matches(".*\\d.*")) {    // At least one digit
+            validationError.append("Password should have at least 8 characters, including at least one uppercase letter, one lowercase letter, and one number.\n");
+        }
+        String email = emailTF.getText();
+        if (!email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$")) {
+            validationError.append("Email should be in a valid email format.\n");
+        }
+
+        // Add similar checks for email and password
+
+        return validationError.toString();
+    }
+
+    private void showAlertError(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+    private void showAlertSuccess(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 
 }

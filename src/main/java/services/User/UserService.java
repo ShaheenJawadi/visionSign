@@ -58,6 +58,21 @@ public class UserService implements IUserServices<User>{
         ps.executeUpdate();
 
     }
+    public void updatePassword(User user) throws SQLException{
+        String sql="update user set password=? where id=?";
+        PreparedStatement ps= connection.prepareStatement(sql);
+        ps.setString(1, user.getPassword());
+        ps.setInt(2,user.getId());
+        ps.executeUpdate();
+    }
+    public void updateEmail(User user) throws SQLException{
+        String sql="update user set email=? where id=?";
+        PreparedStatement ps= connection.prepareStatement(sql);
+        ps.setString(1, user.getEmail());
+        ps.setInt(2,user.getId());
+        ps.executeUpdate();
+    }
+
 
     @Override
     public void supprimer(int id) throws SQLException {
@@ -143,6 +158,10 @@ public class UserService implements IUserServices<User>{
         }
         return null; // Return null if login fails
     }
+
+
+
+
     /* public User getUserById(int id) throws SQLException {
         String sql = "SELECT * FROM user WHERE id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
