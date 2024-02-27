@@ -2,17 +2,21 @@ package controllers.User;
 
 import entities.User;
 import entities.UserLevel;
+import entities.UserRole;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.control.*;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.Period;
+
 import services.User.UserService;
 
 public class UserProfileController {
@@ -28,49 +32,42 @@ public class UserProfileController {
 
     @FXML
     private TextField prenomTF;
-    @FXML
-    private TextField emailTF;
-    @FXML
-    private TextField pwdTF;
 
     @FXML
     private TextField usernameTF;
-    private final UserService userService=new UserService();
     @FXML
+    private Label userTF;
+    private final UserService userService=new UserService();
+
+ @FXML
     void initialize(){
+    User user=userService.getCurrent();
+        userTF.setText(user.getUsername());
         ObservableList<UserLevel> userLevels = FXCollections.observableArrayList(UserLevel.values());
-
-        //ObservableList<String> levels = FXCollections.observableArrayList("1", "2", "3");
         levelTF.setItems(userLevels);
-        levelTF.setValue(UserLevel.DEBUTANT);
-        User currentUser = userService.getCurrent();
-        System.out.println("current user ID "+currentUser.getId());
-
-        System.out.println("current user "+currentUser.getNom());
-        nomTF.setText(currentUser.getNom());
-        prenomTF.setText(currentUser.getPrenom());
-        usernameTF.setText(currentUser.getUsername());
-        //emailTF.setText(currentUser.getEmail());
-
-        System.out.println("emaaaaaaaaail"+currentUser.getEmail());
-        emailTF.setText(currentUser.getEmail());
-        System.out.println(currentUser.getDateNaissance());
-        //dateTF.setValue(currentUser.getDateNaissance().toLocalDate());
-
-        //levelTF.setValue(currentUser.getLevelId());
+        nomTF.setText(user.getNom());
+        prenomTF.setText(user.getPrenom());
+        usernameTF.setText(user.getUsername());
+        if(user.getDateNaissance()!=null){dateTF.setValue(user.getDateNaissance().toLocalDate());}
+         UserLevel userLevel= switch (user.getLevelId()) {
+        case 1 -> UserLevel.DEBUTANT;
+        case 2 -> UserLevel.INTERMEDIAIRE;
+        case 3 -> UserLevel.AVANCE;
+        default-> UserLevel.NULL;
+    };
+    levelTF.setValue(userLevel);
     }
+
     @FXML
     void modifier(ActionEvent event) {
-
+        String validationError = validateInputs();
         try {
             LocalDate selectedDate = dateTF.getValue();
             java.sql.Date dateToSet = null;
             if (selectedDate != null) {
                 dateToSet = java.sql.Date.valueOf(selectedDate);
             }
-            System.out.println("currreeent useeer"+userService.getCurrent().getId());
-
-            User userToUpdate = new User(userService.getCurrent().getId(),nomTF.getText(),prenomTF.getText(),usernameTF.getText(),dateToSet,emailTF.getText(),pwdTF.getText(),userService.getCurrent().getRole(),userService.getCurrent().getStatus());
+            User userToUpdate = new User(userService.getCurrent().getId(),nomTF.getText(),prenomTF.getText(),usernameTF.getText(),dateToSet,userService.getCurrent().getEmail(),userService.getCurrent().getPassword(),userService.getCurrent().getRole(),userService.getCurrent().getStatus());
             System.out.println("Useerr to updateee"+userToUpdate.getId());
             System.out.println("neww datee"+userToUpdate.getDateNaissance());
             switch (levelTF.getText()){
@@ -88,22 +85,92 @@ public class UserProfileController {
                     userToUpdate.setLevelId(3);
                     break;
             }
-            System.out.println("hgghfhghg "+userToUpdate);
 
+            if (validationError.isEmpty()) {
             userService.modifier(userToUpdate);
+            showAlertSucces("Success", "User modified", "User modified successfully.");
+            }
+            else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Validation Error");
+                alert.setContentText(validationError);
+                alert.showAndWait();
 
-            Alert alert=new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("sucess");
-            alert.setContentText("person modifed succesfully");
-            alert.showAndWait();
-
+            }
         }
         catch (SQLException e){
-            Alert alert=new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            showAlertError("Error", "", e.getMessage());
         }
 
+    }
+    @FXML
+    void pwdButton(ActionEvent event){
+        try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserProfilePwd.fxml"));
+            Parent pwdRoot = loader.load();
+            ScrollPane rootScrollPane=new ScrollPane(pwdRoot);
+            rootScrollPane.setFitToWidth(true);
+            rootScrollPane.setFitToHeight(true);
+            usernameTF.getScene().setRoot(rootScrollPane);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+    @FXML
+    void privacyButton(ActionEvent event){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserProfilePrivacy.fxml"));
+            Parent privacyRoot = loader.load();
+            ScrollPane privacyScrollPane=new ScrollPane(privacyRoot);
+            privacyScrollPane.setFitToWidth(true);
+            privacyScrollPane.setFitToHeight(true);
+            usernameTF.getScene().setRoot(privacyScrollPane);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+    }
+
+
+    private void showAlertError(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+    private void showAlertSucces(String title, String header, String content) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+    @FXML
+
+    private String validateInputs() {
+        StringBuilder validationError = new StringBuilder();
+
+        if (!nomTF.getText().matches("[a-zA-Z ]+")) {
+            validationError.append("Nom should only contain characters.\n");
+        }
+
+        if (!prenomTF.getText().matches("[a-zA-Z ]+")) {
+            validationError.append("Prenom should only contain characters.\n");
+        }
+
+        if (!usernameTF.getText().matches("[a-zA-Z]{4,}[a-zA-Z0-9_ ]*")) {
+            validationError.append("Username should have at least 4 alphabetical characters and can contain numbers, _, and spaces.\n");
+        }
+
+       if(levelTF.getText().isEmpty()){
+           validationError.append("You must choose a level");
+       }
+        LocalDate currentDate = LocalDate.now();
+        LocalDate selectedDate = dateTF.getValue();
+        if (selectedDate == null || Period.between(selectedDate, currentDate).getYears() < 12) {
+            validationError.append("Please select a valid date of birth (user must be at least 12 years old).\n");
+        }
+
+        return validationError.toString();
     }
 }

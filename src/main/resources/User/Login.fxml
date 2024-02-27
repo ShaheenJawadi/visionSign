@@ -37,27 +37,41 @@
                         <Font name="Calibri Bold" size="40.0" />
                     </font>
                 </Label>
-                <Label layoutX="33.0" layoutY="315.0" prefHeight="18.0" prefWidth="127.0" text="Forgot your password?" />
-                <JFXButton buttonType="RAISED" layoutX="97.0" layoutY="384.0" onAction="#naviguer" prefHeight="55.0" prefWidth="186.0" style="-fx-background-color: #2aace2;" text="Login." textFill="WHITE">
+                <JFXButton buttonType="RAISED" layoutX="97.0" layoutY="384.0" onAction="#login" prefHeight="55.0" prefWidth="186.0" style="-fx-background-color: #2aace2;" text="Login." textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="17.0" />
                     </font>
                 </JFXButton>
                 <Label layoutX="180.0" layoutY="454.0" prefHeight="18.0" prefWidth="19.0" text="or" />
-                <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="487.0" prefHeight="55.0" prefWidth="146.0" style="-fx-background-color: #2688FF;" text="Facebook" textFill="WHITE">
+                <JFXButton buttonType="RAISED" layoutX="14.0" layoutY="487.0" prefHeight="55.0" prefWidth="146.0" style="-fx-background-color: GREY;" text="Facebook" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="17.0" />
                     </font>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@facebook.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                 </JFXButton>
-                <JFXButton blendMode="SRC_ATOP" buttonType="RAISED" layoutX="187.0" layoutY="487.0" prefHeight="55.0" prefWidth="158.0" style="-fx-background-color: red;" text="Gmail" textFill="WHITE">
+                <JFXButton blendMode="SRC_ATOP" buttonType="RAISED" layoutX="187.0" layoutY="487.0" prefHeight="55.0" prefWidth="158.0" style="-fx-background-color: GREY;" text="Gmail" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="17.0" />
                     </font>
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@gmail.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
                 </JFXButton>
-                <MFXPasswordField fx:id="pwdTF" allowPaste="true" caretVisible="false" floatingTextGap="1.0" hideCharacter="*" layoutX="21.0" layoutY="256.0" prefHeight="36.0" prefWidth="314.0" promptText="Password" />
+                <MFXPasswordField fx:id="pwdTF" allowPaste="true" caretVisible="false" floatingTextGap="1.0" layoutX="21.0" layoutY="256.0" prefHeight="36.0" prefWidth="314.0" promptText="Password" />
                 <MFXTextField fx:id="usernameTF" floatingTextGap="1.0" layoutX="22.0" layoutY="187.0" prefHeight="46.0" prefWidth="308.0" promptText="Username" />
                 <Label layoutX="19.0" layoutY="569.0" prefHeight="18.0" prefWidth="136.0" text="Don't have an account ?" />
-                <Hyperlink fx:id="signHP" layoutX="153.0" layoutY="566.0" onAction="#naviguer2" text="Sign Up" />
+                <Hyperlink fx:id="signHP" layoutX="153.0" layoutY="566.0" onAction="#naviguer" text="Sign Up" />
+            <Hyperlink fx:id="forgetHP" layoutX="29.0" layoutY="314.0" prefHeight="24.0" prefWidth="136.0" text="Forgot you password ?" />
             </children></AnchorPane>
     </children>
 </AnchorPane>
