@@ -26,6 +26,8 @@ public class ManageCoursController implements Initializable {
     private @FXML VBox vbRoot;
     private StackPane spSubScene;
 
+    private Cours cours ;
+
 
 
 
@@ -73,8 +75,9 @@ public class ManageCoursController implements Initializable {
     private TextField ressource_type;
 
 
-
-
+    public void setCours(Cours cours) {
+        this.cours = cours;
+    }
 
     @FXML
     void submitCours(ActionEvent event) throws SQLException {
