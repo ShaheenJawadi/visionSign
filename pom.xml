@@ -34,6 +34,11 @@
             <artifactId>fontawesomefx-fontawesome</artifactId>
             <version>4.7.0-9.1.2</version> <!-- Remplacez la version par la version la plus récente -->
         </dependency>
+        <dependency>
+            <groupId>com.theokanning.openai-gpt3-java</groupId>
+            <artifactId>service</artifactId>
+            <version>0.16.1</version>
+        </dependency>
 
 
     </dependencies>

@@ -12,6 +12,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -31,8 +33,19 @@ public class BaseForumController {
     protected Button addBtn, forumBtn;
     @FXML
     protected TextField searchField;
-    protected List<Publications> mypub, allPub;
+    protected List<Publications> mypub, allPub=null;
     protected PublicationsService pubs = new PublicationsService();
+    @FXML
+    void navigateAddPub(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/AddPublication.fxml"));
+            Parent root = loader.load();
+            addBtn.getScene().setRoot(root);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @FXML
     public void handleForum(ActionEvent event) {
@@ -48,6 +61,30 @@ public class BaseForumController {
 
     public Pane createPublicationPane(Publications publication, int index, boolean isAllPublications) {
         Pane pane = new Pane();
+        pane.setCursor(Cursor.HAND);
+        pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                if(event.getButton().equals(MouseButton.PRIMARY)){
+                    if(event.getClickCount() == 1){
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/PublicationDetails.fxml"));
+                            Parent root = loader.load();
+
+                            PublicationDetailsController pubDetailController = loader.getController();
+                            pubDetailController.setPubId(publication.getId());
+                            System.out.println("Passing pubId: " + publication.getId());
+
+                            forumBtn.getScene().setRoot(root);
+
+                        } catch (IOException e) {
+
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            }
+        });
         pane.setPrefSize(isAllPublications ? 682 : 271, isAllPublications ? 158 : 75);
         pane.setLayoutX(isAllPublications ? 6 : -1);
         pane.setLayoutY(7 + index * (isAllPublications ? 165 : 75));
@@ -103,22 +140,6 @@ public class BaseForumController {
             commentIcon.setFill(Color.web("#34364a"));
             commentIcon.setSize("14");
             commentButton.setGraphic(commentIcon);
-            commentButton.setCursor(Cursor.HAND);
-            commentButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    try {
-
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/AddComment.fxml"));
-                        Parent root = loader.load();
-                        AddCommentController addCommentController = loader.getController();
-                        addCommentController.setPubId(publication.getId());
-                        forumBtn.getScene().setRoot(root);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            });
 
             pane.getChildren().addAll(titreText, iconPane, userIdText, roleText, contenuText, dateText, commentButton);
         } else {
@@ -143,7 +164,7 @@ public class BaseForumController {
                         ModifyPublicationController modifyController = loader.getController();
                         modifyController.setPubId(mypub.get(index).getId());
                         System.out.println(mypub.get(index).getId());
-                        forumBtn.getScene().setRoot(root);
+                        modifyButton.getScene().setRoot(root);
                         refreshPublications();
 
                     } catch (IOException e) {
@@ -231,3 +252,4 @@ public class BaseForumController {
 
 
 }
+

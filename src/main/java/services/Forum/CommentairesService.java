@@ -77,9 +77,8 @@ public class CommentairesService implements IForum<Commentaires> {
 
     public List<Commentaires> getCommentairesByPublicationId(int id_pub) throws SQLException {
 
-        String sql = "SELECT c.*, u.username FROM commentaires c " +
-                "JOIN user u ON c.user_id = u.id " +
-                "WHERE c.id_pub=?";
+        String sql = "SELECT c.*, u.username FROM commentaires c JOIN user u ON c.user_id = u.id WHERE c.id_pub = ?";
+
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, id_pub);
         ResultSet rs = ps.executeQuery();
@@ -93,7 +92,6 @@ public class CommentairesService implements IForum<Commentaires> {
             commentaire.setId_pub(rs.getInt("id_pub"));
             commentaire.setUserId(rs.getInt("user_id"));
             commentaire.setUserName(rs.getString("username"));
-
             commentaires.add(commentaire);
         }
         return commentaires;
@@ -110,5 +108,6 @@ public class CommentairesService implements IForum<Commentaires> {
         }
         return false;
     }
+
 
 }

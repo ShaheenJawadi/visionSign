@@ -31,7 +31,7 @@ public class PublicationsService implements IForum<Publications> {
         try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
             if (generatedKeys.next()) {
 
-               publications.setId(generatedKeys.getInt(1));
+                publications.setId(generatedKeys.getInt(1));
             } else {
                 throw new SQLException("Creating publication failed, no ID obtained.");
             }
@@ -60,7 +60,7 @@ public class PublicationsService implements IForum<Publications> {
 
     @Override
     public Publications getByIdPublicationOrCommentaire(int id) throws SQLException {
-        String sql = "SELECT * FROM publications WHERE id=?";
+        String sql = "SELECT p.*, u.username FROM publications p JOIN user u ON p.user_id = u.id WHERE p.id=?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
@@ -74,11 +74,12 @@ public class PublicationsService implements IForum<Publications> {
             publication.setContenu(rs.getString("contenu"));
             publication.setDate_creation(rs.getTimestamp("date_creation"));
             publication.setUserId(rs.getInt("user_id"));
+            publication.setUserName(rs.getString("username")); // Set the username
             publication.setPubCommentaires(cs.getCommentairesByPublicationId(publication.getId()));
-
         }
         return publication;
     }
+
 
     public List<Publications> getAllPublications() throws SQLException {
         String sql = "SELECT p.*, u.username FROM publications p JOIN user u ON p.user_id = u.id";
@@ -159,5 +160,4 @@ public class PublicationsService implements IForum<Publications> {
         }
         return false;
     }
-
 }
