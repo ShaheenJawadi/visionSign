@@ -3,11 +3,9 @@ package controllers.teacher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextFlow;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +18,17 @@ public class TeacherCoursController implements Initializable{
     private  @FXML VBox gridHolder ;
 
 
+    @FXML
+    private TextFlow succMsg;
+
+    private boolean showMessage ;
+    public boolean isShowMessage() {
+        return showMessage;
+    }
+
+    public void setShowMessage(boolean showMessage) {
+        this.showMessage = showMessage;
+    }
 
     VBox getVBoxRoot()
     {
@@ -35,7 +44,7 @@ public class TeacherCoursController implements Initializable{
         try
         {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/cours/create/NewCours.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/cours/create/NewCours.fxml"));
             loader.load();
             ManageCoursController addCoursPage = loader.getController();
             addCoursPage.setStackPane(spSubScene);
@@ -52,7 +61,7 @@ public class TeacherCoursController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/cours/list/CoursGridPane.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/cours/list/CoursGridPane.fxml"));
              loader.load();
             CoursGridPane controller = loader.getController();
             controller.setStackPane(spSubScene);
@@ -62,6 +71,13 @@ public class TeacherCoursController implements Initializable{
             throw new RuntimeException(e);
         }
 
+        if(isShowMessage()){
+            succMsg.setVisible(true);
+
+        }
+        else {
+            succMsg.setVisible(false);
+        }
 
     }
 }

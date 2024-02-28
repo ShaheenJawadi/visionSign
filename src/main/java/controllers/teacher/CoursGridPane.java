@@ -34,7 +34,7 @@ public class CoursGridPane  implements Initializable {
         List<Cours> coursList =coursService.getAll();
         try {
         for (Cours cours : coursList) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/cours/list/CoursItem.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/cours/list/CoursItem.fxml"));
 
             VBox customView = loader.load();
 
@@ -59,7 +59,7 @@ public class CoursGridPane  implements Initializable {
         try
         {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/cours/create/NewCours.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/cours/create/NewCours.fxml"));
 
             loader.load();
 
