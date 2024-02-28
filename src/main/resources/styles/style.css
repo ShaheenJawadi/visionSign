@@ -1,0 +1,16 @@
+* {
+    -fx-primary-color: #00aeef;
+    -fx-primary-color-background: rgba(0, 174, 239, 0.25);
+    -fx-secondary-color: #34C38F;
+    -fx-secondary-color-background: rgba(52, 195, 143, 0.25);
+    -fx-third-color: #9016b2;
+    -fx-third-color-background: rgba(144, 22, 178, 0.25);
+    -fx-page-background: #f5f6f8;
+    -fx-error-background : #f46a6a;
+    -fx-error-background-background: rgba(244, 106, 106, 0.25);
+}
+
+.btn {
+    -fx-cursor: pointer;
+}
+

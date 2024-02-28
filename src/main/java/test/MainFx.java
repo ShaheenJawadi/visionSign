@@ -13,7 +13,7 @@ public class MainFx  extends Application {
 
 
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/TeacherPanel.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/TeacherPanel.fxml"));
 
         Parent root= loader.load();
 
@@ -22,7 +22,7 @@ public class MainFx  extends Application {
 
         mainViewController.IntitalState();
         primaryStage.setScene(scene);
-        primaryStage.setMinWidth(800);
+        primaryStage.setMinWidth(1200);
         primaryStage.setMinHeight(600);
         primaryStage.show();
 

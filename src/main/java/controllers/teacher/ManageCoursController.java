@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
@@ -104,9 +103,13 @@ public class ManageCoursController implements Initializable {
     private Button addLesson;
 
 
+
+
+
     public void setCours(Cours cours) {
         this.cours = cours;
     }
+
 
     @FXML
     void submitCours(ActionEvent event) throws SQLException, IOException {
@@ -118,7 +121,14 @@ public class ManageCoursController implements Initializable {
             if (cours_id > 0) {
                 DbAddCoursRessources(cours_id);
                 gatherLessonData(cours_id);
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/cours/CoursPage.fxml"));
 
+                loader.load();
+
+                TeacherCoursController coursPage = loader.getController();
+                coursPage.setStackPane(spSubScene);
+                spSubScene.getChildren().clear();
+                spSubScene.getChildren().add(coursPage.getVBoxRoot());
             }
         }
         else {
@@ -369,7 +379,7 @@ public class ManageCoursController implements Initializable {
 
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/cours/create/SingleLesson.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/cours/create/SingleLesson.fxml"));
            VBox ll=  loader.load();
             SingleLessonController controller = loader.getController();
             ll.getProperties().put("fxmlLoader", loader);

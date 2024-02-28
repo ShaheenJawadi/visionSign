@@ -73,3 +73,21 @@
     -fx-text-fill: -fx-error-background;
 }
 
+
+.succ_msg_holder{
+    -fx-background-color:  -fx-primary-color-background;
+    -fx-border-color:  -fx-secondary-color;
+    -fx-border-radius: 5px;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-padding: 10px;
+    -fx-start-margin: 15px;
+
+}
+.succ_msg_holder .succ_msg{
+
+    -fx-fill: -fx-secondary-color;
+    -fx-font-size: 22px;
+
+
+}

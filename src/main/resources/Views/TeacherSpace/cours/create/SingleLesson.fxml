@@ -77,9 +77,9 @@
       <Separator prefWidth="200.0" />
    </children>
    <stylesheets>
-      <URL value="@../../../styles/Teacher/style.css" />
-      <URL value="@../../../styles/Teacher/form.css" />
-      <URL value="@../../../styles/Teacher/add_cours.css" />
-      <URL value="@../../../styles/Teacher/style.css" />
+      <URL value="@../../../../styles/style.css" />
+      <URL value="@../../../../styles/Teacher/form.css" />
+      <URL value="@../../../../styles/Teacher/add_cours.css" />
+
    </stylesheets>
 </VBox>
