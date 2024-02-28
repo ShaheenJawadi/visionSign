@@ -2,6 +2,7 @@ package services.ressource;
 
 import dtos.RessourceDto;
 import entities.Ressource;
+import services.GServices;
 import services.IService;
 import utils.DbOps;
 import utils.MyDatabase;
@@ -9,7 +10,7 @@ import utils.MyDatabase;
 import java.sql.*;
 import java.util.List;
 
-public class RessourceService  implements IService<Ressource> {
+public class RessourceService  extends GServices implements IService<Ressource> {
 
 
 
@@ -24,20 +25,20 @@ public class RessourceService  implements IService<Ressource> {
         dbOps = new DbOps() ;
     }
     @Override
-    public void add(Ressource ressource) throws SQLException {
+    public int add(Ressource ressource) throws SQLException {
 
 
 
 
         String sql = "INSERT INTO "+tableName+" (coursId , lien, type) VALUES(? ,? ,?)";
 
-        PreparedStatement ps=connection.prepareStatement(sql);
+        PreparedStatement ps=prepareStatementWithGeneratedKeys(connection,sql);;
         ps.setInt(1,ressource.getCoursId());
         ps.setString(2,ressource.getLien());
         ps.setString(3,ressource.getType());
 
         ps.executeUpdate();
-
+        return getCurrentId( connection,ps);
     }
 
     @Override

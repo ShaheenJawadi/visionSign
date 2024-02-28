@@ -90,6 +90,9 @@ public class CoursItemController   {
     @FXML
     void editCours(ActionEvent event) {
 
+        System.out.println(cours.getId());
+
+        parentController.openAddCoursPageBtn(cours);
     }
 
 }

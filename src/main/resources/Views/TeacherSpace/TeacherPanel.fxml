@@ -69,7 +69,7 @@
                                  <children>
                                     <ImageView fitHeight="52.0" fitWidth="100.0" layoutX="18.0" layoutY="11.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../assets/logo.png" />
+                                          <Image url="@../../assets/logo.png" />
                                        </image>
                                        <viewport>
                                           <Rectangle2D />
@@ -108,7 +108,7 @@
                   </AnchorPane>
                </top>
                <center>
-                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" prefHeight="274.0" prefWidth="626.0">
+                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER">
                      <content>
                         <StackPane fx:id="spSubScene" alignment="TOP_CENTER" minWidth="600" prefHeight="327.0" prefWidth="600.0" BorderPane.alignment="CENTER" />
                      </content>

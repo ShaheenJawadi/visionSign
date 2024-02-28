@@ -4,9 +4,7 @@ import entities.Cours;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import services.cours.CoursService;
 
 import java.io.IOException;
@@ -17,6 +15,17 @@ import java.util.ResourceBundle;
 
 public class CoursGridPane  implements Initializable {
     private @FXML FlowPane  coursGridList ;
+    private  @FXML AnchorPane coursGridHolder;
+    private StackPane spSubScene;
+    public void setStackPane(StackPane stackPane) {
+        this.spSubScene = stackPane;
+    }
+
+
+    public AnchorPane getCoursGridHolder() {
+        return coursGridHolder;
+    }
+
     @FXML
     public void renderDataCours() throws SQLException {
         System.out.println("render");
@@ -25,7 +34,7 @@ public class CoursGridPane  implements Initializable {
         List<Cours> coursList =coursService.getAll();
         try {
         for (Cours cours : coursList) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/cours/list/CoursItem.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/cours/list/CoursItem.fxml"));
 
             VBox customView = loader.load();
 
@@ -46,6 +55,30 @@ public class CoursGridPane  implements Initializable {
 
     }
 
+    public  void openAddCoursPageBtn(Cours cours)   {
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/cours/create/NewCours.fxml"));
+
+            loader.load();
+
+            ManageCoursController addCoursPage = loader.getController();
+            addCoursPage.setStackPane(spSubScene);
+            addCoursPage.setCours(cours);
+            spSubScene.getChildren().clear();
+            spSubScene.getChildren().add(addCoursPage.getVBoxRoot());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
+
+
+
+
+
+    }
 
 
 

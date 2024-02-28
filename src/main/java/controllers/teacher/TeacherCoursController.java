@@ -3,21 +3,32 @@ package controllers.teacher;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextFlow;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TeacherCoursController{
+public class TeacherCoursController implements Initializable{
 
     private @FXML VBox vbRoot;
     private  StackPane spSubScene;
+    private  @FXML VBox gridHolder ;
 
 
+    @FXML
+    private TextFlow succMsg;
+
+    private boolean showMessage ;
+    public boolean isShowMessage() {
+        return showMessage;
+    }
+
+    public void setShowMessage(boolean showMessage) {
+        this.showMessage = showMessage;
+    }
 
     VBox getVBoxRoot()
     {
@@ -33,10 +44,8 @@ public class TeacherCoursController{
         try
         {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/cours/create/NewCours.fxml"));
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/cours/create/NewCours.fxml"));
             loader.load();
-
             ManageCoursController addCoursPage = loader.getController();
             addCoursPage.setStackPane(spSubScene);
             spSubScene.getChildren().clear();
@@ -46,12 +55,29 @@ public class TeacherCoursController{
         {
             System.out.println(ex.toString());
         }
-
-
-
-
-
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/cours/list/CoursGridPane.fxml"));
+             loader.load();
+            CoursGridPane controller = loader.getController();
+            controller.setStackPane(spSubScene);
+
+            gridHolder.getChildren().add(controller.getCoursGridHolder());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        if(isShowMessage()){
+            succMsg.setVisible(true);
+
+        }
+        else {
+            succMsg.setVisible(false);
+        }
+
+    }
 }

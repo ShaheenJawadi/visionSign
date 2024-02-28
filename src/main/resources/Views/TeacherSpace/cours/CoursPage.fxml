@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox fx:id="vbRoot" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="1000.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teacher.TeacherCoursController">
+   <children>
+      <TextFlow fx:id="succMsg" styleClass="succ_msg_holder" textAlignment="CENTER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="succ_msg" text="Cours ajouté avec succès" />
+         </children>
+      </TextFlow>
+      <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+         <children>
+            <Button fx:id="addCoursBtn" mnemonicParsing="false" onAction="#openAddCoursPageBtn" styleClass="submitButton" text="Ajouter un cours" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="15.0" left="25.0" right="25.0" top="15.0" />
+         </padding>
+      </HBox>
+      <VBox fx:id="gridHolder" prefHeight="200.0" prefWidth="100.0" />
+
+    
+
+
+   </children>
+   <stylesheets>
+      <URL value="@../../../styles/Teacher/form.css" />
+      <URL value="@../../../styles/style.css" />
+   </stylesheets>
+</VBox>

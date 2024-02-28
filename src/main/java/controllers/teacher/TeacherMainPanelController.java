@@ -27,7 +27,7 @@ public class TeacherMainPanelController {
         try
         {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/Dashboard.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/Dashboard.fxml"));
 
             loader.load();
 
@@ -46,11 +46,13 @@ public class TeacherMainPanelController {
         try
         {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/cours/CoursPage.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/cours/CoursPage.fxml"));
 
             loader.load();
 
             TeacherCoursController coursPage = loader.getController();
+
+            coursPage.setShowMessage(true);
             coursPage.setStackPane(spSubScene);
             spSubScene.getChildren().clear();
             spSubScene.getChildren().add(coursPage.getVBoxRoot());
