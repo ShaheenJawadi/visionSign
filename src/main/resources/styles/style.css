@@ -95,6 +95,21 @@
 }
 
 
+.HomeSeparatorBox{
+
+
+    -fx-background-image: url("../assets/mainPage/midBanner.png");
+    -fx-background-repeat: stretch;
+
+    -fx-background-position: center center;
+
+}
+
+
+
+
+
+
 .coursGrid{
     -fx-background-color: #fff;
     -fx-effect: dropshadow(three-pass-box, rgba(222, 227, 236, 0.8), 30, 0.5, 0, 0);
