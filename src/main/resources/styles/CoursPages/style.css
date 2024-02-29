@@ -1,0 +1,32 @@
+.filterPage {
+
+}
+
+.filterPage .headerHolder {
+
+    -fx-background-image: url("../../assets/cours/bannner.png");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+}
+
+.filterPage .headerHolder .chimp {
+
+    -fx-background-color: -fx-primary-color;
+    -fx-text-fill: #fff;
+    -fx-font-size: 25px;
+    -fx-padding: 10 50 10 50;
+    -fx-background-radius: 100;
+}
+
+.filterPage .headerHolder.coursheader {
+    -fx-background-image: url("../../assets/cours/cours_banner.png");
+}
+
+
+.cours_sectionBlock {
+
+    -fx-padding: 20;
+    -fx-spacing: 10;
+    -fx-border-color: -fx-main-text-color;
+
+}
