@@ -15,6 +15,9 @@
 .primaryColorBg {
     -fx-background-color: -fx-primary-color;
 }
+.primaryTextColor  {
+    -fx-fill: -fx-primary-color;
+}
 .btn {
     -fx-cursor: pointer;
 

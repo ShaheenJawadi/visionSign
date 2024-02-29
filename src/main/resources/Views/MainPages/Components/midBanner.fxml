@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+
+<AnchorPane maxHeight="-Infinity" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Views.MainPages.Components.MidBanner">
+   <children>
+      <Pane maxHeight="160.0" prefHeight="200.0" prefWidth="200.0" styleClass="primaryColorBg" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <TextFlow textAlignment="CENTER">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Nos Avnetages">
+                     <font>
+                        <Font name="System Bold" size="23.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="32.0">
+               <children>
+                  <VBox maxWidth="300.0" style="-fx-background-color: #fff;" styleClass="cardInfo" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Circle fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="primaryTextColor" text="Acquérir des Compétences" />
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </HBox>
+                        <TextFlow>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Chez VSA, explorez une multitude de courspour renforcer vos compétences. Que voussoyez débutant ou expert, notre sélection decours vous offre une opportunité illimitéed'apprentissage." wrappingWidth="310.98004150390625">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </TextFlow>
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
+                  <VBox layoutX="10.0" layoutY="10.0" maxWidth="300.0" style="-fx-background-color: #fff;" styleClass="cardInfo">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Circle fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="primaryTextColor" text="Acquérir des Compétences" />
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </HBox>
+                        <TextFlow>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Chez VSA, explorez une multitude de courspour renforcer vos compétences. Que voussoyez débutant ou expert, notre sélection decours vous offre une opportunité illimitéed'apprentissage." wrappingWidth="310.98004150390625">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </TextFlow>
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
+                  <VBox layoutX="335.0" layoutY="10.0" maxWidth="300.0" style="-fx-background-color: #fff;" styleClass="cardInfo">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Circle fill="DODGERBLUE" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="primaryTextColor" text="Acquérir des Compétences" />
+                           </children>
+                           <padding>
+                              <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                           </padding>
+                        </HBox>
+                        <TextFlow>
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Chez VSA, explorez une multitude de courspour renforcer vos compétences. Que voussoyez débutant ou expert, notre sélection decours vous offre une opportunité illimitéed'apprentissage." wrappingWidth="310.98004150390625">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </TextFlow>
+                     </children>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+         </padding>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../../../styles/Main/homeStyle.css" />
+      <URL value="@../../../styles/style.css" />
+   </stylesheets>
+</AnchorPane>

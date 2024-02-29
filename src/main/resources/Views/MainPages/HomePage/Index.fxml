@@ -27,6 +27,8 @@
                               <fx:include source="../Components/InfoBox.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                            </children>
                         </AnchorPane>
+                        <AnchorPane />
+                        <fx:include source="../Components/midBanner.fxml" />
                      </children>
                   </VBox>
                </children>
