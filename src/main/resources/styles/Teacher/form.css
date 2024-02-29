@@ -28,29 +28,6 @@
     -fx-font-size: 18px;
 }
 
-.submitButton {
-    -fx-background-color: -fx-primary-color;
-    -fx-text-fill: #fff;
-    -fx-font-size: 19px;
-
-}
-
-.cancelButton {
-    -fx-background-color: -fx-error-background ;
-    -fx-text-fill: #fff;
-    -fx-font-size: 19px;
-}
-
-.uploadBtn {
-    -fx-background-color:-fx-primary-color-background ;
-    -fx-text-fill: -fx-primary-color;
-}
-
-.secondaryBtn {
-    -fx-text-fill: #fff;
-    -fx-background-color: -fx-secondary-color;
-}
-
 .error_message{
     -fx-background-color:  -fx-error-background-background;
     -fx-border-color:  -fx-error-background;

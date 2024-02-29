@@ -8,9 +8,59 @@
     -fx-page-background: #f5f6f8;
     -fx-error-background : #f46a6a;
     -fx-error-background-background: rgba(244, 106, 106, 0.25);
+
+    -fx-main-text-color: #757783 ;
 }
 
 .btn {
     -fx-cursor: pointer;
+
 }
 
+
+.submitButton {
+    -fx-background-color: -fx-primary-color;
+    -fx-text-fill: #fff;
+    -fx-font-size: 19px;
+
+}
+
+.cancelButton {
+    -fx-background-color: -fx-error-background ;
+    -fx-text-fill: #fff;
+    -fx-font-size: 19px;
+}
+
+.uploadBtn {
+    -fx-background-color:-fx-primary-color-background ;
+    -fx-text-fill: -fx-primary-color;
+}
+
+.secondaryBtn {
+    -fx-text-fill: #fff;
+    -fx-background-color: -fx-secondary-color;
+}
+
+
+
+.header {
+
+}
+
+.header .menu_item {
+
+    -fx-font-size: 16px;
+    -fx-fill: -fx-main-text-color;
+
+}
+
+.header .menu_item.selected {
+
+    -fx-fill: -fx-primary-color;
+
+}
+
+.header .badge{
+
+    -fx-fill: -fx-primary-color ;
+}

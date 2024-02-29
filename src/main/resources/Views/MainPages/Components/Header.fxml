@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Rectangle2D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+
+<HBox alignment="CENTER_LEFT" maxHeight="75.0" maxWidth="-Infinity" minHeight="75.0" minWidth="1000.0" prefHeight="75.0" styleClass="header" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <padding>
+      <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
+   </padding>
+   <children>
+      <HBox alignment="CENTER_LEFT" spacing="20.0" HBox.hgrow="ALWAYS">
+         <children>
+            <ImageView fitHeight="77.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../assets/logo.png" />
+               </image>
+               <viewport>
+                  <Rectangle2D />
+               </viewport>
+            </ImageView>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Accueil">
+               <styleClass>
+                  <String fx:value="menu_item" />
+                  <String fx:value="selected" />
+               </styleClass>
+            </Text>
+            <Text layoutX="188.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="Catégories" />
+            <Text layoutX="275.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="Cours" />
+            <Text layoutX="362.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="Enseignants" />
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_LEFT" spacing="12.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="2.0" HBox.hgrow="NEVER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Connexion">
+                     <styleClass>
+                        <String fx:value="menu_item" />
+                        <String fx:value="selected" />
+                     </styleClass>
+                  </Text>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="/" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="Inscription" />
+               </children>
+            </HBox>
+            <Separator orientation="VERTICAL" prefHeight="200.0" />
+            <AnchorPane HBox.hgrow="NEVER">
+               <children>
+                  <ImageView fitHeight="34.0" fitWidth="27.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="13.0">
+                     <image>
+                        <Image url="@../../../assets/header/book_mark.png" />
+                     </image>
+                  </ImageView>
+                  <Circle fill="#0088ff" radius="10.0" smooth="false" stroke="BLACK" strokeLineCap="ROUND" strokeType="INSIDE" strokeWidth="0.0" styleClass="badge" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+                     <effect>
+                        <Blend />
+                     </effect>
+                  </Circle>
+                  <TextFlow maxHeight="5.0" prefHeight="10.0" prefWidth="10.0" textAlignment="CENTER" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="30.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="+9" />
+                     </children>
+                  </TextFlow>
+               </children>
+            </AnchorPane>
+            <Button mnemonicParsing="false" text="Faire un don">
+               <styleClass>
+                  <String fx:value="btn" />
+                  <String fx:value="submitButton" />
+               </styleClass>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</HBox>
