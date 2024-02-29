@@ -12,11 +12,17 @@
     -fx-main-text-color: #757783 ;
 }
 
+.primaryColorBg {
+    -fx-background-color: -fx-primary-color;
+}
 .btn {
     -fx-cursor: pointer;
 
 }
 
+.secondText{
+    -fx-fill: -fx-main-text-color;
+}
 
 .submitButton {
     -fx-background-color: -fx-primary-color;
