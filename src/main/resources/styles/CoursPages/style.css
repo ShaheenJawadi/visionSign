@@ -1,0 +1,19 @@
+.filterPage {
+
+}
+
+.filterPage .headerHolder{
+
+    -fx-background-image: url("../../assets/cours/bannner.png");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+}
+
+.filterPage .headerHolder .chimp{
+
+    -fx-background-color: -fx-primary-color;
+    -fx-text-fill: #fff;
+    -fx-font-size: 25px;
+     -fx-padding: 10 50 10 50;
+    -fx-background-radius:100;
+}
