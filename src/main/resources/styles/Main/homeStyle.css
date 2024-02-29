@@ -1,0 +1,9 @@
+
+
+.cardInfo.centerCard{
+    -fx-effect: Inherit;
+
+    -fx-border-color:  -fx-primary-color;
+    -fx-border-width: 1 1 5 1;
+}
+
