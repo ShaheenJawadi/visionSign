@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+
+<HBox maxHeight="550.0" maxWidth="-Infinity" minHeight="550.0" minWidth="-Infinity" prefHeight="550.0" prefWidth="1200.0" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane style="-fx-background-color: #dee3ec;" HBox.hgrow="ALWAYS">
+         <children>
+            <ImageView fitHeight="552.0" fitWidth="1199.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <image>
+                  <Image url="@../../../assets/banner/left_clip.png" />
+               </image>
+            </ImageView>
+            <VBox layoutX="242.0" layoutY="59.0" prefHeight="379.0" prefWidth="581.0" spacing="8.0" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="90.0">
+               <children>
+                  <TextFlow>
+                     <children>
+                        <Text fill="#00aeef" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenue sur VSA">
+                           <font>
+                              <Font name="System Bold" size="29.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+                  <TextFlow layoutX="10.0" layoutY="10.0" lineSpacing="5.0" maxWidth="580.0" prefHeight="210.0" prefWidth="580.0">
+                     <children>
+                        <VBox prefHeight="259.0" prefWidth="578.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="L'apprentissage " wrappingWidth="560.5890808105469" VBox.vgrow="NEVER">
+                                 <font>
+                                    <Font name="Arial Bold" size="69.0" />
+                                 </font>
+                              </Text>
+                              <Text fontSmoothingType="LCD" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="accessible " wrappingWidth="426.61688232421875" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Arial Bold" size="69.0" />
+                                 </font>
+                              </Text>
+                              <Text fontSmoothingType="LCD" lineSpacing="5.0" strokeType="OUTSIDE" strokeWidth="0.0" text="à tous !" wrappingWidth="426.61688232421875" VBox.vgrow="ALWAYS">
+                                 <font>
+                                    <Font name="Arial Bold" size="69.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                     </children>
+                  </TextFlow>
+                  <Button mnemonicParsing="false" text="Rejoignez-nous dès maintenant !">
+                     <styleClass>
+                        <String fx:value="btn" />
+                        <String fx:value="submitButton" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </VBox>
+            <ImageView fitHeight="532.0" fitWidth="351.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <image>
+                  <Image url="@../../../assets/banner/right_hand.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</HBox>

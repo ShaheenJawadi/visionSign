@@ -15,7 +15,7 @@
 <?import javafx.scene.text.TextFlow?>
 
 
-<HBox alignment="CENTER_LEFT" maxHeight="75.0" maxWidth="-Infinity" minHeight="75.0" minWidth="1000.0" prefHeight="75.0" styleClass="header" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<HBox alignment="CENTER_LEFT" maxHeight="75.0" maxWidth="-Infinity" minHeight="75.0" prefHeight="75.0" prefWidth="1200.0" styleClass="header" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <padding>
       <Insets bottom="10.0" left="50.0" right="50.0" top="10.0" />
    </padding>
