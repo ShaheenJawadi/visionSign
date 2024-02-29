@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<HBox alignment="CENTER_RIGHT" prefHeight="449.0" prefWidth="1493.0" spacing="37.0" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefHeight="224.0" prefWidth="693.0" spacing="61.0" HBox.hgrow="NEVER">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pourquoi choisir VSA ?" wrappingWidth="691.9739990234375">
+               <font>
+                  <Font size="50.0" />
+               </font>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Profitez d'une expérience immersive avec des fonctionnalités d'interaction en Langue des Signes intégrées dans nos cours, favorisant une compréhension approfondie. " wrappingWidth="636.0159606933594">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <VBox spacing="12.0">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="3.0">
+                     <children>
+                        <Rectangle arcHeight="2.0" arcWidth="5.0" fill="#00aeef" height="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Expertise pédagogique ">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="3.0">
+                     <children>
+                        <Rectangle arcHeight="2.0" arcWidth="5.0" fill="#00aeef" height="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Engagement envers l'inclusion">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="3.0">
+                     <children>
+                        <Rectangle arcHeight="2.0" arcWidth="5.0" fill="#00aeef" height="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Engagement Social ">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="3.0">
+                     <children>
+                        <Rectangle arcHeight="2.0" arcWidth="5.0" fill="#00aeef" height="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Support Communautaire ">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" spacing="3.0">
+                     <children>
+                        <Rectangle arcHeight="2.0" arcWidth="5.0" fill="#00aeef" height="20.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="20.0" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Adaptabilité Universelle ">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="19.0">
+         <children>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <Pane layoutX="391.0" minWidth="494.0" prefHeight="440.0" prefWidth="200.0" style="-fx-background-color: #e2e2e2;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <ImageView fitHeight="375.0" fitWidth="592.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="49.851331646309745" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.30190810804219836" AnchorPane.topAnchor="50.0">
+                     <image>
+                        <Image url="@../../../assets/mainPage/whyUs.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="30.0" top="30.0" />
+   </padding>
+</HBox>
