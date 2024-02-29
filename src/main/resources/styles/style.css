@@ -48,6 +48,7 @@
 .secondaryBtn {
     -fx-text-fill: #fff;
     -fx-background-color: -fx-secondary-color;
+    -fx-font-size: 19px;
 }
 
 
@@ -72,4 +73,12 @@
 .header .badge{
 
     -fx-fill: -fx-primary-color ;
+}
+
+
+.cardInfo{
+    -fx-effect: dropshadow(three-pass-box, rgba(222, 227, 236, 0.8), 10, 0, 0, 0);
+    -fx-background-radius: 5;
+    -fx-background-color: #fff;
+    -fx-font-size: 18px;
 }
