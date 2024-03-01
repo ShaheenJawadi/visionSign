@@ -43,7 +43,12 @@ public class CoursGridController implements Initializable {
 
 
         title.setText(cours.getNom());
-         nbLessons.setText("kjsdfkl");
+         nbLessons.setText(cours.nbLessons());
+         level.setText(cours.getLevel());
+         enseignant.setText(cours.getEnseignant());
+         duration.setText(cours.lessonsDuration());
+         category.setText(cours.getCategory().getNom());
+
 
 
 

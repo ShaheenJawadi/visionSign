@@ -2,12 +2,12 @@ package entities;
 
 public class UserCours {
 
-
+//todo DATABASE
     private int id ;
     private int userId ;
     private int coursId ;
 
-    private int isCorrectQuizz ;
+    private boolean isCorrectQuizz ;
     private  int state  ;
 
 
@@ -37,11 +37,11 @@ public class UserCours {
         this.coursId = coursId;
     }
 
-    public int getIsCorrectQuizz() {
+    public boolean getIsCorrectQuizz() {
         return isCorrectQuizz;
     }
 
-    public void setIsCorrectQuizz(int isCorrectQuizz) {
+    public void setIsCorrectQuizz(boolean isCorrectQuizz) {
         this.isCorrectQuizz = isCorrectQuizz;
     }
 

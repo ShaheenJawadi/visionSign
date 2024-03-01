@@ -1,5 +1,7 @@
 package entities;
 
+import mock.Category;
+
 public class Cours {
     private  int id ,enseignantId, subCategoryId , niveauId  ;
     private  String nom , description,tags  ,image ;
@@ -117,5 +119,29 @@ public class Cours {
                 ", image='" + image + '\'' +
                 ", isValidated=" + isValidated +
                 '}';
+    }
+
+    public  Category getCategory(){
+        return new Category(1 , "cat mock");
+    }
+    public String getLevel (){
+        return "level";
+        //TODO FETCHlEVEL
+    }
+    public  String lessonsDuration(){
+
+        //TODO fetch lessons + calc duration
+        return "10 heurs ";
+
+    }
+
+    public  String getEnseignant (){
+        //TODO fetch user unsg
+        return "ensg";
+    }
+
+    public  String nbLessons(){
+        //TODO fetch nbLessons
+        return "2";
     }
 }
