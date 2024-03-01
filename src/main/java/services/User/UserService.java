@@ -5,8 +5,13 @@ import entities.UserRole;
 import utils.MyDatabase;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class UserService implements IUserServices<User>{
     private Connection connection;
@@ -178,6 +183,102 @@ public class UserService implements IUserServices<User>{
         }
         return null; // Return null if login failsdaada
     }
+    public List <User> searchById(int userId) throws SQLException {
+        String query = "SELECT * FROM user WHERE id = ?";
+        List<User> searchResults = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, userId);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    User user = createUserFromResultSet(resultSet);
+                    searchResults.add(user);
+                    System.out.println("searcheddd userr"+user);
+                }
+            }
+        }
+
+        return searchResults;
+
+    }
+
+    public List<User> searchByEmail(String email) throws SQLException {
+        String query = "SELECT * FROM user WHERE email = ?";
+        List<User> searchResults = new ArrayList<>();
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, email);
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    User user = createUserFromResultSet(resultSet);
+                    searchResults.add(user);
+                }
+            }
+        }
+
+        return searchResults;
+    }
+    public Map<UserRole, Long> getRoleStatistics() {
+        try {
+            // Fetch user statistics from the database or wherever you store them
+            // You may need to adapt this based on your actual data structure
+            List<User> userList = recuperer(); // Replace with your actual method
+            return userList.stream()
+                    .collect(Collectors.groupingBy(User::getRole, Collectors.counting()));
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Collections.emptyMap();
+        }
+    }
+    public Map<String, Long> getAgeStatistics() {
+        try {
+            // Fetch user statistics from the database or wherever you store them
+            // You may need to adapt this based on your actual data structure
+            List<User> userList = recuperer(); // Replace with your actual method
+
+            // Calculate age and group users into age ranges
+            Map<String, Long> ageStatistics = userList.stream()
+                    .collect(Collectors.groupingBy(user -> calculateAgeRange(user.getDateNaissance()), Collectors.counting()));
+
+            return ageStatistics;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Collections.emptyMap();
+        }
+    }
+
+    private String calculateAgeRange(Date dateNaissance) {
+        // Implement logic to calculate age range based on the given dateNaissance
+        // For example, group users into ranges like "0-10", "11-20", etc.
+        // You can use Java 8's java.time.LocalDate for better date manipulation
+
+        // Sample logic (replace with your own):
+        int age = calculateAge(dateNaissance);
+        if (age >= 0 && age <= 10) {
+            return "0-10";
+        } else if (age >= 11 && age <= 20) {
+            return "11-20";
+        } else if (age >= 21 && age <= 30) {
+            return "21-30";
+        } // Add more ranges as needed
+
+        return "Unknown";
+    }
+
+    private int calculateAge(Date dateNaissance) {
+        // Implement logic to calculate age based on the given dateNaissance
+        // You can use Java 8's java.time.LocalDate for better date manipulation
+
+        // Sample logic (replace with your own):
+        LocalDate birthdate = dateNaissance.toLocalDate();
+        LocalDate currentDate = LocalDate.now();
+        return Period.between(birthdate, currentDate).getYears();
+    }
+
+
+
 
 
 
