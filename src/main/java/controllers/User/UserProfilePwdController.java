@@ -34,11 +34,10 @@ void initialize(){
     void modifier(ActionEvent event) {
         String validationError = validateInputs();
         User user=userService.getCurrent();
+
         try{
-        if (oldPwdTF.getText().isEmpty())
-            showAlertError("Error", "Old Password Required", "You must enter your old password.");
-        else{
-            if (oldPwdTF.getText().equals(user.getPassword())){
+
+            if (oldPwdTF.getText().equals(user.getPassword()) || user.getPassword().equals(" ")){
                 if(newPwdTF1.getText().equals(newPwdTF2.getText())){
                     if (validationError.isEmpty()){
                         user.setPassword(newPwdTF2.getText());
@@ -53,7 +52,7 @@ void initialize(){
             }
             else
                 showAlertError("Error", "Incorrect Password", "Wrong password.");
-        }}catch(SQLException e){
+        }catch(SQLException e){
             showAlertError("Error","" , e.getMessage());
         }
 

@@ -1,5 +1,13 @@
 package controllers.User;
 
+import apiUtils.GoogleOAuth2;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.services.oauth2.Oauth2;
+import com.google.api.services.oauth2.model.Userinfoplus;
+import entities.User;
 import entities.UserRole;
 import io.github.palexdev.materialfx.controls.MFXPasswordField;
 import io.github.palexdev.materialfx.controls.MFXTextField;
@@ -14,6 +22,7 @@ import javafx.scene.image.ImageView;
 import services.User.UserService;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.sql.SQLException;
 
 public class LoginController {
@@ -85,6 +94,61 @@ public class LoginController {
             throw new RuntimeException(e.getMessage());
         }
     }
+    @FXML
+    void emailLogin(ActionEvent event) throws Exception {
+        String authorizationUrl = GoogleOAuth2.buildAuthorizationUrl();
+        System.out.println("Authorization URL: " + authorizationUrl);
+
+        // Step 2: User grants permission and gets the authorization code
+
+        // Step 3: Exchange authorization code for access token
+        String authorizationCode = "CODE_RECEIVED_FROM_USER"; // Replace with the actual authorization code
+        Credential credential = GoogleOAuth2.exchangeCodeForToken(authorizationCode);
+
+        System.out.println("Credentials " + getUserEmail(credential));
+        System.out.println("dddddddddddd");
+        if (!verifyUser(credential)) {
+            createUser(credential);
+        }
+        if (userService.loginWithEmail(getUserEmail(credential)) != null){
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserProfile.fxml"));
+            Parent userProfileRoot = loader.load();
+            ScrollPane userProfileScrollPane = new ScrollPane(userProfileRoot);
+            userProfileScrollPane.setFitToWidth(true);
+            userProfileScrollPane.setFitToHeight(true);
+            usernameTF.getScene().setRoot(userProfileScrollPane);
 
 
+    }}
+
+    private static String getUserEmail(Credential credential)  {
+        GoogleCredential googleCredential = new GoogleCredential().setAccessToken(credential.getAccessToken());
+
+        Oauth2 oauth2 = null;
+        try {
+            oauth2 = new Oauth2.Builder(
+                    GoogleNetHttpTransport.newTrustedTransport(),
+                    JacksonFactory.getDefaultInstance(),
+                    googleCredential)
+                    .setApplicationName("visionSignAcademy")
+                    .build();
+            Userinfoplus userInfo = oauth2.userinfo().get().execute();
+            return userInfo.getEmail();
+        } catch (GeneralSecurityException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
+private boolean verifyUser(Credential credential) throws SQLException, GeneralSecurityException, IOException {
+        return userService.recuperer().stream().anyMatch(u->u.getEmail().equals(getUserEmail(credential)));
+}
+    private void createUser(Credential credential) throws SQLException{
+        userService.ajouter(new User(getUserEmail(credential)));
+
+
+    }
 }

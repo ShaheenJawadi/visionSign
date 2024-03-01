@@ -49,13 +49,12 @@ public class UserProfileController {
         prenomTF.setText(user.getPrenom());
         usernameTF.setText(user.getUsername());
         if(user.getDateNaissance()!=null){dateTF.setValue(user.getDateNaissance().toLocalDate());}
-         UserLevel userLevel= switch (user.getLevelId()) {
-        case 1 -> UserLevel.DEBUTANT;
-        case 2 -> UserLevel.INTERMEDIAIRE;
-        case 3 -> UserLevel.AVANCE;
-        default-> UserLevel.NULL;
-    };
-    levelTF.setValue(userLevel);
+     switch (user.getLevelId()) {
+         case 1 -> levelTF.setValue(UserLevel.DEBUTANT);
+         case 2 -> levelTF.setValue(UserLevel.INTERMEDIAIRE);
+         case 3 -> levelTF.setValue(UserLevel.AVANCE);
+         case 0 -> levelTF.setValue(UserLevel.NULL);
+     }
     }
 
     @FXML
@@ -67,24 +66,16 @@ public class UserProfileController {
             if (selectedDate != null) {
                 dateToSet = java.sql.Date.valueOf(selectedDate);
             }
+
             User userToUpdate = new User(userService.getCurrent().getId(),nomTF.getText(),prenomTF.getText(),usernameTF.getText(),dateToSet,userService.getCurrent().getEmail(),userService.getCurrent().getPassword(),userService.getCurrent().getRole(),userService.getCurrent().getStatus());
             System.out.println("Useerr to updateee"+userToUpdate.getId());
             System.out.println("neww datee"+userToUpdate.getDateNaissance());
-            switch (levelTF.getText()){
-                case "DEBUTANT"   :
-                    userToUpdate.setLevelId(1);
-                    System.out.println("dd");
-                    break;
-                case "INTERMEDIAIRE"   :
-                    System.out.println("II");
-                    userToUpdate.setLevelId(2);
-                    break;
-
-                case "AVANCE"   :
-                    System.out.println("22");
-                    userToUpdate.setLevelId(3);
-                    break;
+            switch (levelTF.getText()) {
+                case "DEBUTANT" -> userToUpdate.setLevelId(1);
+                case "INTERMEDIAIRE" -> userToUpdate.setLevelId(2);
+                case "AVANCE" -> userToUpdate.setLevelId(3);
             }
+            System.out.println("aaaaaaaaaaaaaaaaaaaaa");
 
             if (validationError.isEmpty()) {
             userService.modifier(userToUpdate);

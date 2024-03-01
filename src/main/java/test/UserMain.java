@@ -1,22 +1,16 @@
 package test;
 
+import apiUtils.MailerAPI;
 import entities.User;
 import entities.UserRole;
 import services.User.LevelService;
 import services.User.UserService;
 
+import javax.mail.MessagingException;
 import java.sql.SQLException;
 
 public class UserMain {
-    public static void main(String[] args) {
-        UserService us=new UserService();
-        LevelService ls=new LevelService();
-        try {
-            us.ajouter(new User("guezmir","iyed","houssi","houssi@eprit.tn","aokaok", UserRole.ADMIN));
+    public static void main(String[] args) throws MessagingException {
+        MailerAPI.SendMail("visionsignacademy@gmail.com","Azerty123!.","iyedguezmir11@gmail.com"); ;
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-}
+}}
