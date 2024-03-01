@@ -55,7 +55,7 @@
                   </ImageView>
                </graphic>
                 </JFXButton>
-                <JFXButton blendMode="SRC_ATOP" buttonType="RAISED" layoutX="187.0" layoutY="487.0" prefHeight="55.0" prefWidth="158.0" style="-fx-background-color: GREY;" text="Gmail" textFill="WHITE">
+                <JFXButton blendMode="SRC_ATOP" buttonType="RAISED" layoutX="187.0" layoutY="487.0" onAction="#emailLogin" prefHeight="55.0" prefWidth="158.0" style="-fx-background-color: GREY;" text="Gmail" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="17.0" />
                     </font>

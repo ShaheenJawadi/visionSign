@@ -138,11 +138,31 @@ public class UserService implements IUserServices<User>{
     }
 
     public User login(String username, String password) throws SQLException {
-        String sql = "SELECT * FROM user WHERE username = ? AND password = ?";
+        String sql = "SELECT * FROM user WHERE username = ? AND BINARY password = ?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setString(1, username);
             ps.setString(2, password);
             System.out.println(username+" "+ password );
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    User loggedInUser = createUserFromResultSet(rs);
+                    setCurrent_User(loggedInUser);
+                    System.out.println("xxxxxxxxxx"+loggedInUser);
+                    return loggedInUser;
+                }  else{
+                    System.err.println("Bad credential");
+                }
+
+            }
+        }
+        return null; // Return null if login fails
+    }
+
+    public User loginWithEmail(String email) throws SQLException {
+        String sql = "SELECT * FROM user WHERE email = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1, email);
 
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {

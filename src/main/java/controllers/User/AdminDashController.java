@@ -9,10 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -137,7 +134,6 @@ public class AdminDashController {
         stage.show();
         initialize();
 
-
     }
         else{
             // If no user is selected, show a warning
@@ -149,26 +145,15 @@ public class AdminDashController {
     }
     @FXML
     void refresh(ActionEvent event) {
-        try{
-            List<User> users=userService.recuperer();
-            ObservableList<User> observableList= FXCollections.observableList(users);
-            tableView.setItems(observableList);
-            idCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-            nomCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
-            prenomCol.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-            usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
-            dateCol.setCellValueFactory(new PropertyValueFactory<>("dateNaissance"));
-            emailCol.setCellValueFactory(new PropertyValueFactory<>("email"));
-            passwordCol.setCellValueFactory(new PropertyValueFactory<>("password"));
-            roleCol.setCellValueFactory(new PropertyValueFactory<>("role"));
-            statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
-            tokenCol.setCellValueFactory(new PropertyValueFactory<>("token"));
-            levelIdCol.setCellValueFactory(new PropertyValueFactory<>("levelId"));
-
-        }catch(SQLException e){System.err.println(e.getMessage()); }
-    }
-
-
-}
+    try{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/AdminDash.fxml"));
+        Parent tableRoot = loader.load();
+        ScrollPane dashboardScrollPane=new ScrollPane(tableRoot);
+        dashboardScrollPane.setFitToWidth(true);
+        dashboardScrollPane.setFitToHeight(true);
+        tableView.getScene().setRoot(dashboardScrollPane);}
+    catch(IOException e)
+    {throw new RuntimeException(e.getMessage());}
+    }}
 
 

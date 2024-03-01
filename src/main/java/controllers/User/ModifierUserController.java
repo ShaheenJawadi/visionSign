@@ -100,13 +100,12 @@ ObservableList<String> statusList = FXCollections.observableArrayList("Validated
         statusTF.setValue(user.getStatus());
         roleTF.setValue(user.getRole());
         usernameTF.setText(user.getUsername());
-        UserLevel userLevel= switch (user.getLevelId()) {
-            case 1 -> UserLevel.DEBUTANT;
-            case 2 -> UserLevel.INTERMEDIAIRE;
-            case 3 -> UserLevel.AVANCE;
-            default-> UserLevel.NULL;
-        };
-        levelTF.setValue(userLevel);
+        switch (user.getLevelId()) {
+            case 1 -> levelTF.setValue(UserLevel.DEBUTANT);
+            case 2 -> levelTF.setValue(UserLevel.INTERMEDIAIRE);
+            case 3 -> levelTF.setValue(UserLevel.AVANCE);
+            case 0 -> levelTF.setValue(UserLevel.NULL);
+        }
            if(user.getDateNaissance()!=null){dateTF.setValue(user.getDateNaissance().toLocalDate());}
 
 

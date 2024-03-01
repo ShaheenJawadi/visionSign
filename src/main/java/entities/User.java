@@ -19,6 +19,15 @@ public class User {
     private String token;
     private int levelId; //foreign key to level id
     public User(){}
+    public User(String email){
+        this.role=UserRole.NULL;
+        this.email=email;
+        this.nom = " ";
+        this.prenom = " ";
+        this.username=" ";
+        this.password = " ";
+
+    }
     public User(int id, String nom, String prenom, String username, Date dateNaissance, String email, String password, UserRole role, String status,int levelId) {
         this.id = id;
         this.nom = nom;
