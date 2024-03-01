@@ -1,13 +1,24 @@
 package Navigation;
- 
+
+import controllers.MainPages.Cours.FilterController;
+import controllers.MainPages.Cours.SingleCoursController;
+import controllers.teacher.TeacherCoursController;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.VBox;
+
+import java.io.IOException;
+
 public class MainNavigations {
     private static MainNavigations instance;
-    private boolean userLoggedIn = false;
-    private String currentUser;
-    private String currentUserRole;
+
+
+    @FXML
+    private VBox mainPageHolder;
+
 
     private MainNavigations() {
-        // Private constructor to prevent instantiation from outside
+
     }
 
     public static MainNavigations getInstance() {
@@ -17,31 +28,61 @@ public class MainNavigations {
         return instance;
     }
 
-    public void loginUser(String username, String role) {
-        userLoggedIn = true;
-        currentUser = username;
-        currentUserRole = role;
+
+
+    public  void setPaheHoloder(VBox vBox){
+        mainPageHolder =vBox;
+
     }
 
-    public void logoutUser() {
-        userLoggedIn = false;
-        currentUser = null;
-        currentUserRole = null;
+
+    public void openCoursFilterPage(){
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainPages/CoursPages/Filter/index.fxml"));
+
+            loader.load();
+
+            FilterController coursFilterPage = loader.getController();
+
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(coursFilterPage.getVBoxRoot());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
     }
 
-    public boolean isUserLoggedIn() {
-        return userLoggedIn;
+    public void openSingleCoursPage(){
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainPages/CoursPages/Main/index.fxml"));
+
+            loader.load();
+
+            SingleCoursController coursFilterPage = loader.getController();
+
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(coursFilterPage.getVBoxRoot());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
     }
 
-    public String getCurrentUser() {
-        return currentUser;
-    }
 
-    public String getCurrentUserRole() {
-        return currentUserRole;
-    }
 
-    public void setAuthenticatedUser(String username, String role) {
-        loginUser(username, role);
-    }
+
+
+
+
+
 }

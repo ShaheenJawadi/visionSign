@@ -12,12 +12,11 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="300.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" styleClass="coursGrid" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="300.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" styleClass="coursGrid" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainPages.Cours.FilterController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <ImageView fitHeight="224.0" fitWidth="300.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ImageView fitHeight="224.0" fitWidth="300.0" onMouseClicked="#openSingleCours" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../../../../assets/mainPage/Image.png" />
                </image>
@@ -49,7 +48,7 @@
             <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="primaryTextColor" text="Non educateur" />
             <TextFlow>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="aklj dkla jklzjdlk azlkdkl azkld alzk dlkazdjklazkd sqjkdkj sqhkd hsqjkdh">
+                  <Text onMouseClicked="#openSingleCours" strokeType="OUTSIDE" strokeWidth="0.0" text="aklj dkla jklzjdlk azlkdkl azkld alzk dlkazdjklazkd sqjkdkj sqhkd hsqjkdh">
                      <font>
                         <Font size="18.0" />
                      </font>

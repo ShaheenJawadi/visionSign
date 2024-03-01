@@ -17,7 +17,7 @@
                <children>
                   <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox>
+                        <VBox fx:id="mainPageHolder">
                            <children>
                               <fx:include source="Componants.fxml" />
                            </children>
