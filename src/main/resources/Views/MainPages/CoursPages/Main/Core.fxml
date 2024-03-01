@@ -4,6 +4,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollBar?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
@@ -29,6 +30,7 @@
                </viewport>
             </ImageView>
             <Button mnemonicParsing="false" styleClass="submitButton" text="Categorie" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0" />
+            <ScrollBar layoutX="779.0" layoutY="14.0" orientation="VERTICAL" prefHeight="421.0" prefWidth="14.0" />
          </children>
       </AnchorPane>
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="cours_sectionBlock">

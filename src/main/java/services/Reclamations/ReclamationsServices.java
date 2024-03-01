@@ -1,15 +1,17 @@
 package services.Reclamations;
 
 import entities.Reclamations;
-import services.IService;
 import utils.MyDatabase;
+
 import java.sql.*;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class ReclamationsServices implements IServices<Reclamations> {
+public class ReclamationsServices implements IServices<Reclamations>{
 
     private static Connection connection;
 
@@ -18,6 +20,8 @@ public class ReclamationsServices implements IServices<Reclamations> {
     }
 
     public static final String[] TYPES = {"cours", "note", "certificat","autre"}; // Ajoutez vos différents types
+
+
 
     public void ajouterRec(Reclamations reclamations, String selectedType) throws SQLException {
         LocalDate currentDate = LocalDate.now();
@@ -119,12 +123,14 @@ public class ReclamationsServices implements IServices<Reclamations> {
     }
 
     public List<Reclamations> getReclamationsById(int id) throws SQLException {
+        List<Reclamations> reclamationsList = new ArrayList<>();
         String sql = "SELECT * FROM reclamations WHERE id_reclamation=?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
-        Reclamations reclamations =new Reclamations();
-        if (rs.next()) {
+
+        while (rs.next()) {
+            Reclamations reclamations = new Reclamations();
             reclamations.setId_reclamation(rs.getInt("id_reclamation"));
             reclamations.setType(rs.getString("type"));
             reclamations.setDescription(rs.getString("description"));
@@ -132,9 +138,32 @@ public class ReclamationsServices implements IServices<Reclamations> {
             reclamations.setDate(rs.getDate("date"));
             reclamations.setRepondre(rs.getBoolean("repondre"));
             reclamations.setId_user(rs.getInt("id_user"));
+            reclamationsList.add(reclamations);
         }
-        return (List<Reclamations>) reclamations;
+
+        return reclamationsList;
     }
+    public static String getUserEmailById(int userId) {
+        String query = "SELECT email FROM user WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(1, userId);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getString("email");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
+    public void marquerCommeRepondu(int idReclamation) throws SQLException {
+        String sql = "UPDATE reclamations SET repondre = 1 WHERE id_reclamation = ?";
+        try (PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setInt(1, idReclamation);
+            ps.executeUpdate();
+        }
+    }
+
     public Reclamations getReclmationsById(int id) throws SQLException {
         Connection connection = MyDatabase.getInstance().getConnection();
         String query = "SELECT * FROM reclamations WHERE id_reclamation = ?";
@@ -145,7 +174,7 @@ public class ReclamationsServices implements IServices<Reclamations> {
         if (rs.next()) {
             reclamations = new Reclamations();
             reclamations.setId_reclamation(rs.getInt("id_reclamation"));
-            reclamations.setType(rs.getString("type"));
+            //reclamations.setType(rs.getString("type"));
             reclamations.setDescription(rs.getString("description"));
             reclamations.setStatus(rs.getString("status"));
             reclamations.setDate(rs.getDate("date"));
@@ -170,4 +199,15 @@ public class ReclamationsServices implements IServices<Reclamations> {
         }
         return idsUtilisateurs;
     }
+    public Map<String, Integer> compterReclamationsParType() throws SQLException {
+        Map<String, Integer> statistiques = new HashMap<>();
+        String sql = "SELECT type, COUNT(*) AS count FROM reclamations GROUP BY type";
+        try (Statement st = connection.createStatement(); ResultSet rs = st.executeQuery(sql)) {
+            while (rs.next()) {
+                statistiques.put(rs.getString("type"), rs.getInt("count"));
+            }
+        }
+        return statistiques;
+    }
+
 }
