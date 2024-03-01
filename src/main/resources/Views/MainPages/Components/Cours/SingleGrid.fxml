@@ -12,16 +12,16 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox maxHeight="-Infinity" maxWidth="300.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" styleClass="coursGrid" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainPages.Cours.FilterController">
+<VBox maxHeight="-Infinity" maxWidth="300.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" styleClass="coursGrid" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainPages.Cours.CoursGridController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <ImageView fitHeight="224.0" fitWidth="300.0" onMouseClicked="#openSingleCours" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ImageView fx:id="thumbnail" fitHeight="224.0" fitWidth="300.0" onMouseClicked="#openSingleCours" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
                   <Image url="@../../../../assets/mainPage/Image.png" />
                </image>
             </ImageView>
-            <VBox styleClass="addBtnHolder" AnchorPane.bottomAnchor="-25.0" AnchorPane.leftAnchor="11.0">
+            <VBox onDragDetected="#addToBag" styleClass="addBtnHolder" AnchorPane.bottomAnchor="-25.0" AnchorPane.leftAnchor="11.0">
                <children>
                   <ImageView fitHeight="30.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -33,7 +33,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </VBox>
-            <Button mnemonicParsing="false" styleClass="chimp" text="Categorie" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+            <Button fx:id="category" mnemonicParsing="false" styleClass="chimp" text="Categorie" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
                <font>
                   <Font size="12.0" />
                </font>
@@ -45,10 +45,10 @@
             <Insets top="31.0" />
          </VBox.margin>
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="primaryTextColor" text="Non educateur" />
+            <Text fx:id="enseignant" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="primaryTextColor" text="Nom educateur" />
             <TextFlow>
                <children>
-                  <Text onMouseClicked="#openSingleCours" strokeType="OUTSIDE" strokeWidth="0.0" text="aklj dkla jklzjdlk azlkdkl azkld alzk dlkazdjklazkd sqjkdkj sqhkd hsqjkdh">
+                  <Text fx:id="title" onMouseClicked="#openSingleCours" strokeType="OUTSIDE" strokeWidth="0.0" text="aklj dkla jklzjdlk azlkdkl azkld alzk dlkazdjklazkd sqjkdkj sqhkd hsqjkdh">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -68,11 +68,11 @@
       <Separator prefWidth="200.0" />
       <HBox alignment="CENTER" spacing="5.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="5 Lecons" />
+            <Text fx:id="nbLessons" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="5 Lecons" />
             <Text layoutX="10.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="/" />
-            <Text layoutX="55.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="10 heures" />
+            <Text fx:id="duration" layoutX="55.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="10 heures" />
             <Text layoutX="101.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="/" />
-            <Text layoutX="106.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Débutant" />
+            <Text fx:id="level" layoutX="106.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Débutant" />
          </children>
       </HBox>
    </children>

@@ -17,10 +17,5 @@ public class FilterController {
         return FilterPageVbox;
     }
 
-    public void openSingleCours(MouseEvent mouseEvent) {
 
-        System.out.println("jsd");
-        MainNavigations mainNavigations = MainNavigations.getInstance() ;
-        mainNavigations.openSingleCoursPage();
-    }
 }
