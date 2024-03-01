@@ -1,5 +1,6 @@
 package test;
 
+import controllers.MainController;
 import controllers.teacher.TeacherMainPanelController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,12 +8,21 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class MainFx  extends Application {
+import java.io.IOException;
+
+public class MainFx  extends Application  {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
 
+       // OpenTeacherPanel(primaryStage);
+        OpenMainPagel(primaryStage);
 
+
+    }
+
+
+    public void OpenTeacherPanel(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/TeacherPanel.fxml"));
 
         Parent root= loader.load();
@@ -25,9 +35,24 @@ public class MainFx  extends Application {
         primaryStage.setMinWidth(1200);
         primaryStage.setMinHeight(600);
         primaryStage.show();
-
-
     }
+
+
+    public void OpenMainPagel(Stage primaryStage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainPages/HomePage/Index.fxml"));
+
+        Parent root= loader.load();
+
+        Scene scene =new Scene(root);
+        MainController mainViewController = loader.getController();
+
+       // mainViewController.IntitalState();
+        primaryStage.setScene(scene);
+        primaryStage.setMinWidth(1200);
+        primaryStage.setMinHeight(600);
+        primaryStage.show();
+    }
+
 
 
     public  static  void main(String[] args){
