@@ -2,6 +2,8 @@ package entities;
 
 //import services.UserService;
 
+import services.User.PasswordHashing;
+
 import java.sql.Date;
 import java.util.Objects;
 import java.util.UUID;

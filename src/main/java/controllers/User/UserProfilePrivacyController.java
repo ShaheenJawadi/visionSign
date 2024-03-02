@@ -35,6 +35,7 @@ void initialize(){
                 if(validationError.isEmpty()){
             user.setEmail(emailTF.getText());
             userService.updateEmail(user);
+
             showAlertSuccess("Success", "Email Changed", "Email changed successfully.");}
             else{showAlertError("Validation Error","",validationError);}
             }
@@ -55,6 +56,7 @@ void initialize(){
             rootScrollPane.setFitToWidth(true);
             rootScrollPane.setFitToHeight(true);
             emailTF.getScene().setRoot(rootScrollPane);
+            System.out.println(userService.getCurrent().getEmail());
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }

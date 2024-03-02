@@ -19,7 +19,7 @@
                 </font>
                 <graphic>
                     <ImageView fx:id="logoImg" fitHeight="37.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
-                        <Image url="@/assets/logo2.png" />
+                        <Image url="@/assets/logo.png" />
                     </ImageView>
                 </graphic>
             </Button>

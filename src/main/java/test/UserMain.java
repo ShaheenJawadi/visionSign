@@ -11,6 +11,6 @@ import java.sql.SQLException;
 
 public class UserMain {
     public static void main(String[] args) throws MessagingException {
-        MailerAPI.SendMail("visionsignacademy@gmail.com","Azerty123!.","iyedguezmir11@gmail.com"); ;
+        MailerAPI.sendMail("VisionSignAcademy@outlook.com","Azerty123!","iyedguezmir11@gmail.com"); ;
 
 }}
