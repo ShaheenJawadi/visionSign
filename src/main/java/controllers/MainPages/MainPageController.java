@@ -51,7 +51,7 @@ public class MainPageController implements Initializable {
         System.out.println("render");
         listCoursHolder.getChildren().clear();
         CoursService coursService=new CoursService();
-        List<Cours> coursList =coursService.getAll();
+        List<Cours> coursList =coursService.getCompleteCours();
         try {
             for (Cours cours : coursList) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainPages/Components/Cours/SingleGrid.fxml"));

@@ -68,8 +68,8 @@ public class CoursGridController implements Initializable {
 
         UserCoursServices userCoursServices = new UserCoursServices() ;
         //todo SetUser  Id
-        if(!userCoursServices.sheckUserCours(cours.getId() ,3)){
-            UserCours userCours = new UserCours(3 , cours.getId() , false , 0 ) ;
+        if(!userCoursServices.checkUserCours(cours.getId() ,3)){
+            UserCours userCours = new UserCours(3 , cours.getId()  ) ;
             userCoursServices.add(userCours);
         }
 
