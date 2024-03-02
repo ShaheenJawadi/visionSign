@@ -40,9 +40,6 @@ public class ModifierUserController {
     private TextField prenomTF;
 
     @FXML
-    private MFXPasswordField pwdTF;
-
-    @FXML
     private ComboBox<UserRole> roleTF;
 
     @FXML
@@ -62,8 +59,7 @@ public class ModifierUserController {
                 dateToSet = java.sql.Date.valueOf(selectedDate);
             }
 
-            User userToUpdate = new User(Integer.parseInt(idTF.getText()),nomTF.getText(),prenomTF.getText(),usernameTF.getText(),dateToSet,emailTF.getText(),pwdTF.getText(),roleTF.getValue(),statusTF.getValue());
-
+            User userToUpdate = new User(Integer.parseInt(idTF.getText()),nomTF.getText(),prenomTF.getText(),usernameTF.getText(),dateToSet,emailTF.getText(),userService.getCurrent().getPassword(),roleTF.getValue(),statusTF.getValue());
             switch (levelTF.getValue()) {
                 case DEBUTANT -> {userToUpdate.setLevelId(1);}
                 case INTERMEDIAIRE -> {userToUpdate.setLevelId(2);}
@@ -96,7 +92,6 @@ ObservableList<String> statusList = FXCollections.observableArrayList("Validated
         nomTF.setText(user.getNom());
         prenomTF.setText(user.getPrenom());
         emailTF.setText(user.getEmail());
-        pwdTF.setText(user.getPassword());
         statusTF.setValue(user.getStatus());
         roleTF.setValue(user.getRole());
         usernameTF.setText(user.getUsername());
@@ -124,13 +119,6 @@ ObservableList<String> statusList = FXCollections.observableArrayList("Validated
 
         if (!usernameTF.getText().matches("[a-zA-Z]{4,}[a-zA-Z0-9_ ]*")) {
             validationError.append("Username should have at least 4 alphabetical characters and can contain numbers, _, and spaces.\n");
-        }
-        String password = pwdTF.getText();
-        if (password.length() < 8 ||
-                !password.matches(".*[a-z].*") ||  // At least one lowercase letter
-                !password.matches(".*[A-Z].*") ||  // At least one uppercase letter
-                !password.matches(".*\\d.*")) {    // At least one digit
-            validationError.append("Password should have at least 8 characters, including at least one uppercase letter, one lowercase letter, and one number.\n");
         }
         String email = emailTF.getText();
         if (!email.matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}$")) {

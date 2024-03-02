@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import services.User.PasswordHashing;
 import services.User.UserService;
 import entities.User;
 
@@ -34,10 +35,12 @@ void initialize(){
     void modifier(ActionEvent event) {
         String validationError = validateInputs();
         User user=userService.getCurrent();
-
+        String oldPassword= PasswordHashing.hashPassword(oldPwdTF.getText().trim());
+        System.out.println( user +":" + user.getPassword());
+        System.out.println(oldPassword);
         try{
 
-            if (oldPwdTF.getText().equals(user.getPassword()) || user.getPassword().equals(" ")){
+            if (oldPassword.equals(user.getPassword()) || user.getPassword().equals(" ")){
                 if(newPwdTF1.getText().equals(newPwdTF2.getText())){
                     if (validationError.isEmpty()){
                         user.setPassword(newPwdTF2.getText());

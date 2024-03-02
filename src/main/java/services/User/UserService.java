@@ -2,6 +2,7 @@ package services.User;
 
 import entities.User;
 import entities.UserRole;
+import state.UserSessionManager;
 import utils.MyDatabase;
 
 import java.sql.*;
@@ -19,12 +20,17 @@ public class UserService implements IUserServices<User>{
     private LevelService ls;
     public static User current_user;
     public static void setCurrent_User(User user) {
-        current_user = user;
+      //  current_user = user;
+        UserSessionManager userSessionManager=UserSessionManager.getInstance();
+        userSessionManager.setCurrentUser(user);
+    }
+    @Override
+    public User getCurrent() {
+        UserSessionManager userSessionManager=UserSessionManager.getInstance();
+        return userSessionManager.getCurrentUser();
+        //  return current_user;
     }
 
-    public static User getCurrent_User() {
-        return current_user;
-    }
     @Override
     public void ajouter(User user) throws SQLException {
 
@@ -35,7 +41,7 @@ public class UserService implements IUserServices<User>{
         ps.setString(2, user.getPrenom());
         ps.setString(3, user.getUsername());
         ps.setString(4, user.getEmail());
-        ps.setString(5, user.getPassword());
+        ps.setString(5, PasswordHashing.hashPassword(user.getPassword()));
         ps.setString(6, user.getRole().name().toUpperCase());
         ps.setString(7,user.getToken());
         ps.executeUpdate();
@@ -64,11 +70,14 @@ public class UserService implements IUserServices<User>{
 
     }
     public void updatePassword(User user) throws SQLException{
+        System.out.println("eeeeeeeeeee");
+        System.out.println(user.getPassword());
         String sql="update user set password=? where id=?";
         PreparedStatement ps= connection.prepareStatement(sql);
-        ps.setString(1, user.getPassword());
+        ps.setString(1, PasswordHashing.hashPassword(user.getPassword()));
         ps.setInt(2,user.getId());
         ps.executeUpdate();
+        setCurrent_User(user);
     }
     public void updateEmail(User user) throws SQLException{
         String sql="update user set email=? where id=?";
@@ -118,10 +127,7 @@ public class UserService implements IUserServices<User>{
         return users;
     }
 
-    @Override
-    public User getCurrent() {
-        return current_user;
-    }
+
 
     private User createUserFromResultSet(ResultSet rs) throws SQLException {
         System.out.println("rs.getString(\"nom\") "+rs.getString("nom"));

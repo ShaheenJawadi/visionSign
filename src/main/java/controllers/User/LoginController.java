@@ -15,10 +15,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import services.User.PasswordHashing;
 import services.User.UserService;
 
 import java.io.IOException;
@@ -51,8 +55,9 @@ public class LoginController {
         String username = usernameTF.getText();
         String password = pwdTF.getText();
         if(username.isEmpty() || password.isEmpty()) return;
+        System.out.println(PasswordHashing.hashPassword(password));
         try {
-            if (userService.login(username, password) != null) {
+            if (userService.login(username, PasswordHashing.hashPassword(password)) != null) {
                 if (userService.getCurrent().getRole() == UserRole.ADMIN) {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/AdminDash.fxml"));
                     Parent adminDashRoot = loader.load();
@@ -151,4 +156,26 @@ private boolean verifyUser(Credential credential) throws SQLException, GeneralSe
 
 
     }
+
+@FXML
+   void forgetPwd(ActionEvent event){
+    FXMLLoader loader=new FXMLLoader();
+    loader.setLocation(getClass().getResource("/User/ForgetPwd.fxml"));
+    try{
+        loader.load();
+
+    } catch (IOException e) {
+        System.err.println(e.getMessage());
+    }
+    //ForgetPwdController muc=loader.getController();
+    Parent parent=loader.getRoot();
+    Stage stage=new Stage();
+    stage.setScene(new Scene(parent));
+    stage.initStyle(StageStyle.UTILITY);
+    stage.show();
+
 }
+
+
+   }
+

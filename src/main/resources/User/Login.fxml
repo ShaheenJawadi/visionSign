@@ -71,7 +71,7 @@
                 <MFXTextField fx:id="usernameTF" floatingTextGap="1.0" layoutX="22.0" layoutY="187.0" prefHeight="46.0" prefWidth="308.0" promptText="Username" />
                 <Label layoutX="19.0" layoutY="569.0" prefHeight="18.0" prefWidth="136.0" text="Don't have an account ?" />
                 <Hyperlink fx:id="signHP" layoutX="153.0" layoutY="566.0" onAction="#naviguer" text="Sign Up" />
-            <Hyperlink fx:id="forgetHP" layoutX="29.0" layoutY="314.0" prefHeight="24.0" prefWidth="136.0" text="Forgot you password ?" />
+            <Hyperlink fx:id="forgetHP" layoutX="29.0" layoutY="314.0" onAction="#forgetPwd" prefHeight="24.0" prefWidth="136.0" text="Forgot you password ?" />
             </children></AnchorPane>
     </children>
 </AnchorPane>

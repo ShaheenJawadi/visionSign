@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="372.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.User.ForgetPwdController">
+    <children>
+        <AnchorPane layoutX="-1.0" prefHeight="496.0" prefWidth="414.0">
+            <children>
+                <Label layoutX="53.0" layoutY="14.0" prefHeight="54.0" prefWidth="305.0" text="Password recovery" textFill="#2aace2">
+                    <font>
+                        <Font name="Berlin Sans FB" size="39.0" />
+                    </font>
+                </Label>
+                <Button layoutX="138.0" layoutY="429.0" mnemonicParsing="false" onAction="#changePwd" prefHeight="42.0" prefWidth="140.0" style="-fx-background-color: #2aace2; -fx-background-radius: 15;" text="Change password" textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Button>
+                <TextField fx:id="codeTF" layoutX="77.0" layoutY="201.0" prefHeight="31.0" prefWidth="254.0" promptText="Code" style="-fx-background-radius: 10;">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </TextField>
+                <MFXPasswordField fx:id="pwdTF" layoutX="80.0" layoutY="263.0" maxHeight="-Infinity" maxWidth="254.0" prefHeight="50.0" prefWidth="254.0" promptText="new password" style="-fx-background-radius: 20;" />
+            <MFXPasswordField fx:id="pwdTF1" layoutX="80.0" layoutY="343.0" maxHeight="-Infinity" maxWidth="254.0" prefHeight="50.0" prefWidth="254.0" promptText="new password" style="-fx-background-radius: 20;" />
+            <Label layoutX="87.0" layoutY="77.0" prefHeight="18.0" prefWidth="150.0" />
+            <TextField fx:id="emailTF" layoutX="25.0" layoutY="95.0" prefHeight="31.0" prefWidth="254.0" promptText="Email" style="-fx-background-radius: 10;">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </TextField>
+            <Button layoutX="289.0" layoutY="95.0" mnemonicParsing="false" onAction="#codeButton" prefHeight="31.0" prefWidth="110.0" style="-fx-background-color: #2aace2; -fx-background-radius: 15;" text="Send code" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Button>
+            <Label layoutX="91.0" layoutY="167.0" text="Enter the code you received in your Email">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
