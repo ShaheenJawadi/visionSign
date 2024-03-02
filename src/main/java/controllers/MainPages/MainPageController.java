@@ -22,14 +22,21 @@ public class MainPageController implements Initializable {
 
     @FXML
     private FlowPane listCoursHolder ;
+    @FXML
+    private  VBox HomeVboxHolder;
+
+
+    public VBox getVBoxRoot()
+    {
+        return HomeVboxHolder;
+    }
 
 
 
 
     public void OpenListCoursPage(ActionEvent actionEvent) {
-        System.out.println("jdhfjsjdk");
-        MainNavigations mainNavigations = MainNavigations.getInstance() ;
-         mainNavigations.openCoursFilterPage();
+
+            MainNavigations.getInstance().openCoursFilterPage();
     }
 
     @Override
@@ -51,7 +58,7 @@ public class MainPageController implements Initializable {
         System.out.println("render");
         listCoursHolder.getChildren().clear();
         CoursService coursService=new CoursService();
-        List<Cours> coursList =coursService.getAll();
+        List<Cours> coursList =coursService.getCompleteCours();
         try {
             for (Cours cours : coursList) {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainPages/Components/Cours/SingleGrid.fxml"));

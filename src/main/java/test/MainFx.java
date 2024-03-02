@@ -50,6 +50,7 @@ public class MainFx  extends Application  {
         primaryStage.setScene(scene);
         primaryStage.setMinWidth(1200);
         primaryStage.setMinHeight(600);
+        primaryStage.setHeight(800);
         primaryStage.show();
     }
 

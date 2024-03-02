@@ -6,15 +6,19 @@ import dtos.RessourceDto;
 import entities.Cours;
 import entities.Lesson;
 import entities.Ressource;
+import entities.UserCours;
+
 import services.GServices;
 import services.IService;
 import utils.DbOps;
 import utils.MyDatabase;
 
 import java.sql.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class CoursService extends GServices implements IService<Cours>, IServiceCours<Cours, Ressource, Lesson>  {
+public class CoursService extends GServices implements IService<Cours>  {
 
 
     private Connection connection;
@@ -115,7 +119,7 @@ public class CoursService extends GServices implements IService<Cours>, IService
     }
 
 
-    @Override
+
     public List<Cours> search(String term) throws SQLException {
         //   String sql="SELECT * FROM " + tableName +   " WHERE description LIKE '%"+term.toLowerCase()+"%' OR nom LIKE '%\"+term.toLowerCase()+\"%' OR tags LIKE '%"+term.toLowerCase()+"%'";
         String sql = dbOps.select(tableName, "", "") +
@@ -127,7 +131,7 @@ public class CoursService extends GServices implements IService<Cours>, IService
         return coursDto.list(rs);
     }
 
-    @Override
+
     public List<Cours> getBySubCategory(int id) throws SQLException {
         // String sql="SELECT * FROM " + tableName +" where subCategoryId = ?";
         String sql = dbOps.select(tableName, "subCategoryId", "");
@@ -137,7 +141,7 @@ public class CoursService extends GServices implements IService<Cours>, IService
         return coursDto.list(rs);
     }
 
-    @Override
+
     public List<Cours> getByNiveau(int id) throws SQLException {
         //String sql="SELECT * FROM " + tableName +" where niveauId = ?";
         String sql = dbOps.select(tableName, "niveauId", "");
@@ -147,7 +151,7 @@ public class CoursService extends GServices implements IService<Cours>, IService
         return coursDto.list(rs);
     }
 
-    @Override
+
     public List<Cours> getAllWithPagination(int page, int rowsNum) throws SQLException {
 
         //String sql="SELECT * FROM " + tableName +" ORDER BY id LIMIT ?,?";
@@ -160,7 +164,7 @@ public class CoursService extends GServices implements IService<Cours>, IService
 
     }
 
-    @Override
+
     public List<Ressource> getRessouces(int coursId) throws SQLException {
         // String sql="SELECT * FROM " + ressourcesTableName +" where coursId = ?";
         String sql = dbOps.select(ressourcesTableName, "coursId", "");
@@ -171,7 +175,7 @@ public class CoursService extends GServices implements IService<Cours>, IService
         return ressourceDto.list(rs);
     }
 
-    @Override
+
     public List<Lesson> getLessons(int coursId) throws SQLException {
         // String sql="SELECT * FROM " + lessosnsTableName +" where coursId = ? ORDER BY classement";
         String sql = dbOps.select(lessosnsTableName, "coursId", "classement");
@@ -180,6 +184,15 @@ public class CoursService extends GServices implements IService<Cours>, IService
         ResultSet rs = ps.executeQuery();
 
         return lessonDto.list(rs);
+    }
+
+
+
+    public List<Cours>  getCompleteCours() throws SQLException {
+        String sql = dbOps.select(tableName, "", "");
+        Statement st = connection.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        return coursDto.list(rs);
     }
 
 
