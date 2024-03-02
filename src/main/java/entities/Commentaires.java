@@ -9,7 +9,6 @@ public class Commentaires {
     private Date date;
     private int userId;
     private String userName;
-
     private int id_pub;
 
     public Commentaires() {
@@ -62,16 +61,16 @@ public class Commentaires {
         this.userId = userId;
     }
 
+    public int getId_pub() {
+        return id_pub;
+    }
+
     public String getUserName() {
         return userName;
     }
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public int getId_pub() {
-        return id_pub;
     }
 
     public void setId_pub(int id_pub) {
@@ -84,7 +83,8 @@ public class Commentaires {
                 "id=" + id +
                 ", commentaire='" + commentaire + '\'' +
                 ", date=" + date +
-                ", userId=" + userId +", userName: "+userName+
+                ", userId=" + userId +
+                ", userName=" + userName +
                 '}';
     }
 }

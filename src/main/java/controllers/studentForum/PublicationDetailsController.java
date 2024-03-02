@@ -5,8 +5,12 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import entities.Commentaires;
 import entities.Publications;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -17,40 +21,46 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import okhttp3.*;
+import org.json.JSONObject;
 import services.Forum.CommentairesService;
 
 import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-
-public class PublicationDetailsController extends BaseForumController{
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import org.json.JSONObject;
+public class PublicationDetailsController extends BaseForumController {
 
     @FXML
-    protected AnchorPane anchorepubid,CommentsId;
+    protected AnchorPane anchorepubid, CommentsId;
     @FXML
-    private  Pane CommentId;
+    private Pane CommentId;
     @FXML
     private TextField commentField;
     @FXML
     private ScrollPane scrollid;
     private int pubId;
     private CommentairesService commentService = new CommentairesService();
-    private   List<Commentaires> allCom ;
+    private List<Commentaires> allCom;
 
 
     public void setPubId(int pubId) {
         this.pubId = pubId;
-        System.out.println("Passing pubId2: " +pubId);
+        System.out.println("Passing pubId2: " + pubId);
         pubDetails();
-
 
 
     }
 
     @FXML
     public void initialize() {
-        System.out.println("initialize"+pubId);
+        System.out.println("initialize" + pubId);
         try {
             mypub = pubs.getPublicationsByUserId(6);
             mypub.sort(Comparator.comparing(Publications::getDate_creation).reversed());
@@ -75,6 +85,7 @@ public class PublicationDetailsController extends BaseForumController{
 
         }
     }
+
     public void loadComments() {
         CommentId.getChildren().clear();
         try {
@@ -107,6 +118,7 @@ public class PublicationDetailsController extends BaseForumController{
             throw new RuntimeException(e);
         }
     }
+
     public Pane createCommentPane(Commentaires comment, int index) {
         Pane pane = new Pane();
         pane.setPrefSize(680, 105);
@@ -135,7 +147,6 @@ public class PublicationDetailsController extends BaseForumController{
         userIdText.setLayoutX(62);
         userIdText.setLayoutY(37);
         userIdText.setFont(new Font(14));
-
 
 
         Text roleText = new Text("Enseignant");
@@ -204,7 +215,6 @@ public class PublicationDetailsController extends BaseForumController{
                 editField.setLayoutY(contenuText.getLayoutY() - 20);
                 editField.setPrefWidth(600);
 
-
                 editField.setOnKeyPressed(keyEvent -> {
                     if (keyEvent.getCode() == KeyCode.ENTER) {
                         comment.setCommentaire(editField.getText());
@@ -230,23 +240,61 @@ public class PublicationDetailsController extends BaseForumController{
 
         return pane;
     }
+
+    private static boolean checkWithAiModel(String titre) {
+        try {
+            String prompt = "Please check the comment publication for any disrespectful language or inappropriate content for an application for e-learning, including words such as 'stupid,' 'idiot,' or any other derogatory terms. Return true if the comment contains any such language, and false otherwise. Here is the comment:'" + titre + "'";
+
+            OkHttpClient client = new OkHttpClient();
+            MediaType mediaType = MediaType.parse("application/json");
+            RequestBody body = RequestBody.create(mediaType, "{\"model\":\"gpt-3.5-turbo\",\"messages\":[{\"role\":\"user\",\"content\":\"" + prompt + "\"}]}");
+            Request request = new Request.Builder()
+                    .url("https://api.openai.com/v1/chat/completions")
+                    .post(body)
+                    .addHeader("Content-Type", "application/json")
+                    .addHeader("Authorization", "Bearer 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")
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            String responseBody = response.body().string();
+            JSONObject jsonResponse = new JSONObject(responseBody);
+
+            String chatResponse = jsonResponse.getJSONArray("choices").getJSONObject(0).getJSONObject("message").getString("content");
+            boolean x = chatResponse.equalsIgnoreCase("true");
+
+            return x;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     @FXML
+
     public void handleadd() {
         String commentText = commentField.getText();
-        if (!commentText.isEmpty() && commentText!=null) {
+        if (!commentText.isEmpty() && commentText != null) {
             try {
                 if (!commentService.commentaireExists(commentText, pubId, 6)) {
-                    Commentaires newComment = new Commentaires();
-                    newComment.setCommentaire(commentText);
-                    newComment.setDate(new Date());
-                    newComment.setId_pub(pubId);
-                    newComment.setUserId(6);
-                    commentService.addPublicationOrCommentaire(newComment);
-                    loadComments();
-                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Succès!");
-                    alert.setContentText("Commentaire ajouté!");
-                    alert.showAndWait();
+                    boolean y = checkWithAiModel(commentText);
+                    if(!y) {
+                        Commentaires newComment = new Commentaires();
+                        newComment.setCommentaire(commentText);
+                        newComment.setDate(new Date());
+                        newComment.setId_pub(pubId);
+                        newComment.setUserId(6);
+                        commentService.addPublicationOrCommentaire(newComment);
+                        loadComments();
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Succès!");
+                        alert.setContentText("Commentaire ajouté!");
+                        alert.showAndWait();
+                    }
+                    else {
+                        Alert alert = new Alert(Alert.AlertType.WARNING);
+                        alert.setTitle("Contenu inapproprié!");
+                        alert.setContentText("Le commentaire contient du contenu inapproprié et ne peut pas être ajoutée.");
+                        alert.showAndWait();
+                    }
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Erreur!");
@@ -267,26 +315,27 @@ public class PublicationDetailsController extends BaseForumController{
             alert.showAndWait();
         }
     }
-   public void pubDetails() {
-try {
-    Publications selectedPublication = pubs.getByIdPublicationOrCommentaire(pubId);
 
-        if (selectedPublication != null) {
-            Pane pubPane = createPublicationPane(selectedPublication, 0, true);
+    public void pubDetails() {
+        try {
+            Publications selectedPublication = pubs.getByIdPublicationOrCommentaire(pubId);
 
-            anchorepubid.getChildren().remove(pubPane);
-            anchorepubid.getChildren().add(pubPane);
-            loadComments();
-        loadComments();}
-         else {
-            Text notFoundText = new Text("Publication introuvable!");
-            notFoundText.setFont(new Font("System", 15));
-            notFoundText.setFill(Color.RED);
-            notFoundText.setLayoutX(19);
-            notFoundText.setLayoutY(172);
-            anchorepubid.getChildren().add(notFoundText);
-        }}catch (SQLException e){
-    System.out.println(e.getMessage());
-}
+            if (selectedPublication != null) {
+                Pane pubPane = createPublicationPane(selectedPublication, 0, true);
+
+                anchorepubid.getChildren().remove(pubPane);
+                anchorepubid.getChildren().add(pubPane);
+                loadComments();
+            } else {
+                Text notFoundText = new Text("Publication introuvable!");
+                notFoundText.setFont(new Font("System", 15));
+                notFoundText.setFill(Color.RED);
+                notFoundText.setLayoutX(19);
+                notFoundText.setLayoutY(172);
+                anchorepubid.getChildren().add(notFoundText);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

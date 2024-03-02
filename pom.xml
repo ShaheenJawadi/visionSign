@@ -116,7 +116,23 @@
 
         <!-- Thanks for using https://jar-download.com -->
 
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20210307</version>
+        </dependency>
 
+
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-core</artifactId>
+            <version>1.38.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cloudinary</groupId>
+            <artifactId>cloudinary-http44</artifactId>
+            <version>1.38.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -125,7 +141,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>test.MainFx</mainClass>
+                    <mainClass>test.MainForum</mainClass>
                 </configuration>
             </plugin>
         </plugins>
