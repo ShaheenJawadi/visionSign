@@ -34,7 +34,7 @@ public class UserCoursServices implements IService<UserCours> {
         PreparedStatement ps=connection.prepareStatement(sql);;
         ps.setInt(1,userCours.getUserId());
         ps.setInt(2 , userCours.getCoursId());
-        ps.setBoolean(3 , userCours.getIsCorrectQuizz());
+        ps.setBoolean(3 , userCours.isCorrectQuizz());
         ps.setInt(4 , userCours.getState());
 
 
@@ -48,12 +48,10 @@ public class UserCoursServices implements IService<UserCours> {
     public void update(UserCours userCours) throws SQLException {
 
         String sql="update "+tableName+" set userId=?, coursId=?, isCorrectQuizz=?, state=? where id=?";
-
-
         PreparedStatement ps=connection.prepareStatement(sql);
         ps.setInt(1,userCours.getUserId());
          ps.setInt(2 , userCours.getCoursId());
-         ps.setBoolean(3 , userCours.getIsCorrectQuizz());
+         ps.setBoolean(3 , userCours.isCorrectQuizz());
          ps.setInt(4 , userCours.getState());
          ps.setInt(5 , userCours.getId());
         ps.executeUpdate();
@@ -116,6 +114,32 @@ public class UserCoursServices implements IService<UserCours> {
 
 
         return userCoursDto.list(rs);
+    }
+
+
+    public  boolean sheckUserCours(int coursId , int userId) throws SQLException {
+
+        String[] s = new String[2] ;
+        s= new String[]{"userId", "coursId"};
+
+
+        String sql="SELECT * FROM " + tableName +" where userId=? AND coursId=?" ;
+
+
+        PreparedStatement ps=connection.prepareStatement(sql);
+        ps.setInt(1,userId);
+        ps.setInt(2,coursId);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+
+
+
+            return true ;
+        } else {
+            return false;
+        }
     }
 
 }

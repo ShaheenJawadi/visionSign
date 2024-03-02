@@ -1,15 +1,18 @@
 package controllers.MainPages.Cours;
 
-import Navigation.MainNavigations;
+import State.MainNavigations;
 import entities.Cours;
+import entities.UserCours;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import services.cours.UserCoursServices;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class CoursGridController implements Initializable {
@@ -38,9 +41,12 @@ public class CoursGridController implements Initializable {
     private Text title;
 
 
+    private  Cours cours ;
+
 
     public void renderGrid (Cours cours ){
 
+        this.cours = cours ;
 
         title.setText(cours.getNom());
          nbLessons.setText(cours.nbLessons());
@@ -55,7 +61,19 @@ public class CoursGridController implements Initializable {
     }
 
     @FXML
-    void addToBag(MouseEvent event) {
+    void addToBag(MouseEvent event) throws SQLException {
+
+
+        System.out.println("enter");
+
+        UserCoursServices userCoursServices = new UserCoursServices() ;
+        //todo SetUser  Id
+        if(!userCoursServices.sheckUserCours(cours.getId() ,3)){
+            UserCours userCours = new UserCours(3 , cours.getId() , false , 0 ) ;
+            userCoursServices.add(userCours);
+        }
+
+
 
     }
 
@@ -64,7 +82,7 @@ public class CoursGridController implements Initializable {
 
     public void openSingleCours(MouseEvent mouseEvent) {
 
-        System.out.println("jsd");
+
         MainNavigations mainNavigations = MainNavigations.getInstance() ;
         mainNavigations.openSingleCoursPage();
     }

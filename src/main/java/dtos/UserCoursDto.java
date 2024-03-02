@@ -14,11 +14,11 @@ public class UserCoursDto {
 
     public UserCours single(ResultSet rs) throws SQLException {
         UserCours l =new UserCours();
-//id	coursId	titre	content	duree	image	video	classement
+
         l.setId(rs.getInt("id"));
         l.setCoursId(rs.getInt("coursId"));
         l.setUserId(rs.getInt("userId"));
-        l.setIsCorrectQuizz(rs.getBoolean("isCorrectQuizz"));
+        l.setCorrectQuizz(rs.getBoolean("isCorrectQuizz"));
         l.setState(rs.getInt("state"));
 
 

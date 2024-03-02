@@ -21,7 +21,7 @@
                   <Image url="@../../../../assets/mainPage/Image.png" />
                </image>
             </ImageView>
-            <VBox onDragDetected="#addToBag" styleClass="addBtnHolder" AnchorPane.bottomAnchor="-25.0" AnchorPane.leftAnchor="11.0">
+            <VBox onMouseClicked="#addToBag" styleClass="addBtnHolder" AnchorPane.bottomAnchor="-25.0" AnchorPane.leftAnchor="11.0">
                <children>
                   <ImageView fitHeight="30.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                      <image>

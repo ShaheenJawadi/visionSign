@@ -1,8 +1,7 @@
-package Navigation;
+package State;
 
 import controllers.MainPages.Cours.FilterController;
 import controllers.MainPages.Cours.SingleCoursController;
-import controllers.teacher.TeacherCoursController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;

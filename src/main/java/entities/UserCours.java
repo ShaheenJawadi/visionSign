@@ -10,6 +10,16 @@ public class UserCours {
     private boolean isCorrectQuizz ;
     private  int state  ;
 
+    public UserCours() {
+    }
+
+
+    public UserCours(int userId, int coursId, boolean isCorrectQuizz, int state) {
+        this.userId = userId;
+        this.coursId = coursId;
+        this.isCorrectQuizz = isCorrectQuizz;
+        this.state = state;
+    }
 
 
 
@@ -37,13 +47,6 @@ public class UserCours {
         this.coursId = coursId;
     }
 
-    public boolean getIsCorrectQuizz() {
-        return isCorrectQuizz;
-    }
-
-    public void setIsCorrectQuizz(boolean isCorrectQuizz) {
-        this.isCorrectQuizz = isCorrectQuizz;
-    }
 
     public int getState() {
         return state;
@@ -53,5 +56,11 @@ public class UserCours {
         this.state = state;
     }
 
+    public boolean isCorrectQuizz() {
+        return isCorrectQuizz;
+    }
 
+    public void setCorrectQuizz(boolean correctQuizz) {
+        isCorrectQuizz = correctQuizz;
+    }
 }
