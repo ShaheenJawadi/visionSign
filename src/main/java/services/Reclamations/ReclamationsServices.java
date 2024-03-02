@@ -121,6 +121,43 @@ public class ReclamationsServices implements IServices<Reclamations>{
 
         return matchingPublications;
     }
+    //    public Map<String, Integer> compterReclamationsParReponse() throws SQLException {
+//        Map<String, Integer> stats = new HashMap<>();
+//        String query = "SELECT repondre COUNT(*) as count FROM Reclamations GROUP BY repondre";
+//
+//        try (Connection connection = (Connection) MyDatabase.getInstance().getConnection().prepareStatement(query)){
+//            try (PreparedStatement statement = connection.prepareStatement(query)) {
+//                try (ResultSet resultSet = statement.executeQuery()) {
+//                    while (resultSet.next()) {
+//                        Boolean reponse = Boolean.valueOf(resultSet.getString("repondre"));
+//                        int count = resultSet.getInt("count");
+//                        stats.put(String.valueOf(reponse), count);
+//                    }
+//                }
+//            }
+//        }
+//
+//        return stats;
+//    }
+    public Map<Boolean, Integer> compterReclamationsParReponse() throws SQLException {
+        Map<Boolean, Integer> stats = new HashMap<>();
+        String query = "SELECT repondre, COUNT(*) as count FROM Reclamations GROUP BY repondre";
+
+        try (Connection connection = MyDatabase.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                boolean reponse = resultSet.getBoolean("repondre");
+                int count = resultSet.getInt("count");
+                stats.put(reponse, count);
+            }
+        }
+
+        return stats;
+    }
+
+
 
     public List<Reclamations> getReclamationsById(int id) throws SQLException {
         List<Reclamations> reclamationsList = new ArrayList<>();
@@ -142,6 +179,7 @@ public class ReclamationsServices implements IServices<Reclamations>{
         }
 
         return reclamationsList;
+
     }
     public static String getUserEmailById(int userId) {
         String query = "SELECT email FROM user WHERE id = ?";
@@ -209,5 +247,30 @@ public class ReclamationsServices implements IServices<Reclamations>{
         }
         return statistiques;
     }
+    public int getUserIdByUsername(String username) throws SQLException {
+        String query = "SELECT id FROM user WHERE username = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("id");
+            }
+        }
+        throw new SQLException("Utilisateur introuvable pour le nom d'utilisateur spécifié : " + username);
+    }
+    public Map<String, Integer> calculerStatistiques() throws SQLException {
+        Map<String, Integer> statistiques = new HashMap<>();
+
+        List<Reclamations> reclamations = recuperer(); // Récupérer toutes les réclamations
+
+        for (Reclamations reclamation : reclamations) {
+            String type = reclamation.getType();
+            statistiques.put(type, statistiques.getOrDefault(type, 0) + 1);
+        }
+
+        return statistiques;
+    }
+
+
 
 }

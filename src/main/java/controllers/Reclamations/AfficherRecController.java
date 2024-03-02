@@ -19,8 +19,8 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 public class AfficherRecController {
 
@@ -52,15 +52,17 @@ public class AfficherRecController {
     private PieChart pieChartStatistiques;
     @FXML
     private Button back, mailid;
+
     @FXML
     void back(ActionEvent event) throws IOException {
-        try{
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("/main.fxml"));
-            Parent root=loader.load();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main.fxml"));
+            Parent root = loader.load();
             back.getScene().setRoot(root);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }}
+        }
+    }
 
     private final ReclamationsServices reclamationsServices = new ReclamationsServices();
 
@@ -68,17 +70,30 @@ public class AfficherRecController {
     void initialize() {
         try {
             List<Reclamations> reclamations = reclamationsServices.recuperer();
+            trierReclamationsParReponse(reclamations); // Tri des réclamations par statut de réponse
             ObservableList<Reclamations> observableList = FXCollections.observableList(reclamations);
             table.setItems(observableList);
             configureTableColumns();
-
-            configureTableColumns();
             loadReclamations();
-            afficherStatistiques(); // Chargez les statistiques ici
-
+            afficherStatistiques();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    private void trierReclamationsParReponse(List<Reclamations> reclamations) {
+        Comparator<Reclamations> reclamationComparator = new Comparator<Reclamations>() {
+            @Override
+            public int compare(Reclamations r1, Reclamations r2) {
+                if (r1.isRepondre() && !r2.isRepondre()) {
+                    return -1;
+                } else if (!r1.isRepondre() && r2.isRepondre()) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        };
+        Collections.sort(reclamations, reclamationComparator);
     }
 
     private void configureTableColumns() {
@@ -154,6 +169,7 @@ public class AfficherRecController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     @FXML
     private ListView<String> listViewStatistiques;
 
@@ -169,7 +185,19 @@ public class AfficherRecController {
             showAlert("Erreur lors de la récupération des statistiques.");
         }
     }
-
+//    public void afficherStatistiques() {
+//        try {
+//            Map<String, Integer> stats = reclamationsServices.compterReclamationsParReponse(); // Utilisez la méthode mise à jour
+//            ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+//            stats.forEach((reponse, count) -> pieChartData.add(new PieChart.Data(reponse, count))); // Utilisez les réponses pour créer les données du graphique
+//            pieChartStatistiques.setData(pieChartData);
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            showAlert("Erreur lors de la récupération des statistiques.");
+//        }
+//    }
+//
+//    }
 }
 
 
