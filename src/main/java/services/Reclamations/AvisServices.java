@@ -19,8 +19,13 @@ public class AvisServices implements IServices<Avis>{
 
     @Override
     public void ajouter(Avis avis) throws SQLException {
+        // Vérifier si la note est entre 1 et
+        if (avis.getNote() < 1 || avis.getNote() > 5) {
+            throw new IllegalArgumentException("La note doit être un nombre entre 1 et 5.");
+        }
+
         LocalDate currentDate = LocalDate.now();
-        Date sqlCurrentDate = Date.valueOf(currentDate);
+        java.sql.Date sqlCurrentDate = java.sql.Date.valueOf(currentDate);
         String sql = "insert into avis (note,message,date,id_user,coursId) values(?,?,?,?,?)";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
             ps.setInt(1,avis.getNote());
@@ -38,6 +43,7 @@ public class AvisServices implements IServices<Avis>{
     }
 
 
+
     @Override
     public void modifier(Avis avis) throws SQLException {
         String sql="update avis set note=?,message=?,date=?,id_user=?,coursId=? where id_avi=?";
@@ -53,11 +59,11 @@ public class AvisServices implements IServices<Avis>{
 
     @Override
     public void supprimer(int id) throws SQLException {
-            String sql = "DELETE FROM avis WHERE id_avi = ?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.executeUpdate();
-        }
+        String sql = "DELETE FROM avis WHERE id_avi = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, id);
+        ps.executeUpdate();
+    }
 
     @Override
     public List<Avis> recuperer() throws SQLException {
@@ -177,6 +183,17 @@ public class AvisServices implements IServices<Avis>{
         }
 
         return matchingPublications;
+    }
+    public int getUserNameById(String username) throws SQLException {
+        String query = "SELECT id FROM user WHERE username = ?";
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("id");
+            }
+        }
+        throw new SQLException("Utilisateur introuvable pour le nom d'utilisateur spécifié : " + username);
     }
     public List<Integer> recupererIdsUtilisateurs() {
         List<Integer> idsUtilisateurs = new ArrayList<>();
