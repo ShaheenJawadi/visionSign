@@ -1,5 +1,6 @@
 package services.cours;
 
+import State.UserOPState;
 import dtos.UserCoursDto;
 import entities.UserCours;
 import services.IService;
@@ -32,6 +33,7 @@ public class UserCoursServices implements IService<UserCours> {
         ps.setInt(1,userCours.getUserId());
         ps.setInt(2 , userCours.getCoursId());
         ps.executeUpdate();
+        UserOPState.getInstance().fetchUserEnrollement();
         return 1 ;
 
 

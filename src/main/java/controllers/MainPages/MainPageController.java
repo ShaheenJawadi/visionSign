@@ -22,14 +22,21 @@ public class MainPageController implements Initializable {
 
     @FXML
     private FlowPane listCoursHolder ;
+    @FXML
+    private  VBox HomeVboxHolder;
+
+
+    public VBox getVBoxRoot()
+    {
+        return HomeVboxHolder;
+    }
 
 
 
 
     public void OpenListCoursPage(ActionEvent actionEvent) {
-        System.out.println("jdhfjsjdk");
-        MainNavigations mainNavigations = MainNavigations.getInstance() ;
-         mainNavigations.openCoursFilterPage();
+
+            MainNavigations.getInstance().openCoursFilterPage();
     }
 
     @Override

@@ -27,7 +27,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" spacing="20.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <ImageView fitHeight="77.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="77.0" fitWidth="148.0" onMouseClicked="#openHomePage" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../assets/logo.png" />
                            </image>
@@ -35,14 +35,14 @@
                               <Rectangle2D />
                            </viewport>
                         </ImageView>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Accueil">
+                        <Text onMouseClicked="#openHomePage" strokeType="OUTSIDE" strokeWidth="0.0" text="Accueil">
                            <styleClass>
                               <String fx:value="menu_item" />
                               <String fx:value="selected" />
                            </styleClass>
                         </Text>
-                        <Text layoutX="188.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="Catégories" />
-                        <Text layoutX="275.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="Cours" />
+                        <Text layoutX="188.0" layoutY="48.0" onMouseClicked="#OpenListCoursPage" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="Catégories" />
+                        <Text layoutX="275.0" layoutY="48.0" onMouseClicked="#OpenListCoursPage" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="Cours" />
                         <Text layoutX="362.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="Enseignants" />
                      </children>
                   </HBox>
@@ -63,7 +63,7 @@
                         <Separator orientation="VERTICAL" prefHeight="200.0" />
                         <AnchorPane HBox.hgrow="NEVER">
                            <children>
-                              <ImageView fitHeight="34.0" fitWidth="27.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="13.0">
+                              <ImageView fitHeight="34.0" fitWidth="27.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" styleClass="menu_item" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="13.0">
                                  <image>
                                     <Image url="@../../../assets/header/book_mark.png" />
                                  </image>
