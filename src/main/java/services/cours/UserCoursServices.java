@@ -2,12 +2,12 @@ package services.cours;
 
 import dtos.UserCoursDto;
 import entities.UserCours;
-import entities.UserCours;
 import services.IService;
 import utils.DbOps;
 import utils.MyDatabase;
 
 import java.sql.*;
+import java.util.Date;
 import java.util.List;
 
 public class UserCoursServices implements IService<UserCours> {
@@ -26,18 +26,11 @@ public class UserCoursServices implements IService<UserCours> {
     @Override
     public int add(UserCours userCours) throws SQLException {
 
-
-
-
-        String sql = "INSERT INTO "+tableName+" (userId,coursId,isCorrectQuizz,state) VALUES(? ,? ,?,?)";
+        String sql = "INSERT INTO "+tableName+" (userId,coursId) VALUES(? ,?)";
 
         PreparedStatement ps=connection.prepareStatement(sql);;
         ps.setInt(1,userCours.getUserId());
         ps.setInt(2 , userCours.getCoursId());
-        ps.setBoolean(3 , userCours.isCorrectQuizz());
-        ps.setInt(4 , userCours.getState());
-
-
         ps.executeUpdate();
         return 1 ;
 
@@ -46,15 +39,15 @@ public class UserCoursServices implements IService<UserCours> {
 
     @Override
     public void update(UserCours userCours) throws SQLException {
-
-        String sql="update "+tableName+" set userId=?, coursId=?, isCorrectQuizz=?, state=? where id=?";
+//TODO CHANGE THIS
+      /*  String sql="update "+tableName+" set userId=?, coursId=?, isCorrectQuizz=?, state=? where id=?";
         PreparedStatement ps=connection.prepareStatement(sql);
         ps.setInt(1,userCours.getUserId());
          ps.setInt(2 , userCours.getCoursId());
          ps.setBoolean(3 , userCours.isCorrectQuizz());
          ps.setInt(4 , userCours.getState());
          ps.setInt(5 , userCours.getId());
-        ps.executeUpdate();
+        ps.executeUpdate();*/
 
     }
 
@@ -103,6 +96,7 @@ public class UserCoursServices implements IService<UserCours> {
 
     public List<UserCours>  getByUser(int id) throws SQLException {
 
+        System.out.println("getbyuser "+ id);
         //String sql="select * from "+tableName+" where id = ?";
         String sql= dbOps.select(tableName , "userId" , "");
 
@@ -117,7 +111,7 @@ public class UserCoursServices implements IService<UserCours> {
     }
 
 
-    public  boolean sheckUserCours(int coursId , int userId) throws SQLException {
+    public  boolean checkUserCours(int coursId , int userId) throws SQLException {
 
         String[] s = new String[2] ;
         s= new String[]{"userId", "coursId"};
@@ -141,5 +135,9 @@ public class UserCoursServices implements IService<UserCours> {
             return false;
         }
     }
+
+
+
+
 
 }

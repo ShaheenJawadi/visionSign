@@ -2,10 +2,14 @@ package entities;
 
 import mock.Category;
 
+import java.util.ArrayList;
+
 public class Cours {
     private  int id ,enseignantId, subCategoryId , niveauId  ;
     private  String nom , description,tags  ,image ;
     private boolean isValidated ;
+
+    private ArrayList<Lesson> lessons ;
     // add ensgId
     public  Cours(){
 
@@ -124,6 +128,8 @@ public class Cours {
     public  Category getCategory(){
         return new Category(1 , "cat mock");
     }
+
+
     public String getLevel (){
         return "level";
         //TODO FETCHlEVEL
@@ -141,7 +147,18 @@ public class Cours {
     }
 
     public  String nbLessons(){
+
+
+
         //TODO fetch nbLessons
-        return "2";
+        return String.valueOf(this.lessons.size()) ;
+    }
+
+    public ArrayList<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(ArrayList<Lesson> lessons) {
+        this.lessons = lessons;
     }
 }
