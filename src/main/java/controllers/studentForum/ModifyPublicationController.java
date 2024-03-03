@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -23,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -74,14 +76,20 @@ public class ModifyPublicationController extends BaseForumController  {
                         ImageView imageView = new ImageView(image);
                         imageView.setFitHeight(100);
                         imageView.setFitWidth(100);
+
+                        StackPane imagePane = new StackPane(imageView);
+                        imagePane.setPrefSize(110, 70);
+                        imagePane.setStyle("-fx-border-color: transparent; -fx-border-width: 2;"); // Set initial border
+
                         imageView.setOnMouseClicked(event -> {
                             if (selectedImageView != null) {
-                                selectedImageView.setStyle(""); // Remove border from previously selected image
+                                selectedImageView.getParent().setStyle("-fx-border-color: transparent; -fx-border-width: 2;"); // Remove border from previously selected image
                             }
-                            imageView.setStyle("-fx-border-color: red; -fx-border-width: 10; -fx-border-style: solid;");
+                            imagePane.setStyle("-fx-border-color:  #2447F9; -fx-border-width: 2;");
                             selectedImageView = imageView;
                         });
-                        imageContainer.getChildren().add(imageView);
+
+                        imageContainer.getChildren().add(imagePane);
                         selectedImagePaths.put(imageView, url);
                     }
                 }
@@ -94,28 +102,42 @@ public class ModifyPublicationController extends BaseForumController  {
             e.printStackTrace();
         }
         trashBtn.setVisible(!selectedImagePaths.isEmpty());
-
     }
 
 
 
+
     @FXML
+
     private void deleteImage() {
         if (selectedImageView != null) {
-            imageContainer.getChildren().remove(selectedImageView);
+            // Get the parent of the selectedImageView, which should be the Pane
+            Node parent = selectedImageView.getParent();
+
+            // Remove the Pane from the imageContainer
+            imageContainer.getChildren().remove(parent);
+
+            // Remove the image path from the selectedImagePaths map
             selectedImagePaths.remove(selectedImageView);
+
+            // Call the method to update the image paths in the database
             updateImagePathsInDatabase();
+
+            // Reset the selectedImageView to null since it's now deleted
             selectedImageView = null;
 
+            // Show the success alert
             Alert successAlert = new Alert(Alert.AlertType.INFORMATION);
             successAlert.setTitle("Success");
             successAlert.setHeaderText(null);
             successAlert.setContentText("Image deleted successfully!");
             successAlert.showAndWait();
-            trashBtn.setVisible(!selectedImagePaths.isEmpty());
 
+            // Toggle the visibility of the trash button based on the presence of images
+            trashBtn.setVisible(!selectedImagePaths.isEmpty());
         }
     }
+
 
 
     private void updateImagePathsInDatabase() {
@@ -133,17 +155,6 @@ public class ModifyPublicationController extends BaseForumController  {
         }
     }
 
-    private byte[] readFileToByteArray(File file) throws IOException {
-        try (FileInputStream fis = new FileInputStream(file)) {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            byte[] buf = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = fis.read(buf)) != -1) {
-                bos.write(buf, 0, bytesRead);
-            }
-            return bos.toByteArray();
-        }
-    }
 
     @FXML
     private void uploadImage() {
@@ -190,11 +201,16 @@ public class ModifyPublicationController extends BaseForumController  {
             ImageView imageView = new ImageView(image);
             imageView.setFitHeight(100);
             imageView.setFitWidth(100);
+
+            StackPane imagePane = new StackPane(imageView);
+            imagePane.setPrefSize(110, 70);
+            imagePane.setStyle("-fx-border-color: transparent; -fx-border-width: 2;"); // Set initial border
+
             imageView.setOnMouseClicked(event -> {
                 if (selectedImageView != null) {
-                    selectedImageView.setStyle(""); // Remove border from previously selected image
+                    selectedImageView.getParent().setStyle("-fx-border-color: transparent; -fx-border-width: 2;"); // Remove border from previously selected image
                 }
-                imageView.setStyle("-fx-border-color: red; -fx-border-width: 10; -fx-border-style: solid;");
+                imagePane.setStyle("-fx-border-color: #2447F9; -fx-border-width: 2;");
                 selectedImageView = imageView;
             });
 
@@ -203,14 +219,13 @@ public class ModifyPublicationController extends BaseForumController  {
 
             // Update the UI on the JavaFX Application Thread
             Platform.runLater(() -> {
-                imageContainer.getChildren().add(imageView);
+                imageContainer.getChildren().add(imagePane);
                 imageContainer.getChildren().remove(uploadImageView);
             });
         } catch (IOException e) {
             e.printStackTrace();
         }
         trashBtn.setVisible(!selectedImagePaths.isEmpty());
-
     }
 
     public void loadPublicationDetails() {
