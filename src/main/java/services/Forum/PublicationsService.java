@@ -16,12 +16,13 @@ public class PublicationsService implements IForum<Publications> {
 
     @Override
     public void addPublicationOrCommentaire(Publications publications) throws SQLException {
-        String sql = "INSERT INTO publications (titre, contenu, date_creation,user_id) VALUES (?, ?, ?,?)";
+        String sql = "INSERT INTO publications (titre, contenu,images, date_creation,user_id) VALUES (?, ?,?, ?,?)";
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, publications.getTitre());
         ps.setString(2, publications.getContenu());
-        ps.setTimestamp(3, new Timestamp(publications.getDate_creation().getTime()));
-        ps.setInt(4, publications.getUserId());
+        ps.setString(3, publications.getImages());
+        ps.setTimestamp(4, new Timestamp(publications.getDate_creation().getTime()));
+        ps.setInt(5, publications.getUserId());
         int affectedRows = ps.executeUpdate();
 
         if (affectedRows == 0) {
@@ -40,13 +41,14 @@ public class PublicationsService implements IForum<Publications> {
 
     @Override
     public void updatePublicationOrCommentaire(Publications publications) throws SQLException {
-        String sql = "UPDATE publications SET titre=?, contenu=?, date_creation=? , user_id=?  WHERE id=?";
+        String sql = "UPDATE publications SET titre=?, contenu=?,images=?, date_creation=? , user_id=?  WHERE id=?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, publications.getTitre());
         ps.setString(2, publications.getContenu());
-        ps.setTimestamp(3, new Timestamp(publications.getDate_creation().getTime()));
-        ps.setInt(4, publications.getUserId());
-        ps.setInt(5, publications.getId());
+        ps.setString(3, publications.getImages());
+        ps.setTimestamp(4, new Timestamp(publications.getDate_creation().getTime()));
+        ps.setInt(5, publications.getUserId());
+        ps.setInt(6, publications.getId());
         ps.executeUpdate();
     }
 
@@ -72,9 +74,10 @@ public class PublicationsService implements IForum<Publications> {
             publication.setId(rs.getInt("id"));
             publication.setTitre(rs.getString("titre"));
             publication.setContenu(rs.getString("contenu"));
+            publication.setImages(rs.getString("images"));
             publication.setDate_creation(rs.getTimestamp("date_creation"));
             publication.setUserId(rs.getInt("user_id"));
-            publication.setUserName(rs.getString("username")); // Set the username
+            publication.setUserName(rs.getString("username"));
             publication.setPubCommentaires(cs.getCommentairesByPublicationId(publication.getId()));
         }
         return publication;
@@ -93,6 +96,7 @@ public class PublicationsService implements IForum<Publications> {
             publication.setId(rs.getInt("id"));
             publication.setTitre(rs.getString("titre"));
             publication.setContenu(rs.getString("contenu"));
+            publication.setImages(rs.getString("images"));
             publication.setDate_creation(rs.getTimestamp("date_creation"));
             publication.setUserId(rs.getInt("user_id"));
             publication.setUserName(rs.getString("username"));
@@ -117,6 +121,7 @@ public class PublicationsService implements IForum<Publications> {
             publication.setId(rs.getInt("id"));
             publication.setTitre(rs.getString("titre"));
             publication.setContenu(rs.getString("contenu"));
+            publication.setImages(rs.getString("images"));
             publication.setDate_creation(rs.getTimestamp("date_creation"));
             publication.setUserId(rs.getInt("user_id"));
             publication.setPubCommentaires(cs.getCommentairesByPublicationId(publication.getId()));
@@ -139,6 +144,7 @@ public class PublicationsService implements IForum<Publications> {
             publication.setId(rs.getInt("id"));
             publication.setTitre(rs.getString("titre"));
             publication.setContenu(rs.getString("contenu"));
+            publication.setImages(rs.getString("images"));
             publication.setDate_creation(rs.getTimestamp("date_creation"));
             publication.setUserId(rs.getInt("user_id"));
             publication.setPubCommentaires(cs.getCommentairesByPublicationId(publication.getId()));
@@ -160,4 +166,5 @@ public class PublicationsService implements IForum<Publications> {
         }
         return false;
     }
+
 }

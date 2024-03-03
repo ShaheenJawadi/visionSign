@@ -6,20 +6,28 @@ import java.util.List;
 public class Publications {
     private int id;
     private String titre;
-    private String contenu;
+    private String contenu,images;
     private Date date_creation;
     private int userId;
     private String userName;
-
     private List<Commentaires> pubCommentaires;
 
     public Publications() {
     }
 
-    public Publications(int id, String titre, String contenu, Date date_creation, int userId) {
+    public Publications(int id, String titre, String contenu, Date date_creation,String images, int userId) {
         this.id = id;
         this.titre = titre;
         this.contenu = contenu;
+        this.images=images;
+        this.date_creation = date_creation;
+        this.userId = userId;
+    }
+
+    public Publications(String titre, String contenu, Date date_creation,String images, int userId) {
+        this.titre = titre;
+        this.contenu = contenu;
+        this.images=images;
         this.date_creation = date_creation;
         this.userId = userId;
     }
@@ -41,6 +49,14 @@ public class Publications {
 
     public String getTitre() {
         return titre;
+    }
+
+    public String getImages() {
+        return images;
+    }
+
+    public void setImages(String images) {
+        this.images = images;
     }
 
     public void setTitre(String titre) {
@@ -93,8 +109,9 @@ public class Publications {
                 "id=" + id +
                 ", titre='" + titre + '\'' +
                 ", contenu='" + contenu + '\'' +
+                ", images='" + images+ '\'' +
                 ", date_creation=" + date_creation +
-                ", userId=" + userId +", userName: "+userName;
+                ", userId=" + userId;
 
         if (pubCommentaires != null && !pubCommentaires.isEmpty()) {
             result += ",\ncommentaires=[\n";

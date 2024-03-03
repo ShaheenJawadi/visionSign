@@ -59,9 +59,9 @@
                      </VBox.margin>
                   </HBox>
                   <ScrollPane fitToWidth="true" prefHeight="470.0" prefWidth="254.0" style="-fx-background-color: white;">
-                    <content>
-                      <AnchorPane fx:id="listepubid" minHeight="0.0" minWidth="0.0" prefHeight="447.0" prefWidth="270.0" style="-fx-background-color: #FFFFFF;" />
-                    </content>
+                     <content>
+                        <AnchorPane fx:id="listepubid" minHeight="0.0" minWidth="0.0" prefHeight="447.0" prefWidth="270.0" style="-fx-background-color: #FFFFFF;" />
+                     </content>
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -85,7 +85,7 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                         </Button>
-                        <Button layoutX="374.0" layoutY="17.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: white; -fx-background-radius: 200; -fx-border-radius: 200;" text="Chatbot" textFill="#04cb00">
+                        <Button fx:id="btnChat" layoutX="374.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleChat" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: #E2FFE2; -fx-background-radius: 200; -fx-border-radius: 200;" text="Chatbot" textFill="#04cb00">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -102,9 +102,9 @@
                      </children>
                   </Pane>
                   <ScrollPane layoutX="-1.0" layoutY="86.0" prefHeight="458.0" prefWidth="706.0" style="-fx-background-color: white;">
-                    <content>
-                      <AnchorPane fx:id="allpubid" minHeight="0.0" minWidth="0.0" prefHeight="454.0" prefWidth="704.0" style="-fx-background-color: #ffffff;" />
-                    </content>
+                     <content>
+                        <AnchorPane fx:id="allpubid" minHeight="0.0" minWidth="0.0" prefHeight="454.0" prefWidth="704.0" style="-fx-background-color: #ffffff;" />
+                     </content>
                   </ScrollPane>
                </children>
             </AnchorPane>

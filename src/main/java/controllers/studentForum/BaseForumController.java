@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
@@ -14,8 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -30,11 +30,26 @@ public class BaseForumController {
     @FXML
     protected AnchorPane listepubid, allpubid;
     @FXML
-    protected Button addBtn, forumBtn;
+    protected Button addBtn, forumBtn,btnChat;
+
     @FXML
     protected TextField searchField;
-    protected List<Publications> mypub, allPub=null;
+    protected List<Publications> mypub, allPub = null;
     protected PublicationsService pubs = new PublicationsService();
+    @FXML
+    public void handleChat(ActionEvent event){
+        try {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/ChatBot.fxml"));
+            Parent root = loader.load();
+
+            forumBtn.getScene().setRoot(root);
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @FXML
     void navigateAddPub(ActionEvent event) {
         try {
@@ -52,6 +67,7 @@ public class BaseForumController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/ForumGetAllPublications.fxml"));
             Parent root = loader.load();
+
             forumBtn.getScene().setRoot(root);
 
         } catch (IOException e) {
@@ -65,8 +81,8 @@ public class BaseForumController {
         pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                if(event.getButton().equals(MouseButton.PRIMARY)){
-                    if(event.getClickCount() == 1){
+                if (event.getButton().equals(MouseButton.PRIMARY)) {
+                    if (event.getClickCount() == 1) {
                         try {
                             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/PublicationDetails.fxml"));
                             Parent root = loader.load();
@@ -74,7 +90,6 @@ public class BaseForumController {
                             PublicationDetailsController pubDetailController = loader.getController();
                             pubDetailController.setPubId(publication.getId());
                             System.out.println("Passing pubId: " + publication.getId());
-
                             forumBtn.getScene().setRoot(root);
 
                         } catch (IOException e) {
@@ -153,6 +168,7 @@ public class BaseForumController {
             modifyIcon.setSize("15");
             modifyButton.setGraphic(modifyIcon);
             modifyButton.setCursor(Cursor.HAND);
+
             modifyButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
@@ -164,7 +180,7 @@ public class BaseForumController {
                         ModifyPublicationController modifyController = loader.getController();
                         modifyController.setPubId(mypub.get(index).getId());
                         System.out.println(mypub.get(index).getId());
-                        modifyButton.getScene().setRoot(root);
+                        forumBtn.getScene().setRoot(root);
                         refreshPublications();
 
                     } catch (IOException e) {
@@ -238,7 +254,7 @@ public class BaseForumController {
                 Pane pane = createPublicationPane(mypub.get(i), i, false);
                 listepubid.getChildren().add(pane);
             }
-            listepubid.setPrefHeight(mypub.size() * 85);
+            listepubid.setPrefHeight(mypub.size() * 75);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -252,4 +268,3 @@ public class BaseForumController {
 
 
 }
-

@@ -1,18 +1,34 @@
 package controllers.studentForum;
 
+import javafx.event.EventHandler;
+import javafx.scene.Cursor;
+
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import entities.Publications;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import services.Forum.PublicationsService;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.util.Comparator;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class ForumGetAllPublicationsController extends BaseForumController {
     @FXML
@@ -59,18 +75,6 @@ public class ForumGetAllPublicationsController extends BaseForumController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
 
-        }
-    }
-
-    @FXML
-    void navigateAddPub(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/AddPublication.fxml"));
-            Parent root = loader.load();
-            addBtn.getScene().setRoot(root);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
