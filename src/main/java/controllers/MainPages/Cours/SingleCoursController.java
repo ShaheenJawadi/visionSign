@@ -1,6 +1,8 @@
 package controllers.MainPages.Cours;
 
 import State.MainNavigations;
+import controllers.Avis.AvisCoursController;
+import controllers.Avis.SingleAvisController;
 import controllers.MainPages.Cours.SinglePageComponants.CoursLessonItemController;
 import entities.Cours;
 import entities.Lesson;
@@ -69,6 +71,12 @@ public class SingleCoursController implements Initializable {
 
     private boolean  isEnrolled ;
 
+
+    @FXML
+    private  VBox AvisPlaceholder;
+
+
+
     public Cours getCours() {
         return cours;
     }
@@ -100,6 +108,9 @@ public class SingleCoursController implements Initializable {
 
     public void  renderContent(Cours cours){
         this.setCours(cours);
+
+        dispalyAvis();
+
 
 
 
@@ -142,6 +153,21 @@ public class SingleCoursController implements Initializable {
     }
 
 
+
+
+    public void  dispalyAvis(){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainPages/CoursPages/Avis/componant.fxml"));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        AvisCoursController controller = loader.getController();
+        controller.setCoursId(cours.getId());
+
+        AvisPlaceholder.getChildren().add(controller.getRoot());
+    }
 
     public void fillTextContent(Text textView , String text){
         if(textView!= null){
