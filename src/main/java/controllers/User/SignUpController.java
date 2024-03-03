@@ -62,6 +62,16 @@ public class SignUpController {
             userService.ajouter(new User(nomTF.getText(),prenomTF.getText(),usernameTF.getText(),emailTF.getText(),pwdTF.getText(),
                     UserRole.valueOf(roleTF.getText().toUpperCase())));
             showAlertSuccess("Success","Sign up successful","Account is Ready!");
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/Login.fxml"));
+                Parent loginRoot = loader.load();
+                ScrollPane loginScrollPane = new ScrollPane(loginRoot);
+                loginScrollPane.setFitToWidth(true);
+                loginScrollPane.setFitToHeight(true);
+                usernameTF.getScene().setRoot(loginScrollPane);
+            }catch(IOException e){
+                throw new RuntimeException(e.getMessage());
+            }
 
         }
         catch (SQLException e){

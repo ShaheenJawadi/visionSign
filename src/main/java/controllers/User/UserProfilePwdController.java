@@ -11,6 +11,7 @@ import javafx.scene.control.ScrollPane;
 import services.User.PasswordHashing;
 import services.User.UserService;
 import entities.User;
+import state.UserSessionManager;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -27,6 +28,7 @@ public class UserProfilePwdController {
     @FXML
     private Label userTF;
 private final UserService userService=new UserService();
+    private final UserSessionManager userSessionManager=new UserSessionManager();
 @FXML
 void initialize(){
     userTF.setText(userService.getCurrent().getUsername());
@@ -84,6 +86,22 @@ void initialize(){
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }}
+    @FXML
+    void logout(ActionEvent event){
+        userSessionManager.clearSession();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/Login.fxml"));
+            Parent privacyRoot = loader.load();
+            ScrollPane privacyScrollPane=new ScrollPane(privacyRoot);
+            privacyScrollPane.setFitToWidth(true);
+            privacyScrollPane.setFitToHeight(true);
+            newPwdTF1.getScene().setRoot(privacyScrollPane);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
+
+    }
+
 
     private void showAlertError(String title, String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
