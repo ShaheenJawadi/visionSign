@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXBadge?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="table" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.User.AdminStatController">
+    <children>
+        <Pane prefHeight="98.0" prefWidth="827.0" style="-fx-background-color: #2aace2;">
+            <children>
+                <Label layoutX="26.0" layoutY="15.0" prefHeight="26.0" prefWidth="197.0" text="Espace Admin" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+                </Label>
+                <HBox alignment="CENTER" layoutX="627.0" prefHeight="66.0" prefWidth="200.0">
+                    <children>
+                        <ImageView fitHeight="70.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@pic.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets left="-20.0" />
+                            </HBox.margin>
+                        </ImageView>
+                        <Label fx:id="userTF" alignment="CENTER" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="20.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets left="-20.0" />
+                    </padding>
+                </HBox>
+            </children>
+        </Pane>
+        <Pane layoutY="79.0" prefHeight="73.0" prefWidth="827.0" style="-fx-background-color: #081f30;">
+            <children>
+                <HBox alignment="CENTER_LEFT" layoutY="-1.0" prefHeight="74.0" prefWidth="827.0">
+                    <children>
+                        <ImageView fitHeight="60.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@desktop.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin>
+                        </ImageView>
+                        <Label prefHeight="26.0" prefWidth="172.0" text="Visual Sign Academy" textFill="WHITE">
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font name="System Bold" size="15.0" />
+                            </font>
+                        </Label>
+                        <Button fx:id="listButton" mnemonicParsing="false" onAction="#listButton" prefHeight="37.0" prefWidth="170.0" style="-fx-background-color: #081f30;" text="User List" textFill="WHITE">
+                            <font>
+                                <Font size="17.0" />
+                            </font>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="170.0" style="-fx-background-color: #081f30;" text="Statistics" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="17.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </Pane>
+        <JFXBadge />
+      <PieChart fx:id="pieId" layoutX="166.0" layoutY="207.0" prefHeight="378.0" prefWidth="496.0" />
+      <ComboBox layoutX="269.0" layoutY="168.0" prefHeight="26.0" prefWidth="302.0" />
+      <BarChart fx:id="barId" layoutX="138.0" layoutY="207.0" prefHeight="378.0" prefWidth="500.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+
+
+    </children>
+</AnchorPane>

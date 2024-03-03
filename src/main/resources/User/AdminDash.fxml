@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXBadge?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="table" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.User.AdminDashController">
+    <children>
+        <TableView fx:id="tableView" layoutY="214.0" prefHeight="283.0" prefWidth="827.0">
+            <columns>
+                <TableColumn fx:id="idCol" prefWidth="42.39996147155762" text="id" />
+                <TableColumn fx:id="nomCol" prefWidth="64.0" text="nom" />
+                <TableColumn fx:id="prenomCol" prefWidth="72.8000259399414" text="prenom" />
+                <TableColumn fx:id="usernameCol" prefWidth="69.5999755859375" text="username" />
+                <TableColumn fx:id="dateCol" prefWidth="115.20001220703125" text="date_de_naissance" />
+                <TableColumn fx:id="emailCol" prefWidth="99.20001220703125" text="email" />
+                <TableColumn fx:id="passwordCol" prefWidth="89.60000610351562" text="password" />
+                <TableColumn fx:id="roleCol" prefWidth="84.79998779296875" text="Role" />
+                <TableColumn fx:id="statusCol" prefWidth="61.60003662109375" text="status" />
+                <TableColumn fx:id="tokenCol" prefWidth="68.800048828125" text="token" />
+                <TableColumn fx:id="levelIdCol" prefWidth="64.800048828125" text="level_id" />
+            </columns>
+        </TableView>
+        <Button layoutX="741.0" layoutY="511.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="78.0" style="-fx-background-radius: 12;" text="Delete" />
+        <Pane prefHeight="98.0" prefWidth="827.0" style="-fx-background-color: #2aace2;">
+            <children>
+                <Label layoutX="26.0" layoutY="15.0" prefHeight="26.0" prefWidth="197.0" text="Espace Admin" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="25.0" />
+                    </font>
+                </Label>
+                <HBox alignment="CENTER" layoutX="627.0" prefHeight="66.0" prefWidth="200.0">
+                    <children>
+                        <ImageView fitHeight="70.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@pic.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets left="-20.0" />
+                            </HBox.margin>
+                        </ImageView>
+                        <Label fx:id="userTF" alignment="CENTER" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="20.0" />
+                            </HBox.margin>
+                        </Label>
+                    </children>
+                    <padding>
+                        <Insets left="-20.0" />
+                    </padding>
+                </HBox>
+            </children>
+        </Pane>
+        <Pane layoutY="79.0" prefHeight="73.0" prefWidth="827.0" style="-fx-background-color: #081f30;">
+            <children>
+                <HBox alignment="CENTER_LEFT" layoutY="-1.0" prefHeight="74.0" prefWidth="827.0">
+                    <children>
+                        <ImageView fitHeight="60.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@desktop.png" />
+                            </image>
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin>
+                        </ImageView>
+                        <Label prefHeight="26.0" prefWidth="172.0" text="Visual Sign Academy" textFill="WHITE">
+                            <HBox.margin>
+                                <Insets left="10.0" />
+                            </HBox.margin>
+                            <font>
+                                <Font name="System Bold" size="15.0" />
+                            </font>
+                        </Label>
+                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="170.0" style="-fx-background-color: #081f30;" text="User List" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="17.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#statButton" prefHeight="37.0" prefWidth="170.0" style="-fx-background-color: #081f30;" text="Statistics" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+                    </children>
+                </HBox>
+            </children>
+        </Pane>
+      <Button layoutX="652.0" layoutY="511.0" mnemonicParsing="false" onAction="#modify" prefHeight="26.0" prefWidth="78.0" style="-fx-background-radius: 12;" text="Modify" />
+      <Button layoutX="763.0" layoutY="166.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#refresh" prefHeight="38.0" prefWidth="40.0" style="-fx-background-radius: 12;">
+
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@refresh-button.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <TextField fx:id="searchTF" layoutX="235.0" layoutY="167.0" prefHeight="36.0" prefWidth="321.0" promptText="Search" style="-fx-background-radius: 100;" />
+      <Button layoutX="514.0" layoutY="167.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="46.0" style="-fx-border-radius: 100; -fx-background-radius: 100; -fx-background-color: #2aace2;">
+         <graphic>
+            <ImageView fitHeight="26.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@hhh.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <JFXBadge />
+      <ComboBox fx:id="comboId" layoutX="156.0" layoutY="172.0" prefHeight="26.0" prefWidth="78.0" />
+      <Button layoutX="707.0" layoutY="166.0" mnemonicParsing="false" onAction="#pdf" prefHeight="34.0" prefWidth="46.0" style="-fx-background-radius: 12;">
+         <graphic>
+            <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@pdf.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+
+     
+    </children>
+</AnchorPane>
