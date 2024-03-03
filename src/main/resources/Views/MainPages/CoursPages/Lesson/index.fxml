@@ -25,7 +25,7 @@
                            <children>
                               <HBox alignment="BOTTOM_RIGHT">
                                  <children>
-                                    <Button mnemonicParsing="false" styleClass="submitButton" text="Suivant" />
+                                    <Button fx:id="nextLessonBtnId" mnemonicParsing="false" onAction="#nextLessonBtn" styleClass="submitButton" text="Suivant" />
                                  </children>
                               </HBox>
                            </children>

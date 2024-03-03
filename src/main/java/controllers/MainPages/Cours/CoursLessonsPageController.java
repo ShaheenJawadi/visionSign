@@ -9,9 +9,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -31,8 +33,13 @@ public class CoursLessonsPageController implements Initializable {
     private  VBox listLessonsHolder ;
 
 
+    @FXML
+    private Button nextLessonBtnId ;
+
+
 
     private Cours cours ;
+    private  int currentStage ;
 
 
 
@@ -40,6 +47,7 @@ public class CoursLessonsPageController implements Initializable {
     public void setCours (Cours cours){
 
         this.cours = cours ;
+        currentStage =cours.getUserCoursActivity().getStage();
     }
 
 
@@ -60,8 +68,9 @@ public class CoursLessonsPageController implements Initializable {
 
 
 
-     renderLessonList();
+        renderLessonList();
         manipulateCurrentLesson();
+        nextBtnState();
 
 
 
@@ -98,9 +107,11 @@ public class CoursLessonsPageController implements Initializable {
 
     public  void  manipulateCurrentLesson (){
         int currentStage = cours.getUserCoursActivity().getStage() ;
+
         if(cours.getLessons().size()>=currentStage){
             renderCurrentLesson(cours.getLessons().get(currentStage));
         }
+
 
     }
 
@@ -108,8 +119,29 @@ public class CoursLessonsPageController implements Initializable {
     @FXML
     void nextLessonBtn(ActionEvent event) {
 
+        if(cours.getLessons().size()>currentStage){
+
+
+            currentStage++;
+        }
+        nextBtnState();
+
     }
 
+
+
+    void  nextBtnState(){
+        if(cours.getUserCoursActivity().isCompleted()){
+            nextLessonBtnId.setVisible(false);
+        }
+        else {
+            if (cours.getLessons().size() > currentStage) {
+                nextLessonBtnId.setText("Suivant");
+            } else if (cours.getLessons().size() == currentStage) {
+                nextLessonBtnId.setText("Passer le Quizz");
+            }
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
