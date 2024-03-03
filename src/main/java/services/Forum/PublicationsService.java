@@ -85,7 +85,11 @@ public class PublicationsService implements IForum<Publications> {
 
 
     public List<Publications> getAllPublications() throws SQLException {
-        String sql = "SELECT p.*, u.username FROM publications p JOIN user u ON p.user_id = u.id";
+        String sql = "SELECT p.*, u.username, " +
+                "(SELECT COUNT(*) FROM reactions WHERE pub_id = p.id AND `jaime` = 1) AS jaime_count, " +
+                "(SELECT COUNT(*) FROM reactions WHERE pub_id = p.id AND dislike = 1) AS dislike_count " +
+                "FROM publications p JOIN user u ON p.user_id = u.id";
+
         Statement st = connection.createStatement();
         ResultSet rs = st.executeQuery(sql);
         List<Publications> publications = new ArrayList<>();
@@ -100,6 +104,8 @@ public class PublicationsService implements IForum<Publications> {
             publication.setDate_creation(rs.getTimestamp("date_creation"));
             publication.setUserId(rs.getInt("user_id"));
             publication.setUserName(rs.getString("username"));
+            publication.setJaime(rs.getInt("jaime_count"));
+            publication.setDislike(rs.getInt("dislike_count"));
             publication.setPubCommentaires(cs.getCommentairesByPublicationId(publication.getId()));
             publications.add(publication);
         }

@@ -3,6 +3,8 @@ package controllers.studentForum;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import entities.Publications;
+import entities.Reactions;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,10 +22,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import services.Forum.PublicationsService;
+import services.Forum.ReactionsService;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -43,6 +48,7 @@ public class BaseForumController {
     protected TextField searchField;
     protected List<Publications> mypub, allPub = null;
     protected PublicationsService pubs = new PublicationsService();
+    protected ReactionsService reactionsService=new ReactionsService();
     @FXML
     public void handleChat(ActionEvent event){
         try {
@@ -82,7 +88,15 @@ public class BaseForumController {
         }
     }
 
-
+    private void playSound(String soundFile) {
+        try {
+            Media sound = new Media(soundFile);
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        } catch (Exception e) {
+            System.err.println("Failed to play sound: " + e.getMessage());
+        }
+    }
 
     public Pane createPublicationPane(Publications publication, int index, boolean isAllPublications) {
         Pane pane = new Pane();
@@ -166,6 +180,96 @@ public class BaseForumController {
             commentIcon.setFill(Color.web("#34364a"));
             commentIcon.setSize("14");
             commentButton.setGraphic(commentIcon);
+
+
+            Button likeButton = new Button(publication.getJaime() + " Like");
+            likeButton.setLayoutX(160);
+            likeButton.setLayoutY(publication.getImages().isEmpty() ? 121 :205);
+            likeButton.setPrefSize(90, 27);
+            likeButton.setStyle("-fx-background-color: white;");
+            likeButton.setTextFill(Color.web("#34364a"));
+            FontAwesomeIconView likeIcon = new FontAwesomeIconView(FontAwesomeIcon.THUMBS_UP);
+            likeIcon.setFill(Color.web("#008000"));
+            likeIcon.setSize("14");
+            likeButton.setGraphic(likeIcon);
+
+
+            Platform.runLater(() -> {
+                try {
+                    boolean isLiked = reactionsService.isLikedByUser(6, publication.getId());
+
+                    if (isLiked) {
+                        likeButton.setStyle("-fx-background-color: #E2FFE2;-fx-background-radius: 200;");
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+
+
+
+            Button dislikeButton = new Button(publication.getDislike() + " Dislike");
+            dislikeButton.setLayoutX(250);
+            dislikeButton.setLayoutY(publication.getImages().isEmpty() ? 121 :205);
+
+            dislikeButton.setPrefSize(90, 27);
+            dislikeButton.setStyle("-fx-background-color: white;");
+            dislikeButton.setTextFill(Color.web("#34364a"));
+            FontAwesomeIconView dislikeIcon = new FontAwesomeIconView(FontAwesomeIcon.THUMBS_DOWN);
+            dislikeIcon.setFill(Color.web("#FF0000"));
+            dislikeIcon.setSize("14");
+            dislikeButton.setGraphic(dislikeIcon);
+            likeButton.setOnAction(event -> {
+                try {
+                    reactionsService.addLike(6, publication.getId(), 1, 0);
+
+                    int updatedLikes = reactionsService.getLikesCount(publication.getId());
+                    int updatedDislikes = reactionsService.getDislikesCounts(publication.getId());
+
+                    likeButton.setText(updatedLikes + " Like");
+                    dislikeButton.setText(updatedDislikes + " Dislike");
+
+                    likeButton.setStyle("-fx-background-color: #E2FFE2;-fx-background-radius: 200;");
+                    dislikeButton.setStyle("-fx-background-color: white;");
+                    playSound("https://res.cloudinary.com/dkdx59xe9/video/upload/v1709508219/Facebook_Like_Sound_Effect_nbc6ju.mp3");
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            dislikeButton.setOnAction(event -> {
+                try {
+                    reactionsService.addLike(6, publication.getId(), 0, 1);
+
+                    int updatedLikes = reactionsService.getLikesCount(publication.getId());
+                    int updatedDislikes = reactionsService.getDislikesCounts(publication.getId());
+
+                    likeButton.setText(updatedLikes + " Like");
+                    dislikeButton.setText(updatedDislikes + " Dislike");
+
+                    dislikeButton.setStyle("-fx-background-color: #FFE2E2;-fx-background-radius: 200;");
+                    likeButton.setStyle("-fx-background-color: white;");
+
+                    playSound("https://res.cloudinary.com/dkdx59xe9/video/upload/v1709508219/Facebook_Like_Sound_Effect_nbc6ju.mp3");
+
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
+            Platform.runLater(() -> {
+                try {
+                    boolean isdisliked = reactionsService.isDislikedByUser(6, publication.getId());
+
+                    if (isdisliked) {
+                        dislikeButton.setStyle("-fx-background-color: #FFE2E2;-fx-background-radius: 200;");
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+
             if (publication.getImages() != null && !publication.getImages().isEmpty()) {
                 AnchorPane imagesPane = new AnchorPane();
                 String[] images = publication.getImages().split(";");
@@ -206,7 +310,7 @@ public class BaseForumController {
             }
 
 
-            pane.getChildren().addAll(titreText, iconPane, userIdText, roleText, contenuText, dateText, commentButton);
+            pane.getChildren().addAll(titreText, iconPane, userIdText, roleText, contenuText, dateText, commentButton,likeButton,dislikeButton);
         } else {
             Button modifyButton = new Button();
             modifyButton.setLayoutX(202);
