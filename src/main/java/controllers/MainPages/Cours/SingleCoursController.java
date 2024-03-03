@@ -1,8 +1,8 @@
 package controllers.MainPages.Cours;
 
 import State.MainNavigations;
-import controllers.Avis.AvisCoursController;
-import controllers.Avis.SingleAvisController;
+import controllers.avis.AvisCoursController;
+import controllers.avis.SingleAvisController;
 import controllers.MainPages.Cours.SinglePageComponants.CoursLessonItemController;
 import entities.Cours;
 import entities.Lesson;
