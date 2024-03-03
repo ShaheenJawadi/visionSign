@@ -35,6 +35,8 @@ public class ForumGetAllPublicationsController extends BaseForumController {
     public void initialize() {
         refreshPublications();
         try {
+            //TODO userId getPublicationsByUserId
+
             mypub = pubs.getPublicationsByUserId(6);
             mypub.sort(Comparator.comparing(Publications::getDate_creation).reversed());
 

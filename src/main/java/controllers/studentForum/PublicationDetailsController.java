@@ -66,6 +66,8 @@ public class PublicationDetailsController extends BaseForumController {
     public void initialize() {
         System.out.println("initialize" + pubId);
         try {
+            //TODO userId getPublicationsByUserId
+
             mypub = pubs.getPublicationsByUserId(6);
             mypub.sort(Comparator.comparing(Publications::getDate_creation).reversed());
 
@@ -278,6 +280,8 @@ public class PublicationDetailsController extends BaseForumController {
         String commentText = commentField.getText();
         if (!commentText.isEmpty() && commentText != null) {
             try {
+                //TODO userId commentaireExists
+
                 if (!commentService.commentaireExists(commentText, pubId, 6)) {
                     boolean y = checkWithAiModel(commentText);
                     if(!y) {
@@ -285,6 +289,8 @@ public class PublicationDetailsController extends BaseForumController {
                         newComment.setCommentaire(commentText);
                         newComment.setDate(new Date());
                         newComment.setId_pub(pubId);
+                        //TODO userId setUserId
+
                         newComment.setUserId(6);
                         commentService.addPublicationOrCommentaire(newComment);
                         loadComments();

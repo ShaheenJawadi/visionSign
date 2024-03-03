@@ -152,10 +152,13 @@ public class AddPublicationController extends BaseForumController {
         String questionText = questionId.getText();
         try {
             if (titreText != null && !titreText.isEmpty() && questionText != null && !questionText.isEmpty()) {
+        //TODO userId PubExists
                 if (!pubs.publicationExists(titreText, questionText, 6)) {
                     boolean y = checkWithAiModel(titreText, questionText);
                     if (!y) {
                         String imageUrls = String.join(";", selectedImagePaths);
+                        //TODO userId addPub
+
                         pubs.addPublicationOrCommentaire(new Publications(titreText, questionText, new Date(), imageUrls, 6));
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Succès!");

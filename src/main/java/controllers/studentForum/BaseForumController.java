@@ -196,6 +196,8 @@ public class BaseForumController {
 
             Platform.runLater(() -> {
                 try {
+                    //TODO userId isLikedByUser
+
                     boolean isLiked = reactionsService.isLikedByUser(6, publication.getId());
 
                     if (isLiked) {
@@ -222,6 +224,8 @@ public class BaseForumController {
             dislikeButton.setGraphic(dislikeIcon);
             likeButton.setOnAction(event -> {
                 try {
+                    //TODO userId addLike
+
                     reactionsService.addLike(6, publication.getId(), 1, 0);
 
                     int updatedLikes = reactionsService.getLikesCount(publication.getId());
@@ -240,6 +244,8 @@ public class BaseForumController {
             });
             dislikeButton.setOnAction(event -> {
                 try {
+                    //TODO userId addLike
+
                     reactionsService.addLike(6, publication.getId(), 0, 1);
 
                     int updatedLikes = reactionsService.getLikesCount(publication.getId());
@@ -260,6 +266,8 @@ public class BaseForumController {
 
             Platform.runLater(() -> {
                 try {
+                    //TODO userId isDislikedByUser
+
                     boolean isdisliked = reactionsService.isDislikedByUser(6, publication.getId());
 
                     if (isdisliked) {
@@ -394,6 +402,8 @@ public class BaseForumController {
     @FXML
     public void searchPubByTitle(ActionEvent event) {
         String searchText = searchField.getText();
+        //TODO userId search
+
         int userID = 6;
         try {
 

@@ -255,6 +255,7 @@ public class ModifyPublicationController extends BaseForumController  {
             if (titreText != null && !titreText.isEmpty() && questionText != null && !questionText.isEmpty()) {
                 // Join the image URLs with semicolons
                 String imageUrls = String.join(";", selectedImagePaths.values());
+                //TODO userId updatePublicationOrCommentaire
 
                 // Update the publication with the new image URLs
                 pubs.updatePublicationOrCommentaire(new Publications(pubId, titreText, questionText, new Date(), imageUrls, 6));
@@ -288,6 +289,8 @@ public class ModifyPublicationController extends BaseForumController  {
     public void initialize() {
         trashBtn.setVisible(false);
         try {
+            //TODO userId getPublicationsByUserId
+
             mypub = pubs.getPublicationsByUserId(6);
             mypub.sort(Comparator.comparing(Publications::getDate_creation).reversed());
 
