@@ -13,8 +13,6 @@ public interface ISousCategorieService<T> {
 
     T getSousCategorieById(int id) throws SQLException;
 
-    List<T> getSousCategorieListByCategoryId(int id) throws SQLException;
-
     List<T> searchLikeNameCategory(String name) throws SQLException;
 
     void updateSousCategorieStatus(String status) throws SQLException;
