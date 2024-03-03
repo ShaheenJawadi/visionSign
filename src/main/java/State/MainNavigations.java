@@ -3,6 +3,7 @@ package State;
 import controllers.MainPages.Cours.FilterController;
 import controllers.MainPages.Cours.SingleCoursController;
 import controllers.MainPages.MainPageController;
+import entities.Cours;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.VBox;
@@ -57,7 +58,7 @@ public class MainNavigations {
         }
     }
 
-    public void openSingleCoursPage(){
+    public void openSingleCoursPage(Cours cours){
         try
         {
 
@@ -66,6 +67,7 @@ public class MainNavigations {
             loader.load();
 
             SingleCoursController coursFilterPage = loader.getController();
+             coursFilterPage.renderContent(cours);
 
 
 
@@ -99,6 +101,31 @@ public class MainNavigations {
             System.out.println(ex.toString());
         }
     }
+
+
+
+    public void openCoursLessonPage(Cours cours){
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainPages/CoursPages/Main/index.fxml"));
+
+            loader.load();
+
+            SingleCoursController coursFilterPage = loader.getController();
+            coursFilterPage.renderContent(cours);
+
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(coursFilterPage.getVBoxRoot());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
+    }
+
 
 
 

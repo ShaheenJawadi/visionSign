@@ -66,12 +66,7 @@ public class CoursGridController implements Initializable {
 
         System.out.println("enter");
 
-        UserCoursServices userCoursServices = new UserCoursServices() ;
-        //todo SetUser  Id
-        if(!userCoursServices.checkUserCours(cours.getId() ,3)){
-            UserCours userCours = new UserCours(3 , cours.getId()  ) ;
-            userCoursServices.add(userCours);
-        }
+        cours.addToBag();
 
 
 
@@ -82,9 +77,11 @@ public class CoursGridController implements Initializable {
 
     public void openSingleCours(MouseEvent mouseEvent) {
 
+        System.out.println("click");
+        System.out.println(cours);
 
         MainNavigations mainNavigations = MainNavigations.getInstance() ;
-        mainNavigations.openSingleCoursPage();
+        mainNavigations.openSingleCoursPage(cours);
     }
 
 
