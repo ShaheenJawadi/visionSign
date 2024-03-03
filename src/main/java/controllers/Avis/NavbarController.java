@@ -1,4 +1,4 @@
-package controllers.avis;
+package controllers.Avis;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

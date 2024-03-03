@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox fx:id="rootId" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Avis.AvisCoursController">
+<VBox fx:id="rootId" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Avis.SingleAvisController">
    <children>
       <HBox spacing="15.0">
          <children>
@@ -22,7 +22,7 @@
                      <children>
                         <TextFlow>
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Fatma ben ali">
+                              <Text fx:id="userNameid" strokeType="OUTSIDE" strokeWidth="0.0" text="Fatma ben ali">
                                  <font>
                                     <Font size="19.0" />
                                  </font>
@@ -50,7 +50,7 @@
                   </HBox>
                   <TextFlow maxWidth="-Infinity">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Expérience extraordinaire, cours très enrichissant avec desrecettes incroyables !">
+                        <Text fx:id="texteid" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Expérience extraordinaire, cours très enrichissant avec desrecettes incroyables !">
                            <font>
                               <Font size="21.0" />
                            </font>
