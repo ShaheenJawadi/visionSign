@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<VBox fx:id="rootId" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Avis.SingleAvisController">
+   <children>
+      <HBox spacing="15.0">
+         <children>
+            <Circle fill="#65acee" radius="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <VBox spacing="8.0" styleClass="secondText" HBox.hgrow="ALWAYS">
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="5.0">
+                     <children>
+                        <TextFlow>
+                           <children>
+                              <Text fx:id="userNameid" strokeType="OUTSIDE" strokeWidth="0.0" text="Fatma ben ali">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </TextFlow>
+                        <TextFlow textAlignment="CENTER">
+                           <children>
+                              <Text fill="#0b90dc" strokeType="OUTSIDE" strokeWidth="0.0" text="il ya 3 jours">
+                                 <font>
+                                    <Font size="13.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </TextFlow>
+                        <ImageView fitHeight="150.0" fitWidth="88.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../assets/cours/⭐⭐⭐⭐⭐(4).png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+                  <TextFlow maxWidth="-Infinity">
+                     <children>
+                        <Text fx:id="texteid" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Expérience extraordinaire, cours très enrichissant avec desrecettes incroyables !">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </TextFlow>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Separator prefWidth="200.0" />
+   </children>
+</VBox>

@@ -6,7 +6,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane prefHeight="600.0" prefWidth="952.0" style="-fx-background-color: #ECECEC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.avis.gatAllAvisController">
+<AnchorPane prefHeight="600.0" prefWidth="952.0" style="-fx-background-color: #ECECEC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Avis.gatAllAvisController">
    <children>
       <BorderPane layoutY="-12.0" prefHeight="598.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-12.0">
          <top>

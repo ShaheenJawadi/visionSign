@@ -178,5 +178,14 @@
                 </MFXButton>
             </children>
         </VBox>
+      <Button alignment="CENTER" layoutX="740.0" layoutY="20.0" mnemonicParsing="false" onAction="#logout" prefHeight="43.0" prefWidth="34.0" style="-fx-background-color: RED; -fx-background-radius: 15;">
+         <graphic>
+            <ImageView fitHeight="150.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@4400629.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
     </children>
 </AnchorPane>

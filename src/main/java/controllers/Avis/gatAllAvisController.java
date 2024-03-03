@@ -1,4 +1,4 @@
-package controllers.avis;
+package controllers.Avis;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;

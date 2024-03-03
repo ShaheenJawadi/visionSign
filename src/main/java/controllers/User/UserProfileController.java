@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.Period;
 
 import services.User.UserService;
+import state.UserSessionManager;
 
 public class UserProfileController {
 
@@ -38,6 +39,7 @@ public class UserProfileController {
     @FXML
     private Label userTF;
     private final UserService userService=new UserService();
+    private final UserSessionManager userSessionManager=new UserSessionManager();
 
  @FXML
     void initialize(){
@@ -120,7 +122,21 @@ public class UserProfileController {
             throw new RuntimeException(e.getMessage());
         }
     }
+   @FXML
+   void logout(ActionEvent event){
+       userSessionManager.clearSession();
+       try {
+           FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/Login.fxml"));
+           Parent privacyRoot = loader.load();
+           ScrollPane privacyScrollPane=new ScrollPane(privacyRoot);
+           privacyScrollPane.setFitToWidth(true);
+           privacyScrollPane.setFitToHeight(true);
+           usernameTF.getScene().setRoot(privacyScrollPane);
+       } catch (IOException e) {
+           throw new RuntimeException(e.getMessage());
+       }
 
+   }
 
     private void showAlertError(String title, String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);

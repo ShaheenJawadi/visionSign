@@ -53,17 +53,6 @@ public class AddPublicationController extends BaseForumController {
     private ImageView uploadImageView;
     private List<String> selectedImagePaths = new ArrayList<>();
 
-    private byte[] readFileToByteArray(File file) throws IOException {
-        try (FileInputStream fis = new FileInputStream(file)) {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            byte[] buf = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = fis.read(buf)) != -1) {
-                bos.write(buf, 0, bytesRead);
-            }
-            return bos.toByteArray();
-        }
-    }
 
     @FXML
     private void uploadImage() {
