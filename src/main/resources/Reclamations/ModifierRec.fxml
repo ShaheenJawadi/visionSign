@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.reclamations.ModifierRecController">
+   <children>
+      <BorderPane prefHeight="600.0" prefWidth="952.0">
+         <top>
+            <fx:include fx:id="navbar" source="Navbar.fxml" />
+
+         </top>
+         <left>
+         </left>
+         <left>
+            <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Text layoutX="194.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <TextField fx:id="Descriptionid" layoutX="208.0" layoutY="263.0" prefHeight="50.0" prefWidth="588.0" promptText="Votre question..." style="-fx-background-color: white; -fx-border-color: #bababa; -fx-background-radius: 200; -fx-border-radius: 200;" />
+                  <Button fx:id="modPubBtn1" layoutX="493.0" layoutY="425.0" mnemonicParsing="false" onAction="#handleUpdate" prefHeight="47.0" prefWidth="107.0" style="-fx-background-color: #2447F9; -fx-background-radius: 50; -fx-border-radius: 50;" text="Modifier" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <TextField fx:id="statid" layoutX="216.0" layoutY="337.0" prefHeight="39.0" prefWidth="350.0" promptText="Titre du publication...." style="-fx-background-color: white; -fx-border-color: #bababa; -fx-background-radius: 200; -fx-border-radius: 200;" />
+                  <Text layoutX="194.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <ComboBox fx:id="typeid" layoutX="217.0" layoutY="196.0" prefWidth="350.0" style="-fx-background-color: white; -fx-border-color: #bababa; -fx-background-radius: 200; -fx-border-radius: 200;" />
+                  <Text layoutX="192.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Text>
+                  <Text layoutX="210.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifier Reclamation" wrappingWidth="262.30706787109375">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Text>
+                  <Button fx:id="forumBtn" layoutX="375.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleForum" prefHeight="38.0" prefWidth="255.0" style="-fx-background-color: #E8EFFF; -fx-background-radius: 200; -fx-border-radius: 200;" text="Reclamtion" textFill="#2447f9">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </Pane>
+         </left>
+      </BorderPane>
+   </children>
+</AnchorPane>

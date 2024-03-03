@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="510.0" prefWidth="372.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.User.ModifierUserController">
+    <children>
+        <AnchorPane prefHeight="532.0" prefWidth="414.0">
+            <children>
+                <Label layoutX="91.0" layoutY="7.0" prefHeight="54.0" prefWidth="231.0" text="Modfier User" textFill="#2aace2">
+                    <font>
+                        <Font name="Berlin Sans FB" size="39.0" />
+                    </font>
+                </Label>
+                <TextField fx:id="nomTF" layoutX="90.0" layoutY="100.0" prefHeight="28.0" prefWidth="220.0" promptText="Nom">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </TextField>
+                <Button layoutX="158.0" layoutY="446.0" mnemonicParsing="false" onAction="#ModifierU" prefHeight="24.0" prefWidth="83.0" style="-fx-background-color: #2aace2; -fx-background-radius: 12;" text="Modifier" textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Button>
+                <TextField fx:id="emailTF" layoutX="90.0" layoutY="218.0" prefHeight="28.0" prefWidth="220.0" promptText="Email">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="usernameTF" layoutX="90.0" layoutY="180.0" prefHeight="28.0" prefWidth="220.0" promptText="Username">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="idTF" disable="true" layoutX="90.0" layoutY="61.0" prefHeight="28.0" prefWidth="220.0" promptText="ID user">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </TextField>
+                <TextField fx:id="prenomTF" layoutX="90.0" layoutY="139.0" prefHeight="28.0" prefWidth="220.0" promptText="Prenom">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </TextField>
+                <ComboBox fx:id="roleTF" layoutX="90.0" layoutY="299.0" prefHeight="26.0" prefWidth="220.0" promptText="Role" />
+                <ComboBox fx:id="levelTF" layoutX="90.0" layoutY="338.0" prefHeight="26.0" prefWidth="220.0" promptText="Level" />
+                <ComboBox fx:id="statusTF" layoutX="90.0" layoutY="373.0" prefHeight="26.0" prefWidth="220.0" promptText="Status" />
+                <DatePicker fx:id="dateTF" layoutX="90.0" layoutY="259.0" prefHeight="31.0" prefWidth="220.0" promptText="date de naissance" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

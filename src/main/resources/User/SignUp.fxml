@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
+<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
+<?import io.github.palexdev.materialfx.controls.MFXTextField?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.User.SignUpController">
+    <children>
+        <AnchorPane prefHeight="600.0" prefWidth="460.0" style="-fx-background-color: #081f30;">
+            <children>
+                <ImageView fx:id="imgLogo" fitHeight="205.0" fitWidth="227.0" layoutX="134.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@desktop.png" />
+                    </image></ImageView>
+                <Label layoutX="35.0" layoutY="335.0" prefHeight="159.0" prefWidth="403.0" text="VisionSign Academy" textFill="#2aace2">
+                    <font>
+                        <Font size="43.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="460.0" prefHeight="600.0" prefWidth="360.0" style="-fx-background-color: WHITE;">
+            <children>
+                <Label layoutX="98.0" layoutY="69.0" prefHeight="38.0" prefWidth="146.0" text="Learn on your own time " textFill="#2aace2">
+                    <font>
+                        <Font name="Calibri" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="107.0" layoutY="14.0" prefHeight="55.0" prefWidth="127.0" text="Sign up" textFill="#2aace2">
+                    <font>
+                        <Font name="Calibri Bold" size="40.0" />
+                    </font>
+                </Label>
+                <JFXButton buttonType="RAISED" layoutX="87.0" layoutY="466.0" onAction="#ajouter" prefHeight="55.0" prefWidth="186.0" style="-fx-background-color: #2aace2;" text="Join for free" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="17.0" />
+                    </font>
+                </JFXButton>
+                <MFXPasswordField fx:id="pwdTF" allowPaste="true" caretVisible="false" floatingTextGap="1.0" layoutX="39.0" layoutY="342.0" prefHeight="46.0" prefWidth="282.0" promptText="Mot de passe" />
+                <MFXTextField fx:id="nomTF" floatingTextGap="1.0" layoutX="39.0" layoutY="117.0" prefHeight="46.0" prefWidth="282.0" promptText="Nom" />
+                <MFXTextField fx:id="prenomTF" floatingTextGap="1.0" layoutX="39.0" layoutY="176.0" prefHeight="46.0" prefWidth="282.0" promptText="Prenom" />
+                <MFXTextField fx:id="usernameTF" floatingTextGap="1.0" layoutX="39.0" layoutY="230.0" prefHeight="46.0" prefWidth="282.0" promptText="Alias" />
+                <MFXTextField fx:id="emailTF" floatingTextGap="1.0" layoutX="39.0" layoutY="287.0" prefHeight="46.0" prefWidth="282.0" promptText="Email" />
+                <MFXComboBox fx:id="roleTF" layoutX="39.0" layoutY="395.0" prefHeight="46.0" prefWidth="282.0" promptText="Role" />
+                <Label layoutX="25.0" layoutY="578.0" prefHeight="18.0" prefWidth="146.0" text="Already have an account ?" />
+                <Hyperlink fx:id="hpId1" layoutX="171.0" layoutY="575.0" onAction="#naviguer" text="Login" />
+            </children></AnchorPane>
+    </children>
+
+</AnchorPane>

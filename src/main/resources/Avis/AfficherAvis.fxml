@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.avis.AfficherAvisController">
+    <children>
+        <BorderPane prefHeight="600.0" prefWidth="952.0">
+        <top>
+            <fx:include fx:id="navbar" source="Navbar.fxml" />
+
+        </top>
+         <center>
+              <TableView fx:id="table" prefHeight="508.0" prefWidth="454.0" BorderPane.alignment="CENTER">
+                  <columns>
+                      <TableColumn fx:id="id" prefWidth="93.5999755859375" text="id-Avis" />
+                      <TableColumn fx:id="note" prefWidth="145.59996795654297" text="note" />
+                      <TableColumn fx:id="mess" prefWidth="336.0000762939453" text="message" />
+                      <TableColumn fx:id="user" prefWidth="89.5999755859375" text="id-user" />
+                      <TableColumn fx:id="cour" prefWidth="80.7999267578125" text="id-cours" />
+                      <TableColumn fx:id="Date" prefWidth="246.4000244140625" text="Date" />
+                  </columns>
+              </TableView>
+         </center>
+         <bottom>
+            <Button fx:id="back" mnemonicParsing="false" onAction="#back" text="back " BorderPane.alignment="CENTER" />
+         </bottom>
+        </BorderPane>
+
+    </children>
+</AnchorPane>
