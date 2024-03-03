@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<HBox fx:id="lesssonItemHbox" spacing="5.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainPages.Cours.SinglePageComponants.CoursSingleLessonItem">
+   <children>
+      <Circle fill="DODGERBLUE" radius="10.0" stroke="#247ce8" strokeType="INSIDE" />
+      <TextFlow>
+         <children>
+            <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Section 1" />
+         </children>
+      </TextFlow>
+   </children>
+</HBox>

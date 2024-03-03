@@ -1,6 +1,8 @@
 package dtos;
 
 import entities.Cours;
+import entities.Lesson;
+import services.cours.CoursService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +13,7 @@ public class CoursDto {
     public CoursDto() {
     }
 
-    public Cours single(ResultSet rs) throws SQLException {
+    public Cours  onlyCours(ResultSet rs) throws SQLException {
         Cours c = new Cours();
 
         c.setId(rs.getInt("id"));
@@ -46,6 +48,23 @@ public class CoursDto {
 
 
 
+
+
+    public Cours single(ResultSet rs) throws SQLException {
+        Cours c = onlyCours(rs);
+
+        CoursService coursService = new CoursService() ;
+
+       List<Lesson> lessosn =  coursService.getLessons(c.getId());
+
+       c.setLessons((ArrayList<Lesson>) lessosn);
+
+
+
+
+
+        return c ;
+    }
 
 
 }

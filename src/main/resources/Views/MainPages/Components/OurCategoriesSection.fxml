@@ -10,8 +10,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="25.0" style="-fx-background-color: #fff;" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="25.0" style="-fx-background-color: #fff;" stylesheets="@../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainPages.MainPageController">
    <children>
       <TextFlow textAlignment="CENTER">
          <children>
@@ -66,7 +65,7 @@
             </VBox>
          </children>
       </HBox>
-      <Button mnemonicParsing="false" styleClass="submitButton" text="Voir tous les cours" />
+      <Button mnemonicParsing="false" onAction="#OpenListCoursPage" styleClass="submitButton" text="Voir tous les cours" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

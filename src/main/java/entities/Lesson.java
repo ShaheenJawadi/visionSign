@@ -110,4 +110,10 @@ public class Lesson {
                 ", classement=" + classement +
                 '}';
     }
+
+
+
+    public  String getTextDuration (){
+        return String.valueOf(this.getDuree())+" Min";
+    }
 }

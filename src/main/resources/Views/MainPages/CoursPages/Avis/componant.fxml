@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<VBox fx:id="rootId" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Avis.AvisCoursController">
+   <children>
+      <VBox spacing="10.0" styleClass="cours_sectionBlock">
+         <children>
+            <TextFlow>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Reviews" wrappingWidth="59.773592948913574" y="1.0">
+                     <font>
+                        <Font size="23.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox spacing="15.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <HBox alignment="CENTER" spacing="12.0">
+                           <children>
+                              <TextFlow minWidth="80.0" textAlignment="RIGHT">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Stallaire" textAlignment="RIGHT">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </TextFlow>
+                              <Separator prefWidth="200.0" styleClass="primaryColorBg" />
+                              <TextFlow layoutX="10.0" layoutY="10.0">
+                                 <children>
+                                    <Text fx:id="nbrAvis5" strokeType="OUTSIDE" strokeWidth="0.0" text="1" />
+                                 </children>
+                              </TextFlow>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" spacing="12.0">
+                           <children>
+                              <TextFlow minWidth="80.0" textAlignment="RIGHT">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Galactique" textAlignment="RIGHT">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </TextFlow>
+                              <Separator prefWidth="200.0" styleClass="primaryColorBg" />
+                              <TextFlow layoutX="10.0" layoutY="10.0">
+                                 <children>
+                                    <Text fx:id="nbrAvis4" strokeType="OUTSIDE" strokeWidth="0.0" text="5" />
+                                 </children>
+                              </TextFlow>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="26.0" spacing="12.0">
+                           <children>
+                              <TextFlow minWidth="80.0" textAlignment="RIGHT">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Solaire" textAlignment="RIGHT">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </TextFlow>
+                              <Separator prefWidth="200.0" styleClass="primaryColorBg" />
+                              <TextFlow layoutX="10.0" layoutY="10.0">
+                                 <children>
+                                    <Text fx:id="nbrAvis3" strokeType="OUTSIDE" strokeWidth="0.0" text="3" />
+                                 </children>
+                              </TextFlow>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="43.0" spacing="12.0">
+                           <children>
+                              <TextFlow minWidth="80.0" textAlignment="RIGHT">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lunaire" textAlignment="RIGHT">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </TextFlow>
+                              <Separator prefWidth="200.0" styleClass="primaryColorBg" />
+                              <TextFlow layoutX="10.0" layoutY="10.0">
+                                 <children>
+                                    <Text fx:id="nbrAvis2" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                                 </children>
+                              </TextFlow>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="59.0" spacing="12.0">
+                           <children>
+                              <TextFlow minWidth="80.0" textAlignment="RIGHT">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cométaire" textAlignment="RIGHT">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Text>
+                                 </children>
+                              </TextFlow>
+                              <Separator prefWidth="200.0" styleClass="primaryColorBg" />
+                              <TextFlow layoutX="10.0" layoutY="10.0">
+                                 <children>
+                                    <Text fx:id="nbrAvis1" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
+                                 </children>
+                              </TextFlow>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="8.0" style="-fx-background-radius: 10;" styleClass="primaryColorBg" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Text fx:id="AvgAvis" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="4.8">
+                           <font>
+                              <Font size="42.0" />
+                           </font>
+                        </Text>
+                        <ImageView fitHeight="150.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../assets/cours/⭐⭐⭐⭐⭐(4).png" />
+                           </image>
+                        </ImageView>
+                        <HBox alignment="CENTER">
+                           <children>
+                              <Text fx:id="totalAvis" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="25" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Avis" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0" />
+            <VBox fx:id="ListAvisHolder" spacing="9.0">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <children>
+                  <fx:include source="SingleAvis.fxml" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <VBox styleClass="cours_sectionBlock">
+         <children>
+            <TextFlow>
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter un Avis" wrappingWidth="59.773592948913574" y="1.0">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Notez le cours">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="38.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../assets/cours/⭐⭐⭐⭐⭐(4).png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <TextArea fx:id="avisContent" minHeight="100.0" />
+            <Button mnemonicParsing="false" onAction="#postAvis" styleClass="submitButton" text="Poster" />
+         </children>
+      </VBox>
+   </children>
+</VBox>
