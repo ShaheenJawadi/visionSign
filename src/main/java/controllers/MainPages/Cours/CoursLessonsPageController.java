@@ -5,6 +5,7 @@ import controllers.MainPages.Cours.SinglePageComponants.CoursSingleLessonItem;
 import entities.Cours;
 import entities.Lesson;
 import entities.UserCours;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -35,6 +36,7 @@ public class CoursLessonsPageController implements Initializable {
 
 
 
+
     public void setCours (Cours cours){
 
         this.cours = cours ;
@@ -56,10 +58,10 @@ public class CoursLessonsPageController implements Initializable {
     public void  renderCoursLessons(){
 
 
-     renderDescription();
+
 
      renderLessonList();
-
+        manipulateCurrentLesson();
 
 
 
@@ -84,19 +86,39 @@ public class CoursLessonsPageController implements Initializable {
         }
     }
 
-    public  void renderDescription(){
+    public  void renderCurrentLesson(Lesson l){
         WebView webView = new WebView() ;
-        webView.getEngine().loadContent(cours.getDescription());
+        webView.getEngine().loadContent(l.getContent());
+
 
 
         webViewHolder.getChildren().add(webView);
 
     }
+
+    public  void  manipulateCurrentLesson (){
+        int currentStage = cours.getUserCoursActivity().getStage() ;
+        if(cours.getLessons().size()>=currentStage){
+            renderCurrentLesson(cours.getLessons().get(currentStage));
+        }
+
+    }
+
+
+    @FXML
+    void nextLessonBtn(ActionEvent event) {
+
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
        // renderCoursLessons();
     }
+
+
+
 
 
 }
