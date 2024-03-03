@@ -1,5 +1,8 @@
 package entities;
 
+import services.cours.UserCoursServices;
+
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -113,6 +116,31 @@ public class UserCours {
 
 
 
+
+    public int incrementStage(){
+        UserCoursServices userCoursServices = new UserCoursServices();
+        this.stage = this.stage+1 ;
+        try {
+            userCoursServices.incrementStage(this);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return this.stage ;
+
+    }
+    public  void setCompletedCours(){
+
+
+        UserCoursServices userCoursServices = new UserCoursServices();
+
+        try {
+            this.isCompleted = true ;
+            userCoursServices.setCompleted(this);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 
 
 }
