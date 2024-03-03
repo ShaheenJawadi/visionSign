@@ -25,17 +25,17 @@
                         <Font name="System Bold" size="25.0" />
                     </font>
                 </Label>
-                <HBox alignment="CENTER" layoutX="627.0" prefHeight="66.0" prefWidth="200.0">
+                <HBox alignment="CENTER" layoutX="597.0" prefHeight="66.0" prefWidth="230.0">
                     <children>
                         <ImageView fitHeight="70.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@pic.png" />
                             </image>
                             <HBox.margin>
-                                <Insets left="-20.0" />
+                                <Insets left="-20.0" right="-7.0" />
                             </HBox.margin>
                         </ImageView>
-                        <Label fx:id="userTF" alignment="CENTER" textFill="WHITE">
+                        <Label fx:id="userTF" alignment="CENTER" prefHeight="20.0" prefWidth="105.0" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="14.0" />
                             </font>
@@ -43,6 +43,18 @@
                                 <Insets left="20.0" />
                             </HBox.margin>
                         </Label>
+                  <Button mnemonicParsing="false" onAction="#logout" prefHeight="31.0" prefWidth="30.0" style="-fx-background-color: RED; -fx-background-radius: 15;">
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@4400629.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <HBox.margin>
+                        <Insets right="-40.0" />
+                     </HBox.margin>
+                  </Button>
                     </children>
                     <padding>
                         <Insets left="-20.0" />
