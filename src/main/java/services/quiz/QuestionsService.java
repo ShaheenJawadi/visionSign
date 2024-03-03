@@ -16,36 +16,35 @@ public class QuestionsService implements IGestionQuiz<Questions> {
 
     @Override
     public void ajouterGestionQuiz(Questions question) throws SQLException {
-        String sql = "INSERT INTO questions (question, quizId, userId) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO questions (question, quizId, userId, image) VALUES (?, ?, ?, ?)";
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, question.getQuestion());
         ps.setInt(2, question.getQuizId());
         ps.setInt(3, question.getUserId());
+        ps.setString(4, question.getImage());
 
         int affectedRows = ps.executeUpdate();
-
         if (affectedRows > 0) {
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
                     int id = rs.getInt(1);
-                    question.setId((id));
+                    question.setId(id);
                 }
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
             }
-                catch(SQLException ex){
-                    System.out.println(ex.getMessage());
-                }
         }
-
     }
 
     @Override
     public void modifierGestionQuiz(Questions question) throws SQLException {
-        String sql = "UPDATE questions SET question=?, quizId=? , userId=? WHERE id=?";
+        String sql = "UPDATE questions SET question=?, quizId=? , userId=?, image=? WHERE id=?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, question.getQuestion());
         ps.setInt(2, question.getQuizId());
         ps.setInt(3, question.getUserId());
-        ps.setInt(4, question.getId());
+        ps.setString(4, question.getImage());
+        ps.setInt(5, question.getId());
         ps.executeUpdate();
     }
 
@@ -70,12 +69,13 @@ public class QuestionsService implements IGestionQuiz<Questions> {
             question.setQuestion(rs.getString("question"));
             question.setUserId(rs.getInt("userId"));
             question.setQuizId(rs.getInt("quizId"));
+            question.setImage(rs.getString("image"));
             questions.add(question);
         }
         return questions;
     }
 
-    public List<Questions> getAllQuizQuestionsByQuizId( int quizId) throws SQLException {
+    public List<Questions> getAllQuizQuestionsByQuizId(int quizId) throws SQLException {
         List<Questions> questions = new ArrayList<>();
         String sql = "SELECT * FROM questions where quizId=?";
         PreparedStatement ps = connection.prepareStatement(sql);
@@ -90,6 +90,7 @@ public class QuestionsService implements IGestionQuiz<Questions> {
             question.setQuestion(rs.getString("question"));
             question.setUserId(rs.getInt("userId"));
             question.setQuizId(rs.getInt("quizId"));
+            question.setImage(rs.getString("image"));
             question.setSuggestionsQuestion(suggestionService.getAllSuggestionsByQuestionId(question.getId()));
             questions.add(question);
         }
@@ -108,9 +109,6 @@ public class QuestionsService implements IGestionQuiz<Questions> {
             count = rs.getInt("count");
         }
 
-        return count == 0; // Si count est 0, la question est unique dans le quiz
+        return count == 0;
     }
-
-
-
 }

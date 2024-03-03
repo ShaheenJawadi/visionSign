@@ -1,5 +1,6 @@
 package controllers.Student;
 
+import com.itextpdf.text.*;
 import entities.Notes;
 import entities.Questions;
 import entities.Quiz;
@@ -15,22 +16,21 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.layout.Pane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.util.Duration;
 import services.quiz.NotesService;
-import services.quiz.QuestionsService;
 import services.quiz.QuizService;
-import services.quiz.SuggestionService;
-
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 public class QuizEleveController {
-
-    @FXML
-    private Pane leftPane;
 
     @FXML
     private Label hoursLabel;
@@ -47,9 +47,8 @@ public class QuizEleveController {
 
 
     private int remainingSeconds;
-    private QuizService quizService= new QuizService();;
-    private QuestionsService questionsService=new QuestionsService();
-    private SuggestionService suggestionService=new SuggestionService();
+    private QuizService quizService= new QuizService();
+
     @FXML
     private RadioButton suggestion1;
 
@@ -67,60 +66,57 @@ public class QuizEleveController {
 
     @FXML
     private RadioButton selectedRadioButton;
-
-
-    static int iterator=0, note=0;
-    static int quizId=4; // à changer apres
-    static List<Questions> questionsList;
-    static List<Suggestion> suggestionList;
-    private Timeline timeline = null;
     @FXML
-    void initialize() {
-        timeline = new Timeline();
+    ImageView imageQuestion;
 
+
+    private int iterator = 0, note = 0;
+    private int quizId = 9; // à changer dynamique fel integration
+    private List<Questions> questionsList;
+    private List<Suggestion> suggestionList;
+
+    private List<String> answers = new ArrayList<>();
+
+    @FXML
+    void initialize() throws FileNotFoundException, DocumentException {
         suggestion1.setOnAction(event -> handleRadioButtonSelection(suggestion1));
         suggestion2.setOnAction(event -> handleRadioButtonSelection(suggestion2));
         suggestion3.setOnAction(event -> handleRadioButtonSelection(suggestion3));
         suggestion4.setOnAction(event -> handleRadioButtonSelection(suggestion4));
-
         try {
-            Quiz quiz = quizService.getQuizById(4); // à changer dynamique fel integration quizId
+            Quiz quiz = quizService.getQuizById(quizId);
             tempsRestant(quiz.getDuree());
-            questionsList=quiz.getQuizQuestions();
-            numeroQuestion(iterator,questionsList.size());
+            questionsList = quiz.getQuizQuestions();
+            numeroQuestion(iterator, questionsList.size());
             questionCourant(questionsList.get(iterator));
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
-    private void handleRadioButtonSelection(RadioButton radioButton) {
 
+    private void handleRadioButtonSelection(RadioButton radioButton) {
         if (selectedRadioButton != null) {
             selectedRadioButton.setSelected(false);
         }
-
         radioButton.setSelected(true);
         selectedRadioButton = radioButton;
     }
+
     @FXML
-    public void tempsRestant(String duree){
+    public void tempsRestant(String duree) {
         String[] durationParts = duree.split(":");
         int hours = Integer.parseInt(durationParts[0]);
         int minutes = Integer.parseInt(durationParts[1]);
         int seconds = Integer.parseInt(durationParts[2]);
         remainingSeconds = hours * 3600 + minutes * 60 + seconds;
 
-        timeline.getKeyFrames().setAll(
+        Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(1), event -> {
                     if (remainingSeconds <= 0) {
                         calculateNote();
                         NotesService notesService = new NotesService();
                         try {
-                            notesService.ajouterNote(new Notes(note,1,quizId));
+                            notesService.ajouterNote(new Notes(note, 1, quizId));
 
                             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Student/NoteQuiz.fxml"));
                             Parent root = loader.load();
@@ -128,9 +124,9 @@ public class QuizEleveController {
                             NoteQuizController noteQuizController = loader.getController();
                             noteQuizController.setNoteQuiz(note);
                             noteQuizController.setNombreQuestions(questionsList.size());
-                            hoursLabel.getScene().setRoot(root);
+                            noteQuizController.setDownload(questionsList,suggestionList,answers);
 
-                            timeline.stop();
+                            hoursLabel.getScene().setRoot(root);
                         } catch (SQLException | IOException e) {
                             throw new RuntimeException(e);
                         }
@@ -150,12 +146,10 @@ public class QuizEleveController {
         timeline.play();
     }
 
-
-
     @FXML
-    public void numeroQuestion(int num, int size){
-        String n= String.valueOf(num+1);
-        questionNumber.setText(n+" / "+size);
+    public void numeroQuestion(int num, int size) {
+        String n = String.valueOf(num + 1);
+        questionNumber.setText(n + " / " + size);
     }
 
     @FXML
@@ -165,47 +159,78 @@ public class QuizEleveController {
         String questionText = question.getQuestion();
         questionLabel.setText(questionText);
 
-        Collections.shuffle(suggestionList);
-            suggestion1.setText(suggestionList.get(0).getSuggestion());
-            suggestion2.setText(suggestionList.get(1).getSuggestion());
-            suggestion3.setText(suggestionList.get(2).getSuggestion());
-            suggestion4.setText(suggestionList.get(3).getSuggestion());
+        try {
+            URL imageUrl = new URL(question.getImage());
+            HttpURLConnection connection = (HttpURLConnection) imageUrl.openConnection();
+            connection.setRequestMethod("GET");
+            InputStream inputStream = connection.getInputStream();
 
+            Image image = new Image(inputStream);
+            imageQuestion.setImage(image);
+
+            inputStream.close();
+            connection.disconnect();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Collections.shuffle(suggestionList);
+        suggestion1.setText(suggestionList.get(0).getSuggestion());
+        suggestion2.setText(suggestionList.get(1).getSuggestion());
+        suggestion3.setText(suggestionList.get(2).getSuggestion());
+        suggestion4.setText(suggestionList.get(3).getSuggestion());
     }
 
     public void calculateNote() {
-
         int score = 0;
+        String selectedAnswer = null;
+        String correctAnswer = null;
+        Integer moved = 0;
         for (int i = 0; i < suggestionList.size(); i++) {
             Suggestion suggestion = suggestionList.get(i);
-            String correctAnswer = suggestion.getSuggestion();
+            correctAnswer = suggestion.getSuggestion();
             boolean isCorrect = suggestion.isStatus();
-            String selectedAnswer = null;
             boolean isSelected = false;
 
             if (i == 0) {
-                selectedAnswer = suggestion1.getText();
                 isSelected = suggestion1.isSelected();
+                if(isSelected){
+                    selectedAnswer = suggestion1.getText();
+                }
             } else if (i == 1) {
-                selectedAnswer = suggestion2.getText();
                 isSelected = suggestion2.isSelected();
+                if(isSelected){
+                    selectedAnswer = suggestion2.getText();
+                }
             } else if (i == 2) {
-                selectedAnswer = suggestion3.getText();
                 isSelected = suggestion3.isSelected();
+                if(isSelected){
+                    selectedAnswer = suggestion3.getText();
+                }
             } else if (i == 3) {
-                selectedAnswer = suggestion4.getText();
                 isSelected = suggestion4.isSelected();
+                if(isSelected){
+                    selectedAnswer = suggestion4.getText();
+                }
             }
 
             if (correctAnswer.equals(selectedAnswer) && isCorrect && isSelected) {
                 score++;
+                answers.add("Votre réponse " + selectedAnswer + " est vraie");
+
+                moved=1;
             }
+            if( i==3 ){
+                if(moved==0){
+                    answers.add("Votre réponse " + selectedAnswer + " est fausse");
+                }
+                moved=0;
+            }
+
         }
 
         note += score;
-
     }
-
 
     public void nextFn(ActionEvent actionEvent) {
         if (!suggestion1.isSelected() && !suggestion2.isSelected() && !suggestion3.isSelected() && !suggestion4.isSelected()) {
@@ -217,31 +242,33 @@ public class QuizEleveController {
             return;
         }
 
-            calculateNote();
-            iterator+=1;
+        calculateNote();
+        iterator += 1;
 
         suggestion1.setSelected(false);
         suggestion2.setSelected(false);
         suggestion3.setSelected(false);
         suggestion4.setSelected(false);
 
-        if(iterator==questionsList.size()-1){
+        if (iterator == questionsList.size() - 1) {
             nextBtn.setText("Finish");
         }
-        if(iterator<questionsList.size()){
-            numeroQuestion(iterator,questionsList.size());
+        if (iterator < questionsList.size()) {
+            numeroQuestion(iterator, questionsList.size());
             questionCourant(questionsList.get(iterator));
-        }else{
-            NotesService notesService=new NotesService();
+        } else {
+            NotesService notesService = new NotesService();
             try {
-                notesService.ajouterNote(new Notes(note,1,quizId));
+                notesService.ajouterNote(new Notes(note, 1, quizId)); // à changer dynamique (userId)
 
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Student/NoteQuiz.fxml"));
                 Parent root = loader.load();
 
-                NoteQuizController noteQuizController=loader.getController();
+                NoteQuizController noteQuizController = loader.getController();
                 noteQuizController.setNoteQuiz(note);
                 noteQuizController.setNombreQuestions(questionsList.size());
+                noteQuizController.setDownload(questionsList,suggestionList,answers);
+
 
                 questionLabel.getScene().setRoot(root);
 
@@ -249,8 +276,11 @@ public class QuizEleveController {
                 throw new RuntimeException(e);
             }
         }
-
     }
 
-
 }
+
+
+
+
+

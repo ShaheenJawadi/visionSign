@@ -7,6 +7,15 @@ public class Questions {
     private String question;
     private int quizId;
     private int userId;
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     private List<Suggestion> suggestionsQuestion;
 
@@ -22,18 +31,19 @@ public class Questions {
 
     }
 
-    public Questions(int id, String question, int quizId, int userId) {
+    public Questions(int id, String question, int quizId, int userId, String image) {
         this.id = id;
         this.question = question;
         this.quizId = quizId;
         this.userId = userId;
+        this.image=image;
     }
 
-    public Questions(String question, int quizId, int userId) {
+    public Questions(String question, int quizId, int userId, String image) {
         this.question = question;
-
         this.quizId = quizId;
         this.userId = userId;
+        this.image=image;
     }
 
     public int getId() {
@@ -75,7 +85,8 @@ public class Questions {
                 ", question='" + question + '\'' +
                 ", quizId=" + quizId +
                 ", userId=" + userId +
-        getSuggestionsQuestion().toString()+
+                ", image=" + image +
+                getSuggestionsQuestion().toString()+
                 '}'+'\n'/*+"---"+'\n'*/;
     }
 }
