@@ -49,14 +49,14 @@ public class Newquizzcontroller {
             errorMessage.setText("");
             try {
                 if (quizService.isQuizNameUnique(quizName)) {
-                    Quiz quiz = new Quiz(quizName, duree, 1, 1); // à changer dynamique
+                    Quiz quiz = new Quiz(quizName, duree, 1, 1); // à changer apres pour etre dynamique integration
                     quizService.ajouterGestionQuiz(quiz);
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information");
                     alert.setContentText("Quizz ajouté avec succès");
                     alert.showAndWait();
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/quiz//NewQuestion.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/quiz/NewQuestion.fxml"));
                     Parent root = loader.load();
                     Newquestcontroller newquestcontroller = loader.getController();
                     newquestcontroller.setQuizId(quiz.getId());
