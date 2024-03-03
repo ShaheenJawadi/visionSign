@@ -1,11 +1,27 @@
 package entities;
 
+import java.util.List;
+
 public class Categorie {
     private int id;
     private String nom;
     private String description;
+    private List<SousCategorie> sousCategorieListe;
 
     public Categorie() {
+    }
+
+    public Categorie(String nom, String description, List<SousCategorie> sousCategorieListe) {
+        this.nom = nom;
+        this.description = description;
+        this.sousCategorieListe = sousCategorieListe;
+    }
+
+    public Categorie(int id, String nom, String description, List<SousCategorie> sousCategorieListe) {
+        this.id = id;
+        this.nom = nom;
+        this.description = description;
+        this.sousCategorieListe = sousCategorieListe;
     }
 
     public Categorie(int id, String nom, String description) {
@@ -38,12 +54,21 @@ public class Categorie {
         this.description = description;
     }
 
+    public List<SousCategorie> getSousCategorieListe() {
+        return sousCategorieListe;
+    }
+
+    public void setSousCategorieListe(List<SousCategorie> sousCategorieListe) {
+        this.sousCategorieListe = sousCategorieListe;
+    }
+
     @Override
     public String toString() {
         return "Categorie{" +
                 "id=" + id +
                 ", nom='" + nom + '\'' +
                 ", description='" + description + '\'' +
+                ", sousCategorieListe=" + sousCategorieListe +
                 '}';
     }
 }

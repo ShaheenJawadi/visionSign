@@ -13,7 +13,6 @@ public class CategorieDto {
 
     public Categorie single(ResultSet rs) throws SQLException {
         Categorie c = new Categorie();
-
         c.setId(rs.getInt("id"));
         c.setNom(rs.getString("nom"));
         c.setDescription(rs.getString("description"));

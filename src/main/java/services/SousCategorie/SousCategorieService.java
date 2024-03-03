@@ -18,7 +18,7 @@ public class SousCategorieService extends GServices implements IService<SousCate
     private String tableName = "sous_categorie";
     private SousCategorieDto sousCategorie;
 
-    public SousCategorieService(Connection connection, SousCategorie sousCcategorieDto) {
+    public SousCategorieService(Connection connection, SousCategorie sousCategorieDto) {
         connection = MyDatabase.getInstance().getConnection();
         sousCategorie = new SousCategorieDto();
 

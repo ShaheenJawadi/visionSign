@@ -7,5 +7,7 @@ public interface IServiceCategorie<Categorie> {
 
     Categorie getCategorieById(int id) throws SQLException;
 
-    Categorie searchByName(String nom) throws SQLException;
+    List<Categorie> searchByName(String nom) throws SQLException;
+
+    void deleteCategorieWithSousCategories(int categoryId) throws SQLException;
 }
