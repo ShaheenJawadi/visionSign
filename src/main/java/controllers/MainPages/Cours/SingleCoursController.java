@@ -189,7 +189,7 @@ public class SingleCoursController implements Initializable {
         if(isEnrolled){
 
 
-           MainNavigations.getInstance().openCoursLessonPage();
+           MainNavigations.getInstance().openCoursLessonPage(cours);
 
         }
         else {

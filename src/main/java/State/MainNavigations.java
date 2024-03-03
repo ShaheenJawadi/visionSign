@@ -105,7 +105,7 @@ public class MainNavigations {
 
 
 
-    public void openCoursLessonPage(){
+    public void openCoursLessonPage(Cours cours){
         try
         {
 
@@ -113,13 +113,16 @@ public class MainNavigations {
 
             loader.load();
 
-            CoursLessonsPageController coursFilterPage = loader.getController();
-           // coursFilterPage.renderContent(cours);
+            CoursLessonsPageController coursLessonPage = loader.getController();
+
+            coursLessonPage.setCours(cours);
+            coursLessonPage.renderCoursLessons();
+
 
 
 
             mainPageHolder.getChildren().clear();
-            mainPageHolder.getChildren().add(coursFilterPage.getVBoxRoot());
+            mainPageHolder.getChildren().add(coursLessonPage.getVBoxRoot());
         }
         catch (IOException ex)
         {

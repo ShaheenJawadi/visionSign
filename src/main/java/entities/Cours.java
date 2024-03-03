@@ -13,6 +13,8 @@ public class Cours {
     private boolean isValidated ;
 
     private ArrayList<Lesson> lessons ;
+
+    private UserCours userCoursActivity ;
     // add ensgId
     public  Cours(){
 
@@ -166,6 +168,7 @@ public class Cours {
 
     public void setLessons(ArrayList<Lesson> lessons) {
         this.lessons = lessons;
+        fetchUserCoursActivity();
     }
 
 
@@ -197,6 +200,34 @@ public class Cours {
     }
 
 
+
+
+
+    public  void  fetchUserCoursActivity(){
+
+        UserCoursServices userCoursServices = new UserCoursServices() ;
+        //todo SetUser  Id
+        try {
+
+
+            this.userCoursActivity=  userCoursServices.getUserCoursActivity(3, this.getId());
+        } catch (SQLException e) {
+
+            System.out.println("hjqsgjdgsq");
+
+            System.out.println(e);
+            throw new RuntimeException(e);
+        }
+
+
+
+
+    }
+
+    public  UserCours getUserCoursActivity(){
+
+        return  this.userCoursActivity ;
+    }
     public  void  addToBag(){
         UserCoursServices userCoursServices = new UserCoursServices() ;
         //todo SetUser  Id
@@ -209,4 +240,6 @@ public class Cours {
             throw new RuntimeException(e);
         }
     }
+
+
 }

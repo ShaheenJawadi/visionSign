@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.text.TextFlow?>
-<?import javafx.scene.text.Text?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.shape.Circle?>
 <VBox fx:id="CoursLessonsVboxHolder" alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainPages.Cours.CoursLessonsPageController">
    <children>
       <HBox alignment="TOP_CENTER" spacing="25.0">
@@ -25,17 +21,8 @@
                               <Image url="@../../../../assets/cours/coursThumb.png" />
                            </image>
                         </ImageView>
-                        <VBox spacing="10.0">
+                        <VBox fx:id="webViewHolder" spacing="10.0">
                            <children>
-                              <TextFlow>
-                                 <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls kqdkls ">
-                                       <font>
-                                          <Font size="30.0" />
-                                       </font>
-                                    </Text>
-                                 </children>
-                              </TextFlow>
                               <HBox alignment="BOTTOM_RIGHT">
                                  <children>
                                     <Button mnemonicParsing="false" styleClass="submitButton" text="Suivant" />
@@ -53,44 +40,7 @@
             </AnchorPane>
             <AnchorPane>
                <children>
-                  <VBox minWidth="300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-                     <children>
-                        <VBox spacing="10.0">
-                           <children>
-                              <HBox spacing="5.0">
-                                 <children>
-                                    <Circle fill="DODGERBLUE" radius="10.0" stroke="#247ce8" strokeType="INSIDE" />
-                                    <TextFlow>
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Lesson Title 1" />
-                                       </children>
-                                    </TextFlow>
-                                 </children>
-                              </HBox>
-                              <HBox layoutX="19.0" layoutY="19.0" spacing="5.0">
-                                 <children>
-                                    <Circle fill="DODGERBLUE" radius="10.0" stroke="#247ce8" strokeType="INSIDE" />
-                                    <TextFlow>
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Section 1" />
-                                       </children>
-                                    </TextFlow>
-                                 </children>
-                              </HBox>
-                              <HBox layoutX="19.0" layoutY="50.0" spacing="5.0">
-                                 <children>
-                                    <Circle fill="DODGERBLUE" radius="10.0" stroke="#247ce8" strokeType="INSIDE" />
-                                    <TextFlow>
-                                       <children>
-                                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Section 1" />
-                                       </children>
-                                    </TextFlow>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </VBox>
+                  <VBox fx:id="listLessonsHolder" minWidth="300.0" spacing="8.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" />
 
                </children>
             </AnchorPane>

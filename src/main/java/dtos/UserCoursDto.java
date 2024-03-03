@@ -2,7 +2,6 @@ package dtos;
 
 
 import entities.Cours;
-import entities.Lesson;
 import entities.UserCours;
 import services.cours.CoursService;
 
@@ -15,13 +14,18 @@ public class UserCoursDto {
     public UserCoursDto() {
     }
 
-    public UserCours onlyListCours(ResultSet rs) throws SQLException {
+    public UserCours onlyItemSingle(ResultSet rs) throws SQLException {
         UserCours l =new UserCours();
 
         l.setId(rs.getInt("id"));
         l.setCoursId(rs.getInt("coursId"));
         l.setUserId(rs.getInt("userId"));
         l.setCorrectQuizz(rs.getBoolean("isCorrectQuizz"));
+        l.setStage(rs.getInt("stage"));
+        l.setCompleted(rs.getBoolean("isCompleted"));
+        l.setEnrollmentDate(rs.getDate("enrollmentDate"));
+        l.setCompletedDate(rs.getDate("completedDate"));
+
 
 
 
@@ -66,7 +70,7 @@ public class UserCoursDto {
     public UserCours single(ResultSet rs) throws SQLException {
 
 
-        UserCours l = onlyListCours(rs);
+        UserCours l = onlyItemSingle(rs);
 
 
         CoursService coursService = new CoursService() ;

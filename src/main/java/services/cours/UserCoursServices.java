@@ -141,5 +141,26 @@ public class UserCoursServices implements IService<UserCours> {
 
 
 
+    public UserCours  getUserCoursActivity(int userId , int coursId) throws SQLException {
+
+
+        String sql="SELECT * FROM " + tableName +" where userId=? AND coursId=?" ;
+
+
+        PreparedStatement ps=connection.prepareStatement(sql);
+        ps.setInt(1,userId);
+        ps.setInt(2,coursId);
+
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.next())
+                return userCoursDto.onlyItemSingle(rs);
+        else
+            return  null;
+
+    }
+
+
+
 
 }
