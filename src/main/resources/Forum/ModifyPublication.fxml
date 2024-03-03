@@ -121,9 +121,9 @@
                                     <Cursor fx:constant="HAND" />
                                 </cursor>
                             </Button>
-                            <ScrollPane fitToHeight="true" layoutX="14.0" layoutY="248.0" prefHeight="140.0" prefWidth="626.0" style="-fx-background-color: white;" vbarPolicy="NEVER">
+                            <ScrollPane fitToHeight="true" layoutX="14.0" layoutY="248.0" prefHeight="140.0" prefWidth="626.0" style="-fx-background: white;-fx-background-color: white;" vbarPolicy="NEVER">
                                 <content>
-                                    <HBox fx:id="imageContainer" prefHeight="138.0" prefWidth="624.0" style="-fx-background-color: white;">
+                                    <HBox fx:id="imageContainer" prefHeight="138.0" style="-fx-background-color: white;">
                                         <children>
                                             <Button mnemonicParsing="false" onAction="#uploadImage" prefHeight="82.0" prefWidth="75.0" style="-fx-background-color: white;">
                                                 <graphic>
