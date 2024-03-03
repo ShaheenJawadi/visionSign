@@ -10,8 +10,6 @@ public class CoursLessonsPageController {
 
     private VBox CoursLessonsVboxHolder ;
 
-
-
     public VBox getVBoxRoot() {
         return CoursLessonsVboxHolder;
     }
