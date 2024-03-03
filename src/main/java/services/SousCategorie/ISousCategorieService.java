@@ -10,8 +10,10 @@ public interface ISousCategorieService<T> {
     void updateSousCategorie(T t) throws SQLException;
 
     void deleteSousCategorie(int id) throws SQLException;
+    void deleteSousCategoryByCategoryId (int id) throws SQLException;
 
     T getSousCategorieById(int id) throws SQLException;
+    List<T> getSousCategorieListByCategoryId (int categorie_id) throws SQLException;
 
     List<T> searchLikeNameCategory(String name) throws SQLException;
 

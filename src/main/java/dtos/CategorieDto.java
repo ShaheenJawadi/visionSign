@@ -3,6 +3,7 @@ package dtos;
 import entities.Categorie;
 import entities.SousCategorie;
 import services.Categorie.CategorieService;
+import services.SousCategorie.SousCategorieService;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,7 +48,7 @@ public class CategorieDto {
     public Categorie getCategorieWithSousCategories(ResultSet rs) throws SQLException {
         Categorie c = getCategorie(rs);
 
-        CategorieService catSer = new CategorieService();
+        SousCategorieService catSer = new SousCategorieService();
 
         List<SousCategorie> sousCategorieList = catSer.getSousCategorieListByCategoryId(c.getId());
 
