@@ -1,4 +1,4 @@
-package controllers.MainPages.Cours;
+package controllers.MainPages.Cours.Filter;
 
 import State.MainNavigations;
 import entities.Cours;

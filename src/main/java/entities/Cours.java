@@ -182,7 +182,7 @@ public class Cours {
 
         boolean check = false ;
         for (UserCours userCours : list) {
-            if (userCours.getId() == this.id) {
+            if (userCours.getCoursId() == this.id) {
                 // Course found
                 check = true ;
                 break;

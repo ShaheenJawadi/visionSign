@@ -1,6 +1,7 @@
 package State;
 
-import controllers.MainPages.Cours.FilterController;
+import controllers.MainPages.Cours.CoursLessonsPageController;
+import controllers.MainPages.Cours.Filter.FilterController;
 import controllers.MainPages.Cours.SingleCoursController;
 import controllers.MainPages.MainPageController;
 import entities.Cours;
@@ -104,16 +105,16 @@ public class MainNavigations {
 
 
 
-    public void openCoursLessonPage(Cours cours){
+    public void openCoursLessonPage(){
         try
         {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainPages/CoursPages/Main/index.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainPages/CoursPages/Lesson/index.fxml"));
 
             loader.load();
 
-            SingleCoursController coursFilterPage = loader.getController();
-            coursFilterPage.renderContent(cours);
+            CoursLessonsPageController coursFilterPage = loader.getController();
+           // coursFilterPage.renderContent(cours);
 
 
 

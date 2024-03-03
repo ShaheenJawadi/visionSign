@@ -1,7 +1,7 @@
 package controllers.MainPages;
 
 import State.MainNavigations;
-import controllers.MainPages.Cours.CoursGridController;
+import controllers.MainPages.Cours.Filter.CoursGridController;
 import entities.Cours;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

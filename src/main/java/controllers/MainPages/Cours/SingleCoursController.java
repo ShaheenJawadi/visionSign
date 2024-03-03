@@ -1,5 +1,6 @@
 package controllers.MainPages.Cours;
 
+import State.MainNavigations;
 import controllers.MainPages.Cours.SinglePageComponants.CoursLessonItemController;
 import entities.Cours;
 import entities.Lesson;
@@ -188,9 +189,13 @@ public class SingleCoursController implements Initializable {
         if(isEnrolled){
 
 
+           MainNavigations.getInstance().openCoursLessonPage();
+
         }
         else {
             cours.addToBag();
+            this.isEnrolled = true ;
+            setupEnrollBtnState();
         }
     }
 }
