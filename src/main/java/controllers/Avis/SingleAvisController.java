@@ -1,4 +1,4 @@
-package controllers.avis;
+package controllers.Avis;
 
 import entities.Avis;
 import javafx.fxml.FXML;
@@ -20,8 +20,8 @@ public class SingleAvisController {
         return this.rootId;
     }
 
-    public void renderItem() {
-        Avis avis=new Avis();
+    public void renderItem(Avis avis) {
+
         // Assurez-vous que l'objet avis n'est pas nul
         if (avis != null) {
             // Récupérez le nom d'utilisateur et le message de l'avis
