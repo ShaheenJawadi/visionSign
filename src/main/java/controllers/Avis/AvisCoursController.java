@@ -15,7 +15,15 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AvisCoursController {
+import javafx.fxml.Initializable;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AvisCoursController implements Initializable {
+    // Vos autres attributs et méthodes ici
+
+
+
 
     @FXML
     private Text AvgAvis;
@@ -52,6 +60,12 @@ public class AvisCoursController {
 
     public void setCoursId(int coursId) {
         this.CoursId = coursId;
+        renderLessonList(); // Appeler cette méthode ici assure que les avis sont chargés une fois l'ID défini
+
+    }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        renderLessonList(); // Ceci va charger la liste des avis dès que la vue est prête
     }
 
     public void setUesrId(int UserId) {
@@ -61,7 +75,7 @@ public class AvisCoursController {
         ListAvisHolder.getChildren().clear();
         try {
             AvisServices avisServices = new AvisServices();
-            List<Avis> avisList = avisServices.recuperer();
+            List<Avis> avisList = avisServices.recupererParCours(CoursId);
 
             int totalNotes = 0;
             int totalAvisCount = avisList.size();
@@ -97,13 +111,16 @@ public class AvisCoursController {
                         break;
                 }
 
+                // Dans AvisCoursController, là où vous créez SingleAvisController :
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainPages/CoursPages/Avis/SingleAvis.fxml"));
                 loader.load();
 
                 SingleAvisController controller = loader.getController();
+                controller.setAvisCoursController(this); // Ajoutez cette ligne
                 controller.renderItem(avis);
 
                 ListAvisHolder.getChildren().add(controller.getRoot());
+
             }
 
             double moyenne1 = count1 > 0 ? sum1 / (double) count1 : 0;

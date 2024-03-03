@@ -84,6 +84,24 @@ public class AvisServices implements IServices<Avis>{
         return aviss;
 
     }
+    public List<Avis> recupererParCours(int coursId) throws SQLException {
+        String sql = "SELECT * FROM avis WHERE coursId = ?";
+        PreparedStatement st = connection.prepareStatement(sql);
+        st.setInt(1, coursId);
+        ResultSet rs = st.executeQuery();
+        List<Avis> aviss = new ArrayList<>();
+        while (rs.next()) {
+            Avis p = new Avis();
+            p.setId_avis(rs.getInt("id_avi")); // Assurez-vous que le nom de colonne est correct
+            p.setNote(rs.getInt("note"));
+            p.setMessage(rs.getString("message"));
+            p.setDate(rs.getDate("date"));
+            p.setId_user(rs.getInt("id_user"));
+            p.setCoursid(rs.getInt("coursId")); // S'assurer que ce champ existe dans votre table et est correctement nommé
+            aviss.add(p);
+        }
+        return aviss;
+    }
     public int getIdCoursByNom(String nomCours) throws SQLException {
         String query = "SELECT id FROM cours WHERE nom = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
