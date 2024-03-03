@@ -23,9 +23,6 @@ import services.quiz.NotesService;
 import services.quiz.QuizService;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -69,9 +66,11 @@ public class QuizEleveController {
     @FXML
     ImageView imageQuestion;
 
+    private boolean quizCompleted = false;
 
     private int iterator = 0, note = 0;
-    private int quizId = 9; // à changer dynamique fel integration
+    private float  noteSur20=0;
+    private int quizId = 10; // à changer apres pour etre dynamique integration
     private List<Questions> questionsList;
     private List<Suggestion> suggestionList;
 
@@ -102,6 +101,27 @@ public class QuizEleveController {
         selectedRadioButton = radioButton;
     }
 
+    private void changeScene() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Student/NoteQuiz.fxml"));
+            Parent root = loader.load();
+
+            NoteQuizController noteQuizController = loader.getController();
+            noteQuizController.setNoteQuiz(noteSur20);
+            noteQuizController.setNombreQuestions(questionsList.size());
+            noteQuizController.setDownload(questionsList, suggestionList, answers);
+
+            questionLabel.getScene().setRoot(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Erreur lors du changement de scène");
+            alert.setContentText("Une erreur est survenue lors du changement de scène : " + e.getMessage());
+            alert.showAndWait();
+        }
+    }
+
     @FXML
     public void tempsRestant(String duree) {
         String[] durationParts = duree.split(":");
@@ -110,25 +130,31 @@ public class QuizEleveController {
         int seconds = Integer.parseInt(durationParts[2]);
         remainingSeconds = hours * 3600 + minutes * 60 + seconds;
 
+        final boolean[] noteAdded = {false}; // Variable pour contrôler l'ajout de la note
+
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.seconds(1), event -> {
                     if (remainingSeconds <= 0) {
-                        calculateNote();
-                        NotesService notesService = new NotesService();
-                        try {
-                            notesService.ajouterNote(new Notes(note, 1, quizId));
-
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Student/NoteQuiz.fxml"));
-                            Parent root = loader.load();
-
-                            NoteQuizController noteQuizController = loader.getController();
-                            noteQuizController.setNoteQuiz(note);
-                            noteQuizController.setNombreQuestions(questionsList.size());
-                            noteQuizController.setDownload(questionsList,suggestionList,answers);
-
-                            hoursLabel.getScene().setRoot(root);
-                        } catch (SQLException | IOException e) {
-                            throw new RuntimeException(e);
+                        if (!quizCompleted) {
+                            if (!noteAdded[0]) { // Vérifier si la note n'a pas déjà été ajoutée
+                                calculateNote();
+                                NotesService notesService = new NotesService();
+                                try {
+                                    notesService.ajouterNote(new Notes(noteSur20, 1, quizId));
+                                    noteAdded[0] = true; // Marquer la note comme ajoutée
+                                    if (questionLabel.getScene() != null) {
+                                        changeScene();
+                                    } else {
+                                        questionLabel.sceneProperty().addListener((observable, oldValue, newValue) -> {
+                                            if (newValue != null) {
+                                                changeScene();
+                                            }
+                                        });
+                                    }
+                                } catch (SQLException e) {
+                                    e.printStackTrace();
+                                }
+                            }
                         }
                         return;
                     }
@@ -146,6 +172,8 @@ public class QuizEleveController {
         timeline.play();
     }
 
+
+
     @FXML
     public void numeroQuestion(int num, int size) {
         String n = String.valueOf(num + 1);
@@ -159,19 +187,11 @@ public class QuizEleveController {
         String questionText = question.getQuestion();
         questionLabel.setText(questionText);
 
-        try {
-            URL imageUrl = new URL(question.getImage());
-            HttpURLConnection connection = (HttpURLConnection) imageUrl.openConnection();
-            connection.setRequestMethod("GET");
-            InputStream inputStream = connection.getInputStream();
-
-            Image image = new Image(inputStream);
+        if (question.getImage() != null && !question.getImage().isEmpty()) {
+            Image image = new Image(question.getImage());
             imageQuestion.setImage(image);
-
-            inputStream.close();
-            connection.disconnect();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } else {
+            imageQuestion.setImage(null);
         }
 
         Collections.shuffle(suggestionList);
@@ -180,6 +200,7 @@ public class QuizEleveController {
         suggestion3.setText(suggestionList.get(2).getSuggestion());
         suggestion4.setText(suggestionList.get(3).getSuggestion());
     }
+
 
     public void calculateNote() {
         int score = 0;
@@ -221,15 +242,20 @@ public class QuizEleveController {
                 moved=1;
             }
             if( i==3 ){
-                if(moved==0){
+                if(moved==0 && selectedAnswer!=null){
                     answers.add("Votre réponse " + selectedAnswer + " est fausse");
+                }else if (moved==0 && selectedAnswer==null){
+                    answers.add("Vous n'avez pas repondu a cette question");
                 }
                 moved=0;
             }
-
         }
 
         note += score;
+        noteSur20 = (float) note / questionsList.size() * 20;
+        noteSur20 = (float) (Math.round(noteSur20 * 100.0) / 100.0);
+        //noteSur20 = (float) (Math.round(noteSur20 * 10) / 10.0);
+
     }
 
     public void nextFn(ActionEvent actionEvent) {
@@ -259,13 +285,13 @@ public class QuizEleveController {
         } else {
             NotesService notesService = new NotesService();
             try {
-                notesService.ajouterNote(new Notes(note, 1, quizId)); // à changer dynamique (userId)
-
+                notesService.ajouterNote(new Notes(noteSur20, 1, quizId)); // à changer apres pour etre dynamique integration
+                quizCompleted=true;
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Student/NoteQuiz.fxml"));
                 Parent root = loader.load();
 
                 NoteQuizController noteQuizController = loader.getController();
-                noteQuizController.setNoteQuiz(note);
+                noteQuizController.setNoteQuiz(noteSur20);
                 noteQuizController.setNombreQuestions(questionsList.size());
                 noteQuizController.setDownload(questionsList,suggestionList,answers);
 

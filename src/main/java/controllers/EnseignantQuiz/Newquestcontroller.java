@@ -10,19 +10,21 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import services.quiz.QuestionsService;
 import services.quiz.SuggestionService;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import javafx.scene.image.ImageView;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+import java.io.File;
+import java.io.IOException;
+
+import java.util.Map;
 
 public class Newquestcontroller {
     @FXML
@@ -56,67 +58,25 @@ public class Newquestcontroller {
     @FXML
     private ImageView imageQuestion;
 
-
-    private byte[] readFileToByteArray(File file) throws IOException {
-        try (FileInputStream fis = new FileInputStream(file)) {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            byte[] buf = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = fis.read(buf)) != -1) {
-                bos.write(buf, 0, bytesRead);
-            }
-            return bos.toByteArray();
-        }
-    }
+    private Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+            "cloud_name", "dcgmqrlth",
+            "api_key", "212948246846792",
+            "api_secret", "de15yReatA8XLLdJoLhA4M8rvRw",
+            "secure", true));
 
     @FXML
     private void uploadImage() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Choose Image File");
         File file = fileChooser.showOpenDialog(null);
-        System.out.println("open");
         if (file != null) {
-            System.out.println("not null");
-
             try {
-                String clientId = "5c696d00e331543";
-                URL url = new URL("https://api.imgur.com/3/image");
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setRequestMethod("POST");
-                connection.setRequestProperty("Authorization", "Client-ID " + clientId);
-                connection.setDoOutput(true);
-                byte[] imageData = readFileToByteArray(file);
-                String base64Image = Base64.getEncoder().encodeToString(imageData);
-                String requestBody = "image=" + java.net.URLEncoder.encode(base64Image, "UTF-8");
-                try (OutputStream outputStream = connection.getOutputStream()) {
-                    outputStream.write(requestBody.getBytes());
-                    outputStream.flush();
-                }
-
-                int responseCode = connection.getResponseCode();
-                InputStream inputStream = connection.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                StringBuilder response = new StringBuilder();
-                String line;
-
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-                reader.close();
-                int linkIndex = response.indexOf("\"link\":");
-                int linkStartIndex = response.indexOf("\"", linkIndex + 7) + 1;
-                int linkEndIndex = response.indexOf("\"", linkStartIndex);
-                String link = response.substring(linkStartIndex, linkEndIndex);
-                selectedImage=link;
-
-                System.out.println("Image link: " + link);
-                Image image = new Image(file.toURI().toString());
+                Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+                selectedImage = (String) uploadResult.get("url");
+                Image image = new Image(selectedImage);
                 imageQuestion.setImage(image);
-
             } catch (IOException e) {
-                System.out.println(e);
                 e.printStackTrace();
-
             }
         }
     }
@@ -147,7 +107,7 @@ public class Newquestcontroller {
             errorMessage.setText("");
             try {
                 if (questionService.isQuestionUniqueInQuiz(question.getText(), quizId)) {
-                    Questions q = new Questions(question.getText(), quizId, 1,selectedImage); // à changer dynamique
+                    Questions q = new Questions(question.getText(), quizId, 1,selectedImage); // à changer apres pour etre dynamique integration
                     questionService.ajouterGestionQuiz(q);
                     suggestionService.ajouterGestionQuiz(new Suggestion(reponse.getText(), true, q.getId()));
                     suggestionService.ajouterGestionQuiz(new Suggestion(suggestion1.getText(), false, q.getId()));
@@ -202,7 +162,7 @@ public class Newquestcontroller {
             errorMessage.setText("");
             try {
                 if (questionService.isQuestionUniqueInQuiz(question.getText(), quizId)) {
-                    Questions q = new Questions(question.getText(), quizId, 1,selectedImage); // userId à changer dynamique
+                    Questions q = new Questions(question.getText(), quizId, 1,selectedImage); // à changer apres pour etre dynamique integration
                     questionService.ajouterGestionQuiz(q);
                     suggestionService.ajouterGestionQuiz(new Suggestion(reponse.getText(), true, q.getId()));
                     suggestionService.ajouterGestionQuiz(new Suggestion(suggestion1.getText(), false, q.getId()));
