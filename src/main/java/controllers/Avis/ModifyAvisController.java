@@ -1,4 +1,4 @@
-package controllers.avis;
+package controllers.Avis;
 
 import entities.Avis;
 import javafx.event.ActionEvent;

@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import services.User.UserService;
+import state.UserSessionManager;
 
 import java.io.IOException;
 import java.util.Map;
@@ -40,6 +41,7 @@ public class AdminStatController {
     @FXML
     private NumberAxis yAxis;
     private final UserService userService=new UserService();
+    private final UserSessionManager userSessionManager=new UserSessionManager();
 
     @FXML
     void initialize() {
@@ -87,6 +89,21 @@ public class AdminStatController {
             userTF.getScene().setRoot(dashboardScrollPane);}
         catch(IOException e)
         {throw new RuntimeException(e.getMessage());}
+
+    }
+    @FXML
+    void logout(ActionEvent event){
+        userSessionManager.clearSession();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/Login.fxml"));
+            Parent privacyRoot = loader.load();
+            ScrollPane privacyScrollPane=new ScrollPane(privacyRoot);
+            privacyScrollPane.setFitToWidth(true);
+            privacyScrollPane.setFitToHeight(true);
+            barId.getScene().setRoot(privacyScrollPane);
+        } catch (IOException e) {
+            throw new RuntimeException(e.getMessage());
+        }
 
     }
 

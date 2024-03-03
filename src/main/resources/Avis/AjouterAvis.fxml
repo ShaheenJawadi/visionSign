@@ -6,7 +6,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane prefHeight="629.0" prefWidth="990.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.avis.AjouterAvisController">
+<AnchorPane prefHeight="629.0" prefWidth="990.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Avis.AjouterAvisController">
    <children>
       <AnchorPane prefHeight="450.0" prefWidth="728.0">
          <children>

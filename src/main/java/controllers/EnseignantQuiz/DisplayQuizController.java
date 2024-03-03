@@ -33,12 +33,13 @@ import services.quiz.QuizService;
 import services.quiz.SuggestionService;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+
 
 
 public class DisplayQuizController {
@@ -58,6 +59,12 @@ public class DisplayQuizController {
     @FXML
     public VBox listeQuestionsOfQuiz;
 
+    private Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+            "cloud_name", "dcgmqrlth",
+            "api_key", "212948246846792",
+            "api_secret", "de15yReatA8XLLdJoLhA4M8rvRw",
+            "secure", true));
+
 
     public  int quizId;
     public void setDisplayQuizId(int id){
@@ -73,7 +80,7 @@ public class DisplayQuizController {
 
     public void getQuizUserLeft(){
         try {
-            myQuiz = quizService.getQuizByUserId(1);// à changer apres pour etre dynamique
+            myQuiz = quizService.getQuizByUserId(1);// à changer apres pour etre dynamique integration
             if (myQuiz.isEmpty()) {
                 Text emptyText = new Text("Vous n'avez pas de quiz");
                 emptyText.setFont(new Font("System", 15));
@@ -119,18 +126,6 @@ public class DisplayQuizController {
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    private byte[] readFileToByteArray(File file) throws IOException {
-        try (FileInputStream fis = new FileInputStream(file)) {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            byte[] buf = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = fis.read(buf)) != -1) {
-                bos.write(buf, 0, bytesRead);
-            }
-            return bos.toByteArray();
         }
     }
 
@@ -302,54 +297,22 @@ public class DisplayQuizController {
 
             if (file != null) {
                 try {
-                    String clientId = "5c696d00e331543";
-                    URL url = new URL("https://api.imgur.com/3/image");
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setRequestMethod("POST");
-                    connection.setRequestProperty("Authorization", "Client-ID " + clientId);
-                    connection.setDoOutput(true);
-                    byte[] imageData = readFileToByteArray(file);
-                    String base64Image = Base64.getEncoder().encodeToString(imageData);
-                    String requestBody = "image=" + java.net.URLEncoder.encode(base64Image, "UTF-8");
-                    try (OutputStream outputStream = connection.getOutputStream()) {
-                        outputStream.write(requestBody.getBytes());
-                        outputStream.flush();
-                    }
+                    Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+                    String imageUrl = (String) uploadResult.get("url");
+                    question.setImage(imageUrl);
 
-                    int responseCode = connection.getResponseCode();
-                    if (responseCode == HttpURLConnection.HTTP_OK) {
-                        InputStream inputStream = connection.getInputStream();
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                        StringBuilder response = new StringBuilder();
-                        String line;
-
-                        while ((line = reader.readLine()) != null) {
-                            response.append(line);
+                    Platform.runLater(() -> {
+                        try {
+                            Image image = new Image(imageUrl);
+                            imageView.setImage(image);
+                            imageView.setFitWidth(180);
+                            imageView.setFitHeight(180);
+                            imageView.setLayoutX(500);
+                            imageView.setLayoutY(10);
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                        reader.close();
-
-                        int linkIndex = response.indexOf("\"link\":");
-                        int linkStartIndex = response.indexOf("\"", linkIndex + 7) + 1;
-                        int linkEndIndex = response.indexOf("\"", linkStartIndex);
-                        String link = response.substring(linkStartIndex, linkEndIndex);
-                        question.setImage(link);
-
-                        Platform.runLater(() -> {
-                            try {
-                                Image image = new Image(file.toURI().toString());
-                                imageView.setImage(image);
-                                imageView.setFitWidth(180);
-                                imageView.setFitHeight(180);
-                                imageView.setLayoutX(500);
-                                imageView.setLayoutY(10);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        });
-
-                    } else {
-                        System.out.println("Failed to upload image. Response code: " + responseCode);
-                    }
+                    });
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -499,7 +462,7 @@ public class DisplayQuizController {
     @FXML
     void searchQuiz(ActionEvent event) {
         String searchText = searchField.getText();
-        int userID = 1; // à changer dynamique
+        int userID = 1; // à changer apres pour etre dynamique integration
         try {
 
             if (searchText.isEmpty()) {
@@ -521,7 +484,7 @@ public class DisplayQuizController {
     @FXML
     void ajouterQuestionAction(ActionEvent event){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/NewQuestion.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/quiz/NewQuestion.fxml"));
             Parent root = loader.load();
             Newquestcontroller newquestcontroller = loader.getController();
             newquestcontroller.setQuizId(quizId);
@@ -538,7 +501,7 @@ public class DisplayQuizController {
         try {
             QuizService quizService1=new QuizService();
             String duree = hours.getText() + ":" + minutes.getText() + ":" + seconds.getText();
-            quizService1.modifierGestionQuiz(new Quiz(quizId,quizNameId.getText(), duree,1,1));// à changer dynamique ( coursId et userId)
+            quizService1.modifierGestionQuiz(new Quiz(quizId,quizNameId.getText(), duree,1,1));// à changer apres pour etre dynamique integration
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success!");
             alert.setContentText("Quiz modifié");
@@ -554,7 +517,7 @@ public class DisplayQuizController {
 
     @FXML
     void quitterAction(ActionEvent event){
-
+// à changer apres pour etre dynamique integration
     }
 
 }

@@ -114,8 +114,20 @@
                 </VBox>
             </children>
         </VBox>
-        <VBox alignment="CENTER" layoutX="235.0" prefHeight="730.0" prefWidth="566.0" style="-fx-background-color: #fffffff;">
+        <VBox alignment="CENTER" layoutX="235.0" prefHeight="730.0" prefWidth="566.0" style="-fx-background-color: #fffffff; -fx-background-radius: 13;">
             <children>
+            <Button mnemonicParsing="false" onAction="#logout" prefHeight="43.0" prefWidth="34.0" style="-fx-background-color: RED; -fx-background-radius: 15;">
+               <VBox.margin>
+                  <Insets right="-480.0" top="-30.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@4400629.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
                 <Label prefHeight="18.0" prefWidth="298.0" text="Profile Settings" textFill="#081f30">
                     <font>
                         <Font name="System Bold" size="25.0" />

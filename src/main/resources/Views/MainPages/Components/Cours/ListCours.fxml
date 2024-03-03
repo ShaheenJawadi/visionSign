@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="14.0" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="14.0" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainPages.MainPageController">
    <children>
       <TextFlow textAlignment="CENTER" VBox.vgrow="NEVER">
          <children>
@@ -18,15 +18,8 @@
             </Text>
          </children>
       </TextFlow>
-      <FlowPane alignment="CENTER" hgap="20.0" maxWidth="1400.0" prefHeight="200.0" prefWidth="1400.0" vgap="20.0" VBox.vgrow="ALWAYS">
+      <FlowPane fx:id="listCoursHolder" alignment="CENTER" hgap="20.0" maxWidth="1400.0" prefHeight="200.0" prefWidth="1400.0" vgap="20.0" VBox.vgrow="ALWAYS">
          <children>
-            <fx:include source="SingleGrid.fxml" />
-            <fx:include source="SingleGrid.fxml" />
-            <fx:include source="SingleGrid.fxml" />
-            <fx:include source="SingleGrid.fxml" />
-            <fx:include source="SingleGrid.fxml" />
-            <fx:include source="SingleGrid.fxml" />
-            <fx:include source="SingleGrid.fxml" />
             <fx:include source="SingleGrid.fxml" />
          </children>
       </FlowPane>

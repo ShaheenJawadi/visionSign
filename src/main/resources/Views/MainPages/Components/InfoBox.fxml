@@ -14,8 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox alignment="TOP_CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1200.0" spacing="40.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" maxWidth="-Infinity" minHeight="-Infinity" minWidth="1200.0" spacing="40.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainPages.MainPageController">
    <children>
       <HBox alignment="CENTER" prefWidth="1200.0" spacing="37.0" VBox.vgrow="NEVER">
          <children>
@@ -155,7 +154,7 @@
                         </Text>
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" styleClass="submitButton" text="Découvrir tous les cours" />
+                  <Button mnemonicParsing="false" onAction="#OpenListCoursPage" style="-fx-cursor: hand;" styleClass="submitButton" text="Découvrir tous les cours" />
                </children>
             </VBox>
          </children>
