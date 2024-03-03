@@ -8,11 +8,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -28,7 +32,10 @@ import java.util.List;
 
 public class BaseForumController {
     @FXML
-    protected AnchorPane listepubid, allpubid;
+    protected AnchorPane listepubid;
+
+    @FXML
+    protected VBox allpubid;
     @FXML
     protected Button addBtn, forumBtn,btnChat;
 
@@ -75,6 +82,8 @@ public class BaseForumController {
         }
     }
 
+
+
     public Pane createPublicationPane(Publications publication, int index, boolean isAllPublications) {
         Pane pane = new Pane();
         pane.setCursor(Cursor.HAND);
@@ -102,7 +111,9 @@ public class BaseForumController {
         });
         pane.setPrefSize(isAllPublications ? 682 : 271, isAllPublications ? 158 : 75);
         pane.setLayoutX(isAllPublications ? 6 : -1);
-        pane.setLayoutY(7 + index * (isAllPublications ? 165 : 75));
+        double layoutY= 7 + index * (isAllPublications ? 165 : 75);
+
+        pane.setLayoutY(layoutY);
         pane.setStyle("-fx-background-color: white; -fx-border-color: #ECECEC;");
 
         Text titreText = new Text(publication.getTitre());
@@ -155,6 +166,45 @@ public class BaseForumController {
             commentIcon.setFill(Color.web("#34364a"));
             commentIcon.setSize("14");
             commentButton.setGraphic(commentIcon);
+            if (publication.getImages() != null && !publication.getImages().isEmpty()) {
+                AnchorPane imagesPane = new AnchorPane();
+                String[] images = publication.getImages().split(";");
+                double imageWidth = 100; // Adjust the image size as needed
+                double imageHeight = 90; // Adjust the image size as needed
+                double imageGap = 7; // Adjust the gap between images as needed
+                double x = imageGap;
+
+                for (String imageUrl : images) {
+                    ImageView imageView = new ImageView();
+
+                    DisplayImgTest imageLoader = new DisplayImgTest(imageView, imageUrl);
+                    imageLoader.loadImage();
+
+
+                    imageView.setFitWidth(imageWidth);
+                    imageView.setFitHeight(imageHeight);
+                    imageView.setPreserveRatio(true);
+                    AnchorPane.setLeftAnchor(imageView, x);
+                    AnchorPane.setTopAnchor(imageView, imageGap);
+                    imagesPane.getChildren().add(imageView);
+                    x += imageWidth + imageGap;
+                }
+                imagesPane.setLayoutX(31);
+                imagesPane.setLayoutY(105);
+                imagesPane.setPrefHeight(imageHeight + 2 * imageGap); // Set height to accommodate the images
+                commentButton.setLayoutY(205);
+                // Add imagesPane to the main pane and adjust the main pane's height
+                pane.getChildren().add(imagesPane);
+
+                // Calculate the new height for the pane
+                double newHeight = 158+ 100 + imageGap; // Additional space for margin
+                layoutY = 7 + index * newHeight;
+                pane.setLayoutY(layoutY);
+
+
+                pane.setPrefSize(682,newHeight);
+            }
+
 
             pane.getChildren().addAll(titreText, iconPane, userIdText, roleText, contenuText, dateText, commentButton);
         } else {
@@ -236,7 +286,6 @@ public class BaseForumController {
 
         return pane;
     }
-
 
     @FXML
     public void searchPubByTitle(ActionEvent event) {

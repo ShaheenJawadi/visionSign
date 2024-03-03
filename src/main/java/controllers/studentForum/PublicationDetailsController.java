@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -40,7 +41,10 @@ public class PublicationDetailsController extends BaseForumController {
     @FXML
     protected AnchorPane anchorepubid, CommentsId;
     @FXML
-    private Pane CommentId;
+    private Pane CommentId,pubPane;
+
+    @FXML
+    private VBox pubdetails;
     @FXML
     private TextField commentField;
     @FXML
@@ -321,10 +325,21 @@ public class PublicationDetailsController extends BaseForumController {
             Publications selectedPublication = pubs.getByIdPublicationOrCommentaire(pubId);
 
             if (selectedPublication != null) {
-                Pane pubPane = createPublicationPane(selectedPublication, 0, true);
+                // Create a new publication pane for the selected publication
+                Pane pubp = createPublicationPane(selectedPublication, 0, true);
 
-                anchorepubid.getChildren().remove(pubPane);
-                anchorepubid.getChildren().add(pubPane);
+                // Clear existing content from the pubPane
+                pubPane.getChildren().clear();
+
+                // Add the new publication pane to the pubPane
+                pubPane.getChildren().add(pubp);
+
+                // Set the height of pubPane based on the height of pubp
+                pubp.layoutBoundsProperty().addListener((observable, oldValue, newValue) -> {
+                    // Update the height of pubPane based on the height of pubp
+                    pubPane.setPrefHeight(newValue.getHeight()+40);
+                });
+
                 loadComments();
             } else {
                 Text notFoundText = new Text("Publication introuvable!");
@@ -332,7 +347,7 @@ public class PublicationDetailsController extends BaseForumController {
                 notFoundText.setFill(Color.RED);
                 notFoundText.setLayoutX(19);
                 notFoundText.setLayoutY(172);
-                anchorepubid.getChildren().add(notFoundText);
+                pubdetails.getChildren().add(notFoundText);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
