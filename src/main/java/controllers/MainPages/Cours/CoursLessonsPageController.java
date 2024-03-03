@@ -81,12 +81,13 @@ public class CoursLessonsPageController implements Initializable {
         try {
             // Load customItem.fxml for each item
 
-            for (Lesson l : cours.getLessons()) {
+            for(int i = 0; i < cours.getLessons().size(); i++) {
+                Lesson l = cours.getLessons().get(i);
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainPages/CoursPages/Lesson/LessonItem.fxml"));
                 loader.load();
 
                 CoursSingleLessonItem controller = loader.getController();
-                controller.renderItem(l , cours.getUserCoursActivity());
+                controller.renderItem(l , cours.getUserCoursActivity() , i);
 
                 listLessonsHolder.getChildren().add(controller.getRoot());
             }
@@ -105,8 +106,15 @@ public class CoursLessonsPageController implements Initializable {
 
     }
 
-    public  void  manipulateCurrentLesson (){
+    public  void  manipulateCurrentLesson(){
+
         int currentStage = cours.getUserCoursActivity().getStage() ;
+
+        if(cours.getLessons().size()==0){
+
+            return ;
+
+        }
 
         if(cours.getLessons().size()>=currentStage){
             renderCurrentLesson(cours.getLessons().get(currentStage));
@@ -122,7 +130,11 @@ public class CoursLessonsPageController implements Initializable {
         if(cours.getLessons().size()>currentStage){
 
 
-            currentStage++;
+
+            cours.getUserCoursActivity().setStage( cours.getUserCoursActivity().incrementStage())  ;
+
+            renderCoursLessons();
+            renderLessonList();
         }
         nextBtnState();
 

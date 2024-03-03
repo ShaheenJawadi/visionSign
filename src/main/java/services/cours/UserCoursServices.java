@@ -8,7 +8,7 @@ import utils.DbOps;
 import utils.MyDatabase;
 
 import java.sql.*;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 public class UserCoursServices implements IService<UserCours> {
@@ -161,6 +161,30 @@ public class UserCoursServices implements IService<UserCours> {
     }
 
 
+
+    public void incrementStage(UserCours userCours) throws SQLException {
+
+       String sql="update "+tableName+" set stage=? where id=?";
+        PreparedStatement ps=connection.prepareStatement(sql);
+        ps.setInt(1,userCours.getStage());
+         ps.setInt(2 , userCours.getId());
+        ps.executeUpdate();
+
+    }
+
+
+    public void setCompleted(UserCours userCours) throws SQLException {
+
+        LocalDate currentDate = LocalDate.now();
+
+        String sql="update "+tableName+" set isCompleted=1  , completedDate=?  where id=?";
+        PreparedStatement ps=connection.prepareStatement(sql);
+        ps.setDate(1  ,  Date.valueOf(currentDate));
+        ps.setInt(2,userCours.getId());
+
+        ps.executeUpdate();
+
+    }
 
 
 }
