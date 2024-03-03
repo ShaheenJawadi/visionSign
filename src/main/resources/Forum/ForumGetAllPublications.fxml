@@ -101,9 +101,9 @@
                         <FontAwesomeIconView fill="#2447f9" glyphName="PLUS_CIRCLE" layoutX="556.0" layoutY="40.0" size="20" />
                      </children>
                   </Pane>
-                  <ScrollPane layoutX="-1.0" layoutY="86.0" prefHeight="458.0" prefWidth="706.0" style="-fx-background-color: white;">
+                  <ScrollPane fitToWidth="true" layoutX="-1.0" layoutY="86.0" prefHeight="457.0" prefWidth="706.0" style="-fx-background-color: white;">
                      <content>
-                        <AnchorPane fx:id="allpubid" minHeight="0.0" minWidth="0.0" prefHeight="454.0" prefWidth="704.0" style="-fx-background-color: #ffffff;" />
+                        <VBox fx:id="allpubid" prefHeight="452.0" prefWidth="705.0" />
                      </content>
                   </ScrollPane>
                </children>

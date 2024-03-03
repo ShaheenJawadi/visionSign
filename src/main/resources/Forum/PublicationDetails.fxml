@@ -116,24 +116,29 @@
                                         </Button>
                                     </children>
                                 </Pane>
-                                <AnchorPane fx:id="CommentsSection" layoutX="-1.0" layoutY="160.0" prefHeight="238.0" prefWidth="706.0" style="-fx-background-color: white;">
-                                    <children>
-                                        <Text fill="#2447f9" layoutX="10.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments:" wrappingWidth="118.15740966796875">
-                                            <font>
-                                                <Font size="19.0" />
-                                            </font>
-                                        </Text>
-                                        <ScrollPane fx:id="scrollid" fitToWidth="true" layoutY="33.0" prefHeight="200.0" prefWidth="706.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="33">
-                                            <content>
-                                                <AnchorPane fx:id="CommentsId" minHeight="0.0" minWidth="0.0" prefHeight="296.0" prefWidth="691.0" style="-fx-background-color: white;">
-                                                    <children>
-                                                        <Pane fx:id="CommentId" layoutX="14.0" layoutY="14.0" prefHeight="56.0" prefWidth="62.0" style="-fx-background-color: white;" />
-                                                    </children>
-                                                </AnchorPane>
-                                            </content>
-                                        </ScrollPane>
-                                    </children>
-                                </AnchorPane>
+                        <VBox fx:id="pubdetails" layoutX="-1.0" prefHeight="398.0" prefWidth="706.0">
+                           <children>
+                              <Pane fx:id="pubPane" layoutX="18.0" prefWidth="706.0" />
+                              <AnchorPane fx:id="CommentsSection" prefHeight="238.0" prefWidth="706.0" style="-fx-background-color: white;">
+                                 <children>
+                                    <Text fill="#2447f9" layoutX="10.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comments:" wrappingWidth="118.15740966796875">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Text>
+                                    <ScrollPane fx:id="scrollid" fitToWidth="true" layoutY="33.0" prefHeight="200.0" prefWidth="706.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="6.0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="33">
+                                       <content>
+                                          <AnchorPane fx:id="CommentsId" minHeight="0.0" minWidth="0.0" prefHeight="296.0" prefWidth="691.0" style="-fx-background-color: white;">
+                                             <children>
+                                                <Pane fx:id="CommentId" layoutX="14.0" layoutY="14.0" prefHeight="56.0" prefWidth="62.0" style="-fx-background-color: white;" />
+                                             </children>
+                                          </AnchorPane>
+                                       </content>
+                                    </ScrollPane>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                        </VBox>
                             </children>
 
                         </AnchorPane>
