@@ -37,6 +37,9 @@ public class Newquizzcontroller {
 
         if (quizName == null || quizName.isEmpty()) {
             errorMessage.setText("Nom du quiz est obligatoire");
+        }else if (!quizName.matches("[A-Za-z].*")) {
+            errorMessage.setText("Le nom du quiz doit commencer par une lettre.");
+
         } else if (quizHours < 0 || quizHours > 23 || quizMinutes < 0 || quizMinutes > 59 || quizSeconds < 0 || quizSeconds > 59) {
             errorMessage.setText("Les heures doivent être comprises entre 0 et 23, les minutes et les secondes entre 0 et 59");
         }else if (quizHours == 0 && quizMinutes == 0 && quizSeconds == 0) {
@@ -46,14 +49,14 @@ public class Newquizzcontroller {
             errorMessage.setText("");
             try {
                 if (quizService.isQuizNameUnique(quizName)) {
-                    Quiz quiz = new Quiz(quizName, duree, 1, 1);
+                    Quiz quiz = new Quiz(quizName, duree, 1, 1); // à changer dynamique
                     quizService.ajouterGestionQuiz(quiz);
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information");
                     alert.setContentText("Quizz ajouté avec succès");
                     alert.showAndWait();
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/quiz/Newquest.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/quiz//NewQuestion.fxml"));
                     Parent root = loader.load();
                     Newquestcontroller newquestcontroller = loader.getController();
                     newquestcontroller.setQuizId(quiz.getId());
