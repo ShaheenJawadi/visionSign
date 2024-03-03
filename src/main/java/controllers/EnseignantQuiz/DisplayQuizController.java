@@ -5,6 +5,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import entities.Questions;
 import entities.Quiz;
 import entities.Suggestion;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,7 +14,10 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -23,14 +27,19 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import services.quiz.QuestionsService;
 import services.quiz.QuizService;
 import services.quiz.SuggestionService;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.Collections;
 import java.util.List;
+
 
 public class DisplayQuizController {
     @FXML
@@ -38,12 +47,8 @@ public class DisplayQuizController {
     @FXML
     private TextField searchField;
 
-
-
     @FXML
     private TextField hours,minutes,seconds;
-
-
     private List<Quiz> myQuiz;
     private QuizService quizService= new QuizService();;
     private QuestionsService questionsService=new QuestionsService();
@@ -60,18 +65,15 @@ public class DisplayQuizController {
         getQuizUserRight();
     }
 
-
     @FXML
     public void initialize() {
-
         getQuizUserLeft();
-
 
     }
 
     public void getQuizUserLeft(){
         try {
-            myQuiz = quizService.getQuizByUserId(1);// à changer apres pour etre dunamique
+            myQuiz = quizService.getQuizByUserId(1);// à changer apres pour etre dynamique
             if (myQuiz.isEmpty()) {
                 Text emptyText = new Text("Vous n'avez pas de quiz");
                 emptyText.setFont(new Font("System", 15));
@@ -100,18 +102,19 @@ public class DisplayQuizController {
             quizNameId.setText(quiz.getNom());
             String duree = quiz.getDuree();
 
-            if (duree != null) {
-                String[] durationParts = duree.split(":");
-                hours.setText(durationParts[0]);
-                minutes.setText(durationParts[1]);
-                seconds.setText(durationParts[2]);
-            }
+            String[] durationParts = duree.split(":");
+            hours.setText(durationParts[0]);
+            minutes.setText(durationParts[1]);
+            seconds.setText(durationParts[2]);
 
             List<Questions> quizQuestions = questionsService.getAllQuizQuestionsByQuizId(quizId);
             for (int i = 0; i < quizQuestions.size(); i++) {
                 Pane pane = createQuestionPane(quizQuestions.get(i),i);
                 listeQuestionsOfQuiz.getChildren().add(pane);
                 listeQuestionsOfQuiz.setSpacing(10);
+                Separator separator = new Separator();
+                separator.setPrefWidth(listeQuestionsOfQuiz.getWidth());
+                listeQuestionsOfQuiz.getChildren().add(separator);
             }
 
         } catch (SQLException e) {
@@ -119,15 +122,28 @@ public class DisplayQuizController {
         }
     }
 
+    private byte[] readFileToByteArray(File file) throws IOException {
+        try (FileInputStream fis = new FileInputStream(file)) {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = fis.read(buf)) != -1) {
+                bos.write(buf, 0, bytesRead);
+            }
+            return bos.toByteArray();
+        }
+    }
+
     public Pane createQuestionPane(Questions question,int i){
         Pane pane = new Pane();
-        pane.setPrefSize(668, 238);
+        pane.setPrefSize(668, 278);
         pane.setStyle("-fx-background-color: white;");
         pane.setLayoutY(0+i * (90));
         Text questionLabel = new Text("Question:");
         questionLabel.setLayoutX(27);
         questionLabel.setLayoutY(32);
         questionLabel.setFont(Font.font("System", FontWeight.NORMAL, 16));
+        ImageView imageView;
 
         TextField questionTextField = new TextField(question.getQuestion());
         questionTextField.setLayoutX(125);
@@ -137,15 +153,12 @@ public class DisplayQuizController {
         questionTextField.setPromptText("Question...");
         questionTextField.setStyle("-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: white; -fx-border-color: #D2D3D4;");
 
-
-
         Text reponseLabel = new Text("Reponse:");
         reponseLabel.setLayoutX(27);
         reponseLabel.setLayoutY(78);
         reponseLabel.setFont(Font.font("System", FontWeight.NORMAL, 16));
 
         String responseText = "";
-
         for (Suggestion suggestion : question.getSuggestionsQuestion()) {
             if (suggestion.isStatus()) {
                 responseText = suggestion.getSuggestion();
@@ -200,16 +213,50 @@ public class DisplayQuizController {
         suggestion3TextField.setPromptText("Suggestion 3...");
         suggestion3TextField.setStyle("-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: white; -fx-border-color: #D2D3D4;");
 
-        // modifier
-        Button modifyButton = new Button();
-        modifyButton.setLayoutX(550);
-        modifyButton.setLayoutY(40);
-        modifyButton.setPrefSize(40, 40);
-        modifyButton.setStyle("-fx-background-color: #FFFFFF;");
+
+        Button modifierImageButton = new Button();
+        modifierImageButton.setLayoutX(550);
+        modifierImageButton.setLayoutY(195);
+        modifierImageButton.setPrefSize(40, 40);
+        modifierImageButton.setStyle("-fx-background-color: #FFFFFF;");
         FontAwesomeIconView modifyIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL);
         modifyIcon.setFill(Color.web("#2447f9"));
         modifyIcon.setSize("25");
-        modifyButton.setGraphic(modifyIcon);
+        modifierImageButton.setGraphic(modifyIcon);
+        modifierImageButton.setCursor(Cursor.HAND);
+
+
+        Button supprimerImageButton = new Button();
+        supprimerImageButton.setLayoutX(600);
+        supprimerImageButton.setLayoutY(200);
+        supprimerImageButton.setPrefSize(28, 25);
+        supprimerImageButton.setStyle("-fx-background-color: #FFFFFF;");
+        FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
+        deleteIcon.setFill(Color.web("#2447f9"));
+        deleteIcon.setSize("25");
+        supprimerImageButton.setGraphic(deleteIcon);
+        supprimerImageButton.setCursor(Cursor.HAND);
+
+
+
+
+        if (question.getImage() != null) {
+            imageView = new ImageView(question.getImage());
+            imageView.setFitWidth(180);
+            imageView.setFitHeight(180);
+            imageView.setLayoutX(500);
+            imageView.setLayoutY(10);
+        } else {
+            imageView = new ImageView();
+        }
+
+
+        Button modifyButton = new Button("Modifier");
+        modifyButton.setLayoutX(130);
+        modifyButton.setLayoutY(240);
+        modifyButton.setPrefSize(120, 40);
+        modifyButton.setStyle("-fx-background-color: #2447F9; -fx-background-radius: 50; -fx-border-radius: 50; -fx-text-fill: white;");
+        modifyButton.setFont(Font.font("System Bold", 13));
         modifyButton.setCursor(Cursor.HAND);
         modifyButton.setOnAction(event -> {
             QuestionsService qs=new QuestionsService();
@@ -223,7 +270,7 @@ public class DisplayQuizController {
             List<Suggestion> suggestionList=question.getSuggestionsQuestion();
 
             try {
-                qs.modifierGestionQuiz(new Questions(question.getId(),newQuestion,question.getQuizId(),question.getUserId()));
+                qs.modifierGestionQuiz(new Questions(question.getId(),newQuestion,question.getQuizId(),question.getUserId(),question.getImage()));
                 for (Suggestion suggestion : suggestionList) {
                     if (suggestion.isStatus()) {
                         ss.modifierGestionQuiz(new Suggestion(suggestion.getId(), newResponse, true, suggestion.getQuestionId()));
@@ -240,24 +287,99 @@ public class DisplayQuizController {
                 alert.setContentText("Question et sugegstions modifiées!");
                 alert.showAndWait();
 
-        } catch (SQLException e) {
+            } catch (SQLException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("ERROR!");
                 alert.setContentText(e.getMessage());
                 alert.showAndWait();
                 throw new RuntimeException(e);
-            }});
+            }
+        });
+        modifierImageButton.setOnAction(event -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Choose Image File");
+            File file = fileChooser.showOpenDialog(null);
 
+            if (file != null) {
+                try {
+                    String clientId = "5c696d00e331543";
+                    URL url = new URL("https://api.imgur.com/3/image");
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("POST");
+                    connection.setRequestProperty("Authorization", "Client-ID " + clientId);
+                    connection.setDoOutput(true);
+                    byte[] imageData = readFileToByteArray(file);
+                    String base64Image = Base64.getEncoder().encodeToString(imageData);
+                    String requestBody = "image=" + java.net.URLEncoder.encode(base64Image, "UTF-8");
+                    try (OutputStream outputStream = connection.getOutputStream()) {
+                        outputStream.write(requestBody.getBytes());
+                        outputStream.flush();
+                    }
 
-        Button deleteButton = new Button();
-        deleteButton.setLayoutX(550);
-        deleteButton.setLayoutY(124);
-        deleteButton.setPrefSize(28, 25);
-        deleteButton.setStyle("-fx-background-color: #FFFFFF;");
-        FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
-        deleteIcon.setFill(Color.web("#2447f9"));
-        deleteIcon.setSize("25");
-        deleteButton.setGraphic(deleteIcon);
+                    int responseCode = connection.getResponseCode();
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        InputStream inputStream = connection.getInputStream();
+                        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                        StringBuilder response = new StringBuilder();
+                        String line;
+
+                        while ((line = reader.readLine()) != null) {
+                            response.append(line);
+                        }
+                        reader.close();
+
+                        int linkIndex = response.indexOf("\"link\":");
+                        int linkStartIndex = response.indexOf("\"", linkIndex + 7) + 1;
+                        int linkEndIndex = response.indexOf("\"", linkStartIndex);
+                        String link = response.substring(linkStartIndex, linkEndIndex);
+                        question.setImage(link);
+
+                        Platform.runLater(() -> {
+                            try {
+                                Image image = new Image(file.toURI().toString());
+                                imageView.setImage(image);
+                                imageView.setFitWidth(180);
+                                imageView.setFitHeight(180);
+                                imageView.setLayoutX(500);
+                                imageView.setLayoutY(10);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        });
+
+                    } else {
+                        System.out.println("Failed to upload image. Response code: " + responseCode);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        // supp image
+        supprimerImageButton.setOnAction(event -> {
+            try {
+                question.setImage(null);
+                imageView.setImage(null);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success!");
+                alert.setContentText("Image supprimée!");
+                alert.showAndWait();
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR!");
+                alert.setContentText("Une erreur s'est produite lors de la suppression de l'image.");
+                alert.showAndWait();
+                e.printStackTrace();
+            }
+        });
+
+        Button deleteButton = new Button("Supprimer");
+        deleteButton.setLayoutX(280);
+        deleteButton.setLayoutY(240);
+        deleteButton.setPrefSize(120, 40);
+        deleteButton.setStyle("-fx-background-color: #2447F9; -fx-background-radius: 50; -fx-border-radius: 50; -fx-text-fill: white;");
+        deleteButton.setFont(Font.font("System Bold", 13));
         deleteButton.setCursor(Cursor.HAND);
         deleteButton.setOnAction(event -> {
             QuestionsService qs = new QuestionsService();
@@ -268,7 +390,6 @@ public class DisplayQuizController {
                 for (Suggestion suggestion : suggestionList) {
                     ss.supprimerGestionQuiz(suggestion.getId());
                 }
-
                 qs.supprimerGestionQuiz(question.getId());
 
                 listeQuestionsOfQuiz.getChildren().remove(pane);
@@ -286,10 +407,9 @@ public class DisplayQuizController {
             }
         });
 
-
         pane.getChildren().addAll(questionLabel, questionTextField, reponseLabel, reponseTextField,
                 suggestion1Label, suggestion1TextField, suggestion2Label, suggestion2TextField,
-                suggestion3Label, suggestion3TextField, modifyButton, deleteButton);
+                suggestion3Label, suggestion3TextField, modifyButton, deleteButton,imageView, modifierImageButton, supprimerImageButton);
 
         return pane;
     }
@@ -379,7 +499,7 @@ public class DisplayQuizController {
     @FXML
     void searchQuiz(ActionEvent event) {
         String searchText = searchField.getText();
-        int userID = 1;
+        int userID = 1; // à changer dynamique
         try {
 
             if (searchText.isEmpty()) {
@@ -401,12 +521,12 @@ public class DisplayQuizController {
     @FXML
     void ajouterQuestionAction(ActionEvent event){
         try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/quiz/Newquest.fxml"));
-        Parent root = loader.load();
-        Newquestcontroller newquestcontroller = loader.getController();
-        newquestcontroller.setQuizId(quizId);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/NewQuestion.fxml"));
+            Parent root = loader.load();
+            Newquestcontroller newquestcontroller = loader.getController();
+            newquestcontroller.setQuizId(quizId);
 
-        quizNameId.getScene().setRoot(root);
+            quizNameId.getScene().setRoot(root);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -433,6 +553,8 @@ public class DisplayQuizController {
     }
 
     @FXML
-    void quitterAction(ActionEvent event){}
+    void quitterAction(ActionEvent event){
+
+    }
 
 }

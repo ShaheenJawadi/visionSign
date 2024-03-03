@@ -17,7 +17,7 @@ public class QuizService implements IGestionQuiz<Quiz> {
     @Override
     public void ajouterGestionQuiz(Quiz quiz) throws SQLException {
         String sql = "INSERT INTO quiz (nom, duree, coursId, userId) VALUES (?, ?, ?, ?)";
-        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS); // specify to return generated keys
+        PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, quiz.getNom());
         ps.setString(2, quiz.getDuree());
         ps.setInt(3, quiz.getCoursId());
@@ -89,13 +89,13 @@ public class QuizService implements IGestionQuiz<Quiz> {
         Quiz quiz = new Quiz();
         while (rs.next()) {
             QuestionsService questionService = new QuestionsService();
-        quiz.setId(rs.getInt("id"));
-        quiz.setNom(rs.getString("nom"));
-        quiz.setDuree(rs.getString("duree"));
-        quiz.setUserId(rs.getInt("userId"));
-        quiz.setCoursId(rs.getInt("coursId"));
+            quiz.setId(rs.getInt("id"));
+            quiz.setNom(rs.getString("nom"));
+            quiz.setDuree(rs.getString("duree"));
+            quiz.setUserId(rs.getInt("userId"));
+            quiz.setCoursId(rs.getInt("coursId"));
 
-        quiz.setQuizQuestions(questionService.getAllQuizQuestionsByQuizId(id));
+            quiz.setQuizQuestions(questionService.getAllQuizQuestionsByQuizId(id));
         }
         return quiz;
     }
@@ -157,7 +157,7 @@ public class QuizService implements IGestionQuiz<Quiz> {
         if (rs.next()) {
             count = rs.getInt("count");
         }
-        return count == 0; // Si count est 0, cela signifie que le nom du quiz est unique
+        return count == 0;
     }
 
 }
