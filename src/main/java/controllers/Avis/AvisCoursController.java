@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import services.Reclamations.AvisServices;
@@ -15,7 +16,15 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class AvisCoursController {
+import javafx.fxml.Initializable;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class AvisCoursController implements Initializable {
+    // Vos autres attributs et méthodes ici
+
+
+
 
     @FXML
     private Text AvgAvis;
@@ -36,6 +45,8 @@ public class AvisCoursController {
     private Text nbrAvis4;
     @FXML
     private Text nbrAvis5;
+    @FXML
+    private TextField noteid;
 
     @FXML
     private TextArea avisContent;
@@ -52,6 +63,12 @@ public class AvisCoursController {
 
     public void setCoursId(int coursId) {
         this.CoursId = coursId;
+        renderLessonList(); // Appeler cette méthode ici assure que les avis sont chargés une fois l'ID défini
+
+    }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        renderLessonList(); // Ceci va charger la liste des avis dès que la vue est prête
     }
 
     public void setUesrId(int UserId) {
@@ -61,7 +78,7 @@ public class AvisCoursController {
         ListAvisHolder.getChildren().clear();
         try {
             AvisServices avisServices = new AvisServices();
-            List<Avis> avisList = avisServices.recuperer();
+            List<Avis> avisList = avisServices.recupererParCours(CoursId);
 
             int totalNotes = 0;
             int totalAvisCount = avisList.size();
@@ -97,13 +114,16 @@ public class AvisCoursController {
                         break;
                 }
 
+                // Dans AvisCoursController, là où vous créez SingleAvisController :
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainPages/CoursPages/Avis/SingleAvis.fxml"));
                 loader.load();
 
                 SingleAvisController controller = loader.getController();
+                controller.setAvisCoursController(this); // Ajoutez cette ligne
                 controller.renderItem(avis);
 
                 ListAvisHolder.getChildren().add(controller.getRoot());
+
             }
 
             double moyenne1 = count1 > 0 ? sum1 / (double) count1 : 0;
@@ -129,23 +149,39 @@ public class AvisCoursController {
 
 
     @FXML
-    void postAvis(ActionEvent event)  {
-        String message = avisContent.getText();
-        int userId = 3; // Utilisateur fictif pour l'exemple
-        Avis nouvelAvis = new Avis(5, message, userId, CoursId);
-
+    void postAvis(ActionEvent event) {
         try {
+            String noteText = noteid.getText().trim();
+            String message = avisContent.getText().trim();
+
+            if (noteText.isEmpty() || message.isEmpty()) {
+                afficherAlerte("Erreur", "Veuillez remplir tous les champs.");
+                return;
+            }
+
+            int note = Integer.parseInt(noteText);
+            if (note < 1 || note > 5) {
+                afficherAlerte("Erreur", "Veuillez saisir une note valide (entre 1 et 5).");
+                return;
+            }
+
+            int userId = 3; // Utilisateur fictif pour l'exemple
+            Avis nouvelAvis = new Avis(note, message, userId, CoursId);
+
             AvisServices avisServices = new AvisServices();
             avisServices.ajouter(nouvelAvis);
 
             afficherAlerte("Confirmation", "Avis ajouté avec succès.");
-
             renderLessonList();
+        } catch (NumberFormatException e) {
+            e.printStackTrace(); // Log the exception
+            afficherAlerte("Erreur", "Veuillez saisir une note valide (entre 1 et 5).");
         } catch (SQLException e) {
             e.printStackTrace();
             afficherAlerte("Erreur", "Une erreur s'est produite lors de l'ajout de l'avis.");
         }
     }
+
 
     private void afficherAlerte(String titre, String contenu) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

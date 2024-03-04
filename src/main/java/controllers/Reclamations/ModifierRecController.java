@@ -1,7 +1,10 @@
 package controllers.Reclamations;
 
 
+import entities.Publications;
 import entities.Reclamations;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,73 +13,126 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import services.Reclamations.ReclamationsServices;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Date;
 
-public class ModifierRecController {
-
-    @FXML
-    private TextField Descriptionid;
-
-    @FXML
-    private TextField statid;
+public class ModifierRecController extends AjouterRecController {
 
     @FXML
-    private ComboBox<String> typeid;
+    private TextField desFx;
 
-    @FXML
-    private Button modPubBtn1;
     @FXML
     private Button forumBtn;
-    private ReclamationsServices reclamationsServices;
 
     @FXML
-    public void initialize() {
-        // Initialize the ComboBox with the types
-        typeid.getItems().addAll("cours", "note", "certificat", "autre");
+    private AnchorPane listepubid;
 
-        // Initialize the ReclamationsServices
-        reclamationsServices = new ReclamationsServices();
+    @FXML
+    private Button modPubBtn;
+
+    @FXML
+    private VBox myposts;
+
+    @FXML
+    private TextField searchField1;
+
+    @FXML
+    private TextField statFx;
+
+    @FXML
+    private ComboBox<String> typeCombo;
+    private ReclamationsServices reclamationsServices;
+    private int recId;
+    ReclamationsServices pubs = new ReclamationsServices();
+
+
+
+    public void setRecId(int recId) {
+        this.recId = recId;
+        loadPublicationDetails();
     }
 
+
     @FXML
-    void handleUpdate() {
+    void handleModifier(ActionEvent event) {
+        String typeText = typeCombo.getValue();
+        String descriptionText=desFx.getText();
+        String statusText=statFx.getText();
+
         try {
-            // Retrieve the input values from the text fields and combo box
-            String description = Descriptionid.getText();
-            String status = statid.getText();
-            String type = typeid.getValue();
+            if (descriptionText != null && !descriptionText.isEmpty() && statFx != null && !statusText.isEmpty()) {
 
-            // Perform input validation
-            if (description.isEmpty() || status.isEmpty() || type == null) {
-                showAlert("Erreur", "Veuillez remplir tous les champs.");
-                return;
+                //TODO userId=1
+
+                pubs.modifier(new Reclamations(recId,typeText,descriptionText,statusText,1));
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Success!");
+                alert.setContentText("Reclamation updated successfully!");
+                alert.showAndWait();
+
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Reclamations/AfficherRecU.fxml"));
+                Parent root = loader.load();
+                modPubBtn.getScene().setRoot(root);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error!");
+                alert.setContentText("Title and content cannot be empty!");
+                alert.showAndWait();
             }
-
-            // Obtain the reclamations ID (you need to set this value in your UI)
-            int idReclamation = 43; // Placeholder, replace it with the actual value
-
-            // Create a new Reclamations object with the updated information
-            Reclamations reclamations = new Reclamations();
-            reclamations.setId_reclamation(idReclamation);
-            reclamations.setDescription(description);
-            reclamations.setStatus(status);
-            reclamations.setType(type);
-
-            // Update the reclamations in the database
-            reclamationsServices.modifier(reclamations);
-
-            // Show a success message
-            showAlert("Succès", "La réclamation a été modifiée avec succès.");
-
         } catch (SQLException e) {
-            // Show an error message if an SQL exception occurs
-            showAlert("Erreur", "Une erreur s'est produite lors de la modification de la réclamation.");
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error!");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
+
+
+    @FXML
+    void initialize() {
+        typeCombo.getItems().addAll("cours", "note", "certificat", "autre");
+        try {
+            //TODO userid=1
+            mypub = pubs.getReclamationsById(1);
+            if (this.mypub == null || this.mypub.isEmpty()) {
+                Text emptyText = new Text("Vous n'avez pas encore publié!");
+                emptyText.setFont(new Font("System", 15));
+                emptyText.setFill(Color.GRAY);
+                emptyText.setLayoutX(19);
+                emptyText.setLayoutY(172);
+                listepubid.getChildren().add(emptyText);
+                listepubid.setPrefHeight(100);
+            } else {
+                for (int i = 0; i < mypub.size(); i++) {
+                    Pane pane = createPublicationPane(mypub.get(i), i, false);
+                    listepubid.getChildren().add(pane);
+                }
+                listepubid.setPrefHeight(mypub.size() * 85);
+            }
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
 
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -85,50 +141,24 @@ public class ModifierRecController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    private int pubId;
-    ReclamationsServices pubs = new ReclamationsServices();
-    public void setIdProduitUpdate(int pubId)
-    {
-        this.pubId = pubId;
-        ChargerProductDetails();
-    }
 
-    private void ChargerProductDetails()
-    {
+
+    public void loadPublicationDetails() {
         try {
-            ReclamationsServices recl = new ReclamationsServices();
-
-            System.out.println("Loading details for pubId: " + pubId);
-
-            Reclamations p = recl.getReclmationsById(pubId);
-
-            String categorie = p.getType();
-            typeid.setValue(categorie);
-            Descriptionid.setText(p.getDescription());
-            statid.setText(String.valueOf(p.getStatus()));
-
-
+            Reclamations getPub = pubs.getReclamationsById2(recId);
+            if (getPub != null) {
+                typeCombo.setValue(getPub.getType());
+                statFx.setText(getPub.getStatus());
+                desFx.setText(getPub.getDescription());
+            } else {
+                System.out.println("No publication found with ID: " + recId);
+            }
         } catch (SQLException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText("Erreur lors du chargement des détails du produit");
-            alert.setContentText("Une erreur s'est produite lors du chargement des détails du produit.");
-            alert.showAndWait();
-        }
-    }
-    public void setPubId(int pubId) {
-        this.pubId = pubId;
-        ChargerProductDetails();
-    }
-
-    public void handleForum(ActionEvent actionEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Reclamations/AfficherRecU.fxml"));
-            Parent root = loader.load();
-            forumBtn.getScene().setRoot(root);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.err.println("SQL error when trying to load publication details: " + e.getMessage());
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.err.println("Unexpected error when trying to load publication details: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }

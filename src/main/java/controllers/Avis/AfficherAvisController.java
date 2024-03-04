@@ -1,6 +1,7 @@
 package controllers.Avis;
 
 import entities.Avis;
+import entities.Reclamations;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,12 +13,13 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import services.Reclamations.AvisServices;
 
-
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 public class AfficherAvisController {
@@ -78,15 +80,6 @@ public class AfficherAvisController {
 
     }
 
-    public void back(javafx.event.ActionEvent actionEvent) {
-        try{
-            FXMLLoader loader=new FXMLLoader(getClass().getResource("/main.fxml"));
-            Parent root=loader.load();
-            back.getScene().setRoot(root);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public void refreshPublications() {
     }

@@ -6,30 +6,33 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
+<?import javafx.scene.chart.PieChart?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Reclamations.AfficherRecController">
-   <children>
-       <BorderPane layoutY="4.0" prefHeight="600.0" prefWidth="952.0">
-       <top>
-           <fx:include fx:id="navbar" source="Navbar.fxml" />
+    <children>
+        <BorderPane layoutY="4.0" prefHeight="600.0" prefWidth="952.0">
+            <top>
 
-       </top>
-         <bottom>
-            <Button mnemonicParsing="false" onAction="#ajout" text="reponder" BorderPane.alignment="CENTER" />
-         </bottom>
-         <center>
-            <TableView fx:id="table" prefHeight="200.0" prefWidth="538.0" BorderPane.alignment="CENTER">
-              <columns>
-                <TableColumn fx:id="id" prefWidth="96.79998475313187" text="id-reclamation" />
-                  <TableColumn fx:id="type" prefWidth="92.80001831054688" text="Type" />
-                  <TableColumn fx:id="desc" prefWidth="188.0" text="description" />
-                <TableColumn fx:id="stat" prefWidth="135.20004272460938" text="status" />
-                  <TableColumn fx:id="date" prefWidth="188.80001831054688" text="Date" />
-                  <TableColumn fx:id="user" prefWidth="54.39996337890625" text="id-user" />
-                  <TableColumn fx:id="rep" prefWidth="235.199951171875" text="Reponse" />
-              </columns>
-            </TableView>
-         </center>
-       </BorderPane>
+            </top>
+            <bottom>
+                <Button fx:id="mailid" mnemonicParsing="false" onAction="#enoyerrep" text="envoyer reponse par mail" BorderPane.alignment="CENTER" />
+            </bottom>
+            <center>
+                <TableView fx:id="table" prefHeight="200.0" prefWidth="538.0" BorderPane.alignment="CENTER">
+                    <columns>
+                        <TableColumn fx:id="id" prefWidth="96.79998475313187" text="id-reclamation" />
+                        <TableColumn fx:id="type" prefWidth="92.80001831054688" text="Type" />
+                        <TableColumn fx:id="desc" prefWidth="188.0" text="description" />
+                        <TableColumn fx:id="stat" prefWidth="135.20004272460938" text="status" />
+                        <TableColumn fx:id="date" prefWidth="188.80001831054688" text="Date" />
+                        <TableColumn fx:id="user" prefWidth="54.39996337890625" text="id-user" />
+                        <TableColumn fx:id="rep" prefWidth="235.199951171875" text="Reponse" />
+                    </columns>
+                </TableView>
+            </center>
+            <right>
+                <PieChart fx:id="pieChartStatistiques" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER" />
+            </right>
+        </BorderPane>
 
-   </children>
+    </children>
 </AnchorPane>
