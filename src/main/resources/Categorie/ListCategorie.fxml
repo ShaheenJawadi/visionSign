@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.TextFlow?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="14.0" stylesheets="@../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Categorie.ListCategorie">
+    <children>
+        <TextFlow textAlignment="CENTER" VBox.vgrow="NEVER">
+            <children>
+                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="primaryTextColor" text="Explorer les categories">
+                    <font>
+                        <Font
+                                name="System Bold" size="28.0" />
+                    </font>
+                </Text>
+            </children>
+        </TextFlow>
+        <FlowPane fx:id="listCategorieHolder" alignment="CENTER" hgap="20.0" maxWidth="1400.0" prefHeight="200.0" prefWidth="1400.0" vgap="20.0" VBox.vgrow="ALWAYS">
+            <children>
+                <fx:include source="SingleGridCategorie.fxml" />
+            </children>
+        </FlowPane>
+    </children>
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+</VBox>
