@@ -134,7 +134,6 @@ public class CreateCategorie implements Initializable {
     }
 
     public void submitSousCategorie () {
-        
     }
 
     public void initValidation() {
