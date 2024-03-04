@@ -104,11 +104,6 @@
                               <fx:include source="Componants.fxml" />
                            </children>
                         </VBox>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                           <children>
-                              <fx:include source="../Components/Footer.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                           </children>
-                        </AnchorPane>
                      </children>
                   </VBox>
                </children>

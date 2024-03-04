@@ -1,5 +1,6 @@
 package controllers.studentForum;
 
+import State.MainNavigations;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import entities.Publications;
@@ -51,41 +52,18 @@ public class BaseForumController {
     protected ReactionsService reactionsService=new ReactionsService();
     @FXML
     public void handleChat(ActionEvent event){
-        try {
+        MainNavigations.getInstance().openChatbotForumPage();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/ChatBot.fxml"));
-            Parent root = loader.load();
-
-            forumBtn.getScene().setRoot(root);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @FXML
     void navigateAddPub(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/AddPublication.fxml"));
-            Parent root = loader.load();
-            addBtn.getScene().setRoot(root);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        MainNavigations.getInstance().openAddPublicationForumPage();
     }
 
     @FXML
     public void handleForum(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/ForumGetAllPublications.fxml"));
-            Parent root = loader.load();
-
-            forumBtn.getScene().setRoot(root);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        MainNavigations.getInstance().openForumPage();
     }
 
     private void playSound(String soundFile) {
@@ -106,19 +84,9 @@ public class BaseForumController {
             public void handle(MouseEvent event) {
                 if (event.getButton().equals(MouseButton.PRIMARY)) {
                     if (event.getClickCount() == 1) {
-                        try {
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/PublicationDetails.fxml"));
-                            Parent root = loader.load();
 
-                            PublicationDetailsController pubDetailController = loader.getController();
-                            pubDetailController.setPubId(publication.getId());
-                            System.out.println("Passing pubId: " + publication.getId());
-                            forumBtn.getScene().setRoot(root);
 
-                        } catch (IOException e) {
-
-                            throw new RuntimeException(e);
-                        }
+                            MainNavigations.getInstance().openPublicationDetailsForumPage(publication.getId());
                     }
                 }
             }
@@ -196,7 +164,8 @@ public class BaseForumController {
 
             Platform.runLater(() -> {
                 try {
-                    boolean isLiked = reactionsService.isLikedByUser(6, publication.getId());
+                    //TODO USERID
+                    boolean isLiked = reactionsService.isLikedByUser(18, publication.getId());
 
                     if (isLiked) {
                         likeButton.setStyle("-fx-background-color: #E2FFE2;-fx-background-radius: 200;");
@@ -222,7 +191,8 @@ public class BaseForumController {
             dislikeButton.setGraphic(dislikeIcon);
             likeButton.setOnAction(event -> {
                 try {
-                    reactionsService.addLike(6, publication.getId(), 1, 0);
+                    //todo USErid=6
+                    reactionsService.addLike(18, publication.getId(), 1, 0);
 
                     int updatedLikes = reactionsService.getLikesCount(publication.getId());
                     int updatedDislikes = reactionsService.getDislikesCounts(publication.getId());
@@ -240,7 +210,9 @@ public class BaseForumController {
             });
             dislikeButton.setOnAction(event -> {
                 try {
-                    reactionsService.addLike(6, publication.getId(), 0, 1);
+                    //todo USErid=6
+
+                    reactionsService.addLike(18, publication.getId(), 0, 1);
 
                     int updatedLikes = reactionsService.getLikesCount(publication.getId());
                     int updatedDislikes = reactionsService.getDislikesCounts(publication.getId());
@@ -260,7 +232,9 @@ public class BaseForumController {
 
             Platform.runLater(() -> {
                 try {
-                    boolean isdisliked = reactionsService.isDislikedByUser(6, publication.getId());
+                    //todo USErid=6
+
+                    boolean isdisliked = reactionsService.isDislikedByUser(18, publication.getId());
 
                     if (isdisliked) {
                         dislikeButton.setStyle("-fx-background-color: #FFE2E2;-fx-background-radius: 200;");
@@ -326,20 +300,9 @@ public class BaseForumController {
             modifyButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    try {
+                    MainNavigations.getInstance().openModifyPublicationForumPage(mypub.get(index).getId());
+                     refreshPublications();
 
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/ModifyPublication.fxml"));
-                        Parent root = loader.load();
-
-                        ModifyPublicationController modifyController = loader.getController();
-                        modifyController.setPubId(mypub.get(index).getId());
-                        System.out.println(mypub.get(index).getId());
-                        forumBtn.getScene().setRoot(root);
-                        refreshPublications();
-
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                 }
             });
 
@@ -394,7 +357,9 @@ public class BaseForumController {
     @FXML
     public void searchPubByTitle(ActionEvent event) {
         String searchText = searchField.getText();
-        int userID = 6;
+        //todo USErid=6
+
+        int userID = 18;
         try {
 
             if (searchText.isEmpty()) {

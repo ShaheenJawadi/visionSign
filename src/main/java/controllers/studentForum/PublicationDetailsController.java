@@ -53,6 +53,12 @@ public class PublicationDetailsController extends BaseForumController {
     private CommentairesService commentService = new CommentairesService();
     private List<Commentaires> allCom;
 
+    @FXML
+    private AnchorPane rootId ;
+
+    public  AnchorPane getRootBox(){
+        return  this.rootId;
+    }
 
     public void setPubId(int pubId) {
         this.pubId = pubId;
@@ -66,7 +72,9 @@ public class PublicationDetailsController extends BaseForumController {
     public void initialize() {
         System.out.println("initialize" + pubId);
         try {
-            mypub = pubs.getPublicationsByUserId(6);
+            //todo USErid=6
+
+            mypub = pubs.getPublicationsByUserId(18);
             mypub.sort(Comparator.comparing(Publications::getDate_creation).reversed());
 
             if (mypub.isEmpty()) {
@@ -278,14 +286,18 @@ public class PublicationDetailsController extends BaseForumController {
         String commentText = commentField.getText();
         if (!commentText.isEmpty() && commentText != null) {
             try {
-                if (!commentService.commentaireExists(commentText, pubId, 6)) {
+                //todo USErid=6
+
+                if (!commentService.commentaireExists(commentText, pubId, 18)) {
                     boolean y = checkWithAiModel(commentText);
                     if(!y) {
                         Commentaires newComment = new Commentaires();
                         newComment.setCommentaire(commentText);
                         newComment.setDate(new Date());
                         newComment.setId_pub(pubId);
-                        newComment.setUserId(6);
+                        //todo USErid=6
+
+                        newComment.setUserId(18);
                         commentService.addPublicationOrCommentaire(newComment);
                         loadComments();
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);

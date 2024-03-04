@@ -1,5 +1,6 @@
 package controllers.studentForum;
 
+import State.MainNavigations;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import entities.Publications;
@@ -15,6 +16,7 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.scene.image.Image;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import services.Forum.PublicationsService;
 
@@ -37,6 +39,12 @@ import javafx.scene.layout.HBox;
 public class AddPublicationController extends BaseForumController {
     private static final String API_KEY = "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";
 
+    @FXML
+    private  AnchorPane rootId ;
+
+    public AnchorPane getRootBox(){
+        return  this.rootId ;
+    }
     private final Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
             "cloud_name", "dkdx59xe9",
             "api_key", "464462256124751",
@@ -152,18 +160,20 @@ public class AddPublicationController extends BaseForumController {
         String questionText = questionId.getText();
         try {
             if (titreText != null && !titreText.isEmpty() && questionText != null && !questionText.isEmpty()) {
-                if (!pubs.publicationExists(titreText, questionText, 6)) {
+                //todo USErid=6
+
+                if (!pubs.publicationExists(titreText, questionText, 18)) {
                     boolean y = checkWithAiModel(titreText, questionText);
                     if (!y) {
                         String imageUrls = String.join(";", selectedImagePaths);
-                        pubs.addPublicationOrCommentaire(new Publications(titreText, questionText, new Date(), imageUrls, 6));
+                        //todo USErid=6
+
+                        pubs.addPublicationOrCommentaire(new Publications(titreText, questionText, new Date(), imageUrls, 18));
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Succès!");
                         alert.setContentText("Publication ajoutée!");
                         alert.showAndWait();
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/ForumGetAllPublications.fxml"));
-                        Parent root = loader.load();
-                        questionId.getScene().setRoot(root);
+                        MainNavigations.getInstance().openForumPage();
                     } else {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setTitle("Contenu inapproprié!");
@@ -187,8 +197,6 @@ public class AddPublicationController extends BaseForumController {
             alert.setTitle("Erreur!");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 }

@@ -1,5 +1,6 @@
 package controllers.studentForum;
 
+import State.MainNavigations;
 import com.google.gson.Gson;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -15,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -45,6 +47,15 @@ public class ChatBotController {
     private VBox ChatbotContainer;
     @FXML
     private ScrollPane chatScrollPane;
+
+    @FXML
+    private  AnchorPane rootId ;
+
+
+    public AnchorPane getRootBox(){
+        return this.rootId;
+    }
+
     private void scrollToBottom() {
         Platform.runLater(() -> {
             chatScrollPane.layout();
@@ -83,14 +94,7 @@ public class ChatBotController {
     }
     @FXML
     public void handleForum(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/ForumGetAllPublications.fxml"));
-            Parent root = loader.load();
-            forumBtn.getScene().setRoot(root);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        MainNavigations.getInstance().openForumPage();
     }
     public void addUserMessage(String message) {
         Text userText = new Text(message);

@@ -5,7 +5,7 @@ import controllers.MainPages.Cours.Filter.FilterController;
 import controllers.MainPages.Cours.SingleCoursController;
 import controllers.MainPages.MainPageController;
 import controllers.Student.QuizEleveController;
-import controllers.studentForum.ForumGetAllPublicationsController;
+import controllers.studentForum.*;
 import entities.Cours;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -182,6 +182,96 @@ public class MainNavigations {
 
 
 
+    public void openChatbotForumPage(){
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/ChatBot.fxml"));
+
+            loader.load();
+
+            ChatBotController page = loader.getController();
+
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(page.getRootBox());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
+    }
+
+
+
+    public void openAddPublicationForumPage(){
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/AddPublication.fxml"));
+
+            loader.load();
+
+            AddPublicationController page = loader.getController();
+
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(page.getRootBox());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
+    }
+
+
+
+    public void openModifyPublicationForumPage(int pubId){
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/ModifyPublication.fxml"));
+
+            loader.load();
+
+            ModifyPublicationController page = loader.getController();
+            page.setPubId(pubId);
+
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(page.getRootBox());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
+    }
+
+
+    public void openPublicationDetailsForumPage(int pubId){
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/PublicationDetails.fxml"));
+
+            loader.load();
+
+            PublicationDetailsController page = loader.getController();
+            page.setPubId(pubId);
+
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(page.getRootBox());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
+    }
 
 
 

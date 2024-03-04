@@ -1,5 +1,6 @@
 package controllers.studentForum;
 
+import State.MainNavigations;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -40,6 +41,13 @@ import java.util.*;
 public class ModifyPublicationController extends BaseForumController  {
 
 
+    @FXML
+    private AnchorPane rootId ;
+
+
+    public  AnchorPane getRootBox(){
+        return  this.rootId;
+    }
     @FXML
     private TextField titreId, questionId;
 
@@ -255,9 +263,10 @@ public class ModifyPublicationController extends BaseForumController  {
             if (titreText != null && !titreText.isEmpty() && questionText != null && !questionText.isEmpty()) {
                 // Join the image URLs with semicolons
                 String imageUrls = String.join(";", selectedImagePaths.values());
+                //todo USErid=6
 
                 // Update the publication with the new image URLs
-                pubs.updatePublicationOrCommentaire(new Publications(pubId, titreText, questionText, new Date(), imageUrls, 6));
+                pubs.updatePublicationOrCommentaire(new Publications(pubId, titreText, questionText, new Date(), imageUrls, 18));
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success!");
@@ -265,9 +274,7 @@ public class ModifyPublicationController extends BaseForumController  {
                 alert.showAndWait();
 
                 // Load the updated list of publications
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/ForumGetAllPublications.fxml"));
-                Parent root = loader.load();
-                modPubBtn.getScene().setRoot(root);
+                MainNavigations.getInstance().openForumPage();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error!");
@@ -279,8 +286,6 @@ public class ModifyPublicationController extends BaseForumController  {
             alert.setTitle("Error!");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -288,7 +293,9 @@ public class ModifyPublicationController extends BaseForumController  {
     public void initialize() {
         trashBtn.setVisible(false);
         try {
-            mypub = pubs.getPublicationsByUserId(6);
+            //todo USErid=6
+
+            mypub = pubs.getPublicationsByUserId(18);
             mypub.sort(Comparator.comparing(Publications::getDate_creation).reversed());
 
             if (mypub.isEmpty()) {
