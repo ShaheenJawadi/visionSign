@@ -35,12 +35,12 @@
                             <Insets left="20.0" top="8.0" />
                         </HBox.margin>
                     </Button>
-                    <Button fx:id="CoursBtn" mnemonicParsing="false" style="-fx-background-color: none;" text="Cours" textFill="#2447f9">
+                    <Button fx:id="CoursBtn" mnemonicParsing="false" style="-fx-background-color: none;" text="Cours" textFill="#00aeef">
                         <HBox.margin>
                             <Insets left="20.0" top="8.0" />
                         </HBox.margin>
                     </Button>
-                    <Button fx:id="forumBtn" mnemonicParsing="false" style="-fx-background-color: none;" text="Forum" >
+                    <Button fx:id="forumBtn" mnemonicParsing="false" style="-fx-background-color: none;" text="Forum">
                         <HBox.margin>
                             <Insets left="20.0" top="8.0" />
                         </HBox.margin>
@@ -61,7 +61,7 @@
                     <FontAwesomeIconView glyphName="BELL" size="20" text="" />
                 </graphic></Button>
             <Button layoutX="896.0" layoutY="17.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="39.0" text="Button" />
-            <FontAwesomeIconView fill="#2aace2" glyphName="USER" layoutX="725.0" layoutY="43.0" size="20" text="" wrappingWidth="10.971452713012695" />
+            <FontAwesomeIconView fill="#00aeef" glyphName="USER" layoutX="725.0" layoutY="43.0" size="20" text="" wrappingWidth="10.971452713012695" />
         </children>
     </AnchorPane>
 

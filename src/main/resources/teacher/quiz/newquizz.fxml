@@ -65,7 +65,7 @@
          </children>
       </HBox>
       <Text fx:id="errorMessage" fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" />
-      <Button fx:id="nextbtn" mnemonicParsing="false" onAction="#handleButtonClick" style="-fx-background-color: #3B5BFF; -fx-padding: 10 40 10 40; -fx-background-radius: 20; -fx-border-radius: 20;" text="Next" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="nextbtn" mnemonicParsing="false" onAction="#handleButtonClick" style="-fx-background-color: #00aeef; -fx-padding: 10 40 10 40; -fx-background-radius: 20; -fx-border-radius: 20;" text="Next" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

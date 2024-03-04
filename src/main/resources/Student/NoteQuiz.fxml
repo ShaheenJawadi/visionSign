@@ -14,12 +14,12 @@
         <fx:include fx:id="navbar" source="Navbar.fxml" />
         <Pane layoutX="192.0" layoutY="76.0" prefHeight="514.0" prefWidth="969.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="76.0">
             <children>
-                <Label layoutX="384.0" layoutY="122.0" text="Votre note est : " textFill="#2447f9">
+                <Label layoutX="384.0" layoutY="122.0" text="Votre note est : " textFill="#00aeef">
                     <font>
                         <Font name="System Bold" size="30.0" />
                     </font>
                 </Label>
-                <Button layoutX="214.0" layoutY="273.0" mnemonicParsing="false" onAction="#retourAccueil" prefHeight="45.0" prefWidth="245.0" style="-fx-background-color: #3B5BFF; -fx-padding: 10 40 10 40; -fx-background-radius: 20; -fx-border-radius: 20;" text="Retour vers l'Accueil" textAlignment="CENTER" textFill="WHITE">
+                <Button layoutX="214.0" layoutY="273.0" mnemonicParsing="false" onAction="#retourAccueil" prefHeight="45.0" prefWidth="245.0" style="-fx-background-color: #00aeef; -fx-padding: 10 40 10 40; -fx-background-radius: 20; -fx-border-radius: 20;" text="Retour vers l'Accueil" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>
@@ -32,7 +32,7 @@
                         <Font size="27.0" />
                     </font>
                 </Text>
-                <Button layoutX="514.0" layoutY="273.0" mnemonicParsing="false" onAction="#generatePDF" prefHeight="45.0" prefWidth="245.0" style="-fx-background-color: #3B5BFF; -fx-padding: 10 40 10 40; -fx-background-radius: 20; -fx-border-radius: 20;" text="Telecharger (PDF)" textAlignment="CENTER" textFill="WHITE">
+                <Button layoutX="514.0" layoutY="273.0" mnemonicParsing="false" onAction="#generatePDF" prefHeight="45.0" prefWidth="245.0" style="-fx-background-color: #00aeef; -fx-padding: 10 40 10 40; -fx-background-radius: 20; -fx-border-radius: 20;" text="Telecharger (PDF)" textAlignment="CENTER" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="16.0" />
                     </font>

@@ -18,7 +18,7 @@
          <left>
             <Pane fx:id="leftPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="#3b5bff" layoutX="32.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Left" textAlignment="CENTER">
+                  <Text fill="#00aeef" layoutX="32.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time Left" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
@@ -54,7 +54,7 @@
          <right>
             <Pane fx:id="rightPane" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="#3b5bff" layoutX="37.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question">
+                  <Text fill="#00aeef" layoutX="37.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question">
                      <font>
                         <Font name="System Bold" size="25.0" />
                      </font>
@@ -73,7 +73,7 @@
                   <Insets left="10.0" right="10.0" />
                </BorderPane.margin>
                <children>
-                  <Button fx:id="nextBtn" layoutX="384.0" layoutY="436.0" mnemonicParsing="false" onAction="#nextFn" style="-fx-background-color: #3B5BFF; -fx-padding: 10 40 10 40; -fx-background-radius: 20; -fx-border-radius: 20;" text="Next" textAlignment="CENTER" textFill="WHITE">
+                  <Button fx:id="nextBtn" layoutX="384.0" layoutY="436.0" mnemonicParsing="false" onAction="#nextFn" style="-fx-background-color: #00aeef; -fx-padding: 10 40 10 40; -fx-background-radius: 20; -fx-border-radius: 20;" text="Next" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
