@@ -26,7 +26,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="10.0" />
                     </BorderPane.margin>
                     <children>
-                        <Text fill="#2447f9" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Vos Quiz" textAlignment="CENTER" wrappingWidth="171.89178466796875">
+                        <Text fill="#00aeef" smooth="false" strokeType="OUTSIDE" strokeWidth="0.0" text="Vos Quiz" textAlignment="CENTER" wrappingWidth="171.89178466796875">
                             <VBox.margin>
                                 <Insets left="50.0" top="8.0" />
                             </VBox.margin>
@@ -41,12 +41,12 @@
 
                                 <!-- Search Bar -->
                                 <HBox alignment="CENTER_LEFT" spacing="10">
-                                    <TextField fx:id="searchField" onAction="#searchQuiz" prefHeight="30.0" prefWidth="202.0" promptText="Rechercher..." style="-fx-border-color: #2447f9; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 5 10 5 10;" HBox.hgrow="ALWAYS">
+                                    <TextField fx:id="searchField" onAction="#searchQuiz" prefHeight="30.0" prefWidth="202.0" promptText="Rechercher..." style="-fx-border-color: #00aeef; -fx-border-radius: 20; -fx-background-radius: 20; -fx-padding: 5 10 5 10;" HBox.hgrow="ALWAYS">
                                         <HBox.margin>
                                             <Insets right="-42.0" />
                                         </HBox.margin>
                                     </TextField>
-                                    <Button prefHeight="30.0" prefWidth="39.0" style="-fx-background-color: #2447F9; -fx-background-radius: 50;" HBox.hgrow="NEVER">
+                                    <Button prefHeight="30.0" prefWidth="39.0" style="-fx-background-color: #00aeef; -fx-background-radius: 50;" HBox.hgrow="NEVER">
                                      
                                     </Button>
                                 </HBox>
@@ -107,7 +107,7 @@
                                 </AnchorPane>
                             </content>
                         </ScrollPane>
-                        <Button fx:id="modQuizBtn" layoutX="446.0" layoutY="61.0" mnemonicParsing="false" onAction="#modifierQuizAction" prefHeight="34.0" prefWidth="74.0" style="-fx-background-color: #2447F9; -fx-background-radius: 50; -fx-border-radius: 50;" text="Modifier" textFill="WHITE">
+                        <Button fx:id="modQuizBtn" layoutX="446.0" layoutY="61.0" mnemonicParsing="false" onAction="#modifierQuizAction" prefHeight="34.0" prefWidth="74.0" style="-fx-background-color: #00aeef; -fx-background-radius: 50; -fx-border-radius: 50;" text="Modifier" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
@@ -115,7 +115,7 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button fx:id="quitterBtn" layoutX="539.0" layoutY="61.0" mnemonicParsing="false" onAction="#quitterAction" prefHeight="34.0" prefWidth="74.0" style="-fx-background-color: #2447F9; -fx-background-radius: 50; -fx-border-radius: 50;" text="Quitter" textFill="WHITE">
+                        <Button fx:id="quitterBtn" layoutX="539.0" layoutY="61.0" mnemonicParsing="false" onAction="#quitterAction" prefHeight="34.0" prefWidth="74.0" style="-fx-background-color: #00aeef; -fx-background-radius: 50; -fx-border-radius: 50;" text="Quitter" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
@@ -123,7 +123,7 @@
                                 <Cursor fx:constant="HAND" />
                             </cursor>
                         </Button>
-                        <Button fx:id="ajouterQuestionBtn" layoutX="459.0" layoutY="19.0" mnemonicParsing="false" onAction="#ajouterQuestionAction" prefHeight="34.0" prefWidth="139.0" style="-fx-background-color: #2447F9; -fx-background-radius: 50; -fx-border-radius: 50;" text="Ajouter question" textFill="WHITE">
+                        <Button fx:id="ajouterQuestionBtn" layoutX="459.0" layoutY="19.0" mnemonicParsing="false" onAction="#ajouterQuestionAction" prefHeight="34.0" prefWidth="139.0" style="-fx-background-color: #00aeef; -fx-background-radius: 50; -fx-border-radius: 50;" text="Ajouter question" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="13.0" />
                             </font>
