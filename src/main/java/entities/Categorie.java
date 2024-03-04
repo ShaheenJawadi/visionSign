@@ -15,13 +15,20 @@ public class Categorie {
     public Categorie() {
     }
 
-    public Categorie(String nom, String description, Date last_updated, String image, List<SousCategorie> sousCategorieListe, int nbSousCategorie ) {
+    public Categorie(String nom, String description, String image) {
+        this.nom = nom;
+        this.description = description;
+        this.image = image;
+        this.nbSousCategorie = 0;
+    }
+
+    public Categorie(String nom, String description, Date last_updated, String image, List<SousCategorie> sousCategorieListe, int nbSousCategorie) {
         this.nom = nom;
         this.description = description;
         this.last_updated = last_updated;
         this.image = image;
         this.sousCategorieListe = sousCategorieListe;
-        this.nbSousCategorie=nbSousCategorie;
+        this.nbSousCategorie = nbSousCategorie;
     }
 
 
@@ -93,7 +100,7 @@ public class Categorie {
                 '}';
     }
 
-    public  String nbsousCategories(){
-        return String.valueOf(this.getSousCategorieListe().size()) ;
+    public String nbsousCategories() {
+        return String.valueOf(this.getSousCategorieListe().size());
     }
 }

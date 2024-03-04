@@ -83,6 +83,7 @@ public class SousCategorieService implements ISousCategorieService<SousCategorie
         }
     }
 
+
     @Override
     public List<SousCategorie> getSousCategorieListByCategoryId(int categorie_id) throws SQLException {
         List<SousCategorie> subCategories = new ArrayList<>();
@@ -91,6 +92,30 @@ public class SousCategorieService implements ISousCategorieService<SousCategorie
         String query = "SELECT * FROM" + tableName + " WHERE categorie_id = ?";
         PreparedStatement statement = connection.prepareStatement(query);
         statement.setInt(1, categorie_id);
+        ResultSet resultSet = statement.executeQuery();
+
+        // Iterate through the ResultSet and create SubCategorie objects
+        while (resultSet.next()) {
+            SousCategorie subCategory = new SousCategorie();
+            subCategory.setId(resultSet.getInt("id"));
+            subCategory.setNom(resultSet.getString("nom"));
+            subCategory.setDescription(resultSet.getString("description"));
+            subCategory.setDateCreation(resultSet.getDate("date_creation"));
+            subCategory.setStatus(resultSet.getString("status"));
+            subCategories.add(subCategory);
+        }
+
+        return subCategories;
+
+    }
+
+    @Override
+    public List<SousCategorie> getSousCategorieList() throws SQLException {
+        List<SousCategorie> subCategories = new ArrayList<>();
+
+        // SQL query to select subcategories for the given category ID
+        String query = "SELECT * FROM" + tableName;
+        PreparedStatement statement = connection.prepareStatement(query);
         ResultSet resultSet = statement.executeQuery();
 
         // Iterate through the ResultSet and create SubCategorie objects
@@ -159,6 +184,8 @@ public class SousCategorieService implements ISousCategorieService<SousCategorie
         }
         return sousCategorie;
     }
+
+
 
     public PreparedStatement prepareStatementWithGeneratedKeys(Connection connection, String sql) throws SQLException {
         return connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
