@@ -10,7 +10,6 @@
    <children>
       <BorderPane layoutY="-12.0" prefHeight="598.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-12.0">
          <top>
-            <fx:include fx:id="navbar" source="Navbar.fxml" />
 
          </top>
          <left>

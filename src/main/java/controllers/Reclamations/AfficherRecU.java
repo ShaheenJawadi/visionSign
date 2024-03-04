@@ -23,6 +23,7 @@ import services.Reclamations.ReclamationsServices;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -31,8 +32,7 @@ public class AfficherRecU implements Initializable{
 
     @FXML
     public AnchorPane listepubid, allpubid;
-    @FXML
-    public AnchorPane navbar;
+
     @FXML
     private Button addBtn,forumBtn;
     @FXML
@@ -45,24 +45,31 @@ public class AfficherRecU implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
         refreshPublications();
         try {
-            mypub = pubs.getReclamationsById(2);
-            if (this.mypub == null || this.mypub.isEmpty()) {
+            //TODO userId=1
+
+            mypub = pubs.getReclamationsById(1);
+            System.out.println(mypub);
+            mypub.sort(Comparator.comparing(Reclamations::getDate).reversed());
+
+            if (mypub.isEmpty()) {
                 Text emptyText = new Text("Vous n'avez pas encore publié!");
                 emptyText.setFont(new Font("System", 15));
                 emptyText.setFill(Color.GRAY);
                 emptyText.setLayoutX(19);
                 emptyText.setLayoutY(172);
                 listepubid.getChildren().add(emptyText);
-                listepubid.setPrefHeight(100);
             } else {
                 for (int i = 0; i < mypub.size(); i++) {
                     Pane pane = createPublicationPane(mypub.get(i), i, false);
                     listepubid.getChildren().add(pane);
                 }
-                listepubid.setPrefHeight(mypub.size() * 85);
             }
+            listepubid.setPrefHeight(mypub.isEmpty() ? 100 : mypub.size() * 85);
 
             allPub = pubs.recuperer();
+            allPub.sort(Comparator.comparing(Reclamations::getDate).reversed());
+            allpubid.getChildren().clear();
+
             if (allPub.isEmpty()) {
                 Text emptyText = new Text("Aucune publication n'a été publiée.");
                 emptyText.setFont(new Font("System", 16));
@@ -70,17 +77,17 @@ public class AfficherRecU implements Initializable{
                 emptyText.setLayoutX(10);
                 emptyText.setLayoutY(50);
                 allpubid.getChildren().add(emptyText);
-                allpubid.setPrefHeight(100);
             } else {
                 for (int i = 0; i < allPub.size(); i++) {
                     Pane pane = createPublicationPane(allPub.get(i), i, true);
                     allpubid.getChildren().add(pane);
                 }
-                allpubid.setPrefHeight(allPub.size() * 165);
             }
+            allpubid.setPrefHeight(allPub.isEmpty() ? 100 : allPub.size() * 165);
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
+
         }
     }
 
@@ -155,7 +162,7 @@ public class AfficherRecU implements Initializable{
                         Parent root = loader.load();
 
                         ModifierRecController modifyController = loader.getController();
-                        modifyController.setPubId(mypub.get(index).getId_reclamation());
+                        modifyController.setRecId(mypub.get(index).getId_reclamation());
                         System.out.println(mypub.get(index).getId_reclamation());
                         forumBtn.getScene().setRoot(root);
                     } catch (IOException e) {
@@ -178,13 +185,20 @@ public class AfficherRecU implements Initializable{
                 @Override
                 public void handle(ActionEvent event) {
                     try {
+                        int publicationId = mypub.get(index).getId_reclamation();
                         pubs.supprimer(mypub.get(index).getId_reclamation());
                         System.out.println("deleted!");
                         listepubid.getChildren().remove(pane);
                         mypub.remove(index);
+                        allPub.removeIf(pub -> pub.getId_reclamation() == publicationId);
+                        allpubid.getChildren().clear();
+                        for (int i = 0; i < allPub.size(); i++) {
+                            Pane pubPane = createPublicationPane(allPub.get(i), i, true);
+                            allpubid.getChildren().add(pubPane);
+                        }
                         Alert alert=new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Succes!");
-                        alert.setContentText("Publication supprimé!");
+                        alert.setContentText("Reclamation supprimé!");
                         alert.showAndWait();
                     } catch (SQLException e) {
                         Alert alert=new Alert(Alert.AlertType.ERROR);
@@ -227,7 +241,8 @@ public class AfficherRecU implements Initializable{
     @FXML
     void searchPubByTitle(ActionEvent event) {
         String searchText = searchField.getText();
-        int userID = 2;
+        //TODO userid=1
+        int userID = 1;
         try {
 
             if (searchText.isEmpty()) {
@@ -237,7 +252,7 @@ public class AfficherRecU implements Initializable{
             }
             listepubid.getChildren().clear();
             for (int i = 0; i < mypub.size(); i++) {
-                Pane pane = createPublicationPane(mypub.get(i), i,true);
+                Pane pane = createPublicationPane(mypub.get(i), i,false);
                 listepubid.getChildren().add(pane);
             }
             listepubid.setPrefHeight(mypub.size() * 85);

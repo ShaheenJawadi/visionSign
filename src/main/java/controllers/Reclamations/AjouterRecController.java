@@ -12,7 +12,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -73,8 +72,8 @@ public class AjouterRecController {
     void ajouter(ActionEvent event) {
         try {
             String typeReclamation = typeCombo.getValue();
-            //int idUtilisateur = userCombo.getValue();
-            Reclamations nouvelleReclamation = new Reclamations(typeReclamation, desFx.getText(), statFx.getText(), Integer.parseInt(userid.getText()));
+            //TODO userid=1
+            Reclamations nouvelleReclamation = new Reclamations(typeReclamation, desFx.getText(), statFx.getText(), 1);
             reclamationsServices.ajouterRec(nouvelleReclamation, typeReclamation); // Utilisation de la méthode ajouterRec
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");
@@ -90,6 +89,30 @@ public class AjouterRecController {
 
     @FXML
     void initialize() {
+        try {
+            //TODO userid=1
+            mypub = pubs.getReclamationsById(1);
+            if (this.mypub == null || this.mypub.isEmpty()) {
+                Text emptyText = new Text("Vous n'avez pas encore publié!");
+                emptyText.setFont(new Font("System", 15));
+                emptyText.setFill(Color.GRAY);
+                emptyText.setLayoutX(19);
+                emptyText.setLayoutY(172);
+                listepubid.getChildren().add(emptyText);
+                listepubid.setPrefHeight(100);
+            } else {
+                for (int i = 0; i < mypub.size(); i++) {
+                    Pane pane = createPublicationPane(mypub.get(i), i, false);
+                    listepubid.getChildren().add(pane);
+                }
+                listepubid.setPrefHeight(mypub.size() * 85);
+            }
+
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         try {
             // Charger les réclamations depuis le service
             mypub = reclamationsServices.recuperer(); // Initialise mypub
@@ -117,7 +140,7 @@ public class AjouterRecController {
 
 
 
-    private Pane createPublicationPane(Reclamations publication, int index) {
+    Pane createPublicationPane(Reclamations publication, int index, boolean b) {
         Pane pane = new Pane();
         pane.setPrefSize(271, 75);
         pane.setLayoutX(-1);
@@ -153,7 +176,7 @@ public class AjouterRecController {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/Reclamations/ModifierRec.fxml"));
                     Parent root = loader.load();
                     ModifierRecController modifyController = loader.getController();
-                    modifyController.setPubId(mypub.get(index).getId_reclamation());
+                    modifyController.setRecId(mypub.get(index).getId_reclamation());
                     System.out.println(mypub.get(index).getId_reclamation());
                     forumBtn.getScene().setRoot(root);
                 } catch (IOException e) {
@@ -212,7 +235,8 @@ public class AjouterRecController {
 
     public void searchPubByTitle1(ActionEvent actionEvent) {
         String searchText = searchField1.getText();
-        int userID = 2;
+        //TODO userid=1
+        int userID = 1;
         try {
 
             if (searchText.isEmpty()) {
@@ -222,7 +246,7 @@ public class AjouterRecController {
             }
             listepubid.getChildren().clear();
             for (int i = 0; i < mypub.size(); i++) {
-                Pane pane = createPublicationPane(mypub.get(i), i);
+                Pane pane = createPublicationPane(mypub.get(i), i, false);
                 listepubid.getChildren().add(pane);
             }
             listepubid.setPrefHeight(mypub.size() * 85);

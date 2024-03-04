@@ -53,16 +53,6 @@ public class AfficherRecController {
     @FXML
     private Button back, mailid;
 
-    @FXML
-    void back(ActionEvent event) throws IOException {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/main.fxml"));
-            Parent root = loader.load();
-            back.getScene().setRoot(root);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     private final ReclamationsServices reclamationsServices = new ReclamationsServices();
 
@@ -115,16 +105,6 @@ public class AfficherRecController {
         }
     }
 
-    @FXML
-    void ajout(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/reclamtions/AjouterRec.fxml"));
-            Parent root = loader.load();
-            table.getScene().setRoot(root);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 
     @FXML

@@ -160,25 +160,42 @@ public class ReclamationsServices implements IServices<Reclamations>{
 
 
     public List<Reclamations> getReclamationsById(int id) throws SQLException {
-        List<Reclamations> reclamationsList = new ArrayList<>();
-        String sql = "SELECT * FROM reclamations WHERE id_reclamation=?";
+        String sql = "SELECT * FROM reclamations WHERE id_user = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
-        ps.setInt(1, id);
+        ps.setInt(1, id); // Set the userId in the query
         ResultSet rs = ps.executeQuery();
-
+        List<Reclamations> reclamations = new ArrayList<>();
         while (rs.next()) {
-            Reclamations reclamations = new Reclamations();
-            reclamations.setId_reclamation(rs.getInt("id_reclamation"));
-            reclamations.setType(rs.getString("type"));
-            reclamations.setDescription(rs.getString("description"));
-            reclamations.setStatus(rs.getString("status"));
-            reclamations.setDate(rs.getDate("date"));
-            reclamations.setRepondre(rs.getBoolean("repondre"));
-            reclamations.setId_user(rs.getInt("id_user"));
-            reclamationsList.add(reclamations);
+            Reclamations p = new Reclamations();
+            p.setId_reclamation(rs.getInt("id_reclamation"));
+            p.setType(rs.getString("type"));
+            p.setDescription(rs.getString("description"));
+            p.setStatus(rs.getString("status"));
+            p.setDate(rs.getDate("date"));
+            p.setRepondre(rs.getBoolean("repondre"));
+            p.setId_user(rs.getInt("id_user"));
+            reclamations.add(p);
         }
+        return reclamations;
 
-        return reclamationsList;
+    }
+    public Reclamations getReclamationsById2(int id) throws SQLException {
+        String sql = "SELECT * FROM reclamations WHERE id_reclamation = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, id); // Set the userId in the query
+        ResultSet rs = ps.executeQuery();
+        Reclamations p =null;
+        while (rs.next()) {
+            p= new Reclamations();
+            p.setId_reclamation(rs.getInt("id_reclamation"));
+            p.setType(rs.getString("type"));
+            p.setDescription(rs.getString("description"));
+            p.setStatus(rs.getString("status"));
+            p.setDate(rs.getDate("date"));
+            p.setRepondre(rs.getBoolean("repondre"));
+            p.setId_user(rs.getInt("id_user"));
+        }
+        return p;
 
     }
     public static String getUserEmailById(int userId) {
@@ -248,7 +265,7 @@ public class ReclamationsServices implements IServices<Reclamations>{
         return statistiques;
     }
     public int getUserIdByUsername(String username) throws SQLException {
-        String query = "SELECT id FROM user WHERE username = ?";
+        String query = "SELECT id FROM user WHERE nom = ?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
