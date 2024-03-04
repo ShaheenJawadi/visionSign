@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import services.User.UserService;
 import state.UserSessionManager;
 
@@ -17,6 +18,8 @@ import java.sql.SQLException;
 
 public class UserProfilePrivacyController {
 
+   @FXML
+    public ImageView imageId;
     @FXML
     private TextField emailTF;
     @FXML

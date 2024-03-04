@@ -13,6 +13,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import services.User.UserService;
@@ -25,6 +27,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AdminDashController {
+    @FXML
+    public ImageView imageId;
     @FXML
     private TableColumn<User, String> nomCol;
 
@@ -76,6 +80,7 @@ public class AdminDashController {
 
     @FXML
     void initialize() {
+        User user=userService.getCurrent();
         try{
             userTF.setText(userService.getCurrent().getUsername());
             List<User> users=userService.recuperer();
@@ -101,6 +106,16 @@ public class AdminDashController {
         });
         filteredList = new FilteredList<>(tableView.getItems(), p -> true);
         initializeSearchTypeComboBox();
+        String url = user.getImage();
+        if(!(url ==null)){
+            Image image = new Image(url);
+            imageId.setImage(image);
+        }
+        else{
+
+        }
+        Image image=new Image("User/UserDefault.png");
+        imageId.setImage(image);
 
     }
     @FXML
@@ -286,6 +301,26 @@ public class AdminDashController {
 
     }
 
+    @FXML
+    public void profile(javafx.scene.input.MouseEvent mouseEvent) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/User/UserProfile.fxml"));
+        try {
+            loader.load();
+           // UploadImageController uploadImageController = loader.getController();
+            // Set a reference to this UserProfileController
+            //uploadImageController.setUserProfileController(this);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+
+        Parent parent = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.initStyle(StageStyle.UTILITY);
+        stage.show();
+
+    }
 
 }
 

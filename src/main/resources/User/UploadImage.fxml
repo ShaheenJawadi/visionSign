@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="342.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.User.UploadImageController">
+    <children>
+        <AnchorPane layoutX="78.0" prefHeight="200.0" prefWidth="300.0">
+            <children>
+                <Button layoutX="47.0" layoutY="249.0" mnemonicParsing="false" onAction="#Save" prefHeight="42.0" prefWidth="140.0" style="-fx-background-color: #2aace2; -fx-background-radius: 15;" text="Changer image" textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                </Button>
+                <Label layoutX="87.0" layoutY="77.0" prefHeight="18.0" prefWidth="150.0" />
+            <ImageView fx:id="imageId" fitHeight="150.0" fitWidth="200.0" layoutX="37.0" layoutY="64.0" onMouseClicked="#upload" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@UserDefault.png" />
+               </image>
+            </ImageView>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

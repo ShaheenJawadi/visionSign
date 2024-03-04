@@ -42,7 +42,7 @@
                 </Label>
                 <HBox alignment="CENTER" layoutX="597.0" prefHeight="66.0" prefWidth="230.0">
                     <children>
-                        <ImageView fitHeight="70.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageId" fitHeight="70.0" fitWidth="60.0" onMouseClicked="#profile" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@pic.png" />
                             </image>

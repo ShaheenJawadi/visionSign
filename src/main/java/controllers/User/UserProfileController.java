@@ -1,22 +1,34 @@
 package controllers.User;
 
+import com.cloudinary.Cloudinary;
 import entities.User;
 import entities.UserLevel;
 import entities.UserRole;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
+import javafx.application.HostServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import entities.User;
 
+import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
+import javafx.event.EventHandler;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import services.User.UserService;
 import state.UserSessionManager;
 
@@ -38,19 +50,49 @@ public class UserProfileController {
     private TextField usernameTF;
     @FXML
     private Label userTF;
+    @FXML
+    private ImageView imageId;
     private final UserService userService=new UserService();
     private final UserSessionManager userSessionManager=new UserSessionManager();
+    private Cloudinary cloudinary;
+
 
  @FXML
     void initialize(){
-    User user=userService.getCurrent();
-        userTF.setText(user.getUsername());
-        ObservableList<UserLevel> userLevels = FXCollections.observableArrayList(UserLevel.values());
-        levelTF.setItems(userLevels);
-        nomTF.setText(user.getNom());
-        prenomTF.setText(user.getPrenom());
-        usernameTF.setText(user.getUsername());
-        if(user.getDateNaissance()!=null){dateTF.setValue(user.getDateNaissance().toLocalDate());}
+     User user = userService.getCurrent();
+
+     userTF.setText(user.getUsername());
+     ObservableList<UserLevel> userLevels = FXCollections.observableArrayList(UserLevel.values());
+     levelTF.setItems(userLevels);
+
+     // Check if the user is an admin before showing the levelTF
+     if (user.getRole().equals(UserRole.ADMIN) || user.getRole().equals(UserRole.ENSEIGNANT)) {
+         levelTF.setVisible(false);
+     } else {
+         levelTF.setVisible(true);
+     }
+
+     nomTF.setText(user.getNom());
+     prenomTF.setText(user.getPrenom());
+     usernameTF.setText(user.getUsername());
+     System.out.println("hahahahaa");
+     String url = user.getImage();
+     if(!(url ==null)){
+         Image image = new Image(url);
+         imageId.setImage(image);
+     }
+     else{
+
+     }
+         Image image=new Image("User/UserDefault.png");
+         imageId.setImage(image);
+     System.out.println("bababab");
+
+
+     if (user.getDateNaissance() != null) {
+         dateTF.setValue(user.getDateNaissance().toLocalDate());
+     }
+
      switch (user.getLevelId()) {
          case 1 -> levelTF.setValue(UserLevel.DEBUTANT);
          case 2 -> levelTF.setValue(UserLevel.INTERMEDIAIRE);
@@ -69,14 +111,15 @@ public class UserProfileController {
                 dateToSet = java.sql.Date.valueOf(selectedDate);
             }
 
-            User userToUpdate = new User(userService.getCurrent().getId(),nomTF.getText(),prenomTF.getText(),usernameTF.getText(),dateToSet,userService.getCurrent().getEmail(),userService.getCurrent().getPassword(),userService.getCurrent().getRole(),userService.getCurrent().getStatus());
+            User userToUpdate = new User(userService.getCurrent().getId(),nomTF.getText(),prenomTF.getText(),usernameTF.getText(),dateToSet,userService.getCurrent().getEmail(),userService.getCurrent().getPassword(),userService.getCurrent().getRole(),userService.getCurrent().getStatus(),"");
             System.out.println("Useerr to updateee"+userToUpdate.getId());
             System.out.println("neww datee"+userToUpdate.getDateNaissance());
+            if (!userToUpdate.getRole().equals(UserRole.ADMIN) || !userToUpdate.getRole().equals(UserRole.ENSEIGNANT)){
             switch (levelTF.getText()) {
                 case "DEBUTANT" -> userToUpdate.setLevelId(1);
                 case "INTERMEDIAIRE" -> userToUpdate.setLevelId(2);
                 case "AVANCE" -> userToUpdate.setLevelId(3);
-            }
+            }}
             System.out.println("aaaaaaaaaaaaaaaaaaaaa");
 
             if (validationError.isEmpty()) {
@@ -180,4 +223,29 @@ public class UserProfileController {
 
         return validationError.toString();
     }
+@FXML
+    public void changePic(javafx.scene.input.MouseEvent mouseEvent) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/User/UploadImage.fxml"));
+        try {
+            loader.load();
+            UploadImageController uploadImageController = loader.getController();
+            // Set a reference to this UserProfileController
+            uploadImageController.setUserProfileController(this);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+
+        Parent parent = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(parent));
+        stage.initStyle(StageStyle.UTILITY);
+        stage.show();
+
+    }
+    public void updateImage(String imageUrl) {
+        Image image = new Image(imageUrl);
+        imageId.setImage(image);
+    }
+
 }
