@@ -7,8 +7,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.print.PrinterJob;
+import javafx.scene.Scene;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import services.cours.CoursService;
 
 import java.io.IOException;
@@ -34,8 +38,40 @@ public class MainPageController implements Initializable {
 
 
 
-    public void OpenListCoursPage(ActionEvent actionEvent) {
+    private void printFXMLToPDF() {
+        try {
+            // Load the FXML file
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/MainPages/CoursPages/Main/sectionContent.fxml"));
+            Pane root = loader.load();
 
+            // Create a scene with the loaded FXML content
+            Scene scene = new Scene(root);
+
+            // Create a new stage for printing
+            Stage printStage = new Stage();
+            printStage.setScene(scene);
+
+            // Show the stage to layout the scene
+            printStage.show();
+
+            // Create a PrinterJob
+            PrinterJob job = PrinterJob.createPrinterJob();
+
+            if (job != null && job.showPrintDialog(printStage.getOwner())) {
+                boolean success = job.printPage(root);
+                if (success) {
+                    job.endJob();
+                }
+            }
+
+            // Close the stage after printing
+            printStage.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void OpenListCoursPage(ActionEvent actionEvent) {
+       // printFXMLToPDF();
             MainNavigations.getInstance().openCoursFilterPage();
     }
 
