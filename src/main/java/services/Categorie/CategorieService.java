@@ -27,13 +27,14 @@ public class CategorieService implements ICategorieService<Categorie, SousCatego
 
     @Override
     public void addCategorie(Categorie categorie) throws SQLException {
-        String sql = "INSERT INTO " + tableName + " (nom, description, last_updated, image) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO " + tableName + " (nom, description, last_updated, image, nbSousCategorie) VALUES(?,?,?,?,?)";
 
         PreparedStatement ps = prepareStatementWithGeneratedKeys(connection, sql);
         ps.setString(1, categorie.getNom());
         ps.setString(2, categorie.getDescription());
         ps.setDate(3, Date.valueOf(LocalDate.now()));
         ps.setString(4, categorie.getImage());
+        ps.setInt(4, 0);
         ps.executeUpdate();
     }
 

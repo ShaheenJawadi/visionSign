@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Categorie.AjouterCategorieController">
+    <children>
+        <Label layoutX="197.0" layoutY="27.0" text="Ajouter une catégorie">
+            <font>
+                <Font size="27.0" />
+            </font>
+        </Label>
+        <TextField fx:id="nomTF" layoutX="28.0" layoutY="92.0" promptText="Nom" />
+        <TextField fx:id="descriptionTF" layoutX="28.0" layoutY="160.0" promptText="Description" />
+        <TextField fx:id="image" layoutX="28.0" layoutY="218.0" promptText="image" />
+        <Button layoutX="460.0" layoutY="301.0" mnemonicParsing="false" onAction="#ajouter" text="Ajouter" />
+        <Button layoutX="523.0" layoutY="301.0" mnemonicParsing="false" onAction="#naviguer" text="Afficher" />
+    </children>
+</AnchorPane>

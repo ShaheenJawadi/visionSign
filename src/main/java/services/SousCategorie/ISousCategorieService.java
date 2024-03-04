@@ -1,5 +1,7 @@
 package services.SousCategorie;
 
+import entities.SousCategorie;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -21,6 +23,7 @@ public interface ISousCategorieService<T> {
 
     List<T> getSousCategoriesListByStatusAndCategoryId(String status, int categorieId) throws SQLException;
 
+    List<T> getSousCategorieList() throws SQLException;
     List<T> sortSousCategoryListByAttribute(String attribute) throws SQLException;
 
 }
