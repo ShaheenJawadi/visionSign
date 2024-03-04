@@ -12,6 +12,26 @@
     -fx-main-text-color: #757783 ;
 }
 
+
+.filter .category{
+
+    -fx-text-fill: -fx-secondary-color;
+    -fx-background-color: -fx-secondary-color-background;
+
+}
+.filter .category.selected{
+    -fx-background-color: -fx-secondary-color;
+    -fx-text-fill: #fff;
+}
+.filter .subCategory{
+    -fx-text-fill: -fx-third-color;
+    -fx-background-color: -fx-third-color-background;
+}
+.filter .subCategory.selected{
+    -fx-background-color: -fx-third-color;
+    -fx-text-fill: #fff;
+}
+
 .primaryColorBg {
     -fx-background-color: -fx-primary-color;
 }
@@ -19,6 +39,9 @@
     -fx-fill: -fx-primary-color;
 }
 .btn {
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size: 19px;
     -fx-cursor: hand;
 
 }
