@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import services.Reclamations.AvisServices;
@@ -44,6 +45,8 @@ public class AvisCoursController implements Initializable {
     private Text nbrAvis4;
     @FXML
     private Text nbrAvis5;
+    @FXML
+    private TextField noteid;
 
     @FXML
     private TextArea avisContent;
@@ -146,23 +149,39 @@ public class AvisCoursController implements Initializable {
 
 
     @FXML
-    void postAvis(ActionEvent event)  {
-        String message = avisContent.getText();
-        int userId = 3; // Utilisateur fictif pour l'exemple
-        Avis nouvelAvis = new Avis(5, message, userId, CoursId);
-
+    void postAvis(ActionEvent event) {
         try {
+            String noteText = noteid.getText().trim();
+            String message = avisContent.getText().trim();
+
+            if (noteText.isEmpty() || message.isEmpty()) {
+                afficherAlerte("Erreur", "Veuillez remplir tous les champs.");
+                return;
+            }
+
+            int note = Integer.parseInt(noteText);
+            if (note < 1 || note > 5) {
+                afficherAlerte("Erreur", "Veuillez saisir une note valide (entre 1 et 5).");
+                return;
+            }
+
+            int userId = 3; // Utilisateur fictif pour l'exemple
+            Avis nouvelAvis = new Avis(note, message, userId, CoursId);
+
             AvisServices avisServices = new AvisServices();
             avisServices.ajouter(nouvelAvis);
 
             afficherAlerte("Confirmation", "Avis ajouté avec succès.");
-
             renderLessonList();
+        } catch (NumberFormatException e) {
+            e.printStackTrace(); // Log the exception
+            afficherAlerte("Erreur", "Veuillez saisir une note valide (entre 1 et 5).");
         } catch (SQLException e) {
             e.printStackTrace();
             afficherAlerte("Erreur", "Une erreur s'est produite lors de l'ajout de l'avis.");
         }
     }
+
 
     private void afficherAlerte(String titre, String contenu) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

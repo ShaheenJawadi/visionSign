@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
@@ -177,14 +178,10 @@
                         <Font size="14.0" />
                      </font>
                   </Text>
-                  <ImageView fitHeight="38.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../assets/cours/⭐⭐⭐⭐⭐(4).png" />
-                     </image>
-                  </ImageView>
+                  <TextField fx:id="noteid" />
                </children>
             </HBox>
-            <TextArea fx:id="avisContent" minHeight="100.0" />
+            <TextArea fx:id="avisContent" minHeight="100.0" prefHeight="172.0" prefWidth="846.0" />
             <Button mnemonicParsing="false" onAction="#postAvis" styleClass="submitButton" text="Poster" />
          </children>
       </VBox>
