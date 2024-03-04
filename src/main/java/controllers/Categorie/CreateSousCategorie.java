@@ -33,4 +33,8 @@ public class CreateSousCategorie implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
+
+    public void submitSousCategorie() {
+
+    }
 }
