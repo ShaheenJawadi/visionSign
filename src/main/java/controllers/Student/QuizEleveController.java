@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import services.quiz.NotesService;
 import services.quiz.QuizService;
@@ -41,6 +42,14 @@ public class QuizEleveController {
     private Label questionLabel;
     @FXML
     private Label  questionNumber;
+
+    @FXML
+    private VBox rootId ;
+
+
+    public  VBox getVBoxRoot(){
+        return  this.rootId;
+    }
 
 
     private int remainingSeconds;
@@ -70,27 +79,40 @@ public class QuizEleveController {
 
     private int iterator = 0, note = 0;
     private float  noteSur20=0;
-    private int quizId = 10; // à changer apres pour etre dynamique integration
+    private int quizId=1; // à changer apres pour etre dynamique integration
     private List<Questions> questionsList;
     private List<Suggestion> suggestionList;
 
     private List<String> answers = new ArrayList<>();
 
-    @FXML
-    void initialize() throws FileNotFoundException, DocumentException {
+    private  int coursId ;
+
+
+    public void setCoursId(int coursId ){
+        this.coursId = coursId;
+        initQuizz();
+    }
+
+
+    public  void  initQuizz(){
         suggestion1.setOnAction(event -> handleRadioButtonSelection(suggestion1));
         suggestion2.setOnAction(event -> handleRadioButtonSelection(suggestion2));
         suggestion3.setOnAction(event -> handleRadioButtonSelection(suggestion3));
         suggestion4.setOnAction(event -> handleRadioButtonSelection(suggestion4));
         try {
-            Quiz quiz = quizService.getQuizById(quizId);
+            Quiz quiz = quizService.getQuizByCoursId(coursId);
             tempsRestant(quiz.getDuree());
             questionsList = quiz.getQuizQuestions();
             numeroQuestion(iterator, questionsList.size());
             questionCourant(questionsList.get(iterator));
+            quizId = quiz.getId();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    @FXML
+    void initialize() throws FileNotFoundException, DocumentException {
+
     }
 
     private void handleRadioButtonSelection(RadioButton radioButton) {
@@ -140,7 +162,7 @@ public class QuizEleveController {
                                 calculateNote();
                                 NotesService notesService = new NotesService();
                                 try {
-                                    notesService.ajouterNote(new Notes(noteSur20, 1, quizId));
+                                    notesService.ajouterNote(new Notes(noteSur20, 3, quizId));
                                     noteAdded[0] = true; // Marquer la note comme ajoutée
                                     if (questionLabel.getScene() != null) {
                                         changeScene();
@@ -285,7 +307,7 @@ public class QuizEleveController {
         } else {
             NotesService notesService = new NotesService();
             try {
-                notesService.ajouterNote(new Notes(noteSur20, 1, quizId)); // à changer apres pour etre dynamique integration
+                notesService.ajouterNote(new Notes(noteSur20, 3, quizId)); // à changer apres pour etre dynamique integration
                 quizCompleted=true;
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Student/NoteQuiz.fxml"));
                 Parent root = loader.load();

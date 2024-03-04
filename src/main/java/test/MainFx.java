@@ -16,7 +16,7 @@ public class MainFx  extends Application  {
 
 
        // OpenTeacherPanel(primaryStage);
-        OpenMainPagel(primaryStage);
+        OpenTeacherPanel(primaryStage);
 
 
     }

@@ -160,4 +160,32 @@ public class QuizService implements IGestionQuiz<Quiz> {
         return count == 0;
     }
 
+
+
+    public Quiz getQuizByCoursId(int coursId) throws SQLException {
+        Quiz quiz = new Quiz();
+        String sql = "SELECT * FROM quiz WHERE coursId=?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, coursId);
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.next()) {
+
+            QuestionsService questionService = new QuestionsService();
+
+            quiz.setId(rs.getInt("id"));
+            quiz.setNom(rs.getString("nom"));
+            quiz.setDuree(rs.getString("duree"));
+            quiz.setUserId(rs.getInt("userId"));
+            quiz.setCoursId(rs.getInt("coursId"));
+            quiz.setQuizQuestions(questionService.getAllQuizQuestionsByQuizId(quiz.getId()));
+
+
+        }
+
+        return quiz;
+    }
+
+
+
 }

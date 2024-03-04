@@ -1,11 +1,13 @@
 package controllers.teacher;
 
+import State.TeacherNavigations;
 import entities.Cours;
 import entities.Lesson;
 import entities.Ressource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuItem;
 import javafx.scene.text.Text;
 import services.cours.CoursService;
 import services.lesson.LessonService;
@@ -37,13 +39,14 @@ public class CoursItemController   {
     private Text title;
 
 
+    @FXML
+    private MenuItem ajouterQuizBtn;
+
+
+
     private  Cours cours ;
 
-    private CoursGridPane parentController;
 
-    public void setParentController(CoursGridPane parentController) {
-        this.parentController = parentController;
-    }
     public void putData(Cours cours) throws SQLException {
             this.cours  =cours ;
 
@@ -83,7 +86,7 @@ public class CoursItemController   {
         System.out.println(cours.getId());
         CoursService coursService = new CoursService() ;
         coursService.delete(cours.getId());
-        parentController.renderDataCours();
+
 
     }
 
@@ -92,7 +95,16 @@ public class CoursItemController   {
 
         System.out.println(cours.getId());
 
-        parentController.openAddCoursPageBtn(cours);
+
+    }
+
+
+    @FXML
+    void ajouterQuiz(ActionEvent event) {
+
+        TeacherNavigations.getInstance().openQuizzPage(cours.getId());
+
+
     }
 
 }

@@ -1,5 +1,6 @@
 package controllers.EnseignantQuiz;
 
+import State.TeacherNavigations;
 import entities.Questions;
 import entities.Suggestion;
 import javafx.event.ActionEvent;
@@ -10,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import services.quiz.QuestionsService;
@@ -57,6 +59,19 @@ public class Newquestcontroller {
 
     @FXML
     private ImageView imageQuestion;
+
+    @FXML
+    private VBox rootId ;
+
+
+
+    public  int coursId;
+
+
+
+    public  VBox getVboxRoot (){
+        return  this.rootId;
+    }
 
     private Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
             "cloud_name", "dcgmqrlth",
@@ -107,7 +122,7 @@ public class Newquestcontroller {
             errorMessage.setText("");
             try {
                 if (questionService.isQuestionUniqueInQuiz(question.getText(), quizId)) {
-                    Questions q = new Questions(question.getText(), quizId, 1,selectedImage); // à changer apres pour etre dynamique integration
+                    Questions q = new Questions(question.getText(), quizId, 3,selectedImage); // à changer apres pour etre dynamique integration
                     questionService.ajouterGestionQuiz(q);
                     suggestionService.ajouterGestionQuiz(new Suggestion(reponse.getText(), true, q.getId()));
                     suggestionService.ajouterGestionQuiz(new Suggestion(suggestion1.getText(), false, q.getId()));
@@ -120,13 +135,11 @@ public class Newquestcontroller {
                     alert.setContentText("Question ajoutée avec succès");
                     alert.showAndWait();
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/quiz/DisplayQuiz.fxml"));
-                    Parent root = loader.load();
 
-                    DisplayQuizController displayQuizController = loader.getController();
-                    displayQuizController.setDisplayQuizId(quizId);
+                    TeacherNavigations.getInstance().openDisplayQuestionFromQuizz(coursId , quizId);
 
-                    question.getScene().setRoot(root);
+
+
                 }else {
                     errorMessage.setText("Cette question existe déjà dans le quiz actuel.");
                 }
@@ -136,8 +149,6 @@ public class Newquestcontroller {
                 alert.setContentText(e.getMessage());
                 alert.showAndWait();
 
-            }catch (IOException e) {
-                e.printStackTrace();
             }
         }
     }
@@ -162,7 +173,7 @@ public class Newquestcontroller {
             errorMessage.setText("");
             try {
                 if (questionService.isQuestionUniqueInQuiz(question.getText(), quizId)) {
-                    Questions q = new Questions(question.getText(), quizId, 1,selectedImage); // à changer apres pour etre dynamique integration
+                    Questions q = new Questions(question.getText(), quizId, 3,selectedImage); // TOdO USERiD à changer apres pour etre dynamique integration
                     questionService.ajouterGestionQuiz(q);
                     suggestionService.ajouterGestionQuiz(new Suggestion(reponse.getText(), true, q.getId()));
                     suggestionService.ajouterGestionQuiz(new Suggestion(suggestion1.getText(), false, q.getId()));
@@ -203,4 +214,7 @@ public class Newquestcontroller {
         }
     }
 
+    public void setCoursId(int coursId) {
+        this.coursId = coursId;
+    }
 }
