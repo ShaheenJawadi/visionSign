@@ -29,12 +29,12 @@ public class CoursSingleLessonItem {
     }
 
 
-    public void  renderItem(Lesson l , UserCours userCours , int showIndex ){
+    public void  renderItem(Lesson l , int stage, int showIndex ){
 
-        if(showIndex>userCours.getStage()){
+        if(showIndex>stage){
             indexCircle.setFill(Color.web("#f46a6a"));
         }
-        else if(showIndex== userCours.getStage()){
+        else if(showIndex== stage){
             indexCircle.setFill(Color.web("#34C38F"));
         }
         else {

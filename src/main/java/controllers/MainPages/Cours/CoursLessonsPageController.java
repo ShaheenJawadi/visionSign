@@ -37,6 +37,11 @@ public class CoursLessonsPageController implements Initializable {
     private Button nextLessonBtnId ;
 
 
+    @FXML
+    private Button previousLessonBtnId;
+
+
+
 
     private Cours cours ;
     private  int currentStage ;
@@ -47,7 +52,7 @@ public class CoursLessonsPageController implements Initializable {
     public void setCours (Cours cours){
 
         this.cours = cours ;
-        currentStage =cours.getUserCoursActivity().getStage();
+        currentStage =cours.getUserCoursActivity().getStage()+1;
     }
 
 
@@ -71,6 +76,7 @@ public class CoursLessonsPageController implements Initializable {
         renderLessonList();
         manipulateCurrentLesson();
         nextBtnState();
+        previousLessonBtnState();
 
 
 
@@ -87,7 +93,7 @@ public class CoursLessonsPageController implements Initializable {
                 loader.load();
 
                 CoursSingleLessonItem controller = loader.getController();
-                controller.renderItem(l , cours.getUserCoursActivity() , i);
+                controller.renderItem(l , currentStage, i);
 
                 listLessonsHolder.getChildren().add(controller.getRoot());
             }
@@ -101,6 +107,7 @@ public class CoursLessonsPageController implements Initializable {
         webView.getEngine().loadContent(l.getContent());
 
 
+        webViewHolder.getChildren().clear();
 
         webViewHolder.getChildren().add(webView);
 
@@ -108,16 +115,17 @@ public class CoursLessonsPageController implements Initializable {
 
     public  void  manipulateCurrentLesson(){
 
-        int currentStage = cours.getUserCoursActivity().getStage() ;
+       // int c_stage = cours.getUserCoursActivity().getStage() ;
+        int c_stage = currentStage;
 
-        if(cours.getLessons().size()==0){
+        if(cours.getLessons().isEmpty()){
 
             return ;
 
         }
 
-        if(cours.getLessons().size()>=currentStage){
-            renderCurrentLesson(cours.getLessons().get(currentStage));
+        if(cours.getLessons().size()>=c_stage){
+            renderCurrentLesson(cours.getLessons().get(c_stage));
         }
 
 
@@ -127,15 +135,25 @@ public class CoursLessonsPageController implements Initializable {
     @FXML
     void nextLessonBtn(ActionEvent event) {
 
-        if(cours.getLessons().size()>currentStage){
+
+
+        if(cours.getLessons().size()>currentStage ){
 
 
 
-            cours.getUserCoursActivity().setStage( cours.getUserCoursActivity().incrementStage())  ;
 
+            if(cours.getUserCoursActivity().getStage()<currentStage) {
+
+                cours.getUserCoursActivity().setStage(cours.getUserCoursActivity().incrementStage());
+            }
+            else{
+                currentStage++;
+            }
             renderCoursLessons();
-            renderLessonList();
+
         }
+
+        //todo quizz here
         nextBtnState();
 
     }
@@ -155,11 +173,42 @@ public class CoursLessonsPageController implements Initializable {
         }
     }
 
+
+
+    @FXML
+    void previousLessonBtn(ActionEvent event) {
+        if( currentStage>0){
+
+
+
+            currentStage-- ;
+
+            renderCoursLessons();
+
+        }
+        previousLessonBtnState();
+    }
+
+
+    void  previousLessonBtnState(){
+        if( currentStage>0){
+
+
+            previousLessonBtnId.setDisable(false);
+
+        }
+        else{
+            previousLessonBtnId.setDisable(true);
+        }
+    }
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
        // renderCoursLessons();
     }
+
 
 
 
