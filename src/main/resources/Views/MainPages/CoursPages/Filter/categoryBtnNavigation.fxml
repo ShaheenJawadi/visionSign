@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+
+<Button fx:id="catBtn" mnemonicParsing="false"   text="Categorie 1" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainPages.Cours.Filter.singleCategoryFilterController">
+   <styleClass>
+      <String fx:value="submitButton" />
+      <String fx:value="uploadBtn" />
+   </styleClass>
+   <stylesheets>
+      <URL value="@../../../../styles/style.css" />
+      <URL value="@../../../../styles/CoursPages/style.css" />
+   </stylesheets>
+</Button>

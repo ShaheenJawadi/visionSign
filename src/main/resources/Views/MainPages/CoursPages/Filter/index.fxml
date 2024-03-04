@@ -1,19 +1,124 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <VBox fx:id="FilterPageVbox" alignment="TOP_CENTER" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainPages.Cours.Filter.FilterController">
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <fx:include source="Head.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <VBox prefWidth="1000.0" styleClass="filterPage" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <AnchorPane minHeight="320.0" prefHeight="320.0" styleClass="headerHolder">
+                     <children>
+                        <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <TextField fx:id="searchField" alignment="CENTER">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font>
+                              </TextField>
+                              <Button mnemonicParsing="false" prefHeight="42.0" styleClass="submitButton" text="Trouver">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <Button mnemonicParsing="false" styleClass="chimp" text="Cours" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="200.0" />
+                        <HBox spacing="4.0" style="-fx-background-color: #fff; -fx-background-radius: 10 10 0 0;" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="100.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="Accueil">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="secondText" text="/">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Text>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="primaryTextColor" text="Cours">
+                                 <font>
+                                    <Font size="17.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                           <padding>
+                              <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                           </padding>
+                        </HBox>
+                        <HBox prefHeight="100.0" prefWidth="200.0" />
+                     </children>
+                  </AnchorPane>
+                  <HBox fx:id="listCategories" alignment="CENTER" spacing="10.0">
+                     <children>
+                        <Button mnemonicParsing="false" styleClass="submitButton" text="Tous" />
+                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" text="Categorie 1">
+                           <styleClass>
+                              <String fx:value="submitButton" />
+                              <String fx:value="uploadBtn" />
+                           </styleClass>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Categorie 2">
+                           <styleClass>
+                              <String fx:value="submitButton" />
+                              <String fx:value="uploadBtn" />
+                           </styleClass>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Categorie 3">
+                           <styleClass>
+                              <String fx:value="submitButton" />
+                              <String fx:value="uploadBtn" />
+                           </styleClass>
+                        </Button>
+                        <Button mnemonicParsing="false" text="Categorie 4">
+                           <styleClass>
+                              <String fx:value="submitButton" />
+                              <String fx:value="uploadBtn" />
+                           </styleClass>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox fx:id="listSubCategories" alignment="CENTER" layoutX="10.0" layoutY="331.0" spacing="10.0">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </HBox>
+               </children>
+               <stylesheets>
+                  <URL value="@../../../../styles/style.css" />
+                  <URL value="@../../../../styles/CoursPages/style.css" />
+               </stylesheets>
+            </VBox>
          </children>
       </AnchorPane>
       <AnchorPane>
          <children>
-            <fx:include source="../../Components/Cours/ListCours.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="14.0" stylesheets="@../../../../styles/style.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <FlowPane fx:id="listCoursHolder" alignment="CENTER" hgap="20.0" maxWidth="1400.0" prefHeight="200.0" prefWidth="1400.0" vgap="20.0" VBox.vgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+            </VBox>
          </children>
+
       </AnchorPane>
+
+
    </children>
 </VBox>
