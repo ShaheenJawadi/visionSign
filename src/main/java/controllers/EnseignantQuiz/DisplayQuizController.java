@@ -59,6 +59,17 @@ public class DisplayQuizController {
     @FXML
     public VBox listeQuestionsOfQuiz;
 
+
+    public  int coursId ;
+
+
+    @FXML
+    public AnchorPane rootId ;
+
+    public AnchorPane getRootId() {
+        return rootId;
+    }
+
     private Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
             "cloud_name", "dcgmqrlth",
             "api_key", "212948246846792",
@@ -80,7 +91,7 @@ public class DisplayQuizController {
 
     public void getQuizUserLeft(){
         try {
-            myQuiz = quizService.getQuizByUserId(1);// à changer apres pour etre dynamique integration
+            myQuiz = quizService.getQuizByUserId(3);//TODO à changer apres pour etre dynamique integration
             if (myQuiz.isEmpty()) {
                 Text emptyText = new Text("Vous n'avez pas de quiz");
                 emptyText.setFont(new Font("System", 15));
@@ -462,7 +473,7 @@ public class DisplayQuizController {
     @FXML
     void searchQuiz(ActionEvent event) {
         String searchText = searchField.getText();
-        int userID = 1; // à changer apres pour etre dynamique integration
+        int userID = 3; // à changer apres pour etre dynamique integration
         try {
 
             if (searchText.isEmpty()) {
@@ -501,7 +512,7 @@ public class DisplayQuizController {
         try {
             QuizService quizService1=new QuizService();
             String duree = hours.getText() + ":" + minutes.getText() + ":" + seconds.getText();
-            quizService1.modifierGestionQuiz(new Quiz(quizId,quizNameId.getText(), duree,1,1));// à changer apres pour etre dynamique integration
+            quizService1.modifierGestionQuiz(new Quiz(quizId,quizNameId.getText(), duree,coursId,3));// à changer apres pour etre dynamique integration
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success!");
             alert.setContentText("Quiz modifié");
@@ -521,7 +532,7 @@ public class DisplayQuizController {
     }
 
 
-
-
-
+    public void setCoursId(int coursId) {
+        this.coursId = coursId;
+    }
 }

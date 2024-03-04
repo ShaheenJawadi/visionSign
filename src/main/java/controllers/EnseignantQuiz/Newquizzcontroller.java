@@ -1,5 +1,6 @@
 package controllers.EnseignantQuiz;
 
+import State.TeacherNavigations;
 import entities.Quiz;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import services.quiz.QuizService;
 
@@ -26,6 +28,21 @@ public class Newquizzcontroller {
     @FXML
     public Button nextbtn;
     public Text errorMessage;
+
+    public  int coursId ;
+
+
+    public void setCoursId(int coursId) {
+        this.coursId = coursId;
+    }
+
+    @FXML
+    public VBox rootId ;
+
+    public VBox getVBoxRoot() {
+        return rootId;
+    }
+
     private final QuizService quizService = new QuizService();
 
     public void handleButtonClick(ActionEvent actionEvent) {
@@ -49,24 +66,21 @@ public class Newquizzcontroller {
             errorMessage.setText("");
             try {
                 if (quizService.isQuizNameUnique(quizName)) {
-                    Quiz quiz = new Quiz(quizName, duree, 1, 1); // à changer apres pour etre dynamique integration
+                    Quiz quiz = new Quiz(quizName, duree, coursId, 3); // TODO USER Id à changer apres pour etre dynamique integration
                     quizService.ajouterGestionQuiz(quiz);
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information");
                     alert.setContentText("Quizz ajouté avec succès");
                     alert.showAndWait();
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/quiz/NewQuestion.fxml"));
-                    Parent root = loader.load();
-                    Newquestcontroller newquestcontroller = loader.getController();
-                    newquestcontroller.setQuizId(quiz.getId());
+                    TeacherNavigations.getInstance().openQuestionFromQuizz(coursId , quiz.getId());
 
-                    name.getScene().setRoot(root);
+
                 }else {
                     errorMessage.setText("Un quiz avec ce nom existe déjà.");
                 }
 
-            } catch (IOException | SQLException e) {
+            } catch ( SQLException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setContentText(e.getMessage());

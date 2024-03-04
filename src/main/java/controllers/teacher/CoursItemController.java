@@ -1,5 +1,6 @@
 package controllers.teacher;
 
+import State.TeacherNavigations;
 import entities.Cours;
 import entities.Lesson;
 import entities.Ressource;
@@ -45,11 +46,7 @@ public class CoursItemController   {
 
     private  Cours cours ;
 
-    private CoursGridPane parentController;
 
-    public void setParentController(CoursGridPane parentController) {
-        this.parentController = parentController;
-    }
     public void putData(Cours cours) throws SQLException {
             this.cours  =cours ;
 
@@ -89,7 +86,7 @@ public class CoursItemController   {
         System.out.println(cours.getId());
         CoursService coursService = new CoursService() ;
         coursService.delete(cours.getId());
-        parentController.renderDataCours();
+
 
     }
 
@@ -98,12 +95,15 @@ public class CoursItemController   {
 
         System.out.println(cours.getId());
 
-        parentController.openAddCoursPageBtn(cours);
+
     }
 
 
     @FXML
     void ajouterQuiz(ActionEvent event) {
+
+        TeacherNavigations.getInstance().openQuizzPage(cours.getId());
+
 
     }
 

@@ -6,7 +6,7 @@ import javafx.scene.layout.VBox;
 public class TeacherDashboardController {
 
     private @FXML VBox vbRoot;
-    VBox getVBoxRoot()
+   public VBox getVBoxRoot()
     {
         return vbRoot;
     }
