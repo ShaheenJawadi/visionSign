@@ -160,4 +160,7 @@ public class CreateCategorie implements Initializable {
 
 
     }
+    public void uploadImage () {
+
+    }
 }
