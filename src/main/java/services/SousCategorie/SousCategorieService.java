@@ -38,7 +38,14 @@ public class SousCategorieService implements ISousCategorieService<SousCategorie
     //everytime a subcategory is updated, the lastUpdated attribute of the parentCategory is updated
     @Override
     public void updateSousCategorie(SousCategorie sousCategorie) throws SQLException {
-
+        String sql = "update " + tableName + " set  nom=?, description=?, date_creation=?, status=? where id=?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, sousCategorie.getNom());
+        ps.setString(2, sousCategorie.getDescription());
+        ps.setDate(3, Date.valueOf(LocalDate.now()));
+        ps.setString(4, sousCategorie.getStatus());
+        ps.setInt(5, sousCategorie.getId());
+        ps.executeUpdate();
 
         CategorieService catSer = new CategorieService();
         catSer.updateLastUpdatedTime(sousCategorie.getcategorieId());
@@ -55,7 +62,11 @@ public class SousCategorieService implements ISousCategorieService<SousCategorie
 
     @Override
     public void deleteSousCategoryByCategoryId(int id) throws SQLException {
+        String sql = "DELETE FROM " + tableName + " WHERE categorie_id=?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, id);
 
+        ps.executeUpdate();
     }
 
     @Override
@@ -100,22 +111,53 @@ public class SousCategorieService implements ISousCategorieService<SousCategorie
 
     @Override
     public List<SousCategorie> searchLikeNameCategory(String name) throws SQLException {
-        return null;
+        List<SousCategorie> souscat = new ArrayList<>();
+        //LIKE operator with % wildcard characters to match any part of the category name.
+        // For example, if nom is "book", the query will match categories with names like "Bookstore",
+        // "eBook", "Bookshelf"
+        String sql = "select * from " + tableName + "  WHERE nom LIKE ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setString(1, "%" + name + "%");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            SousCategorie sous = sousCategorieDto.getSousCategorie(rs);
+            souscat.add(sous);
+        }
+        return souscat;
     }
 
     @Override
-    public void updateSousCategorieStatus(String status) throws SQLException {
-
+    public void updateSousCategorieStatus(String status, int id) throws SQLException {
+        String sql = "UPDATE" + tableName + "set status =" + status + "where id= " + id;
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
     }
 
     @Override
     public List<SousCategorie> getSousCategoriesListByStatusAndCategoryId(String status, int categorieId) throws SQLException {
-        return null;
+        List<SousCategorie> sousCategorie = new ArrayList<>();
+        String sql = "SELECT * FROM " + tableName + " WHERE status= " + status + "and categorie_id=" + categorieId;
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            SousCategorie sous = sousCategorieDto.getSousCategorie(rs);
+            sousCategorie.add(sous);
+        }
+        return sousCategorie;
     }
 
+    //sort byname or date order asc
     @Override
     public List<SousCategorie> sortSousCategoryListByAttribute(String attribute) throws SQLException {
-        return null;
+        List<SousCategorie> sousCategorie = new ArrayList<>();
+        String sql = "SELECT * FROM " + tableName + " ORDER BY " + attribute + " ASC;";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            SousCategorie sous = sousCategorieDto.getSousCategorie(rs);
+            sousCategorie.add(sous);
+        }
+        return sousCategorie;
     }
 
     public PreparedStatement prepareStatementWithGeneratedKeys(Connection connection, String sql) throws SQLException {

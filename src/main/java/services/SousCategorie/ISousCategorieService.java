@@ -17,7 +17,7 @@ public interface ISousCategorieService<T> {
 
     List<T> searchLikeNameCategory(String name) throws SQLException;
 
-    void updateSousCategorieStatus(String status) throws SQLException;
+    void updateSousCategorieStatus(String status, int id) throws SQLException;
 
     List<T> getSousCategoriesListByStatusAndCategoryId(String status, int categorieId) throws SQLException;
 
