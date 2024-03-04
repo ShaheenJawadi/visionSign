@@ -1,5 +1,6 @@
 package controllers.MainPages.Cours;
 
+import State.MainNavigations;
 import controllers.MainPages.Cours.SinglePageComponants.CoursLessonItemController;
 import controllers.MainPages.Cours.SinglePageComponants.CoursSingleLessonItem;
 import entities.Cours;
@@ -127,6 +128,7 @@ public class CoursLessonsPageController implements Initializable {
     @FXML
     void nextLessonBtn(ActionEvent event) {
 
+        openQuizz();
         if(cours.getLessons().size()>currentStage){
 
 
@@ -161,6 +163,14 @@ public class CoursLessonsPageController implements Initializable {
        // renderCoursLessons();
     }
 
+
+
+    public  void openQuizz(){
+
+
+        MainNavigations.getInstance().openQuizzPage(cours.getId());
+
+    }
 
 
 
