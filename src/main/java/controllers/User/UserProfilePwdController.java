@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import services.User.PasswordHashing;
 import services.User.UserService;
 import entities.User;
@@ -17,6 +18,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class UserProfilePwdController {
+    @FXML
+    public ImageView imageId;
     @FXML
     private MFXPasswordField newPwdTF1;
 
