@@ -44,6 +44,7 @@
                         <Text layoutX="188.0" layoutY="48.0" onMouseClicked="#OpenListCoursPage" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="Catégories" />
                         <Text layoutX="275.0" layoutY="48.0" onMouseClicked="#OpenListCoursPage" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="Cours" />
                         <Text layoutX="362.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="Enseignants" />
+                        <Text layoutX="406.0" layoutY="47.0" onMouseClicked="#OpenForumPage" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="Forum" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" spacing="12.0">

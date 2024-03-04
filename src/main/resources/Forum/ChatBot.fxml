@@ -19,8 +19,7 @@
     <children>
         <BorderPane prefHeight="600.0" prefWidth="952.0">
             <top>
-                <fx:include fx:id="navbar" source="Navbar.fxml" />
-            </top>
+             </top>
             <Pane layoutX="1.0" layoutY="10.0" prefHeight="71.0" prefWidth="702.0" style="-fx-background-color: white;" />
             <center>
                 <AnchorPane prefHeight="335.0" prefWidth="952.0" BorderPane.alignment="CENTER">

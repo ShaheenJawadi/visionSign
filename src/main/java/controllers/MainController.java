@@ -42,4 +42,9 @@ public class MainController implements Initializable {
         MainNavigations.getInstance().openMainHomePage();
 
     }
+
+    public void OpenForumPage(MouseEvent mouseEvent) {
+        MainNavigations.getInstance().openForumPage();
+
+    }
 }

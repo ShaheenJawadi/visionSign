@@ -13,11 +13,10 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane style="-fx-background-color: #ECECEC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.studentForum.ForumGetAllPublicationsController">
+<AnchorPane fx:id="rootId" style="-fx-background-color: #ECECEC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.studentForum.ForumGetAllPublicationsController">
    <children>
       <BorderPane layoutY="-12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-12.0">
          <top>
-            <fx:include fx:id="navbar" source="Navbar.fxml" />
 
          </top>
          <left>
@@ -116,6 +115,5 @@
             </AnchorPane>
          </center>
       </BorderPane>
-      <FontAwesomeIconView layoutX="-8.0" layoutY="308.0" />
    </children>
 </AnchorPane>

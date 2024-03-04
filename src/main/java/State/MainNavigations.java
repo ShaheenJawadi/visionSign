@@ -5,6 +5,7 @@ import controllers.MainPages.Cours.Filter.FilterController;
 import controllers.MainPages.Cours.SingleCoursController;
 import controllers.MainPages.MainPageController;
 import controllers.Student.QuizEleveController;
+import controllers.studentForum.ForumGetAllPublicationsController;
 import entities.Cours;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -147,6 +148,30 @@ public class MainNavigations {
 
             mainPageHolder.getChildren().clear();
             mainPageHolder.getChildren().add(page.getVBoxRoot());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
+    }
+
+
+
+
+    public void openForumPage(){
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Forum/ForumGetAllPublications.fxml"));
+
+            loader.load();
+
+            ForumGetAllPublicationsController page = loader.getController();
+
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(page.getRootBox());
         }
         catch (IOException ex)
         {

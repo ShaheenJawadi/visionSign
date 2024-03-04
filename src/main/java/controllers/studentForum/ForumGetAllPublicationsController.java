@@ -31,11 +31,24 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class ForumGetAllPublicationsController extends BaseForumController {
+
+
+
+    @FXML
+    public  AnchorPane rootId ;
+
+
+
+
+    public  AnchorPane getRootBox(){
+        return this.rootId ;
+    }
+
     @FXML
     public void initialize() {
         refreshPublications();
         try {
-            mypub = pubs.getPublicationsByUserId(6);
+            mypub = pubs.getPublicationsByUserId(3); //todo userId
             mypub.sort(Comparator.comparing(Publications::getDate_creation).reversed());
 
             if (mypub.isEmpty()) {
@@ -73,6 +86,7 @@ public class ForumGetAllPublicationsController extends BaseForumController {
             allpubid.setPrefHeight(allPub.isEmpty() ? 100 : allPub.size() * 165);
 
         } catch (SQLException e) {
+            System.out.println(e);
             throw new RuntimeException(e);
 
         }
