@@ -32,7 +32,7 @@
                                                         <children>
                                                             <VBox prefHeight="53.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                 <children>
-                                                                    <Label text="Titre de catégorie" />
+                                                                    <Label text="Nom de la catégorie" />
                                                                     <TextField id="nom" fx:id="nom" styleClass="inputField" />
                                                                     <Label fx:id="validateTitleCategorie" styleClass="errorLabel" text="Label" />
                                                                 </children>
@@ -66,7 +66,7 @@
                                         <AnchorPane styleClass="TForm">
                                             <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                 <children>
-                                                    <VBox fx:id="ListCategorieHolder" prefHeight="200.0" prefWidth="100.0" />
+                                                    <VBox fx:id="ListCoursHolder" prefHeight="200.0" prefWidth="100.0" />
                                                     <Button fx:id="addSousCat" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addSousCatClick" prefHeight="40.0" prefWidth="286.0" styleClass="secondaryBtn" text="Ajouter une sous catégorie" />
                                                 </children>
                                             </VBox>
