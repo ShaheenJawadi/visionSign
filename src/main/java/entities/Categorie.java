@@ -1,6 +1,6 @@
 package entities;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public class Categorie {
@@ -9,17 +9,19 @@ public class Categorie {
     private String description;
     private Date last_updated;
     private String image;
+    private int nbSousCategorie;
     private List<SousCategorie> sousCategorieListe;
 
     public Categorie() {
     }
 
-    public Categorie(String nom, String description, Date last_updated, String image, List<SousCategorie> sousCategorieListe) {
+    public Categorie(String nom, String description, Date last_updated, String image, List<SousCategorie> sousCategorieListe, int nbSousCategorie ) {
         this.nom = nom;
         this.description = description;
         this.last_updated = last_updated;
         this.image = image;
         this.sousCategorieListe = sousCategorieListe;
+        this.nbSousCategorie=nbSousCategorie;
     }
 
 
@@ -71,13 +73,27 @@ public class Categorie {
         this.sousCategorieListe = sousCategorieListe;
     }
 
+    public int getNbSousCategorie() {
+        return nbSousCategorie;
+    }
+
+    public void setNbSousCategorie(int nbSousCategorie) {
+        this.nbSousCategorie = nbSousCategorie;
+    }
+
     @Override
     public String toString() {
         return "Categorie{" +
-                "id=" + id +
-                ", nom='" + nom + '\'' +
+                "nom='" + nom + '\'' +
                 ", description='" + description + '\'' +
+                ", last_updated=" + last_updated +
+                ", image='" + image + '\'' +
+                ", nbSousCategorie=" + nbSousCategorie +
                 ", sousCategorieListe=" + sousCategorieListe +
                 '}';
+    }
+
+    public  String nbsousCategories(){
+        return String.valueOf(this.getSousCategorieListe().size()) ;
     }
 }
