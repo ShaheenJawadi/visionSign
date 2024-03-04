@@ -79,7 +79,7 @@ public class QuizEleveController {
 
     private int iterator = 0, note = 0;
     private float  noteSur20=0;
-    private int quizId; // à changer apres pour etre dynamique integration
+    private int quizId=1; // à changer apres pour etre dynamique integration
     private List<Questions> questionsList;
     private List<Suggestion> suggestionList;
 
@@ -87,12 +87,14 @@ public class QuizEleveController {
 
     private  int coursId ;
 
+
     public void setCoursId(int coursId ){
         this.coursId = coursId;
+        initQuizz();
     }
 
-    @FXML
-    void initialize() throws FileNotFoundException, DocumentException {
+
+    public  void  initQuizz(){
         suggestion1.setOnAction(event -> handleRadioButtonSelection(suggestion1));
         suggestion2.setOnAction(event -> handleRadioButtonSelection(suggestion2));
         suggestion3.setOnAction(event -> handleRadioButtonSelection(suggestion3));
@@ -107,6 +109,10 @@ public class QuizEleveController {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    @FXML
+    void initialize() throws FileNotFoundException, DocumentException {
+
     }
 
     private void handleRadioButtonSelection(RadioButton radioButton) {
@@ -156,7 +162,7 @@ public class QuizEleveController {
                                 calculateNote();
                                 NotesService notesService = new NotesService();
                                 try {
-                                    notesService.ajouterNote(new Notes(noteSur20, 1, quizId));
+                                    notesService.ajouterNote(new Notes(noteSur20, 3, quizId));
                                     noteAdded[0] = true; // Marquer la note comme ajoutée
                                     if (questionLabel.getScene() != null) {
                                         changeScene();
@@ -301,7 +307,7 @@ public class QuizEleveController {
         } else {
             NotesService notesService = new NotesService();
             try {
-                notesService.ajouterNote(new Notes(noteSur20, 1, quizId)); // à changer apres pour etre dynamique integration
+                notesService.ajouterNote(new Notes(noteSur20, 3, quizId)); // à changer apres pour etre dynamique integration
                 quizCompleted=true;
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Student/NoteQuiz.fxml"));
                 Parent root = loader.load();

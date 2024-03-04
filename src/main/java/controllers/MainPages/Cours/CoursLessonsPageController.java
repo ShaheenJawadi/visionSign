@@ -48,6 +48,10 @@ public class CoursLessonsPageController implements Initializable {
     public void setCours (Cours cours){
 
         this.cours = cours ;
+        System.out.println(cours);
+        System.out.println("///////////////");
+        System.out.println(cours.getUserCoursActivity());
+
         currentStage =cours.getUserCoursActivity().getStage();
     }
 
