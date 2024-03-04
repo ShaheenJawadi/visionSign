@@ -4,6 +4,8 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.effect.Blend?>
@@ -49,16 +51,32 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" spacing="12.0">
                      <children>
-                        <HBox alignment="CENTER_LEFT" spacing="2.0" HBox.hgrow="NEVER">
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Connexion">
+                              <HBox fx:id="authBox" alignment="CENTER">
+                                 <children>
+                                    <ImageView fx:id="userImage" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
+                                    <Text fx:id="userName" strokeType="OUTSIDE" strokeWidth="0.0" text="name" />
+                                 </children>
+                              </HBox>
+                              <MenuButton mnemonicParsing="false" style="-fx-background-color: #fff; fill: ;" textFill="#0cd9fd">
+                                <items>
+                                  <MenuItem mnemonicParsing="false" onAction="#openProfileUser" text="Profile" />
+                                  <MenuItem mnemonicParsing="false" onAction="#logoutBtn" text="Deconnexion" />
+                                </items>
+                              </MenuButton>
+                           </children>
+                        </HBox>
+                        <HBox fx:id="unAuthBox" alignment="CENTER_LEFT" spacing="2.0" HBox.hgrow="NEVER">
+                           <children>
+                              <Text onMouseClicked="#openSignIn" strokeType="OUTSIDE" strokeWidth="0.0" text="Connexion">
                                  <styleClass>
                                     <String fx:value="menu_item" />
                                     <String fx:value="selected" />
                                  </styleClass>
                               </Text>
                               <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="/" />
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="Inscription" />
+                              <Text onMouseClicked="#openSignUp" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="menu_item" text="Inscription" />
                            </children>
                         </HBox>
                         <Separator orientation="VERTICAL" prefHeight="200.0" />

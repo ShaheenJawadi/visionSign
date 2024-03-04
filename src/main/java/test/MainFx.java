@@ -17,6 +17,7 @@ public class MainFx  extends Application  {
 
        // OpenTeacherPanel(primaryStage);
         OpenMainPagel(primaryStage);
+        //OpenLogin(primaryStage);
 
 
     }
@@ -53,6 +54,15 @@ public class MainFx  extends Application  {
         primaryStage.setHeight(800);
         primaryStage.show();
     }
+    public void OpenLogin(Stage primaryStage) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/Login.fxml"));
+
+        Parent root=loader.load();
+        Scene scene=new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
 
 
 

@@ -20,6 +20,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import services.User.PasswordHashing;
@@ -43,6 +44,14 @@ public class LoginController {
     @FXML
     private Hyperlink forgetHP;
 
+
+    @FXML
+    private AnchorPane rootId ;
+
+
+    public  AnchorPane getRootBox(){
+        return  this.rootId ;
+    }
     private final UserService userService=new UserService();
 
     @FXML

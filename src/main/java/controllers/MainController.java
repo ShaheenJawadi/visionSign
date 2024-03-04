@@ -1,10 +1,13 @@
 package controllers;
 import State.MainNavigations;
 import State.UserOPState;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
@@ -21,6 +24,15 @@ public class MainController implements Initializable {
     @FXML
     private Text nbEnrolledCours;
 
+    @FXML
+    private HBox unAuthBox;
+    @FXML
+    private HBox authBox;
+    @FXML
+    private ImageView userImage;
+
+    @FXML
+    private Text userName;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -47,4 +59,34 @@ public class MainController implements Initializable {
         MainNavigations.getInstance().openForumPage();
 
     }
+
+
+
+
+    @FXML
+    void openSignIn(MouseEvent event) {
+        MainNavigations.getInstance().openSignIn();
+
+    }
+
+    @FXML
+    void openSignUp(MouseEvent event) {
+
+        MainNavigations.getInstance().openSignUp();
+
+    }
+
+    @FXML
+    void logoutBtn(ActionEvent event) {
+
+    }
+
+
+
+    @FXML
+    void openProfileUser(ActionEvent event) {
+
+    }
+
+
 }

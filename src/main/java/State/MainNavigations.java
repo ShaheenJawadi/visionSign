@@ -5,6 +5,8 @@ import controllers.MainPages.Cours.Filter.FilterController;
 import controllers.MainPages.Cours.SingleCoursController;
 import controllers.MainPages.MainPageController;
 import controllers.Student.QuizEleveController;
+import controllers.User.LoginController;
+import controllers.User.SignUpController;
 import controllers.studentForum.*;
 import entities.Cours;
 import javafx.fxml.FXML;
@@ -274,7 +276,54 @@ public class MainNavigations {
     }
 
 
+    public void openSignIn(){
+        try
+        {
 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/Login.fxml"));
+
+            loader.load();
+
+            LoginController page = loader.getController();
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(page.getRootBox());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
+    }
+
+
+
+    public void openSignUp(){
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/SignUp.fxml"));
+
+            loader.load();
+
+            SignUpController page = loader.getController();
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(page.getRootBox());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
+    }
+    public  void authHeaderSetup(){
+
+    }
+
+    public  void unAuthHeaderSetup(){
+
+    }
 
 
 }

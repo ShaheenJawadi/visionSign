@@ -15,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import services.User.UserService;
 
 import java.io.IOException;
@@ -43,6 +44,15 @@ public class SignUpController {
     private MFXTextField usernameTF;
     @FXML
     private Hyperlink hpId1;
+
+
+    @FXML
+    private AnchorPane rootId ;
+
+
+    public  AnchorPane getRootBox(){
+        return  this.rootId ;
+    }
     private final UserService userService=new UserService();
 
 
