@@ -1,14 +1,12 @@
 package services.SousCategorie;
 
-import dtos.CategorieDto;
 import dtos.SousCategorieDto;
 import entities.SousCategorie;
+import services.Categorie.CategorieService;
 import utils.MyDatabase;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +15,7 @@ public class SousCategorieService implements ISousCategorieService<SousCategorie
     private String tableName = "sous_categorie";
 
     private SousCategorieDto sousCategorieDto;
+    private CategorieService categorieService;
 
 
     public SousCategorieService() {
@@ -25,17 +24,33 @@ public class SousCategorieService implements ISousCategorieService<SousCategorie
 
     @Override
     public void addSousCategorie(SousCategorie sousCategorie) throws SQLException {
+        String sql = "INSERT INTO " + tableName + " (nom, description, date_creation, status, category_id) VALUES(?,?,?,?,?)";
 
+        PreparedStatement ps = prepareStatementWithGeneratedKeys(connection, sql);
+        ps.setString(1, sousCategorie.getNom());
+        ps.setString(2, sousCategorie.getDescription());
+        ps.setDate(3, Date.valueOf(LocalDate.now()));
+        ps.setString(4, sousCategorie.getStatus());
+        ps.setInt(5, sousCategorie.getcategorieId());
+        ps.executeUpdate();
     }
 
+    //everytime a subcategory is updated, the lastUpdated attribute of the parentCategory is updated
     @Override
     public void updateSousCategorie(SousCategorie sousCategorie) throws SQLException {
 
+
+        CategorieService catSer = new CategorieService();
+        catSer.updateLastUpdatedTime(sousCategorie.getcategorieId());
     }
 
     @Override
     public void deleteSousCategorie(int id) throws SQLException {
+        String sql = "DELETE FROM " + tableName + " WHERE id=?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, id);
 
+        ps.executeUpdate();
     }
 
     @Override
@@ -45,7 +60,16 @@ public class SousCategorieService implements ISousCategorieService<SousCategorie
 
     @Override
     public SousCategorie getSousCategorieById(int id) throws SQLException {
-        return null;
+        String sql = "select * from " + tableName + " where id = ?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setInt(1, id);
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            return sousCategorieDto.getSousCategorie(rs);
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -92,5 +116,9 @@ public class SousCategorieService implements ISousCategorieService<SousCategorie
     @Override
     public List<SousCategorie> sortSousCategoryListByAttribute(String attribute) throws SQLException {
         return null;
+    }
+
+    public PreparedStatement prepareStatementWithGeneratedKeys(Connection connection, String sql) throws SQLException {
+        return connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
     }
 }

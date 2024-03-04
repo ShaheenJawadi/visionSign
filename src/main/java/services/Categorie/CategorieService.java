@@ -64,16 +64,13 @@ public class CategorieService implements ICategorieService<Categorie, SousCatego
 
     @Override
     public Categorie getCategorieById(int id) throws SQLException {
-        Categorie c = new Categorie();
         String sql = "select * from " + tableName + " where id = ?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {
-            c = categorieDto.getCategorie(rs);
-            return c;
-
+            return categorieDto.getCategorieWithSousCategories(rs);
         } else {
             return null;
         }
@@ -127,6 +124,15 @@ public class CategorieService implements ICategorieService<Categorie, SousCatego
         String sql = "update " + tableName + " set image=? where id=?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, image);
+        ps.setInt(2, id);
+        ps.executeUpdate();
+    }
+
+    @Override
+    public void updateLastUpdatedTime(int id) throws SQLException {
+        String sql = "update " + tableName + " set last_updated=? where id=?";
+        PreparedStatement ps = connection.prepareStatement(sql);
+        ps.setDate(1, Date.valueOf(LocalDate.now()));
         ps.setInt(2, id);
         ps.executeUpdate();
     }

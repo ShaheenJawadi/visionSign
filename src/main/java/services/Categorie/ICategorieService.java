@@ -19,6 +19,7 @@ public interface ICategorieService<T, S> {
     List<T> searchLikeNameCategory(String name) throws SQLException;
 
     void updateCategoryImage(String image, int id) throws SQLException;
+    void updateLastUpdatedTime(int id) throws SQLException;
 
     List<T> sortCategoryListByAttribute(String attribute) throws SQLException;
 
