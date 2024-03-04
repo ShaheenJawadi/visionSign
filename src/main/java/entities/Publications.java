@@ -8,7 +8,7 @@ public class Publications {
     private String titre;
     private String contenu,images;
     private Date date_creation;
-    private int userId;
+    private int userId,jaime,dislike;
     private String userName;
     private List<Commentaires> pubCommentaires;
 
@@ -101,6 +101,22 @@ public class Publications {
 
     public void setPubCommentaires(List<Commentaires> pubCommentaires) {
         this.pubCommentaires = pubCommentaires;
+    }
+
+    public int getJaime() {
+        return jaime;
+    }
+
+    public void setJaime(int jaime) {
+        this.jaime = jaime;
+    }
+
+    public int getDislike() {
+        return dislike;
+    }
+
+    public void setDislike(int dislike) {
+        this.dislike = dislike;
     }
 
     @Override

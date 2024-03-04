@@ -9,14 +9,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="952.0" style="-fx-background-color: #ECECEC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.studentForum.ForumGetAllPublicationsController">
+<AnchorPane style="-fx-background-color: #ECECEC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.studentForum.ForumGetAllPublicationsController">
    <children>
-      <BorderPane layoutY="-12.0" prefHeight="598.0" prefWidth="998.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-12.0">
+      <BorderPane layoutY="-12.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-12.0">
          <top>
             <fx:include fx:id="navbar" source="Navbar.fxml" />
 
@@ -73,39 +72,46 @@
             </VBox>
          </left>
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ECECEC;" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ECECEC; -fx-background-color: #fff;" BorderPane.alignment="CENTER">
                <children>
-                  <Pane layoutX="1.0" layoutY="10.0" prefHeight="71.0" prefWidth="702.0" style="-fx-background-color: white;">
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <Button fx:id="forumBtn" layoutX="222.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleForum" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #E8EFFF; -fx-background-radius: 200; -fx-border-radius: 200;" text="Forum Community" textFill="#2447f9">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <Button fx:id="btnChat" layoutX="374.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleChat" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: #E2FFE2; -fx-background-radius: 200; -fx-border-radius: 200;" text="Chatbot" textFill="#04cb00">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="addBtn" alignment="CENTER_RIGHT" layoutX="541.0" layoutY="18.0" mnemonicParsing="false" onAction="#navigateAddPub" prefHeight="31.0" prefWidth="153.0" style="-fx-background-color: white;" text="Ajouter Publication" textAlignment="RIGHT" textFill="#2447f9">
-                           <font>
-                              <Font name="System Bold" size="12.0" />
-                           </font>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </Button>
-                        <FontAwesomeIconView fill="#2447f9" glyphName="PLUS_CIRCLE" layoutX="556.0" layoutY="40.0" size="20" />
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="forumBtn" mnemonicParsing="false" onAction="#handleForum" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #E8EFFF; -fx-background-radius: 200; -fx-border-radius: 200;" text="Forum Community" textFill="#2447f9">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button fx:id="btnChat" mnemonicParsing="false" onAction="#handleChat" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: #E2FFE2; -fx-background-radius: 200; -fx-border-radius: 200;" text="Chatbot" textFill="#04cb00">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="addBtn" alignment="CENTER_RIGHT" mnemonicParsing="false" onAction="#navigateAddPub" prefHeight="31.0" prefWidth="153.0" style="-fx-background-color: white;" text="Ajouter Publication" textAlignment="RIGHT" textFill="#2447f9">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <FontAwesomeIconView fill="#2447f9" glyphName="PLUS_CIRCLE" size="20" />
+                           </children>
+                           <padding>
+                              <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+                           </padding>
+                        </HBox>
+                        <ScrollPane fitToWidth="true" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
+                           <content>
+                              <VBox fx:id="allpubid" style="-fx-background-color: #000;" />
+                           </content>
+                        </ScrollPane>
                      </children>
-                  </Pane>
-                  <ScrollPane layoutX="-1.0" layoutY="86.0" prefHeight="458.0" prefWidth="706.0" style="-fx-background-color: white;">
-                     <content>
-                        <AnchorPane fx:id="allpubid" minHeight="0.0" minWidth="0.0" prefHeight="454.0" prefWidth="704.0" style="-fx-background-color: #ffffff;" />
-                     </content>
-                  </ScrollPane>
+                  </VBox>
                </children>
             </AnchorPane>
          </center>
