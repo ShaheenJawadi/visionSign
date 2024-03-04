@@ -12,10 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Separator;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
@@ -47,6 +44,9 @@ public class DisplayQuizController {
     private TextField quizNameId;
     @FXML
     private TextField searchField;
+
+
+
 
     @FXML
     private TextField hours,minutes,seconds;
@@ -519,5 +519,9 @@ public class DisplayQuizController {
     void quitterAction(ActionEvent event){
 // à changer apres pour etre dynamique integration
     }
+
+
+
+
 
 }

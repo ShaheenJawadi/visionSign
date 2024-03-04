@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
@@ -13,11 +12,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="952.0" style="-fx-background-color: #ECECEC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EnseignantQuiz.DisplayQuizController">
+<AnchorPane prefHeight="679.0" prefWidth="1121.0" style="-fx-background-color: #ECECEC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EnseignantQuiz.DisplayQuizController">
     <children>
         <BorderPane layoutY="-12.0" prefHeight="600.0" prefWidth="952.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-12.0">
             <top>
-                <fx:include fx:id="navbar" source="Navbar.fxml" />
+
+
 
             </top>
             <left>
@@ -47,9 +47,7 @@
                                         </HBox.margin>
                                     </TextField>
                                     <Button prefHeight="30.0" prefWidth="39.0" style="-fx-background-color: #2447F9; -fx-background-radius: 50;" HBox.hgrow="NEVER">
-                                        <graphic>
-                                            <FontAwesomeIconView fill="WHITE" glyphName="SEARCH" size="16" />
-                                        </graphic>
+                                     
                                     </Button>
                                 </HBox>
                             </children>
@@ -57,7 +55,7 @@
                                 <Insets left="10.0" right="15.0" top="3.0" />
                             </VBox.margin>
                         </HBox>
-                        <ScrollPane fitToWidth="true" prefHeight="470.0" prefWidth="254.0" style="-fx-background-color: white;">
+                        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="470.0" prefWidth="254.0" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
                             <content>
                                 <AnchorPane fx:id="listeQuizId" minHeight="0.0" minWidth="0.0" prefHeight="447.0" prefWidth="270.0" style="-fx-background-color: #FFFFFF;" />
                             </content>
@@ -72,7 +70,7 @@
                 </VBox>
             </left>
             <center>
-                <AnchorPane fx:id="totalQuizContainer" minHeight="0.0" minWidth="0.0" prefHeight="536.0" prefWidth="444.0" style="-fx-background-color: white;">
+                <AnchorPane fx:id="totalQuizContainer" minHeight="0.0" minWidth="0.0" style="-fx-background-color: white;">
                     <children>
                         <Text layoutX="27.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Quiz :">
                             <font>
@@ -100,11 +98,11 @@
                                 <Font size="11.0" />
                             </font>
                         </TextField>
-                        <ScrollPane fitToHeight="true" hbarPolicy="ALWAYS" layoutX="-1.0" layoutY="115.0" prefHeight="420.0" prefWidth="700.0" style="-fx-background-color: white;" vbarPolicy="ALWAYS">
+                        <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="ALWAYS" layoutX="-1.0" layoutY="115.0" style="-fx-background-color: white;" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="125.0">
                             <content>
-                                <AnchorPane prefHeight="401.0" prefWidth="704.0" style="-fx-background-color: white;">
+                                <AnchorPane style="-fx-background-color: white;">
                                     <children>
-                                        <VBox fx:id="listeQuestionsOfQuiz" prefWidth="704.0" spacing="30.0" style="-fx-background-color: white;" />
+                                        <VBox fx:id="listeQuestionsOfQuiz" spacing="30.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                     </children>
                                 </AnchorPane>
                             </content>

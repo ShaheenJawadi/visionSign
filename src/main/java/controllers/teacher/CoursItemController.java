@@ -6,6 +6,7 @@ import entities.Ressource;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuItem;
 import javafx.scene.text.Text;
 import services.cours.CoursService;
 import services.lesson.LessonService;
@@ -35,6 +36,11 @@ public class CoursItemController   {
 
     @FXML
     private Text title;
+
+
+    @FXML
+    private MenuItem ajouterQuizBtn;
+
 
 
     private  Cours cours ;
@@ -93,6 +99,12 @@ public class CoursItemController   {
         System.out.println(cours.getId());
 
         parentController.openAddCoursPageBtn(cours);
+    }
+
+
+    @FXML
+    void ajouterQuiz(ActionEvent event) {
+
     }
 
 }

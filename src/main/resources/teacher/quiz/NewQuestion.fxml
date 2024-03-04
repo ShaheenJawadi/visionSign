@@ -10,10 +10,8 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="600.0" prefWidth="906.0" style="-fx-background-color: #D2D3D4;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EnseignantQuiz.Newquestcontroller">
-    <Pane>
-        <fx:include fx:id="navbar" source="Navbar.fxml" />
-    </Pane>
-   <Pane layoutX="369.0" layoutY="235.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="80.0">
+ 
+   <Pane layoutX="369.0" layoutY="235.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
        <children>
            <Text layoutX="27.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter une nouvelle question">
                <font>
