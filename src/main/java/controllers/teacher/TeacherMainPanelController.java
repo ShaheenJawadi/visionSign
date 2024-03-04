@@ -1,16 +1,23 @@
 package controllers.teacher;
 
+import State.MainNavigations;
+import State.TeacherNavigations;
+import State.UserOPState;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class TeacherMainPanelController {
+public class TeacherMainPanelController  implements Initializable {
 
 
-    private @FXML StackPane spSubScene;
+    private @FXML VBox spSubScene;
     private  @FXML Button dashboardBtnId ;
 
 
@@ -19,48 +26,31 @@ public class TeacherMainPanelController {
       dashboardBtnId.fire();
     }
 
-    public StackPane getSpSubScene() {
-        return spSubScene;
-    }
 
     public void openDashboard(){
-        try
-        {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/Dashboard.fxml"));
-
-            loader.load();
-
-            TeacherDashboardController dashboardController = loader.getController();
-            spSubScene.getChildren().clear();
-            spSubScene.getChildren().add(dashboardController.getVBoxRoot());
-        }
-        catch (IOException ex)
-        {
-            System.out.println(ex.toString());
-        }
+        TeacherNavigations.getInstance().openDashboardPage();
 
     }
 
     public void openCoursPage(){
-        try
-        {
+        TeacherNavigations.getInstance().openCoursListPage();
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/cours/CoursPage.fxml"));
+    }
 
-            loader.load();
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-            TeacherCoursController coursPage = loader.getController();
 
-            coursPage.setShowMessage(true);
-            coursPage.setStackPane(spSubScene);
-            spSubScene.getChildren().clear();
-            spSubScene.getChildren().add(coursPage.getVBoxRoot());
-        }
-        catch (IOException ex)
-        {
-            System.out.println(ex.toString());
-        }
+
+        UserOPState userOPState = UserOPState.getInstance() ;
+
+        TeacherNavigations mainNavigations = TeacherNavigations.getInstance() ;
+        mainNavigations.setPaheHoloder(spSubScene);
+
+
+        IntitalState();
+
     }
 
 

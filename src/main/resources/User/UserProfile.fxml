@@ -18,16 +18,12 @@
     <children>
         <VBox prefHeight="730.0" prefWidth="235.0" style="-fx-background-color: #1675bc;">
             <children>
-                <VBox alignment="CENTER" prefHeight="183.0" prefWidth="235.0" spacing="15.0">
+                <VBox alignment="CENTER" prefHeight="183.0" prefWidth="235.0" spacing="15.0" stylesheets="@../styles/User/ImageStyle.css">
                     <VBox.margin>
                         <Insets top="50.0" />
                     </VBox.margin>
                     <children>
-                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@pic.png" />
-                            </image>
-                        </ImageView>
+                        <ImageView fx:id="imageId" fitHeight="150.0" fitWidth="168.0" onMouseClicked="#changePic" pickOnBounds="true" preserveRatio="true" styleClass="ImageStyle" />
                         <Label fx:id="userTF" alignment="CENTER" prefHeight="22.0" prefWidth="120.0" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="15.0" />
@@ -38,6 +34,7 @@
                                 <Font name="System Bold" size="12.0" />
                             </font>
                         </MFXButton>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
                     </children>
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="402.0" prefWidth="235.0" spacing="17.0">

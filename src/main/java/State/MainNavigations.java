@@ -4,6 +4,7 @@ import controllers.MainPages.Cours.CoursLessonsPageController;
 import controllers.MainPages.Cours.Filter.FilterController;
 import controllers.MainPages.Cours.SingleCoursController;
 import controllers.MainPages.MainPageController;
+import controllers.Student.QuizEleveController;
 import entities.Cours;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -129,6 +130,30 @@ public class MainNavigations {
             System.out.println(ex.toString());
         }
     }
+
+
+    public void openQuizzPage(int coursId){
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Student/QuizEleve.fxml"));
+
+            loader.load();
+
+            QuizEleveController page = loader.getController();
+            page.setCoursId(coursId);
+
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(page.getVBoxRoot());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
+    }
+
 
 
 

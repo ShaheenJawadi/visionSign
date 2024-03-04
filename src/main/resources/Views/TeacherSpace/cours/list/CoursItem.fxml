@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
-<VBox prefHeight="100.0" prefWidth="300.0" spacing="3.0" styleClass="item" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teacher.CoursItemController">
+<VBox prefHeight="100.0" prefWidth="300.0" spacing="3.0" styleClass="item" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teacher.CoursItemController">
    <children>
       <HBox alignment="TOP_RIGHT" prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -15,6 +20,7 @@
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#editCours" text="Modifier" />
                 <MenuItem mnemonicParsing="false" onAction="#deleteCours" text="Supprimer" />
+                  <MenuItem fx:id="ajouterQuizBtn" mnemonicParsing="false" onAction="#ajouterQuiz" text="Ajouter Quiz" />
               </items>
             </MenuButton>
          </children>

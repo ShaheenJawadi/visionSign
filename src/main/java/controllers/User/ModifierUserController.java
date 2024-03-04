@@ -49,6 +49,7 @@ public class ModifierUserController {
     private TextField usernameTF;
     private final UserService userService=new UserService();
 
+
     @FXML
     void ModifierU(ActionEvent event) {
         String validationError = validateInputs();
@@ -59,7 +60,7 @@ public class ModifierUserController {
                 dateToSet = java.sql.Date.valueOf(selectedDate);
             }
 
-            User userToUpdate = new User(Integer.parseInt(idTF.getText()),nomTF.getText(),prenomTF.getText(),usernameTF.getText(),dateToSet,emailTF.getText(),userService.getCurrent().getPassword(),roleTF.getValue(),statusTF.getValue());
+            User userToUpdate = new User(Integer.parseInt(idTF.getText()),nomTF.getText(),prenomTF.getText(),usernameTF.getText(),dateToSet,emailTF.getText(),userService.getCurrent().getPassword(),roleTF.getValue(),statusTF.getValue(),"");
             switch (levelTF.getValue()) {
                 case DEBUTANT -> {userToUpdate.setLevelId(1);}
                 case INTERMEDIAIRE -> {userToUpdate.setLevelId(2);}

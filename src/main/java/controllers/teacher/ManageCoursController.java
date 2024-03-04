@@ -1,5 +1,6 @@
 package controllers.teacher;
 
+import State.TeacherNavigations;
 import entities.Cours;
 import entities.Lesson;
 import entities.Ressource;
@@ -121,14 +122,7 @@ public class ManageCoursController implements Initializable {
             if (cours_id > 0) {
                 DbAddCoursRessources(cours_id);
                 gatherLessonData(cours_id);
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/cours/CoursPage.fxml"));
-
-                loader.load();
-
-                TeacherCoursController coursPage = loader.getController();
-                coursPage.setStackPane(spSubScene);
-                spSubScene.getChildren().clear();
-                spSubScene.getChildren().add(coursPage.getVBoxRoot());
+                TeacherNavigations.getInstance().openCoursListPage();
             }
         }
         else {
@@ -216,7 +210,7 @@ public class ManageCoursController implements Initializable {
 
 
 
-    VBox getVBoxRoot()
+    public VBox getVBoxRoot()
     {
         return vbRoot;
     }

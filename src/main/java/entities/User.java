@@ -19,6 +19,7 @@ public class User {
     private UserRole role;
     private String status;
     private String token;
+    private String image;
     private int levelId; //foreign key to level id
     public User(){}
     public User(String email){
@@ -35,7 +36,7 @@ public class User {
         this.nom = nom;
         this.email = email;
     }
-    public User(int id, String nom, String prenom, String username, Date dateNaissance, String email, String password, UserRole role, String status,int levelId) {
+    public User(int id, String nom, String prenom, String username, Date dateNaissance, String email, String password, UserRole role, String status,String image,int levelId) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -47,10 +48,11 @@ public class User {
         this.status = status;
         this.token = UUID.randomUUID().toString();
         this.levelId=levelId;
+        this.image=image;
 
 
     }
-    public User(int id, String nom, String prenom, String username, Date dateNaissance, String email, String password, UserRole role, String status) {
+    public User(int id, String nom, String prenom, String username, Date dateNaissance, String email, String password, UserRole role, String status,String image) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -61,6 +63,7 @@ public class User {
         this.role = role;
         this.status = status;
         this.token = UUID.randomUUID().toString();
+        this.image=image;
 
 
     }
@@ -181,6 +184,13 @@ public class User {
         return levelId;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
 
     @Override
     public String toString() {

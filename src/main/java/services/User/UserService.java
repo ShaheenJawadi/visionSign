@@ -86,6 +86,13 @@ public class UserService implements IUserServices<User>{
         ps.setInt(2,user.getId());
         ps.executeUpdate();
     }
+    public void updateImage(User user) throws SQLException{
+        String sql="update user set image=? where id=?";
+        PreparedStatement ps= connection.prepareStatement(sql);
+        ps.setString(1, user.getImage());
+        ps.setInt(2,user.getId());
+        ps.executeUpdate();
+    }
 
 
     @Override
@@ -119,6 +126,7 @@ public class UserService implements IUserServices<User>{
             u.setRole(UserRole.valueOf(rs.getString("role")));
             u.setStatus(rs.getString("status"));
             u.setToken(rs.getString("token"));
+            u.setImage(rs.getString("image"));
             u.setLevelId(rs.getInt("level_id"));
 
 
@@ -141,10 +149,11 @@ public class UserService implements IUserServices<User>{
         String password=rs.getString("password");
         String status=rs.getString("status");
         String token=rs.getString("token");
+        String image=rs.getString("image");
         UserRole role=UserRole.valueOf(rs.getString("role"));
         int level_id=rs.getInt("level_id");
 
-        User user =new User(id,nom, prenom,username,dateNaissance,email,password,role,status,level_id);
+        User user =new User(id,nom, prenom,username,dateNaissance,email,password,role,status,image,level_id);
         return user;
     }
 

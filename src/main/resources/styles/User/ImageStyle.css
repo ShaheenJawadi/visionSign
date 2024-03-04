@@ -1,0 +1,21 @@
+
+
+.ImageStyle{
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+    -fx-min-width: 100px; /* set your desired width */
+    -fx-min-height: 100px; /* set your desired height */
+    -fx-max-width: 100px; /* set your desired width */
+    -fx-max-height: 100px; /* set your desired height */
+
+}
+
+.tstbg{
+
+    -fx-background-image: url("../../assets/botImage.png");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+
+}
