@@ -42,7 +42,7 @@
                                     <graphic>
                                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@user-128.png" />
+                                                <Image url="@../assets/user/user-128.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -55,7 +55,7 @@
                                     <graphic>
                                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@accomplishment.png" />
+                                                <Image url="@../assets/user/accomplishment.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -68,7 +68,7 @@
                                     <graphic>
                                         <ImageView fitHeight="34.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@privacy.png" />
+                                                <Image url="@../assets/user/privacy.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -81,7 +81,7 @@
                                     <graphic>
                                         <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@padlock.png" />
+                                                <Image url="@../assets/user/padlock.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -97,7 +97,7 @@
                                     <graphic>
                                         <ImageView fitHeight="34.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                             <image>
-                                                <Image url="@noti.png" />
+                                                <Image url="@../assets/user/noti.png" />
                                             </image>
                                         </ImageView>
                                     </graphic>
@@ -189,7 +189,7 @@
          <graphic>
             <ImageView fitHeight="150.0" fitWidth="32.0" onDragDetected="#logout" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@4400629.png" />
+                  <Image url="@../assets/user/4400629.png" />
                </image>
             </ImageView>
          </graphic>

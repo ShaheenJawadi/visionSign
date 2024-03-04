@@ -44,7 +44,7 @@
                     <children>
                         <ImageView fx:id="imageId" fitHeight="70.0" fitWidth="60.0" onMouseClicked="#profile" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@pic.png" />
+                                <Image url="@../assets/user/pic.png" />
                             </image>
                             <HBox.margin>
                                 <Insets left="-20.0" right="-7.0" />
@@ -62,7 +62,7 @@
                      <graphic>
                         <ImageView fitHeight="27.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@4400629.png" />
+                              <Image url="@../assets/user/4400629.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -83,7 +83,7 @@
                     <children>
                         <ImageView fitHeight="60.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="@desktop.png" />
+                                <Image url="@../assets/user/desktop.png" />
                             </image>
                             <HBox.margin>
                                 <Insets left="10.0" />
@@ -117,7 +117,7 @@
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@refresh-button.png" />
+                  <Image url="@../assets/user/refresh-button.png" />
                </image>
             </ImageView>
          </graphic>
@@ -127,7 +127,7 @@
          <graphic>
             <ImageView fitHeight="26.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@hhh.png" />
+                  <Image url="@../assets/user/hhh.png" />
                </image>
             </ImageView>
          </graphic></Button>
@@ -137,7 +137,7 @@
          <graphic>
             <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@pdf.png" />
+                  <Image url="@../assets/user/pdf.png" />
                </image>
             </ImageView>
          </graphic>

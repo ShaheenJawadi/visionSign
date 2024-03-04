@@ -16,7 +16,7 @@
             <children>
                 <ImageView fx:id="imgLogo" fitHeight="205.0" fitWidth="227.0" layoutX="109.0" layoutY="130.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@desktop.png" />
+                        <Image url="@../assets/user/desktop.png" />
                     </image></ImageView>
                 <Label layoutX="35.0" layoutY="335.0" prefHeight="159.0" prefWidth="403.0" text="VisionSign Academy" textFill="#2aace2">
                     <font>
@@ -50,7 +50,7 @@
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@facebook.png" />
+                        <Image url="@../assets/user/facebook.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -62,7 +62,7 @@
                <graphic>
                   <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@gmail.png" />
+                        <Image url="@../assets/user/gmail.png" />
                      </image>
                   </ImageView>
                </graphic>

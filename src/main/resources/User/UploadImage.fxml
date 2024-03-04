@@ -19,7 +19,7 @@
                 <Label layoutX="87.0" layoutY="77.0" prefHeight="18.0" prefWidth="150.0" />
             <ImageView fx:id="imageId" fitHeight="150.0" fitWidth="200.0" layoutX="37.0" layoutY="64.0" onMouseClicked="#upload" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@UserDefault.png" />
+                  <Image url="@../assets/user/UserDefault.png" />
                </image>
             </ImageView>
             </children>

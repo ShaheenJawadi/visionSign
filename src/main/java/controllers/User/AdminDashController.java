@@ -24,7 +24,6 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class AdminDashController {
     @FXML
@@ -114,7 +113,7 @@ public class AdminDashController {
         else{
 
         }
-        Image image=new Image("User/UserDefault.png");
+        Image image=new Image("assets/user/UserDefault.png");
         imageId.setImage(image);
 
     }
