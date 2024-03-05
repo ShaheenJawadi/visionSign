@@ -1,6 +1,7 @@
 package controllers.Reclamations;
 
 
+import State.MainNavigations;
 import entities.Publications;
 import entities.Reclamations;
 import javafx.collections.FXCollections;
@@ -27,6 +28,12 @@ import java.util.Arrays;
 import java.util.Date;
 
 public class ModifierRecController extends AjouterRecController {
+    @FXML
+    public AnchorPane rootId;
+    public AnchorPane getRootBox(){
+        return  this.rootId ;
+    }
+    private int usserId=State.UserSessionManager.getInstance().getCurrentUser().getId();
 
     @FXML
     private TextField desFx;
@@ -74,16 +81,14 @@ public class ModifierRecController extends AjouterRecController {
 
                 //TODO userId=1
 
-                pubs.modifier(new Reclamations(recId,typeText,descriptionText,statusText,1));
+                pubs.modifier(new Reclamations(recId,typeText,descriptionText,statusText,usserId));
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success!");
                 alert.setContentText("Reclamation updated successfully!");
                 alert.showAndWait();
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Reclamations/AfficherRecU.fxml"));
-                Parent root = loader.load();
-                modPubBtn.getScene().setRoot(root);
+                MainNavigations.getInstance().openReclamationPage();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error!");
@@ -95,10 +100,8 @@ public class ModifierRecController extends AjouterRecController {
             alert.setTitle("Error!");
             alert.setContentText(e.getMessage());
             alert.showAndWait();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
+
     }
 
 
@@ -107,7 +110,7 @@ public class ModifierRecController extends AjouterRecController {
         typeCombo.getItems().addAll("cours", "note", "certificat", "autre");
         try {
             //TODO userid=1
-            mypub = pubs.getReclamationsById(1);
+            mypub = pubs.getReclamationsById(usserId);
             if (this.mypub == null || this.mypub.isEmpty()) {
                 Text emptyText = new Text("Vous n'avez pas encore publié!");
                 emptyText.setFont(new Font("System", 15));

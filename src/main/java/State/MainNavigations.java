@@ -4,6 +4,10 @@ import controllers.MainPages.Cours.CoursLessonsPageController;
 import controllers.MainPages.Cours.Filter.FilterController;
 import controllers.MainPages.Cours.SingleCoursController;
 import controllers.MainPages.MainPageController;
+import controllers.Reclamations.AfficherRecController;
+import controllers.Reclamations.AfficherRecU;
+import controllers.Reclamations.AjouterRecController;
+import controllers.Reclamations.ModifierRecController;
 import controllers.Student.NoteQuizController;
 import controllers.Student.QuizEleveController;
 import controllers.User.*;
@@ -231,9 +235,65 @@ public class MainNavigations {
             System.out.println(ex.toString());
         }
     }
+    public void openReclamationPage(){
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Reclamations/AfficherRecU.fxml"));
+
+            loader.load();
+
+            AfficherRecU page = loader.getController();
 
 
 
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(page.getRootBox());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
+    }
+    public void openModifyReclamationPage(int recId){
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Reclamations/ModifierRec.fxml"));
+
+            loader.load();
+
+            ModifierRecController page = loader.getController();
+            page.setRecId(recId);
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(page.getRootBox());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }}
+
+    public void openAddReclamationPage(){
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Reclamations/AjouterRec.fxml"));
+
+            loader.load();
+
+            AjouterRecController page = loader.getController();
+
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(page.getRootBox());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }}
 
     public void openChatbotForumPage(){
         try
