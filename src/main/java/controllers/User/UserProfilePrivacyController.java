@@ -20,12 +20,10 @@ import java.sql.SQLException;
 
 public class UserProfilePrivacyController {
 
-   @FXML
-    public ImageView imageId;
+
     @FXML
     private TextField emailTF;
-    @FXML
-    private Label userTF;
+
 
     @FXML
     private AnchorPane rootId;
@@ -39,7 +37,7 @@ private final UserService userService=new UserService();
 private final UserSessionManager userSessionManager=new UserSessionManager();
 @FXML
 void initialize(){
-    userTF.setText(userService.getCurrent().getUsername());
+
     emailTF.setText(userService.getCurrent().getEmail());
 }
     @FXML
@@ -63,48 +61,10 @@ void initialize(){
         }
 
     }
-    @FXML
-    void pwdButton(ActionEvent event){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserProfilePwd.fxml"));
-            Parent pwdRoot = loader.load();
-            ScrollPane rootScrollPane=new ScrollPane(pwdRoot);
-            rootScrollPane.setFitToWidth(true);
-            rootScrollPane.setFitToHeight(true);
-            emailTF.getScene().setRoot(rootScrollPane);
-            System.out.println(userService.getCurrent().getEmail());
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-    @FXML
-    void profileButton(ActionEvent event){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserProfile.fxml"));
-            Parent profileRoot = loader.load();
-            ScrollPane profileScrollPane=new ScrollPane(profileRoot);
-            profileScrollPane.setFitToWidth(true);
-            profileScrollPane.setFitToHeight(true);
-            emailTF.getScene().setRoot(profileScrollPane);
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }}
 
-    @FXML
-    void logout(ActionEvent event){
-        userSessionManager.clearSession();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/Login.fxml"));
-            Parent privacyRoot = loader.load();
-            ScrollPane privacyScrollPane=new ScrollPane(privacyRoot);
-            privacyScrollPane.setFitToWidth(true);
-            privacyScrollPane.setFitToHeight(true);
-            emailTF.getScene().setRoot(privacyScrollPane);
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
 
-    }
+
+
     private void showAlertError(String title, String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

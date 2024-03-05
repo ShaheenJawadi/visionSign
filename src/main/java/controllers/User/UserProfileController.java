@@ -43,10 +43,6 @@ public class UserProfileController {
 
     @FXML
     private TextField usernameTF;
-    @FXML
-    private Label userTF;
-    @FXML
-    private ImageView imageId;
 
 
     @FXML
@@ -66,7 +62,7 @@ public class UserProfileController {
     void initialize(){
      User user = userService.getCurrent();
 
-     userTF.setText(user.getUsername());
+
      ObservableList<UserLevel> userLevels = FXCollections.observableArrayList(UserLevel.values());
      levelTF.setItems(userLevels);
 
@@ -82,15 +78,8 @@ public class UserProfileController {
      usernameTF.setText(user.getUsername());
      System.out.println("hahahahaa");
      String url = user.getImage();
-     if(!(url ==null)){
-         Image image = new Image(url);
-         imageId.setImage(image);
-     }
-     else{
 
-     }
-         Image image=new Image("assets/user/UserDefault.png");
-         imageId.setImage(image);
+
      System.out.println("bababab");
 
 
@@ -144,47 +133,8 @@ public class UserProfileController {
         }
 
     }
-    @FXML
-    void pwdButton(ActionEvent event){
-        try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserProfilePwd.fxml"));
-            Parent pwdRoot = loader.load();
-            ScrollPane rootScrollPane=new ScrollPane(pwdRoot);
-            rootScrollPane.setFitToWidth(true);
-            rootScrollPane.setFitToHeight(true);
-            usernameTF.getScene().setRoot(rootScrollPane);
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-    @FXML
-    void privacyButton(ActionEvent event){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserProfilePrivacy.fxml"));
-            Parent privacyRoot = loader.load();
-            ScrollPane privacyScrollPane=new ScrollPane(privacyRoot);
-            privacyScrollPane.setFitToWidth(true);
-            privacyScrollPane.setFitToHeight(true);
-            usernameTF.getScene().setRoot(privacyScrollPane);
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
-    }
-   @FXML
-   void logout(ActionEvent event){
-       userSessionManager.clearSession();
-       try {
-           FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/Login.fxml"));
-           Parent privacyRoot = loader.load();
-           ScrollPane privacyScrollPane=new ScrollPane(privacyRoot);
-           privacyScrollPane.setFitToWidth(true);
-           privacyScrollPane.setFitToHeight(true);
-           usernameTF.getScene().setRoot(privacyScrollPane);
-       } catch (IOException e) {
-           throw new RuntimeException(e.getMessage());
-       }
 
-   }
+
 
     private void showAlertError(String title, String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -228,29 +178,7 @@ public class UserProfileController {
 
         return validationError.toString();
     }
-@FXML
-    public void changePic(javafx.scene.input.MouseEvent mouseEvent) {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/User/UploadImage.fxml"));
-        try {
-            loader.load();
-            UploadImageController uploadImageController = loader.getController();
-            // Set a reference to this UserProfileController
-            uploadImageController.setUserProfileController(this);
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
 
-        Parent parent = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(parent));
-        stage.initStyle(StageStyle.UTILITY);
-        stage.show();
 
-    }
-    public void updateImage(String imageUrl) {
-        Image image = new Image(imageUrl);
-        imageId.setImage(image);
-    }
 
 }

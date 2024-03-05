@@ -19,8 +19,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class UserProfilePwdController {
-    @FXML
-    public ImageView imageId;
+
     @FXML
     private MFXPasswordField newPwdTF1;
 
@@ -29,8 +28,7 @@ public class UserProfilePwdController {
 
     @FXML
     private MFXPasswordField oldPwdTF;
-    @FXML
-    private Label userTF;
+
 
 
     @FXML
@@ -45,7 +43,7 @@ private final UserService userService=new UserService();
     private final UserSessionManager userSessionManager=new UserSessionManager();
 @FXML
 void initialize(){
-    userTF.setText(userService.getCurrent().getUsername());
+
 }
     @FXML
     void modifier(ActionEvent event) {
@@ -76,45 +74,8 @@ void initialize(){
         }
 
     }
-    @FXML
-    void profileButton(ActionEvent event){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserProfile.fxml"));
-            Parent profileRoot = loader.load();
-            ScrollPane profileScrollPane=new ScrollPane(profileRoot);
-            profileScrollPane.setFitToWidth(true);
-            profileScrollPane.setFitToHeight(true);
-            newPwdTF1.getScene().setRoot(profileScrollPane);
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }}
-    @FXML
-    void privacyButton(ActionEvent event){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserProfilePrivacy.fxml"));
-            Parent privacyRoot = loader.load();
-            ScrollPane privacyScrollPane=new ScrollPane(privacyRoot);
-            privacyScrollPane.setFitToWidth(true);
-            privacyScrollPane.setFitToHeight(true);
-            newPwdTF1.getScene().setRoot(privacyScrollPane);
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }}
-    @FXML
-    void logout(ActionEvent event){
-        userSessionManager.clearSession();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/Login.fxml"));
-            Parent privacyRoot = loader.load();
-            ScrollPane privacyScrollPane=new ScrollPane(privacyRoot);
-            privacyScrollPane.setFitToWidth(true);
-            privacyScrollPane.setFitToHeight(true);
-            newPwdTF1.getScene().setRoot(privacyScrollPane);
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
 
-    }
+
 
 
     private void showAlertError(String title, String header, String content) {

@@ -38,7 +38,7 @@
                     <children>
                         <HBox alignment="CENTER" prefHeight="45.0" prefWidth="200.0">
                             <children>
-                                <Button mnemonicParsing="false" onAction="#profileButton" prefHeight="48.0" prefWidth="158.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 60;" text="Profile">
+                                <Button fx:id="profileBtn" mnemonicParsing="false" onAction="#profileButton" prefHeight="48.0" prefWidth="158.0" style="-fx-background-color: #FFFFFF; -fx-background-radius: 60;" text="Profile">
                                     <graphic>
                                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                             <image>

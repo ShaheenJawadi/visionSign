@@ -57,7 +57,7 @@ public class UploadImageController {
                 currentUser.setImage(cloudinaryUrl);
                 userService.updateImage(currentUser);
                 if (userProfileController != null) {
-                    userProfileController.updateImage(cloudinaryUrl);
+                   // userProfileController.updateImage(cloudinaryUrl);
                 }
                 // Display success message
                 showAlert("Image Saved Successfully", Alert.AlertType.INFORMATION);

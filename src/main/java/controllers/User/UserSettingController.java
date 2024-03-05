@@ -45,6 +45,9 @@ public class UserSettingController {
     @FXML
     private VBox settingHolder ;
 
+    @FXML
+    private  Button profileBtn ;
+
 
 
 
@@ -59,6 +62,7 @@ public class UserSettingController {
 
  @FXML
     void initialize(){
+     profileBtn.fire();
      User user = userService.getCurrent();
 
      userTF.setText(user.getUsername());
