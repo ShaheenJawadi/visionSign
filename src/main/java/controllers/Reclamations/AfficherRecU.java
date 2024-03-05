@@ -1,5 +1,6 @@
 package controllers.Reclamations;
 
+import State.MainNavigations;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import entities.Reclamations;
@@ -29,6 +30,7 @@ import java.util.ResourceBundle;
 
 public class AfficherRecU implements Initializable{
 
+    private int usersId=State.UserSessionManager.getInstance().getCurrentUser().getId();
 
     @FXML
     public AnchorPane listepubid, allpubid;
@@ -40,14 +42,18 @@ public class AfficherRecU implements Initializable{
     List<Reclamations> mypub;
     List<Reclamations> allPub;
     ReclamationsServices pubs = new ReclamationsServices();
-
+    @FXML
+    public AnchorPane rootId;
+    public AnchorPane getRootBox(){
+        return  this.rootId ;
+    }
 
     public void initialize(URL url, ResourceBundle rb) {
         refreshPublications();
         try {
             //TODO userId=1
 
-            mypub = pubs.getReclamationsById(1);
+            mypub = pubs.getReclamationsById(usersId);
             System.out.println(mypub);
             mypub.sort(Comparator.comparing(Reclamations::getDate).reversed());
 
@@ -156,18 +162,7 @@ public class AfficherRecU implements Initializable{
             modifyButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    try {
-
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Reclamations/ModifierRec.fxml"));
-                        Parent root = loader.load();
-
-                        ModifierRecController modifyController = loader.getController();
-                        modifyController.setRecId(mypub.get(index).getId_reclamation());
-                        System.out.println(mypub.get(index).getId_reclamation());
-                        forumBtn.getScene().setRoot(root);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    MainNavigations.getInstance().openModifyReclamationPage(mypub.get(index).getId_reclamation());
                 }
             });
 
@@ -217,38 +212,24 @@ public class AfficherRecU implements Initializable{
 
     @FXML
     void navigateAddPub(ActionEvent event) {
-        try {
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("/Reclamations/AjouterRec.fxml"));
-            Parent root = loader.load();
-            addBtn.getScene().setRoot(root);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        MainNavigations.getInstance().openAddReclamationPage();
     }
     @FXML
     private  void handleForum(ActionEvent event){
-        try {
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("/Reclamations/AfficherRecU.fxml"));
-            Parent root = loader.load();
-            forumBtn.getScene().setRoot(root);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        MainNavigations.getInstance().openReclamationPage();
     }
 
     @FXML
     void searchPubByTitle(ActionEvent event) {
         String searchText = searchField.getText();
         //TODO userid=1
-        int userID = 1;
+
         try {
 
             if (searchText.isEmpty()) {
-                mypub = (List<Reclamations>) pubs.getReclmationsById(userID);
+                mypub = (List<Reclamations>) pubs.getReclmationsById(usersId);
             } else {
-                mypub = pubs.searchreclamationbyType(searchText, userID);
+                mypub = pubs.searchreclamationbyType(searchText, usersId);
             }
             listepubid.getChildren().clear();
             for (int i = 0; i < mypub.size(); i++) {

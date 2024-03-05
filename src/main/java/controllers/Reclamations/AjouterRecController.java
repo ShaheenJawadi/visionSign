@@ -1,5 +1,6 @@
 package controllers.Reclamations;
 
+import State.MainNavigations;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import entities.Reclamations;
@@ -38,9 +39,14 @@ public class AjouterRecController {
     private TextField searchField1;
     @FXML
     private TextField statFx,userid;
-
+    @FXML
+    public AnchorPane rootId;
+    public AnchorPane getRootBox(){
+        return  this.rootId ;
+    }
     @FXML
     private TableColumn<Reclamations, String> descfx;
+    private int usserId=State.UserSessionManager.getInstance().getCurrentUser().getId();
 
     @FXML
     private TableColumn<Reclamations, Integer> idfx;
@@ -73,7 +79,7 @@ public class AjouterRecController {
         try {
             String typeReclamation = typeCombo.getValue();
             //TODO userid=1
-            Reclamations nouvelleReclamation = new Reclamations(typeReclamation, desFx.getText(), statFx.getText(), 1);
+            Reclamations nouvelleReclamation = new Reclamations(typeReclamation, desFx.getText(), statFx.getText(), usserId);
             reclamationsServices.ajouterRec(nouvelleReclamation, typeReclamation); // Utilisation de la méthode ajouterRec
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");
@@ -91,7 +97,7 @@ public class AjouterRecController {
     void initialize() {
         try {
             //TODO userid=1
-            mypub = pubs.getReclamationsById(1);
+            mypub = pubs.getReclamationsById(usserId);
             if (this.mypub == null || this.mypub.isEmpty()) {
                 Text emptyText = new Text("Vous n'avez pas encore publié!");
                 emptyText.setFont(new Font("System", 15));
@@ -172,16 +178,7 @@ public class AjouterRecController {
         modifyButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                try {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/Reclamations/ModifierRec.fxml"));
-                    Parent root = loader.load();
-                    ModifierRecController modifyController = loader.getController();
-                    modifyController.setRecId(mypub.get(index).getId_reclamation());
-                    System.out.println(mypub.get(index).getId_reclamation());
-                    forumBtn.getScene().setRoot(root);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                MainNavigations.getInstance().openModifyReclamationPage(mypub.get(index).getId_reclamation());
             }
         });
 
@@ -223,26 +220,19 @@ public class AjouterRecController {
     }
 
     public void handleForum(ActionEvent actionEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Reclamations/AfficherRecU.fxml"));
-            Parent root = loader.load();
-            forumBtn.getScene().setRoot(root);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        MainNavigations.getInstance().openReclamationPage();
     }
 
     public void searchPubByTitle1(ActionEvent actionEvent) {
         String searchText = searchField1.getText();
         //TODO userid=1
-        int userID = 1;
+
         try {
 
             if (searchText.isEmpty()) {
-                mypub = (List<Reclamations>) pubs.getReclmationsById(userID);
+                mypub = (List<Reclamations>) pubs.getReclmationsById(usserId);
             } else {
-                mypub = pubs.searchreclamationbyType(searchText, userID);
+                mypub = pubs.searchreclamationbyType(searchText, usserId);
             }
             listepubid.getChildren().clear();
             for (int i = 0; i < mypub.size(); i++) {

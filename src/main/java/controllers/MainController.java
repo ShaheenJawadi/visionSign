@@ -78,8 +78,11 @@ public class MainController implements Initializable {
 
     }
 
+@FXML
+    public void OpenReclamationPage(MouseEvent mouseEvent) {
+        MainNavigations.getInstance().openReclamationPage();
 
-
+    }
 
     @FXML
     void openSignIn(MouseEvent event) {
