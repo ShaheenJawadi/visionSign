@@ -214,8 +214,8 @@ public class Cours {
         //todo SetUser  Id
         try {
 
-if(UserSessionManager.getInstance().isUserLoggedIn())
-            this.userCoursActivity=  userCoursServices.getUserCoursActivity(UserSessionManager.getInstance().getCurrentUser().getId(), this.getId());
+    if(UserSessionManager.getInstance().isUserLoggedIn())
+                this.userCoursActivity=  userCoursServices.getUserCoursActivity(UserSessionManager.getInstance().getCurrentUser().getId(), this.getId());
 
 
         } catch (SQLException e) {
@@ -243,7 +243,7 @@ if(UserSessionManager.getInstance().isUserLoggedIn())
         //todo SetUser  Id
         try {
             if(!userCoursServices.checkUserCours(this.getId() ,UserSessionManager.getInstance().getCurrentUser().getId())){
-                UserCours userCours = new UserCours(3 , this.getId()  ) ;
+                UserCours userCours = new UserCours(UserSessionManager.getInstance().getCurrentUser().getId() , this.getId()  ) ;
                 userCoursServices.add(userCours);
             }
         } catch (SQLException e) {

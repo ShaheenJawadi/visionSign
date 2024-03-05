@@ -113,6 +113,7 @@ public class MainController implements Initializable {
 
     }
 
+
     @FXML
     void openDashboard(ActionEvent event) {
 
@@ -120,6 +121,7 @@ public class MainController implements Initializable {
 
 
     }
+
 
 
     @FXML

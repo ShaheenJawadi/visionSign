@@ -47,6 +47,7 @@ public class ForumGetAllPublicationsController extends BaseForumController {
 
     @FXML
     public void initialize() {
+        System.out.println("ttttttttttt"+userId);
         refreshPublications();
         try {
             mypub = pubs.getPublicationsByUserId(userId); //todo userId

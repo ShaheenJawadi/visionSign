@@ -163,7 +163,7 @@ public class AddPublicationController extends BaseForumController {
             if (titreText != null && !titreText.isEmpty() && questionText != null && !questionText.isEmpty()) {
                 //todo USErid=6
 
-                if (!pubs.publicationExists(titreText, questionText, 18)) {
+                if (!pubs.publicationExists(titreText, questionText, userId)) {
                     boolean y = checkWithAiModel(titreText, questionText);
                     if (!y) {
                         String imageUrls = String.join(";", selectedImagePaths);
