@@ -139,6 +139,6 @@ public class NoteQuizController {
 
     @FXML
     public void retourAccueil(){
-        // à changer apres pour etre dynamique integration
+        //TODO à changer apres pour etre dynamique integration
     }
 }

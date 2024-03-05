@@ -82,7 +82,7 @@ public class QuizEleveController {
 
     private int iterator = 0, note = 0;
     private float  noteSur20=0;
-    private int quizId=1; // à changer apres pour etre dynamique integration
+    private int quizId=1; //TODO à changer apres pour etre dynamique integration
     private List<Questions> questionsList;
     private List<Suggestion> suggestionList;
 

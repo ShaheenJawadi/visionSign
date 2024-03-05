@@ -67,7 +67,7 @@ public class Newquizzcontroller {
             errorMessage.setText("");
             try {
                 if (quizService.isQuizNameUnique(quizName)) {
-                    Quiz quiz = new Quiz(quizName, duree, coursId, usserId); // TODO USER Id à changer apres pour etre dynamique integration
+                    Quiz quiz = new Quiz(quizName, duree, coursId, usserId); //  USER Id à changer apres pour etre dynamique integration
                     quizService.ajouterGestionQuiz(quiz);
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information");

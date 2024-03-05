@@ -174,7 +174,7 @@ public class Newquestcontroller {
             errorMessage.setText("");
             try {
                 if (questionService.isQuestionUniqueInQuiz(question.getText(), quizId)) {
-                    Questions q = new Questions(question.getText(), quizId, usserId,selectedImage); // TOdO USERiD à changer apres pour etre dynamique integration
+                    Questions q = new Questions(question.getText(), quizId, usserId,selectedImage); //  USERiD à changer apres pour etre dynamique integration
                     questionService.ajouterGestionQuiz(q);
                     suggestionService.ajouterGestionQuiz(new Suggestion(reponse.getText(), true, q.getId()));
                     suggestionService.ajouterGestionQuiz(new Suggestion(suggestion1.getText(), false, q.getId()));

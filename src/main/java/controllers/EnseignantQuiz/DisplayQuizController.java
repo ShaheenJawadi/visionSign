@@ -93,7 +93,7 @@ public class DisplayQuizController {
 
     public void getQuizUserLeft(){
         try {
-            myQuiz = quizService.getQuizByUserId(usserId);//TODO à changer apres pour etre dynamique integration
+            myQuiz = quizService.getQuizByUserId(usserId);// à changer apres pour etre dynamique integration
             if (myQuiz.isEmpty()) {
                 Text emptyText = new Text("Vous n'avez pas de quiz");
                 emptyText.setFont(new Font("System", 15));
@@ -809,7 +809,7 @@ public class DisplayQuizController {
 
     @FXML
     void quitterAction(ActionEvent event){
-// à changer apres pour etre dynamique integration
+//TODO à changer apres pour etre dynamique integration
     }
 
 
