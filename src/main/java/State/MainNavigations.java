@@ -8,6 +8,7 @@ import controllers.Student.QuizEleveController;
 import controllers.User.LoginController;
 import controllers.User.SignUpController;
 import controllers.User.UserProfileController;
+import controllers.User.UserSettingController;
 import controllers.studentForum.*;
 import entities.Cours;
 import javafx.fxml.FXML;
@@ -347,11 +348,11 @@ public class MainNavigations {
         try
         {
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserProfile.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserSettingPage.fxml"));
 
             loader.load();
 
-            UserProfileController page = loader.getController();
+            UserSettingController page = loader.getController();
 
 
             mainPageHolder.getChildren().clear();

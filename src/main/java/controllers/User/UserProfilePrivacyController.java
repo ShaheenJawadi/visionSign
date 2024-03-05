@@ -4,12 +4,14 @@ import entities.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import services.User.UserService;
 import State.UserSessionManager;
 
@@ -24,6 +26,15 @@ public class UserProfilePrivacyController {
     private TextField emailTF;
     @FXML
     private Label userTF;
+
+    @FXML
+    private AnchorPane rootId;
+
+
+
+    public AnchorPane getRootId() {
+        return  this.rootId;
+    }
 private final UserService userService=new UserService();
 private final UserSessionManager userSessionManager=new UserSessionManager();
 @FXML
@@ -122,5 +133,6 @@ void initialize(){
 
         return validationError.toString();
     }
+
 
 }

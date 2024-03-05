@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import services.User.PasswordHashing;
 import services.User.UserService;
 import entities.User;
@@ -30,6 +31,16 @@ public class UserProfilePwdController {
     private MFXPasswordField oldPwdTF;
     @FXML
     private Label userTF;
+
+
+    @FXML
+    private AnchorPane rootId ;
+
+
+    public  AnchorPane getRootId(){
+        return  this.rootId ;
+    }
+
 private final UserService userService=new UserService();
     private final UserSessionManager userSessionManager=new UserSessionManager();
 @FXML
