@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Categorie.AfficherCategorie">
+    <children>
+        <TableView fx:id="tableView" layoutX="73.0" layoutY="76.0" prefHeight="266.0" prefWidth="482.0">
+            <columns>
+                <TableColumn fx:id="nomCol" prefWidth="156.0" text="Nom" />
+                <TableColumn fx:id="descCol" prefWidth="154.0" text="Description" />
+                <TableColumn fx:id="nbCol" prefWidth="164.0" text="Nombre de sous catégories" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>

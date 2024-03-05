@@ -76,7 +76,7 @@ public class CreateCategorie implements Initializable {
             int cat_id = DbAddCategorieDetails();
             if (cat_id > 0) {
 
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/catgeorie/CategorieList.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/categorie/CategorieList.fxml"));
 
                 loader.load();
 
@@ -133,6 +133,9 @@ public class CreateCategorie implements Initializable {
 
     }
 
+    public void submitSousCategorie () {
+    }
+
     public void initValidation() {
 
         validateDescriptionCategorie.setVisible(false);
@@ -147,7 +150,7 @@ public class CreateCategorie implements Initializable {
 
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/catgeorie/CreateSousCategorie.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/categorie/CreateSousCategorie.fxml"));
             VBox ll = loader.load();
             CreateSousCategorie controller = loader.getController();
             ll.getProperties().put("fxmlLoader", loader);

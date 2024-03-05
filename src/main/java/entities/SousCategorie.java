@@ -1,7 +1,7 @@
 package entities;
 
 
-import java.sql.Date;
+import java.util.Date;
 import java.time.LocalDate;
 
 public class SousCategorie {
@@ -15,11 +15,19 @@ public class SousCategorie {
     public SousCategorie() {
     }
 
+    public SousCategorie(String nom, String description, String status, int categorieId) {
+        this.nom = nom;
+        this.description = description;
+        this.dateCreation = new Date();
+        this.status = status;
+        this.categorieId = categorieId;
+    }
+
     public SousCategorie(int id, String nom, String description, Date dateCreation, String status, int categorieId) {
         this.id = id;
         this.nom = nom;
         this.description = description;
-        this.dateCreation = Date.valueOf(LocalDate.now());
+        this.dateCreation = new Date();
         this.status = status;
         this.categorieId = categorieId;
     }
@@ -27,7 +35,7 @@ public class SousCategorie {
     public SousCategorie(String nom, String description, Date dateCreation, String status, int categorieId) {
         this.nom = nom;
         this.description = description;
-        this.dateCreation = Date.valueOf(LocalDate.now());
+        this.dateCreation = new Date();
         this.status = status;
         this.categorieId = categorieId;
     }
