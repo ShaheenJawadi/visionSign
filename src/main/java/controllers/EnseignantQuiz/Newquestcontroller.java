@@ -47,6 +47,7 @@ public class Newquestcontroller {
     public Text errorMessage;
     private  QuestionsService questionService = new QuestionsService();
     private  SuggestionService suggestionService = new SuggestionService();
+    private int usserId=State.UserSessionManager.getInstance().getCurrentUser().getId();
 
     public int quizId;
 
@@ -122,7 +123,7 @@ public class Newquestcontroller {
             errorMessage.setText("");
             try {
                 if (questionService.isQuestionUniqueInQuiz(question.getText(), quizId)) {
-                    Questions q = new Questions(question.getText(), quizId, 3,selectedImage); // à changer apres pour etre dynamique integration
+                    Questions q = new Questions(question.getText(), quizId, usserId,selectedImage); // à changer apres pour etre dynamique integration
                     questionService.ajouterGestionQuiz(q);
                     suggestionService.ajouterGestionQuiz(new Suggestion(reponse.getText(), true, q.getId()));
                     suggestionService.ajouterGestionQuiz(new Suggestion(suggestion1.getText(), false, q.getId()));
@@ -173,7 +174,7 @@ public class Newquestcontroller {
             errorMessage.setText("");
             try {
                 if (questionService.isQuestionUniqueInQuiz(question.getText(), quizId)) {
-                    Questions q = new Questions(question.getText(), quizId, 3,selectedImage); // TOdO USERiD à changer apres pour etre dynamique integration
+                    Questions q = new Questions(question.getText(), quizId, usserId,selectedImage); // TOdO USERiD à changer apres pour etre dynamique integration
                     questionService.ajouterGestionQuiz(q);
                     suggestionService.ajouterGestionQuiz(new Suggestion(reponse.getText(), true, q.getId()));
                     suggestionService.ajouterGestionQuiz(new Suggestion(suggestion1.getText(), false, q.getId()));

@@ -4,13 +4,17 @@ import controllers.MainPages.Cours.CoursLessonsPageController;
 import controllers.MainPages.Cours.Filter.FilterController;
 import controllers.MainPages.Cours.SingleCoursController;
 import controllers.MainPages.MainPageController;
+import controllers.Student.NoteQuizController;
 import controllers.Student.QuizEleveController;
 import controllers.User.*;
 import controllers.studentForum.*;
 import entities.Cours;
+import entities.Questions;
+import entities.Suggestion;
 import entities.UserRole;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -18,6 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
+import java.util.List;
 
 public class MainNavigations {
     private static MainNavigations instance;
@@ -174,6 +179,28 @@ public class MainNavigations {
 
             mainPageHolder.getChildren().clear();
             mainPageHolder.getChildren().add(page.getVBoxRoot());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
+    }
+    public void openQuizzNotePage(float note, int size, List<Questions> questionsList, List<Suggestion> suggestionList,List<String> answers){
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Student/NoteQuiz.fxml"));
+            loader.load();
+
+            NoteQuizController noteQuizController = loader.getController();
+            noteQuizController.setNoteQuiz(note);
+            noteQuizController.setNombreQuestions(size);
+            noteQuizController.setDownload(questionsList, suggestionList, answers);
+
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(noteQuizController.getVBoxRoot());
         }
         catch (IOException ex)
         {
