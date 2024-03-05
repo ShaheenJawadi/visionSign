@@ -1,5 +1,6 @@
 package controllers.User;
 
+import State.MainNavigations;
 import entities.User;
 import entities.UserRole;
 import io.github.palexdev.materialfx.controls.MFXComboBox;
@@ -72,16 +73,7 @@ public class SignUpController {
             userService.ajouter(new User(nomTF.getText(),prenomTF.getText(),usernameTF.getText(),emailTF.getText(),pwdTF.getText(),
                     UserRole.valueOf(roleTF.getText().toUpperCase())));
             showAlertSuccess("Success","Sign up successful","Account is Ready!");
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/Login.fxml"));
-                Parent loginRoot = loader.load();
-                ScrollPane loginScrollPane = new ScrollPane(loginRoot);
-                loginScrollPane.setFitToWidth(true);
-                loginScrollPane.setFitToHeight(true);
-                usernameTF.getScene().setRoot(loginScrollPane);
-            }catch(IOException e){
-                throw new RuntimeException(e.getMessage());
-            }
+            MainNavigations.getInstance().openSignIn();
 
         }
         catch (SQLException e){
@@ -95,16 +87,7 @@ public class SignUpController {
 
     @FXML
     void naviguer(ActionEvent event){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/Login.fxml"));
-            Parent loginRoot = loader.load();
-            ScrollPane loginScrollPane = new ScrollPane(loginRoot);
-            loginScrollPane.setFitToWidth(true);
-            loginScrollPane.setFitToHeight(true);
-            usernameTF.getScene().setRoot(loginScrollPane);
-        }catch(IOException e){
-            throw new RuntimeException(e.getMessage());
-        }
+        MainNavigations.getInstance().openSignIn();
     }
 
     private String validateInputs() {

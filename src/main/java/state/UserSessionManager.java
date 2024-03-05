@@ -11,7 +11,10 @@ public class UserSessionManager {
     public static UserSessionManager getInstance() {
          if (instance==null)
              instance=new UserSessionManager();
-         return instance;
+
+
+
+        return instance;
     }
 
     public  void setCurrentUser(User user) {

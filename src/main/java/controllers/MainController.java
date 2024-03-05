@@ -39,6 +39,11 @@ public class MainController implements Initializable {
     private Text userName;
     @FXML
     private MenuItem dashboardBtnAcc;
+
+    @FXML
+    private MenuItem teacherDashboardBtnAcc;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -50,7 +55,7 @@ public class MainController implements Initializable {
         userOPState.setNbEnrolementTextView(nbEnrolledCours);
         MainNavigations mainNavigations = MainNavigations.getInstance() ;
         mainNavigations.setPaheHoloder(mainPageHolder);
-        mainNavigations.setAuthComponents(authBox ,unAuthBox , userName , userImage,dashboardBtnAcc);
+        mainNavigations.setAuthComponents(authBox ,unAuthBox , userName , userImage,dashboardBtnAcc ,teacherDashboardBtnAcc);
 
         mainNavigations.manageHeaderAuth();
 
@@ -109,6 +114,15 @@ public class MainController implements Initializable {
     void openDashboard(ActionEvent event) {
 
             MainNavigations.getInstance().openAdminProfile();
+
+
+    }
+
+
+    @FXML
+    void openTeacherDashboard(ActionEvent event) {
+
+        MainNavigations.getInstance().openTeacherPanel();
 
 
     }

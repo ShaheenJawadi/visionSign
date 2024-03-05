@@ -45,6 +45,7 @@ public class AddPublicationController extends BaseForumController {
     public AnchorPane getRootBox(){
         return  this.rootId ;
     }
+
     private final Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
             "cloud_name", "dkdx59xe9",
             "api_key", "464462256124751",

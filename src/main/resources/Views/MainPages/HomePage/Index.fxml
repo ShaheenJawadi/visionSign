@@ -59,10 +59,11 @@
                                     <Text fx:id="userName" strokeType="OUTSIDE" strokeWidth="0.0" text="name" />
                                  </children>
                               </HBox>
-                              <MenuButton mnemonicParsing="false" style="-fx-background-color: #fff; fill: ;" textFill="#0cd9fd">
+                              <MenuButton mnemonicParsing="false" style="-fx-background-color: #fff; " textFill="#0cd9fd">
                                 <items>
                                   <MenuItem mnemonicParsing="false" onAction="#openProfileUser" text="Profile" />
                                     <MenuItem fx:id="dashboardBtnAcc" mnemonicParsing="false" onAction="#openDashboard" text="Dashboard" visible="false" />
+                                    <MenuItem fx:id="teacherDashboardBtnAcc" mnemonicParsing="false" onAction="#openTeacherDashboard" text="Dashboard" visible="false" />
                                   <MenuItem mnemonicParsing="false" onAction="#logoutBtn" text="Deconnexion" />
                                 </items>
                               </MenuButton>
