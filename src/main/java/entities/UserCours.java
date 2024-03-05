@@ -8,7 +8,6 @@ import java.util.Date;
 
 public class UserCours {
 
-//todo DATABASE
     private int id ;
     private int userId ;
     private int coursId ;

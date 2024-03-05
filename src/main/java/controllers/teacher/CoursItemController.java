@@ -1,6 +1,7 @@
 package controllers.teacher;
 
 import State.TeacherNavigations;
+import controllers.studentForum.DisplayImgTest;
 import entities.Cours;
 import entities.Lesson;
 import entities.Ressource;
@@ -53,6 +54,8 @@ public class CoursItemController   {
         title.setText(cours.getNom());
         sousCategorie.setText("sous Category");
        niveau.setText(String.valueOf(cours.getNiveauId()));
+
+
 
         RessourceService ressourceService = new RessourceService();
 

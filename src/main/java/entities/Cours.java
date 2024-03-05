@@ -1,6 +1,7 @@
 package entities;
 
 import State.UserOPState;
+import State.UserSessionManager;
 import mock.Category;
 import services.cours.UserCoursServices;
 
@@ -145,7 +146,7 @@ public class Cours {
     public  String lessonsDuration(){
 
         //TODO fetch lessons + calc duration
-        return "10 heurs ";
+        return "10 heures ";
 
     }
 
@@ -175,6 +176,10 @@ public class Cours {
 
     public boolean isEnrolled (){
 
+        if(UserOPState.getInstance().getUserEnrollmentsCours() == null)
+        {
+            return  false;
+        }
         ArrayList<UserCours> list = UserOPState.getInstance().getUserEnrollmentsCours();
 
         if (UserOPState.getInstance().getUserEnrollmentsCours().isEmpty()){
@@ -209,8 +214,10 @@ public class Cours {
         //todo SetUser  Id
         try {
 
+if(UserSessionManager.getInstance().isUserLoggedIn())
+            this.userCoursActivity=  userCoursServices.getUserCoursActivity(UserSessionManager.getInstance().getCurrentUser().getId(), this.getId());
 
-            this.userCoursActivity=  userCoursServices.getUserCoursActivity(3, this.getId());
+
         } catch (SQLException e) {
 
             System.out.println("hjqsgjdgsq");
@@ -229,10 +236,13 @@ public class Cours {
         return  this.userCoursActivity ;
     }
     public  void  addToBag(){
+        if(!UserSessionManager.getInstance().isUserLoggedIn()){
+            return;
+        }
         UserCoursServices userCoursServices = new UserCoursServices() ;
         //todo SetUser  Id
         try {
-            if(!userCoursServices.checkUserCours(this.getId() ,3)){
+            if(!userCoursServices.checkUserCours(this.getId() ,UserSessionManager.getInstance().getCurrentUser().getId())){
                 UserCours userCours = new UserCours(3 , this.getId()  ) ;
                 userCoursServices.add(userCours);
             }

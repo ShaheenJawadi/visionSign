@@ -28,7 +28,7 @@
          <children>
             <HBox prefHeight="53.0" prefWidth="600.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
-                  <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
+                  <VBox prefHeight="53.0" prefWidth="600.0" visible="false" HBox.hgrow="ALWAYS">
                      <children>
                         <Label text="Lien video" />
                         <TextField fx:id="Video" prefHeight="41.0" prefWidth="142.0" styleClass="inputField" VBox.vgrow="ALWAYS" />
@@ -38,7 +38,7 @@
                   <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label text="Image" />
-                        <Button fx:id="leconImage" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="38.0" prefWidth="318.0" styleClass="uploadBtn" text="Ajouter Image" />
+                        <Button fx:id="leconImage" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false"   prefHeight="38.0" prefWidth="318.0" styleClass="uploadBtn" text="Ajouter Image" />
                      </children>
                   </VBox>
                   <VBox prefHeight="53.0" prefWidth="600.0" HBox.hgrow="ALWAYS">
@@ -63,6 +63,7 @@
             </HBox>
          </children>
       </AnchorPane>
+      <HBox fx:id="imageContainer" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
       <AnchorPane layoutX="10.0" layoutY="10.0" prefHeight="299.0" prefWidth="600.0" styleClass="inputHolder">
          <children>
             <VBox layoutX="19.924529018924964" layoutY="19.924529018924964" prefHeight="307.0" prefWidth="581.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">

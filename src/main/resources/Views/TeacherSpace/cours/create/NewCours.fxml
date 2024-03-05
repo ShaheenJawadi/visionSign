@@ -16,17 +16,17 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.TextFlow?>
 
-<VBox fx:id="vbRoot" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teacher.ManageCoursController">
+<VBox fx:id="vbRoot" prefHeight="1921.0" prefWidth="1560.0" spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.teacher.ManageCoursController">
    <children>
-      <AnchorPane>
+      <AnchorPane VBox.vgrow="ALWAYS">
          <children>
-            <VBox maxWidth="1000.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <VBox AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                <children>
-                  <TabPane style="-fx-background-color: #fff;" styleClass="MyTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+                  <TabPane minHeight="1500.0" style="-fx-background-color: #fff;" styleClass="MyTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                     <tabs>
                       <Tab text="Details">
                         <content>
-                          <AnchorPane prefHeight="180.0" prefWidth="200.0" styleClass="TForm">
+                          <AnchorPane prefWidth="200.0" styleClass="TForm">
                                  <VBox prefHeight="200.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <children>
                                        <AnchorPane prefHeight="44.0" prefWidth="600.0" styleClass="inputHolder">
@@ -40,7 +40,7 @@
                                              </VBox>
                                           </children>
                                        </AnchorPane>
-                                       <AnchorPane prefHeight="41.0" prefWidth="600.0" styleClass="inputHolder">
+                                       <AnchorPane prefWidth="600.0" styleClass="inputHolder">
                                           <children>
                                              <HBox prefHeight="53.0" prefWidth="600.0" spacing="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                                 <children>
@@ -109,9 +109,10 @@
                                        </AnchorPane>
                                        <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="inputHolder">
                                           <children>
-                                             <Button layoutX="231.0" layoutY="7.0" mnemonicParsing="false" styleClass="uploadBtn" text="Ajouter Image de cours" />
+                                             <Button layoutX="231.0" layoutY="7.0" mnemonicParsing="false" onAction="#uploadImage" styleClass="uploadBtn" text="Ajouter Image de cours" />
                                           </children>
                                        </AnchorPane>
+                                       <HBox fx:id="imageContainer" prefHeight="100.0" prefWidth="200.0" />
                                     </children>
                                  </VBox>
                           </AnchorPane>
@@ -119,7 +120,7 @@
                       </Tab>
                       <Tab text="Ressources">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="TForm">
+                          <AnchorPane styleClass="TForm">
                                    <VBox prefHeight="200.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                        <children>
                                            <AnchorPane prefHeight="41.0" prefWidth="600.0" styleClass="inputHolder">
@@ -155,8 +156,8 @@
                       </Tab>
                         <Tab text="Lecons">
                           <content>
-                            <AnchorPane styleClass="TForm">
-                                 <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <AnchorPane minHeight="1500.0" styleClass="TForm">
+                                 <VBox alignment="TOP_CENTER" minHeight="1500.0" prefWidth="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                     <children>
                                        <VBox fx:id="ListCoursHolder" prefHeight="200.0" prefWidth="100.0" />
                                              <Button fx:id="addLesson" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addLessonClick" prefHeight="25.0" prefWidth="186.0" styleClass="secondaryBtn" text="Ajouter une lecon" />
@@ -167,19 +168,19 @@
                         </Tab>
                     </tabs>
                   </TabPane>
-                  <AnchorPane prefHeight="0.0" prefWidth="561.0" VBox.vgrow="NEVER" />
                </children>
             </VBox>
          </children>
       </AnchorPane>
-      <TextFlow fx:id="validationErrorMessage" styleClass="error_message" textAlignment="CENTER">
+      <HBox alignment="CENTER">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="msg" text="Certains champs sont invalides. Veuillez vérifier et corriger les informations saisies avant de procéder à l'insertion." />
+            <TextFlow fx:id="validationErrorMessage" styleClass="error_message" textAlignment="CENTER">
+               <children>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="msg" text="Certains champs sont invalides. Veuillez vérifier et corriger les informations saisies avant de procéder à l'insertion." />
+               </children>
+            </TextFlow>
          </children>
-         <VBox.margin>
-            <Insets left="20.0" right="20.0" />
-         </VBox.margin>
-      </TextFlow>
+      </HBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="0.0" prefWidth="561.0" spacing="15.0">
          <children>
             <Button mnemonicParsing="false" styleClass="cancelButton" text="Annuler" />
@@ -195,5 +196,5 @@
       <URL value="@../../../../styles/style.css" />
        <URL value="@../../../../styles/Teacher/add_cours.css" />
 
-   </stylesheets>
+         </stylesheets>
 </VBox>

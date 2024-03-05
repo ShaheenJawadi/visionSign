@@ -6,6 +6,7 @@ import State.UserOPState;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -20,7 +21,13 @@ public class TeacherMainPanelController  implements Initializable {
     private @FXML VBox spSubScene;
     private  @FXML Button dashboardBtnId ;
 
+    private @FXML VBox teacherHolder ;
 
+
+
+    public VBox getRootId() {
+        return this.teacherHolder;
+    }
     public void IntitalState(){
 
       dashboardBtnId.fire();
@@ -52,6 +59,7 @@ public class TeacherMainPanelController  implements Initializable {
         IntitalState();
 
     }
+
 
 
 }

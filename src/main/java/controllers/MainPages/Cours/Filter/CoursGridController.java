@@ -1,6 +1,7 @@
 package controllers.MainPages.Cours.Filter;
 
 import State.MainNavigations;
+import controllers.studentForum.DisplayImgTest;
 import entities.Cours;
 import entities.UserCours;
 import javafx.fxml.FXML;
@@ -54,6 +55,11 @@ public class CoursGridController implements Initializable {
          enseignant.setText(cours.getEnseignant());
          duration.setText(cours.lessonsDuration());
          category.setText(cours.getCategory().getNom());
+
+        if(!cours.getImage().isEmpty()){
+            DisplayImgTest imageLoader = new DisplayImgTest(thumbnail, cours.getImage());
+            imageLoader.loadImage();
+        }
 
 
 

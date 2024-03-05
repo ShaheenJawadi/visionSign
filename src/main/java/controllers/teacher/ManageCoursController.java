@@ -1,19 +1,27 @@
 package controllers.teacher;
 
 import State.TeacherNavigations;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import entities.Cours;
 import entities.Lesson;
 import entities.Ressource;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextFlow;
+import javafx.stage.FileChooser;
 import mock.Category;
 import mock.Level;
 import mock.SubCategory;
@@ -22,11 +30,13 @@ import services.lesson.LessonService;
 import services.ressource.RessourceService;
 import validation.ValidateCours;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ManageCoursController implements Initializable {
@@ -106,6 +116,17 @@ public class ManageCoursController implements Initializable {
 
 
 
+    @FXML
+    private HBox imageContainer;
+
+    private  String imgLink ;
+
+
+    private final Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+            "cloud_name", "dkdx59xe9",
+            "api_key", "464462256124751",
+            "api_secret", "h0D2KPEbrpHqzK3tSlxRJHadeLE"
+    ));
 
     public void setCours(Cours cours) {
         this.cours = cours;
@@ -152,9 +173,9 @@ public class ManageCoursController implements Initializable {
 
       if(validateCours()){
 
-          System.out.println("valid");
+
           c.setEnseignantId(3);
-          c.setImage("000");
+          c.setImage(imgLink);
 
           c.setNom(nom.getText());
           c.setDescription(description.getText());
@@ -164,9 +185,9 @@ public class ManageCoursController implements Initializable {
 
 
           CoursService cours=new CoursService();
-        int cours_id =  cours.add(c);
+            int cours_id =  cours.add(c);
 
-        return cours_id ;
+            return cours_id ;
 
       }
 
@@ -471,6 +492,76 @@ public class ManageCoursController implements Initializable {
 
         System.out.println(allLessonData);
     }
+
+
+
+
+    @FXML
+    private void uploadImage() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Choose Image Files");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+        );
+        List<File> files = fileChooser.showOpenMultipleDialog(null);
+
+        if (files != null && !files.isEmpty()) {
+            for (File file : files) {
+                // Create a new Task for the upload process
+                Task<Void> uploadTask = new Task<Void>() {
+                    @Override
+                    protected Void call() throws Exception {
+                        uploadFile(file);
+                        return null;
+                    }
+                };
+
+                // Add a ProgressIndicator to the HBox
+                ProgressIndicator progressIndicator = new ProgressIndicator();
+
+                imageContainer.getChildren().add(progressIndicator);
+
+
+                // Run the upload task in a background thread
+                new Thread(uploadTask).start();
+
+                // Remove the ProgressIndicator when the task is done
+                uploadTask.setOnSucceeded(event -> {
+                    imageContainer.getChildren().remove(progressIndicator);
+                });
+            }
+        }
+    }
+
+    private void uploadFile(File file) {
+        try {
+            Map uploadResult = cloudinary.uploader().upload(file, ObjectUtils.emptyMap());
+
+            String imageUrl = (String) uploadResult.get("url");
+
+            imgLink=imageUrl;
+            System.out.println("eee");
+            System.out.println(imageUrl);
+
+            Image image = new Image(imageUrl);
+            ImageView imageView = new ImageView(image);
+            imageView.setFitHeight(150);
+            imageView.setFitWidth(200);
+            imageView.setPreserveRatio(true);
+
+            // Update the UI on the JavaFX Application Thread
+            Platform.runLater(() -> {
+                imageContainer.getChildren().add(imageView);
+
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
 
 
 }

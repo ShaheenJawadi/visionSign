@@ -3,6 +3,7 @@ package controllers.MainPages.Cours;
 import State.MainNavigations;
 import controllers.MainPages.Cours.SinglePageComponants.CoursLessonItemController;
 import controllers.MainPages.Cours.SinglePageComponants.CoursSingleLessonItem;
+import controllers.studentForum.DisplayImgTest;
 import entities.Cours;
 import entities.Lesson;
 import entities.UserCours;
@@ -11,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebView;
 
@@ -38,6 +40,8 @@ public class CoursLessonsPageController implements Initializable {
     private Button nextLessonBtnId ;
 
 
+    @FXML
+    private ImageView lessonThumbnail ;
 
     private Cours cours ;
     private  int currentStage ;
@@ -49,7 +53,6 @@ public class CoursLessonsPageController implements Initializable {
 
         this.cours = cours ;
         System.out.println(cours);
-        System.out.println("///////////////");
         System.out.println(cours.getUserCoursActivity());
 
         currentStage =cours.getUserCoursActivity().getStage();
@@ -106,6 +109,10 @@ public class CoursLessonsPageController implements Initializable {
         webView.getEngine().loadContent(l.getContent());
 
 
+        if(!l.getImage().isEmpty()){
+            DisplayImgTest imageLoader = new DisplayImgTest(lessonThumbnail, l.getImage());
+            imageLoader.loadImage();
+        }
 
         webViewHolder.getChildren().add(webView);
 

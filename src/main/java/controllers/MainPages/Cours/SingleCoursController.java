@@ -3,6 +3,7 @@ package controllers.MainPages.Cours;
 import State.MainNavigations;
 import controllers.Avis.AvisCoursController;
 import controllers.MainPages.Cours.SinglePageComponants.CoursLessonItemController;
+import controllers.studentForum.DisplayImgTest;
 import entities.Cours;
 import entities.Lesson;
 import javafx.event.ActionEvent;
@@ -20,7 +21,6 @@ import java.util.ResourceBundle;
 import javafx.scene.text.Text;
 public class SingleCoursController implements Initializable {
 
-//TODO ADD AVIS ATTR
 
 
     @FXML
@@ -107,6 +107,7 @@ public class SingleCoursController implements Initializable {
 
     public void  renderContent(Cours cours){
         this.setCours(cours);
+        cours.fetchUserCoursActivity();
 
         dispalyAvis();
 
@@ -116,6 +117,10 @@ public class SingleCoursController implements Initializable {
 
         try {
 
+            if(!cours.getImage().isEmpty()){
+                DisplayImgTest imageLoader = new DisplayImgTest(thumbnail, cours.getImage());
+                imageLoader.loadImage();
+            }
             fillTextContent(title , cours.getNom());
             fillTextContent(descripton , cours.getDescription());
 
@@ -141,11 +146,7 @@ public class SingleCoursController implements Initializable {
 
         }
 
-               //todo rating
-                //todo teacher
 
-
-                //Todo addDtae      uploadedDate
 
 
 

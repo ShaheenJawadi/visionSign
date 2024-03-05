@@ -8,19 +8,19 @@ import controllers.Student.NoteQuizController;
 import controllers.Student.QuizEleveController;
 import controllers.User.*;
 import controllers.studentForum.*;
-import entities.Cours;
-import entities.Questions;
-import entities.Suggestion;
-import entities.UserRole;
+import controllers.teacher.TeacherMainPanelController;
+import entities.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import javax.management.relation.Role;
 import java.io.IOException;
 import java.util.List;
 
@@ -43,13 +43,17 @@ public class MainNavigations {
     private Text userName ;
     @FXML
     private MenuItem dashboardBtnAcc;
+    @FXML
+    private MenuItem teacherDashboardBtnAcc;
 
-    public void setAuthComponents(HBox authBox , HBox unauthBox , Text userName , ImageView userImage, MenuItem dashboardBtnAcc){
+    public void setAuthComponents(HBox authBox , HBox unauthBox , Text userName , ImageView userImage, MenuItem dashboardBtnAcc, MenuItem teacherDashboardBtnAcc){
         this.authBox = authBox;
         this.unauthBox = unauthBox;
         this.userName = userName ;
         this.userImage = userImage ;
-        this.dashboardBtnAcc=dashboardBtnAcc ;
+        this.dashboardBtnAcc=dashboardBtnAcc;
+        this.teacherDashboardBtnAcc=teacherDashboardBtnAcc ;
+
     }
 
     private MainNavigations() {
@@ -116,6 +120,11 @@ public class MainNavigations {
 
 
     public void openMainHomePage(){
+
+         User u = new User(3 , "qsmd@qsd.qsd");
+         u.setRole(UserRole.ENSEIGNANT);
+
+        UserSessionManager.getInstance().setCurrentUser(u);
         try
         {
 
@@ -147,7 +156,7 @@ public class MainNavigations {
             loader.load();
 
             CoursLessonsPageController coursLessonPage = loader.getController();
-
+            cours.fetchUserCoursActivity();
             coursLessonPage.setCours(cours);
             coursLessonPage.renderCoursLessons();
 
@@ -418,6 +427,33 @@ public class MainNavigations {
 
 
 
+    public  void openTeacherPanel(){
+
+
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/TeacherSpace/TeacherPanel.fxml"));
+
+            loader.load();
+
+            TeacherMainPanelController page = loader.getController();
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(page.getRootId());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
+
+
+
+
+
+    }
+
 
 
 
@@ -446,6 +482,7 @@ public class MainNavigations {
         if(UserSessionManager.getInstance().isUserLoggedIn()) {
             authHeaderSetup();
             showDachBtn(UserSessionManager.getInstance().getCurrentUser().getRole()== UserRole.ADMIN);
+            showTeacherDachBtn(UserSessionManager.getInstance().getCurrentUser().getRole()== UserRole.ENSEIGNANT);
 
         }
         else {
@@ -455,6 +492,10 @@ public class MainNavigations {
 
     public  void showDachBtn(boolean b){
         dashboardBtnAcc.setVisible(b);
+    }
+
+    public  void showTeacherDachBtn(boolean b){
+        teacherDashboardBtnAcc.setVisible(b);
     }
 
 

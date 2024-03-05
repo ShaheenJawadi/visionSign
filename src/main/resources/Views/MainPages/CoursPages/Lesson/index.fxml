@@ -16,7 +16,7 @@
                <children>
                   <VBox maxHeight="-Infinity" maxWidth="800.0" minHeight="-Infinity" minWidth="800.0" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
                      <children>
-                        <ImageView fitHeight="439.0" fitWidth="808.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="lessonThumbnail" fitHeight="439.0" fitWidth="808.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../assets/cours/coursThumb.png" />
                            </image>
