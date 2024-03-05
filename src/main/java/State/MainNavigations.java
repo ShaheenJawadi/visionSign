@@ -5,14 +5,13 @@ import controllers.MainPages.Cours.Filter.FilterController;
 import controllers.MainPages.Cours.SingleCoursController;
 import controllers.MainPages.MainPageController;
 import controllers.Student.QuizEleveController;
-import controllers.User.LoginController;
-import controllers.User.SignUpController;
-import controllers.User.UserProfileController;
-import controllers.User.UserSettingController;
+import controllers.User.*;
 import controllers.studentForum.*;
 import entities.Cours;
+import entities.UserRole;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -37,12 +36,15 @@ public class MainNavigations {
     private ImageView userImage ;
     @FXML
     private Text userName ;
+    @FXML
+    private MenuItem dashboardBtnAcc;
 
-    public void setAuthComponents(HBox authBox ,HBox unauthBox , Text userName , ImageView userImage ){
+    public void setAuthComponents(HBox authBox , HBox unauthBox , Text userName , ImageView userImage, MenuItem dashboardBtnAcc){
         this.authBox = authBox;
         this.unauthBox = unauthBox;
         this.userName = userName ;
         this.userImage = userImage ;
+        this.dashboardBtnAcc=dashboardBtnAcc ;
     }
 
     private MainNavigations() {
@@ -366,6 +368,26 @@ public class MainNavigations {
 
 
 
+    public void openAdminProfile(){
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/AdminSettingPage.fxml"));
+
+            loader.load();
+
+            AdminSettingsController page = loader.getController();
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(page.getRootId());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
+    }
+
 
 
 
@@ -396,10 +418,16 @@ public class MainNavigations {
     public void manageHeaderAuth(){
         if(UserSessionManager.getInstance().isUserLoggedIn()) {
             authHeaderSetup();
+            showDachBtn(UserSessionManager.getInstance().getCurrentUser().getRole()== UserRole.ADMIN);
+
         }
         else {
             unAuthHeaderSetup();
         }
+    }
+
+    public  void showDachBtn(boolean b){
+        dashboardBtnAcc.setVisible(b);
     }
 
 

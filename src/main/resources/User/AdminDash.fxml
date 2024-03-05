@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXBadge?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="table" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.User.AdminDashController">
+<AnchorPane fx:id="rootId" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.User.AdminDashController">
     <children>
         <TableView fx:id="tableView" layoutY="214.0" prefHeight="283.0" prefWidth="827.0">
             <columns>
@@ -33,84 +28,6 @@
             </columns>
         </TableView>
         <Button layoutX="741.0" layoutY="511.0" mnemonicParsing="false" onAction="#delete" prefHeight="26.0" prefWidth="78.0" style="-fx-background-radius: 12;" text="Delete" />
-        <Pane prefHeight="98.0" prefWidth="827.0" style="-fx-background-color: #2aace2;">
-            <children>
-                <Label layoutX="26.0" layoutY="15.0" prefHeight="26.0" prefWidth="197.0" text="Espace Admin" textFill="WHITE">
-                    <font>
-                        <Font name="System Bold" size="25.0" />
-                    </font>
-                </Label>
-                <HBox alignment="CENTER" layoutX="597.0" prefHeight="66.0" prefWidth="230.0">
-                    <children>
-                        <ImageView fx:id="imageId" fitHeight="70.0" fitWidth="60.0" onMouseClicked="#profile" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../assets/user/pic.png" />
-                            </image>
-                            <HBox.margin>
-                                <Insets left="-20.0" right="-7.0" />
-                            </HBox.margin>
-                        </ImageView>
-                        <Label fx:id="userTF" alignment="CENTER" prefHeight="20.0" prefWidth="105.0" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="14.0" />
-                            </font>
-                            <HBox.margin>
-                                <Insets left="20.0" right="10.0" />
-                            </HBox.margin>
-                        </Label>
-                  <Button mnemonicParsing="false" onAction="#logout" prefHeight="31.0" prefWidth="30.0" style="-fx-background-color: RED; -fx-background-radius: 15;">
-                     <graphic>
-                        <ImageView fitHeight="27.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../assets/user/4400629.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <HBox.margin>
-                        <Insets right="-40.0" />
-                     </HBox.margin>
-                  </Button>
-                    </children>
-                    <padding>
-                        <Insets left="-20.0" />
-                    </padding>
-                </HBox>
-            </children>
-        </Pane>
-        <Pane layoutY="79.0" prefHeight="73.0" prefWidth="827.0" style="-fx-background-color: #081f30;">
-            <children>
-                <HBox alignment="CENTER_LEFT" layoutY="-1.0" prefHeight="74.0" prefWidth="827.0">
-                    <children>
-                        <ImageView fitHeight="60.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../assets/user/desktop.png" />
-                            </image>
-                            <HBox.margin>
-                                <Insets left="10.0" />
-                            </HBox.margin>
-                        </ImageView>
-                        <Label prefHeight="26.0" prefWidth="172.0" text="Visual Sign Academy" textFill="WHITE">
-                            <HBox.margin>
-                                <Insets left="10.0" />
-                            </HBox.margin>
-                            <font>
-                                <Font name="System Bold" size="15.0" />
-                            </font>
-                        </Label>
-                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="170.0" style="-fx-background-color: #081f30;" text="User List" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="17.0" />
-                     </font>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#statButton" prefHeight="37.0" prefWidth="170.0" style="-fx-background-color: #081f30;" text="Statistics" textFill="WHITE">
-                     <font>
-                        <Font size="17.0" />
-                     </font>
-                  </Button>
-                    </children>
-                </HBox>
-            </children>
-        </Pane>
       <Button layoutX="652.0" layoutY="511.0" mnemonicParsing="false" onAction="#modify" prefHeight="26.0" prefWidth="78.0" style="-fx-background-radius: 12;" text="Modify" />
       <Button layoutX="763.0" layoutY="166.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#refresh" prefHeight="38.0" prefWidth="40.0" style="-fx-background-radius: 12;">
 

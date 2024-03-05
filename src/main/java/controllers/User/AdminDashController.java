@@ -9,12 +9,14 @@ import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import services.User.UserService;
@@ -26,8 +28,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class AdminDashController {
-    @FXML
-    public ImageView imageId;
+
     @FXML
     private TableColumn<User, String> nomCol;
 
@@ -64,8 +65,7 @@ public class AdminDashController {
 
     @FXML
     private TableColumn<User, String> usernameCol;
-    @FXML
-    private Label userTF;
+
     @FXML
     private TextField searchTF;
     @FXML
@@ -78,10 +78,17 @@ public class AdminDashController {
     private final UserSessionManager userSessionManager=new UserSessionManager();
 
     @FXML
+    private AnchorPane rootId;
+
+    public AnchorPane getRootId() {
+        return  this.rootId;
+    }
+
+    @FXML
     void initialize() {
         User user=userService.getCurrent();
         try{
-            userTF.setText(userService.getCurrent().getUsername());
+
             List<User> users=userService.recuperer();
             ObservableList<User> observableList= FXCollections.observableList(users);
             tableView.setItems(observableList);
@@ -105,16 +112,9 @@ public class AdminDashController {
         });
         filteredList = new FilteredList<>(tableView.getItems(), p -> true);
         initializeSearchTypeComboBox();
-        String url = user.getImage();
-        if(!(url ==null)){
-            Image image = new Image(url);
-            imageId.setImage(image);
-        }
-        else{
 
-        }
-        Image image=new Image("assets/user/UserDefault.png");
-        imageId.setImage(image);
+
+
 
     }
     @FXML
@@ -271,55 +271,10 @@ public class AdminDashController {
             e.printStackTrace();
         }
     }
-    @FXML
-    private void statButton(ActionEvent event){
-        try{
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/AdminStat.fxml"));
-            Parent tableRoot = loader.load();
-            ScrollPane dashboardScrollPane=new ScrollPane(tableRoot);
-            dashboardScrollPane.setFitToWidth(true);
-            dashboardScrollPane.setFitToHeight(true);
-            tableView.getScene().setRoot(dashboardScrollPane);}
-        catch(IOException e)
-        {throw new RuntimeException(e.getMessage());}
 
-    }
-    @FXML
-    void logout(ActionEvent event){
-        userSessionManager.clearSession();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/Login.fxml"));
-            Parent privacyRoot = loader.load();
-            ScrollPane privacyScrollPane=new ScrollPane(privacyRoot);
-            privacyScrollPane.setFitToWidth(true);
-            privacyScrollPane.setFitToHeight(true);
-            tableView.getScene().setRoot(privacyScrollPane);
-        } catch (IOException e) {
-            throw new RuntimeException(e.getMessage());
-        }
 
-    }
 
-    @FXML
-    public void profile(javafx.scene.input.MouseEvent mouseEvent) {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/User/UserProfile.fxml"));
-        try {
-            loader.load();
-           // UploadImageController uploadImageController = loader.getController();
-            // Set a reference to this UserProfileController
-            //uploadImageController.setUserProfileController(this);
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
 
-        Parent parent = loader.getRoot();
-        Stage stage = new Stage();
-        stage.setScene(new Scene(parent));
-        stage.initStyle(StageStyle.UTILITY);
-        stage.show();
-
-    }
 
 }
 

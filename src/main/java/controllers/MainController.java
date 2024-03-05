@@ -2,10 +2,12 @@ package controllers;
 import State.MainNavigations;
 import State.UserOPState;
 import State.UserSessionManager;
+import entities.UserRole;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
@@ -35,6 +37,8 @@ public class MainController implements Initializable {
 
     @FXML
     private Text userName;
+    @FXML
+    private MenuItem dashboardBtnAcc;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -46,9 +50,10 @@ public class MainController implements Initializable {
         userOPState.setNbEnrolementTextView(nbEnrolledCours);
         MainNavigations mainNavigations = MainNavigations.getInstance() ;
         mainNavigations.setPaheHoloder(mainPageHolder);
-        mainNavigations.setAuthComponents(authBox ,unAuthBox , userName , userImage);
+        mainNavigations.setAuthComponents(authBox ,unAuthBox , userName , userImage,dashboardBtnAcc);
 
         mainNavigations.manageHeaderAuth();
+
 
 
 
@@ -86,14 +91,26 @@ public class MainController implements Initializable {
 
     @FXML
     void logoutBtn(ActionEvent event) {
-
+        UserSessionManager.getInstance().clearSession();
+        MainNavigations.getInstance().manageHeaderAuth();
+        MainNavigations.getInstance().openMainHomePage();
     }
 
 
 
     @FXML
     void openProfileUser(ActionEvent event) {
-        MainNavigations.getInstance().openUserProfile();
+
+            MainNavigations.getInstance().openUserProfile();
+
+    }
+
+    @FXML
+    void openDashboard(ActionEvent event) {
+
+            MainNavigations.getInstance().openAdminProfile();
+
+
     }
 
 

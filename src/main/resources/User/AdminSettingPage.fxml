@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<VBox fx:id="rootId" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.User.AdminSettingsController">
+   <children>
+      <HBox alignment="CENTER_LEFT" style="-fx-background-color: #00aeef;">
+         <children>
+            <TextFlow HBox.hgrow="ALWAYS">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Espace Admin">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </Text>
+               </children>
+            </TextFlow>
+            <HBox alignment="CENTER" spacing="15.0" HBox.hgrow="NEVER">
+               <children>
+                  <Button fx:id="listButton" mnemonicParsing="false" onAction="#listButton" prefHeight="37.0" prefWidth="170.0" style="-fx-background-color: #081f30;" text="User List" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#statButton" prefHeight="37.0" prefWidth="170.0" style="-fx-background-color: #081f30;" text="Statistics" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </HBox>
+      <VBox fx:id="pagesHolder" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS" />
+   </children>
+</VBox>

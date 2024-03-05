@@ -62,6 +62,7 @@
                               <MenuButton mnemonicParsing="false" style="-fx-background-color: #fff; fill: ;" textFill="#0cd9fd">
                                 <items>
                                   <MenuItem mnemonicParsing="false" onAction="#openProfileUser" text="Profile" />
+                                    <MenuItem fx:id="dashboardBtnAcc" mnemonicParsing="false" onAction="#openDashboard" text="Dashboard" visible="false" />
                                   <MenuItem mnemonicParsing="false" onAction="#logoutBtn" text="Deconnexion" />
                                 </items>
                               </MenuButton>

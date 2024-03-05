@@ -66,36 +66,26 @@ public class LoginController {
         String password = pwdTF.getText();
         if(username.isEmpty() || password.isEmpty()) return;
         System.out.println(PasswordHashing.hashPassword(password));
-        try {
-            if (userService.login(username, PasswordHashing.hashPassword(password)) != null) {
-                if (userService.getCurrent().getRole() == UserRole.ADMIN) {
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/AdminDash.fxml"));
-                    Parent adminDashRoot = loader.load();
-                    ScrollPane adminDashScrollPane = new ScrollPane(adminDashRoot);
-                    adminDashScrollPane.setFitToWidth(true);
-                    adminDashScrollPane.setFitToHeight(true);
-                    usernameTF.getScene().setRoot(adminDashScrollPane);
-                } else {
+        if (userService.login(username, PasswordHashing.hashPassword(password)) != null) {
+            if (userService.getCurrent().getRole() == UserRole.ADMIN) {
+                MainNavigations.getInstance().openAdminProfile();
+            } else {
 
-                    MainNavigations.getInstance().openMainHomePage();
-                   /* System.out.println("currentUser" + userService.getCurrent());
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserProfile.fxml"));
-                    Parent userProfileRoot = loader.load();
-                    ScrollPane userProfileScrollPane = new ScrollPane(userProfileRoot);
-                    userProfileScrollPane.setFitToWidth(true);
-                    userProfileScrollPane.setFitToHeight(true);
-                    usernameTF.getScene().setRoot(userProfileScrollPane);*/
-                    //UserProfileController userProfileController = loader.getController();
-                }
-            }else {
-                Alert alert=new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Login failed.");
-                alert.setContentText("Invalid Username or password");
-                alert.showAndWait();
+                MainNavigations.getInstance().openMainHomePage();
+               /* System.out.println("currentUser" + userService.getCurrent());
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserProfile.fxml"));
+                Parent userProfileRoot = loader.load();
+                ScrollPane userProfileScrollPane = new ScrollPane(userProfileRoot);
+                userProfileScrollPane.setFitToWidth(true);
+                userProfileScrollPane.setFitToHeight(true);
+                usernameTF.getScene().setRoot(userProfileScrollPane);*/
+                //UserProfileController userProfileController = loader.getController();
             }
-        } catch (IOException e) {
-
-            throw new RuntimeException(e.getMessage());
+        }else {
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Login failed.");
+            alert.setContentText("Invalid Username or password");
+            alert.showAndWait();
         }
     }
     @FXML
