@@ -96,7 +96,7 @@
                               </Circle>
                               <TextFlow maxHeight="5.0" prefHeight="10.0" prefWidth="10.0" textAlignment="CENTER" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="30.0">
                                  <children>
-                                    <Text fx:id="nbEnrolledCours" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="+9" />
+                                    <Text fx:id="nbEnrolledCours" fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="0" />
                                  </children>
                               </TextFlow>
                            </children>

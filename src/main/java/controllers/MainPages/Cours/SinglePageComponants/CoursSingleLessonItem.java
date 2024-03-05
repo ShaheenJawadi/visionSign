@@ -31,6 +31,8 @@ public class CoursSingleLessonItem {
 
     public void  renderItem(Lesson l , UserCours userCours , int showIndex ){
 
+
+
         if(showIndex>userCours.getStage()){
             indexCircle.setFill(Color.web("#f46a6a"));
         }

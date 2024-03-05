@@ -121,8 +121,9 @@ public class MainNavigations {
 
     public void openMainHomePage(){
 
-         User u = new User(1 , "qsmd@qsd.qsd");
+         User u = new User(3 , "qsmd@qsd.qsd");
          u.setRole(UserRole.ENSEIGNANT);
+
         UserSessionManager.getInstance().setCurrentUser(u);
         try
         {
@@ -155,7 +156,7 @@ public class MainNavigations {
             loader.load();
 
             CoursLessonsPageController coursLessonPage = loader.getController();
-
+            cours.fetchUserCoursActivity();
             coursLessonPage.setCours(cours);
             coursLessonPage.renderCoursLessons();
 

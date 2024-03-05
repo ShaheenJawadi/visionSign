@@ -41,7 +41,7 @@ public class UserCoursServices implements IService<UserCours> {
 
     @Override
     public void update(UserCours userCours) throws SQLException {
-//TODO CHANGE THIS
+
       /*  String sql="update "+tableName+" set userId=?, coursId=?, isCorrectQuizz=?, state=? where id=?";
         PreparedStatement ps=connection.prepareStatement(sql);
         ps.setInt(1,userCours.getUserId());

@@ -45,7 +45,8 @@ public class UserOPState {
         UserCoursServices userCoursServices = new UserCoursServices() ;
         //TODO userId
         try {
-            this.userEnrollmentsCours = (ArrayList< UserCours>)  userCoursServices.getByUser(3);
+            if(UserSessionManager.getInstance().isUserLoggedIn())
+            this.userEnrollmentsCours = (ArrayList< UserCours>)  userCoursServices.getByUser(UserSessionManager.getInstance().getCurrentUser().getId());
             setEnrollementCoursNumber();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -62,8 +63,8 @@ public class UserOPState {
     }
     public  void setEnrollementCoursNumber(){
 
-        if(nbEnrolledCours != null)
-        nbEnrolledCours.setText(String.valueOf(userEnrollmentsCours.size()));
+        if(nbEnrolledCours != null && userEnrollmentsCours!= null)
+            nbEnrolledCours.setText(String.valueOf(userEnrollmentsCours.size()));
 
     }
 
