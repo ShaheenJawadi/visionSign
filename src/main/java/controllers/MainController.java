@@ -1,6 +1,7 @@
 package controllers;
 import State.MainNavigations;
 import State.UserOPState;
+import State.UserSessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -37,11 +39,17 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
 
+        UserSessionManager.getInstance();
+
 
         UserOPState userOPState = UserOPState.getInstance() ;
         userOPState.setNbEnrolementTextView(nbEnrolledCours);
         MainNavigations mainNavigations = MainNavigations.getInstance() ;
         mainNavigations.setPaheHoloder(mainPageHolder);
+        mainNavigations.setAuthComponents(authBox ,unAuthBox , userName , userImage);
+
+        mainNavigations.manageHeaderAuth();
+
 
 
     }
@@ -85,7 +93,7 @@ public class MainController implements Initializable {
 
     @FXML
     void openProfileUser(ActionEvent event) {
-
+        MainNavigations.getInstance().openUserProfile();
     }
 
 

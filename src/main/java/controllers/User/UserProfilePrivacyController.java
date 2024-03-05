@@ -11,7 +11,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import services.User.UserService;
-import state.UserSessionManager;
+import State.UserSessionManager;
 
 import java.io.IOException;
 import java.sql.SQLException;

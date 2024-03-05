@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 import services.User.PasswordHashing;
 import services.User.UserService;
 import entities.User;
-import state.UserSessionManager;
+import State.UserSessionManager;
 
 import java.io.IOException;
 import java.sql.SQLException;

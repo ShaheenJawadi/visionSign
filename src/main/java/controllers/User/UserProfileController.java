@@ -21,10 +21,11 @@ import java.time.Period;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import services.User.UserService;
-import state.UserSessionManager;
+import State.UserSessionManager;
 
 public class UserProfileController {
 
@@ -46,6 +47,16 @@ public class UserProfileController {
     private Label userTF;
     @FXML
     private ImageView imageId;
+
+
+    @FXML
+    private AnchorPane rootId ;
+
+
+    public  AnchorPane getRootId(){
+        return  this.rootId ;
+    }
+
     private final UserService userService=new UserService();
     private final UserSessionManager userSessionManager=new UserSessionManager();
     private Cloudinary cloudinary;

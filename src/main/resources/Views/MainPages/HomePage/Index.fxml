@@ -51,9 +51,9 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" spacing="12.0">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <HBox fx:id="authBox" alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                            <children>
-                              <HBox fx:id="authBox" alignment="CENTER">
+                              <HBox alignment="CENTER">
                                  <children>
                                     <ImageView fx:id="userImage" fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" />
                                     <Text fx:id="userName" strokeType="OUTSIDE" strokeWidth="0.0" text="name" />

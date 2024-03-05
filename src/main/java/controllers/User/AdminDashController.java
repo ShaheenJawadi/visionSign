@@ -18,7 +18,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import services.User.UserService;
-import state.UserSessionManager;
+import State.UserSessionManager;
 
 import java.io.IOException;
 import java.sql.Date;

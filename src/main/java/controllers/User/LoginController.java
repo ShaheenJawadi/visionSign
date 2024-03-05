@@ -1,5 +1,6 @@
 package controllers.User;
 
+import State.MainNavigations;
 import apiUtils.GoogleOAuth2;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
@@ -75,13 +76,15 @@ public class LoginController {
                     adminDashScrollPane.setFitToHeight(true);
                     usernameTF.getScene().setRoot(adminDashScrollPane);
                 } else {
-                    System.out.println("currentUser" + userService.getCurrent());
+
+                    MainNavigations.getInstance().openMainHomePage();
+                   /* System.out.println("currentUser" + userService.getCurrent());
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserProfile.fxml"));
                     Parent userProfileRoot = loader.load();
                     ScrollPane userProfileScrollPane = new ScrollPane(userProfileRoot);
                     userProfileScrollPane.setFitToWidth(true);
                     userProfileScrollPane.setFitToHeight(true);
-                    usernameTF.getScene().setRoot(userProfileScrollPane);
+                    usernameTF.getScene().setRoot(userProfileScrollPane);*/
                     //UserProfileController userProfileController = loader.getController();
                 }
             }else {

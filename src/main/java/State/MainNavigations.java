@@ -7,11 +7,15 @@ import controllers.MainPages.MainPageController;
 import controllers.Student.QuizEleveController;
 import controllers.User.LoginController;
 import controllers.User.SignUpController;
+import controllers.User.UserProfileController;
 import controllers.studentForum.*;
 import entities.Cours;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 
@@ -22,6 +26,23 @@ public class MainNavigations {
     @FXML
     private VBox mainPageHolder;
 
+    @FXML
+    private HBox authBox ;
+    @FXML
+    private  HBox unauthBox ;
+
+
+    @FXML
+    private ImageView userImage ;
+    @FXML
+    private Text userName ;
+
+    public void setAuthComponents(HBox authBox ,HBox unauthBox , Text userName , ImageView userImage ){
+        this.authBox = authBox;
+        this.unauthBox = unauthBox;
+        this.userName = userName ;
+        this.userImage = userImage ;
+    }
 
     private MainNavigations() {
 
@@ -317,12 +338,67 @@ public class MainNavigations {
             System.out.println(ex.toString());
         }
     }
+
+
+
+
+
+    public void openUserProfile(){
+        try
+        {
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserProfile.fxml"));
+
+            loader.load();
+
+            UserProfileController page = loader.getController();
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(page.getRootId());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ///////////////////////////
     public  void authHeaderSetup(){
+        authBox.setVisible(true);
+        unauthBox.setVisible(false);
+        userName.setText(UserSessionManager.getInstance().getCurrentUser().getUsername());
+        //TODO IMAGE   userName.setText(UserSessionManager.getInstance().getCurrentUser().getUsername());
 
     }
 
     public  void unAuthHeaderSetup(){
 
+            authBox.setVisible(false);
+            unauthBox.setVisible(true);
+
+
+    }
+
+    public void manageHeaderAuth(){
+        if(UserSessionManager.getInstance().isUserLoggedIn()) {
+            authHeaderSetup();
+        }
+        else {
+            unAuthHeaderSetup();
+        }
     }
 
 

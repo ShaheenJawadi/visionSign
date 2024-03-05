@@ -17,7 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import services.User.UserService;
-import state.UserSessionManager;
+import State.UserSessionManager;
 
 import java.io.IOException;
 import java.util.Map;
