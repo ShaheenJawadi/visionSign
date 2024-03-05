@@ -14,17 +14,17 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootId" prefHeight="600.0" prefWidth="952.0" style="-fx-background-color: #ECECEC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.studentForum.AddPublicationController">
+<AnchorPane fx:id="rootId" prefHeight="618.0" prefWidth="1501.0" style="-fx-background-color: #ECECEC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.studentForum.AddPublicationController">
    <children>
-      <BorderPane prefHeight="600.0" prefWidth="952.0">
+      <BorderPane prefHeight="615.0" prefWidth="1501.0">
          <top>
          </top>
          <Pane layoutX="1.0" layoutY="10.0" prefHeight="71.0" prefWidth="702.0" style="-fx-background-color: white;" />
          <center>
             <AnchorPane prefHeight="335.0" prefWidth="952.0" BorderPane.alignment="CENTER">
-               <Pane layoutX="1.0" layoutY="4.0" prefHeight="71.0" prefWidth="990.0" style="-fx-background-color: white;">
+               <Pane layoutX="1.0" layoutY="4.0" prefHeight="71.0" prefWidth="1500.0" style="-fx-background-color: white;">
                   <children>
-                     <Button fx:id="forumBtn" layoutX="342.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleForum" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #E8EFFF; -fx-background-radius: 200; -fx-border-radius: 200;" text="Forum Community" textFill="#2447f9">
+                     <Button fx:id="forumBtn" layoutX="572.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleForum" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #E8EFFF; -fx-background-radius: 200; -fx-border-radius: 200;" text="Forum Community" textFill="#2aace2">
                         <font>
                            <Font name="System Bold" size="14.0" />
                         </font>
@@ -32,33 +32,33 @@
                            <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
-                     <Button fx:id="btnChat" layoutX="494.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleChat" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: #E2FFE2; -fx-background-radius: 200; -fx-border-radius: 200;" text="Chatbot" textFill="#04cb00">
+                     <Button fx:id="btnChat" layoutX="754.0" layoutY="23.0" mnemonicParsing="false" onAction="#handleChat" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: #E2FFE2; -fx-background-radius: 200; -fx-border-radius: 200;" text="Chatbot" textFill="#04cb00">
                         <font>
                            <Font name="System Bold" size="14.0" />
                         </font>
                      </Button>
                   </children>
                </Pane>
-               <Pane layoutX="100.0" layoutY="89.0" prefHeight="435.0" prefWidth="801.0" style="-fx-background-color: white;">
+               <Pane layoutY="85.0" prefHeight="543.0" prefWidth="1501.0" style="-fx-background-color: white;">
                   <children>
-                     <Text layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter Publication" wrappingWidth="203.10699462890625">
+                     <Text layoutX="62.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter Publication" wrappingWidth="203.10699462890625">
                         <font>
                            <Font name="System Bold" size="22.0" />
                         </font>
                      </Text>
-                     <Text layoutX="27.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Titre:">
+                     <Text layoutX="81.0" layoutY="84.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Titre:">
                         <font>
                            <Font size="15.0" />
                         </font>
                      </Text>
-                     <TextField fx:id="titreId" layoutX="31.0" layoutY="84.0" prefHeight="39.0" prefWidth="350.0" promptText="Titre du publication...." style="-fx-background-color: white; -fx-border-color: #bababa; -fx-background-radius: 200; -fx-border-radius: 200;" />
-                     <Text layoutX="28.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question:">
+                     <TextField fx:id="titreId" layoutX="85.0" layoutY="97.0" prefHeight="39.0" prefWidth="751.0" promptText="Titre du publication...." style="-fx-background-color: white; -fx-border-color: #bababa; -fx-background-radius: 200; -fx-border-radius: 200;" />
+                     <Text layoutX="82.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Question:">
                         <font>
                            <Font size="15.0" />
                         </font>
                      </Text>
-                     <TextField fx:id="questionId" layoutX="31.0" layoutY="168.0" prefHeight="44.0" prefWidth="734.0" promptText="Votre question..." style="-fx-background-color: white; -fx-border-color: #bababa; -fx-background-radius: 200; -fx-border-radius: 200;" />
-                     <Button fx:id="addPubBtn" layoutX="364.0" layoutY="378.0" mnemonicParsing="false" onAction="#handlePublish" prefHeight="47.0" prefWidth="107.0" style="-fx-background-color: #2447F9; -fx-background-radius: 50; -fx-border-radius: 50;" text="Publier" textFill="WHITE">
+                     <TextField fx:id="questionId" layoutX="85.0" layoutY="181.0" prefHeight="87.0" prefWidth="759.0" promptText="Votre question..." style="-fx-background-color: white; -fx-border-color: #bababa; -fx-background-radius: 200; -fx-border-radius: 200;" />
+                     <Button fx:id="addPubBtn" layoutX="461.0" layoutY="473.0" mnemonicParsing="false" onAction="#handlePublish" prefHeight="47.0" prefWidth="143.0" style="-fx-background-color: #2aace2; -fx-background-radius: 50; -fx-border-radius: 50;" text="Publier" textFill="WHITE">
                         <font>
                            <Font name="System Bold" size="18.0" />
                         </font>
@@ -66,9 +66,9 @@
                            <Cursor fx:constant="HAND" />
                         </cursor>
                      </Button>
-                     <ScrollPane fitToHeight="true" layoutX="31.0" layoutY="218.0" prefHeight="158.0" prefWidth="640.0" style="-fx-background-color: white;" vbarPolicy="NEVER">
+                     <ScrollPane fitToHeight="true" layoutX="90.0" layoutY="273.0" prefHeight="194.0" prefWidth="884.0" style="-fx-background-color: white;" vbarPolicy="NEVER">
                         <content>
-                           <HBox fx:id="imageContainer" prefHeight="154.0" prefWidth="623.0" style="-fx-background-color: white;">
+                           <HBox fx:id="imageContainer" prefHeight="192.0" prefWidth="879.0" style="-fx-background-color: white;">
                               <children>
                                  <Button mnemonicParsing="false" onAction="#uploadImage" prefHeight="82.0" prefWidth="75.0" style="-fx-background-color: white;">
                                     <graphic>

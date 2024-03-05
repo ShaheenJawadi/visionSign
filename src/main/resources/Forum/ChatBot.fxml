@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootId" prefHeight="600.0" prefWidth="952.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.studentForum.ChatBotController">
+<AnchorPane fx:id="rootId" prefHeight="618.0" prefWidth="1401.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.studentForum.ChatBotController">
     <children>
         <BorderPane prefHeight="600.0" prefWidth="952.0">
             <top>
@@ -23,9 +23,9 @@
             <Pane layoutX="1.0" layoutY="10.0" prefHeight="71.0" prefWidth="702.0" style="-fx-background-color: white;" />
             <center>
                 <AnchorPane prefHeight="335.0" prefWidth="952.0" BorderPane.alignment="CENTER">
-                    <Pane layoutX="1.0" layoutY="4.0" prefHeight="71.0" prefWidth="990.0" style="-fx-background-color: white;">
+                    <Pane layoutX="1.0" layoutY="4.0" prefHeight="71.0" prefWidth="1398.0" style="-fx-background-color: white;">
                         <children>
-                            <Button fx:id="forumBtn" layoutX="342.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleForum" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #E8EFFF; -fx-background-radius: 200; -fx-border-radius: 200;" text="Forum Community" textFill="#2447f9">
+                            <Button fx:id="forumBtn" layoutX="489.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleForum" prefHeight="38.0" prefWidth="143.0" style="-fx-background-color: #E8EFFF; -fx-background-radius: 200; -fx-border-radius: 200;" text="Forum Community" textFill="#2aace2">
                                 <font>
                                     <Font name="System Bold" size="14.0" />
                                 </font>
@@ -33,24 +33,24 @@
                                     <Cursor fx:constant="HAND" />
                                 </cursor>
                             </Button>
-                            <Button fx:id="btnChat" layoutX="494.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleChat" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: #E2FFE2; -fx-background-radius: 200; -fx-border-radius: 200;" text="Chatbot" textFill="#04cb00">
+                            <Button fx:id="btnChat" layoutX="641.0" layoutY="17.0" mnemonicParsing="false" onAction="#handleChat" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: #E2FFE2; -fx-background-radius: 200; -fx-border-radius: 200;" text="Chatbot" textFill="#04cb00">
                                 <font>
                                     <Font name="System Bold" size="14.0" />
                                 </font>
                             </Button>
                         </children>
                     </Pane>
-                    <Pane layoutY="89.0" prefHeight="444.0" prefWidth="992.0" style="-fx-background-color: white;">
+                    <Pane layoutY="89.0" prefHeight="527.0" prefWidth="1398.0" style="-fx-background-color: white;">
                   <children>
-                     <TextField fx:id="MessageTf" layoutX="17.0" layoutY="383.0" onAction="#handleSend" prefHeight="47.0" prefWidth="797.0" promptText="Message Chatbot......" style="-fx-background-color: white; -fx-border-color: #ececec; -fx-background-radius: 1000; -fx-border-radius: 1000;" />
-                     <Button fx:id="btnEnvoyer" layoutX="835.0" layoutY="385.0" mnemonicParsing="false" onAction="#handleSend" prefHeight="43.0" prefWidth="124.0" style="-fx-background-color: #04cb00; -fx-background-radius: 200;" text="Envoyer" textFill="WHITE">
+                     <TextField fx:id="MessageTf" layoutX="43.0" layoutY="467.0" onAction="#handleSend" prefHeight="47.0" prefWidth="810.0" promptText="Message Chatbot......" style="-fx-background-color: white; -fx-border-color: #ececec; -fx-background-radius: 1000; -fx-border-radius: 1000;" />
+                     <Button fx:id="btnEnvoyer" layoutX="857.0" layoutY="470.0" mnemonicParsing="false" onAction="#handleSend" prefHeight="43.0" prefWidth="124.0" style="-fx-background-color: #04cb00; -fx-background-radius: 200;" text="Envoyer" textFill="WHITE">
                         <font>
                            <Font name="System Bold" size="17.0" />
                         </font>
                      </Button>
                      <ScrollPane fx:id="chatScrollPane" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: white;" vbarPolicy="AS_NEEDED">
                         <content>
-                           <VBox fx:id="ChatbotContainer" prefHeight="370.0" prefWidth="974.0" style="-fx-background-color: WHITE;">
+                           <VBox fx:id="ChatbotContainer" prefHeight="370.0" prefWidth="970.0" style="-fx-background-color: WHITE;">
                               <children>
                                  <HBox fx:id="imagesHbox" prefHeight="280.0" prefWidth="974.0" style="-fx-background-color: white;">
                                     <children>

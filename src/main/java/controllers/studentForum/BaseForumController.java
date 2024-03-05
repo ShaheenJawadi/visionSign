@@ -49,6 +49,8 @@ public class BaseForumController {
     protected TextField searchField;
     protected List<Publications> mypub, allPub = null;
     protected PublicationsService pubs = new PublicationsService();
+    private int userId=State.UserSessionManager.getInstance().getCurrentUser().getId();
+
     protected ReactionsService reactionsService=new ReactionsService();
     @FXML
     public void handleChat(ActionEvent event){
@@ -114,7 +116,7 @@ public class BaseForumController {
             iconPane.setLayoutX(14);
             iconPane.setLayoutY(39);
             iconPane.setPrefSize(41, 38);
-            iconPane.setStyle("-fx-background-color: #2447f9; -fx-border-radius: 1000; -fx-background-radius: 1000;");
+            iconPane.setStyle("-fx-background-color: #2aace2; -fx-border-radius: 1000; -fx-background-radius: 1000;");
             FontAwesomeIconView userIcon = new FontAwesomeIconView(FontAwesomeIcon.USER);
             userIcon.setFill(Color.WHITE);
             userIcon.setLayoutX(12);
@@ -127,7 +129,7 @@ public class BaseForumController {
             userIdText.setLayoutY(54);
             userIdText.setFont(new Font(14));
 
-            Text roleText = new Text("Elève");
+            Text roleText = new Text(State.UserSessionManager.getInstance().getCurrentUser().getRole().toString());
             roleText.setLayoutX(62);
             roleText.setLayoutY(71);
             roleText.setFill(Color.web("#a5a5a5"));
@@ -165,7 +167,7 @@ public class BaseForumController {
             Platform.runLater(() -> {
                 try {
                     //TODO USERID
-                    boolean isLiked = reactionsService.isLikedByUser(18, publication.getId());
+                    boolean isLiked = reactionsService.isLikedByUser(userId, publication.getId());
 
                     if (isLiked) {
                         likeButton.setStyle("-fx-background-color: #E2FFE2;-fx-background-radius: 200;");
@@ -192,7 +194,7 @@ public class BaseForumController {
             likeButton.setOnAction(event -> {
                 try {
                     //todo USErid=6
-                    reactionsService.addLike(18, publication.getId(), 1, 0);
+                    reactionsService.addLike(userId, publication.getId(), 1, 0);
 
                     int updatedLikes = reactionsService.getLikesCount(publication.getId());
                     int updatedDislikes = reactionsService.getDislikesCounts(publication.getId());
@@ -212,7 +214,7 @@ public class BaseForumController {
                 try {
                     //todo USErid=6
 
-                    reactionsService.addLike(18, publication.getId(), 0, 1);
+                    reactionsService.addLike(userId, publication.getId(), 0, 1);
 
                     int updatedLikes = reactionsService.getLikesCount(publication.getId());
                     int updatedDislikes = reactionsService.getDislikesCounts(publication.getId());
@@ -234,7 +236,7 @@ public class BaseForumController {
                 try {
                     //todo USErid=6
 
-                    boolean isdisliked = reactionsService.isDislikedByUser(18, publication.getId());
+                    boolean isdisliked = reactionsService.isDislikedByUser(userId, publication.getId());
 
                     if (isdisliked) {
                         dislikeButton.setStyle("-fx-background-color: #FFE2E2;-fx-background-radius: 200;");
@@ -292,7 +294,7 @@ public class BaseForumController {
             modifyButton.setPrefSize(28, 25);
             modifyButton.setStyle("-fx-background-color: #FFFFFF;");
             FontAwesomeIconView modifyIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL);
-            modifyIcon.setFill(Color.web("#2447f9"));
+            modifyIcon.setFill(Color.web("#2aace2"));
             modifyIcon.setSize("15");
             modifyButton.setGraphic(modifyIcon);
             modifyButton.setCursor(Cursor.HAND);
@@ -312,7 +314,7 @@ public class BaseForumController {
             deleteButton.setPrefSize(28, 25);
             deleteButton.setStyle("-fx-background-color: #FFFFFF;");
             FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
-            deleteIcon.setFill(Color.web("#2447f9"));
+            deleteIcon.setFill(Color.web("#2aace2"));
             deleteIcon.setSize("15");
             deleteButton.setGraphic(deleteIcon);
             deleteButton.setCursor(Cursor.HAND);
@@ -359,13 +361,13 @@ public class BaseForumController {
         String searchText = searchField.getText();
         //todo USErid=6
 
-        int userID = 18;
+
         try {
 
             if (searchText.isEmpty()) {
-                mypub = pubs.getPublicationsByUserId(userID);
+                mypub = pubs.getPublicationsByUserId(userId);
             } else {
-                mypub = pubs.searchPublicationsByTitle(searchText, userID);
+                mypub = pubs.searchPublicationsByTitle(searchText, userId);
             }
             listepubid.getChildren().clear();
             for (int i = 0; i < mypub.size(); i++) {

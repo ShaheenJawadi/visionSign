@@ -50,6 +50,7 @@ public class ModifyPublicationController extends BaseForumController  {
     }
     @FXML
     private TextField titreId, questionId;
+    private int userId=State.UserSessionManager.getInstance().getCurrentUser().getId();
 
     @FXML
     private Button modPubBtn,trashBtn;
@@ -266,7 +267,7 @@ public class ModifyPublicationController extends BaseForumController  {
                 //todo USErid=6
 
                 // Update the publication with the new image URLs
-                pubs.updatePublicationOrCommentaire(new Publications(pubId, titreText, questionText, new Date(), imageUrls, 18));
+                pubs.updatePublicationOrCommentaire(new Publications(pubId, titreText, questionText, new Date(), imageUrls, userId));
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success!");
@@ -295,7 +296,7 @@ public class ModifyPublicationController extends BaseForumController  {
         try {
             //todo USErid=6
 
-            mypub = pubs.getPublicationsByUserId(18);
+            mypub = pubs.getPublicationsByUserId(userId);
             mypub.sort(Comparator.comparing(Publications::getDate_creation).reversed());
 
             if (mypub.isEmpty()) {
