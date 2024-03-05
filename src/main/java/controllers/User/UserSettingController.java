@@ -64,7 +64,18 @@ public class UserSettingController {
     void initialize(){
      profileBtn.fire();
      User user = userService.getCurrent();
+     String url = user.getImage() ;
+     Image image ;
+     if(!(url==null)){
 
+          image = new Image(url);
+
+     }
+     else {
+          image = new Image("assets/user/UserDefault.png");
+
+     }
+     imageId.setImage(image);
      userTF.setText(user.getUsername());
      ObservableList<UserLevel> userLevels = FXCollections.observableArrayList(UserLevel.values());
 
@@ -72,16 +83,8 @@ public class UserSettingController {
 
 
      System.out.println("hahahahaa");
-     String url = user.getImage();
-     if(!(url ==null)){
-         Image image = new Image(url);
-         imageId.setImage(image);
-     }
-     else{
 
-     }
-         Image image=new Image("assets/user/UserDefault.png");
-         imageId.setImage(image);
+
      System.out.println("bababab");
 
 
@@ -175,7 +178,7 @@ public class UserSettingController {
             loader.load();
             UploadImageController uploadImageController = loader.getController();
             // Set a reference to this UserProfileController
-          //Todo  uploadImageController.setUserProfileController(this);
+          uploadImageController.setUserProfileController(this);
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

@@ -22,14 +22,14 @@ import java.sql.SQLException;
 public class UploadImageController {
     private final UserService userService = new UserService();
     private final UploadImage uploadImage = new UploadImage();
-    private UserProfileController userProfileController;
+    private UserSettingController userProfileController;
 
     @FXML
     private ImageView imageId;
 
     private File selectedImageFile;
 
-    public void setUserProfileController(UserProfileController userProfileController) {
+    public void setUserProfileController(UserSettingController userProfileController) {
         this.userProfileController = userProfileController;
     }
 
@@ -57,7 +57,7 @@ public class UploadImageController {
                 currentUser.setImage(cloudinaryUrl);
                 userService.updateImage(currentUser);
                 if (userProfileController != null) {
-                   // userProfileController.updateImage(cloudinaryUrl);
+                    userProfileController.updateImage(cloudinaryUrl);
                 }
                 // Display success message
                 showAlert("Image Saved Successfully", Alert.AlertType.INFORMATION);
