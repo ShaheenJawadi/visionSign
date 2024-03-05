@@ -31,6 +31,7 @@ public class Newquizzcontroller {
 
     public  int coursId ;
 
+    private int usserId=State.UserSessionManager.getInstance().getCurrentUser().getId();
 
     public void setCoursId(int coursId) {
         this.coursId = coursId;
@@ -66,7 +67,7 @@ public class Newquizzcontroller {
             errorMessage.setText("");
             try {
                 if (quizService.isQuizNameUnique(quizName)) {
-                    Quiz quiz = new Quiz(quizName, duree, coursId, 3); // TODO USER Id à changer apres pour etre dynamique integration
+                    Quiz quiz = new Quiz(quizName, duree, coursId, usserId); //  USER Id à changer apres pour etre dynamique integration
                     quizService.ajouterGestionQuiz(quiz);
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information");

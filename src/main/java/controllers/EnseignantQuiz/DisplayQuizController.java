@@ -64,7 +64,7 @@ public class DisplayQuizController {
 
     public  int coursId ;
 
-
+    private int usserId=State.UserSessionManager.getInstance().getCurrentUser().getId();
     @FXML
     public AnchorPane rootId ;
 
@@ -93,7 +93,7 @@ public class DisplayQuizController {
 
     public void getQuizUserLeft(){
         try {
-            myQuiz = quizService.getQuizByUserId(3);//TODO à changer apres pour etre dynamique integration
+            myQuiz = quizService.getQuizByUserId(usserId);// à changer apres pour etre dynamique integration
             if (myQuiz.isEmpty()) {
                 Text emptyText = new Text("Vous n'avez pas de quiz");
                 emptyText.setFont(new Font("System", 15));
@@ -763,7 +763,7 @@ public class DisplayQuizController {
     @FXML
     void searchQuiz(ActionEvent event) {
         String searchText = searchField.getText();
-        int userID = 3; // à changer apres pour etre dynamique integration
+        int userID = usserId; // à changer apres pour etre dynamique integration
         try {
 
             if (searchText.isEmpty()) {
@@ -793,7 +793,7 @@ public class DisplayQuizController {
         try {
             QuizService quizService1=new QuizService();
             String duree = hours.getText() + ":" + minutes.getText() + ":" + seconds.getText();
-            quizService1.modifierGestionQuiz(new Quiz(quizId,quizNameId.getText(), duree,coursId,3));// à changer apres pour etre dynamique integration
+            quizService1.modifierGestionQuiz(new Quiz(quizId,quizNameId.getText(), duree,coursId,usserId));// à changer apres pour etre dynamique integration
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Success!");
             alert.setContentText("Quiz modifié");
@@ -809,7 +809,7 @@ public class DisplayQuizController {
 
     @FXML
     void quitterAction(ActionEvent event){
-// à changer apres pour etre dynamique integration
+//TODO à changer apres pour etre dynamique integration
     }
 
 

@@ -1,5 +1,6 @@
 package controllers.Student;
 
+import State.MainNavigations;
 import com.itextpdf.text.*;
 import entities.Notes;
 import entities.Questions;
@@ -47,6 +48,8 @@ public class QuizEleveController {
     private VBox rootId ;
 
 
+    private int usserId=State.UserSessionManager.getInstance().getCurrentUser().getId();
+
     public  VBox getVBoxRoot(){
         return  this.rootId;
     }
@@ -79,7 +82,7 @@ public class QuizEleveController {
 
     private int iterator = 0, note = 0;
     private float  noteSur20=0;
-    private int quizId=1; // à changer apres pour etre dynamique integration
+    private int quizId=1; //TODO à changer apres pour etre dynamique integration
     private List<Questions> questionsList;
     private List<Suggestion> suggestionList;
 
@@ -124,7 +127,9 @@ public class QuizEleveController {
     }
 
     private void changeScene() {
-        try {
+        MainNavigations.getInstance().openQuizzNotePage(noteSur20,questionsList.size(),questionsList, suggestionList, answers);
+
+       /* try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Student/NoteQuiz.fxml"));
             Parent root = loader.load();
 
@@ -141,7 +146,7 @@ public class QuizEleveController {
             alert.setHeaderText("Erreur lors du changement de scène");
             alert.setContentText("Une erreur est survenue lors du changement de scène : " + e.getMessage());
             alert.showAndWait();
-        }
+        }*/
     }
 
     @FXML
@@ -307,7 +312,7 @@ public class QuizEleveController {
         } else {
             NotesService notesService = new NotesService();
             try {
-                notesService.ajouterNote(new Notes(noteSur20, 3, quizId)); // à changer apres pour etre dynamique integration
+                notesService.ajouterNote(new Notes(noteSur20, usserId, quizId)); // à changer apres pour etre dynamique integration
                 quizCompleted=true;
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/Student/NoteQuiz.fxml"));
                 Parent root = loader.load();

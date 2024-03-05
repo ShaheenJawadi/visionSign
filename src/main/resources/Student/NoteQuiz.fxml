@@ -8,11 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="952.0" style="-fx-background-color: #ECECEC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Student.NoteQuizController">
+<AnchorPane fx:id="rootId" style="-fx-background-color: #ECECEC;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Student.NoteQuizController">
     <children>
-
-        <fx:include fx:id="navbar" source="Navbar.fxml" />
-        <Pane layoutX="192.0" layoutY="76.0" prefHeight="514.0" prefWidth="969.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="76.0">
+        <Pane layoutX="192.0" layoutY="76.0" prefHeight="514.0" prefWidth="969.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <Label layoutX="384.0" layoutY="122.0" text="Votre note est : " textFill="#00aeef">
                     <font>

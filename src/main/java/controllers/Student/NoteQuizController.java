@@ -7,6 +7,8 @@ import entities.Suggestion;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.control.Alert;
 import java.io.FileOutputStream;
@@ -22,7 +24,11 @@ public class NoteQuizController {
     @FXML
     private Text notess;
     private String sugg;
-
+    @FXML
+    private AnchorPane rootId ;
+    public  AnchorPane getVBoxRoot(){
+        return  this.rootId;
+    }
     public void setNoteQuiz(float note) {
         this.noteSur20=note;
     }
@@ -133,6 +139,6 @@ public class NoteQuizController {
 
     @FXML
     public void retourAccueil(){
-        // à changer apres pour etre dynamique integration
+        //TODO à changer apres pour etre dynamique integration
     }
 }
