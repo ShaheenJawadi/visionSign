@@ -4,7 +4,9 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import entities.Publications;
 import entities.Reactions;
+import entities.User;
 import javafx.application.Platform;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -32,6 +34,7 @@ import services.Forum.ReactionsService;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -48,7 +51,16 @@ public class BaseForumController {
     protected TextField searchField;
     protected List<Publications> mypub, allPub = null;
     protected PublicationsService pubs = new PublicationsService();
+    private FilteredList<Publications> filteredList;
     protected ReactionsService reactionsService=new ReactionsService();
+   @FXML
+   public void initialize() {
+       searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+           searchPubByTitle();
+       });
+   }
+
+
     @FXML
     public void handleChat(ActionEvent event){
         try {
@@ -399,8 +411,8 @@ public class BaseForumController {
         return pane;
     }
 
-    @FXML
-    public void searchPubByTitle(ActionEvent event) {
+    /* @FXML
+     public void searchPubByTitle(ActionEvent event) {
         String searchText = searchField.getText();
         //TODO userId search
 
@@ -421,13 +433,41 @@ public class BaseForumController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    }
+    } */
+
+
 
     public void refreshPublications() {
         listepubid.getChildren().clear();
         allpubid.getChildren().clear();
 
     }
+    @FXML
+    public void searchPubByTitle() {
+        String searchText = searchField.getText();
+        int userID = 6; // You may want to make this dynamic as well
+        try {
+            if (searchText.isEmpty()) {
+                mypub = pubs.getPublicationsByUserId(userID);
+            } else {
+                mypub = pubs.searchPublicationsByTitle(searchText, userID);
+            }
+            updatePublicationList();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+@FXML
+    private void updatePublicationList() {
+        listepubid.getChildren().clear();
+        for (int i = 0; i < mypub.size(); i++) {
+            Pane pane = createPublicationPane(mypub.get(i), i, false);
+            listepubid.getChildren().add(pane);
+        }
+        listepubid.setPrefHeight(mypub.size() * 75);
+    }
+
+
 
 
 }

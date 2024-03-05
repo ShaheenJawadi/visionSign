@@ -78,6 +78,9 @@ public class ForumGetAllPublicationsController extends BaseForumController {
             throw new RuntimeException(e);
 
         }
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchPubByTitle();
+        });
     }
 
 
