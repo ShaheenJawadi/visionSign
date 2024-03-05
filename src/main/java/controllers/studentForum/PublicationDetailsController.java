@@ -67,6 +67,7 @@ public class PublicationDetailsController extends BaseForumController {
 
 
     }
+    private int userId=State.UserSessionManager.getInstance().getCurrentUser().getId();
 
     @FXML
     public void initialize() {
@@ -74,7 +75,7 @@ public class PublicationDetailsController extends BaseForumController {
         try {
             //todo USErid=6
 
-            mypub = pubs.getPublicationsByUserId(18);
+            mypub = pubs.getPublicationsByUserId(userId);
             mypub.sort(Comparator.comparing(Publications::getDate_creation).reversed());
 
             if (mypub.isEmpty()) {
@@ -147,7 +148,7 @@ public class PublicationDetailsController extends BaseForumController {
         iconPane.setLayoutX(14);
         iconPane.setLayoutY(22);
         iconPane.setPrefSize(41, 38);
-        iconPane.setStyle("-fx-background-color: #2447f9; -fx-border-radius: 1000; -fx-background-radius: 1000;");
+        iconPane.setStyle("-fx-background-color:#2aace2; -fx-border-radius: 1000; -fx-background-radius: 1000;");
         FontAwesomeIconView userIcon = new FontAwesomeIconView(FontAwesomeIcon.USER);
         userIcon.setFill(Color.WHITE);
         userIcon.setLayoutX(12);
@@ -161,7 +162,7 @@ public class PublicationDetailsController extends BaseForumController {
         userIdText.setFont(new Font(14));
 
 
-        Text roleText = new Text("Enseignant");
+        Text roleText = new Text(State.UserSessionManager.getInstance().getCurrentUser().getRole().toString());
         roleText.setLayoutX(62);
         roleText.setLayoutY(54);
         roleText.setFill(Color.web("#a5a5a5"));
@@ -171,14 +172,14 @@ public class PublicationDetailsController extends BaseForumController {
         contenuText.setLayoutX(31);
         contenuText.setLayoutY(85);
         contenuText.setFill(Color.web("#7a757d"));
-        if (comment.getUserId() == 6) {
+        if (comment.getUserId() == userId) {
             Button deleteButton = new Button();
             deleteButton.setLayoutX(userIdText.getLayoutBounds().getWidth() + 70);
             deleteButton.setLayoutY(37);
             deleteButton.setPrefSize(28, 25);
             deleteButton.setStyle("-fx-background-color: #FFFFFF;");
             FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.TRASH);
-            deleteIcon.setFill(Color.web("#2447f9"));
+            deleteIcon.setFill(Color.web("#2aace2"));
             deleteIcon.setSize("15");
             deleteButton.setGraphic(deleteIcon);
             deleteButton.setCursor(Cursor.HAND);
@@ -217,7 +218,7 @@ public class PublicationDetailsController extends BaseForumController {
             modifyButton.setPrefSize(28, 25);
             modifyButton.setStyle("-fx-background-color: #FFFFFF;");
             FontAwesomeIconView modifyIcon = new FontAwesomeIconView(FontAwesomeIcon.PENCIL);
-            modifyIcon.setFill(Color.web("#2447f9"));
+            modifyIcon.setFill(Color.web("#2aace2"));
             modifyIcon.setSize("15");
             modifyButton.setGraphic(modifyIcon);
             modifyButton.setCursor(Cursor.HAND);
@@ -288,7 +289,7 @@ public class PublicationDetailsController extends BaseForumController {
             try {
                 //todo USErid=6
 
-                if (!commentService.commentaireExists(commentText, pubId, 18)) {
+                if (!commentService.commentaireExists(commentText, pubId, userId)) {
                     boolean y = checkWithAiModel(commentText);
                     if(!y) {
                         Commentaires newComment = new Commentaires();
@@ -297,7 +298,7 @@ public class PublicationDetailsController extends BaseForumController {
                         newComment.setId_pub(pubId);
                         //todo USErid=6
 
-                        newComment.setUserId(18);
+                        newComment.setUserId(userId);
                         commentService.addPublicationOrCommentaire(newComment);
                         loadComments();
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);

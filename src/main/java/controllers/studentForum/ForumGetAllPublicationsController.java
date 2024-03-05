@@ -36,6 +36,7 @@ public class ForumGetAllPublicationsController extends BaseForumController {
 
     @FXML
     public  AnchorPane rootId ;
+    private int userId=State.UserSessionManager.getInstance().getCurrentUser().getId();
 
 
 
@@ -48,7 +49,7 @@ public class ForumGetAllPublicationsController extends BaseForumController {
     public void initialize() {
         refreshPublications();
         try {
-            mypub = pubs.getPublicationsByUserId(18); //todo userId
+            mypub = pubs.getPublicationsByUserId(userId); //todo userId
             mypub.sort(Comparator.comparing(Publications::getDate_creation).reversed());
 
             if (mypub.isEmpty()) {
