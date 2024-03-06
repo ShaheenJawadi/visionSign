@@ -26,8 +26,8 @@ public class NoteQuizController {
     private String sugg;
     @FXML
     private AnchorPane rootId ;
-    public  AnchorPane getVBoxRoot(){
-        return  this.rootId;
+    public AnchorPane getRootBox(){
+        return  this.rootId ;
     }
     public void setNoteQuiz(float note) {
         this.noteSur20=note;

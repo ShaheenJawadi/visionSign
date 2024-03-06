@@ -114,6 +114,8 @@ public class UserProfileController {
                 case "INTERMEDIAIRE" -> userToUpdate.setLevelId(2);
                 case "AVANCE" -> userToUpdate.setLevelId(3);
             }}
+            else
+                userToUpdate.setLevelId(1);
             System.out.println("aaaaaaaaaaaaaaaaaaaaa");
 
             if (validationError.isEmpty()) {
@@ -167,7 +169,7 @@ public class UserProfileController {
             validationError.append("Username should have at least 4 alphabetical characters and can contain numbers, _, and spaces.\n");
         }
 
-       if(levelTF.getText().isEmpty()){
+       if(!(userService.getCurrent().getRole()==UserRole.ADMIN) && levelTF.getText().isEmpty()){
            validationError.append("You must choose a level");
        }
         LocalDate currentDate = LocalDate.now();

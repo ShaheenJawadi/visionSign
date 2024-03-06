@@ -118,12 +118,7 @@ public class LoginController {
             createUser(credential);
         }
         if (userService.loginWithEmail(getUserEmail(credential)) != null){
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserProfile.fxml"));
-            Parent userProfileRoot = loader.load();
-            ScrollPane userProfileScrollPane = new ScrollPane(userProfileRoot);
-            userProfileScrollPane.setFitToWidth(true);
-            userProfileScrollPane.setFitToHeight(true);
-            usernameTF.getScene().setRoot(userProfileScrollPane);
+            MainNavigations.getInstance().openUserProfile();
 
 
     }}

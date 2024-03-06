@@ -49,8 +49,9 @@ public class CoursLessonsPageController implements Initializable {
 
 
 
-    public void setCours (Cours cours){
+    public void setCours(Cours cours){
 
+        cours.fetchUserCoursActivity();
         this.cours = cours ;
         System.out.println(cours);
         System.out.println(cours.getUserCoursActivity());

@@ -125,10 +125,10 @@ public class MainNavigations {
 
     public void openMainHomePage(){
 
-         User u = new User(3 , "qsmd@qsd.qsd");
-         u.setRole(UserRole.ENSEIGNANT);
+        // User u = new User(3 , "qsmd@qsd.qsd");
+        // u.setRole(UserRole.ENSEIGNANT);
 
-        UserSessionManager.getInstance().setCurrentUser(u);
+      //  UserSessionManager.getInstance().setCurrentUser(u);
         try
         {
 
@@ -213,7 +213,7 @@ public class MainNavigations {
 
 
             mainPageHolder.getChildren().clear();
-            mainPageHolder.getChildren().add(noteQuizController.getVBoxRoot());
+            mainPageHolder.getChildren().add(noteQuizController.getRootBox());
         }
         catch (IOException ex)
         {
