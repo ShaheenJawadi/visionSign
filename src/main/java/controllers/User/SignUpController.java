@@ -67,23 +67,27 @@ public class SignUpController {
     @FXML
     void ajouter(ActionEvent event) {
         String validationError = validateInputs();
-        if(validationError.isEmpty()){
+        if (validationError.isEmpty()) {
+            try {
+                userService.ajouter(new User(
+                        nomTF.getText(),
+                        prenomTF.getText(),
+                        usernameTF.getText(),
+                        emailTF.getText(),
+                        pwdTF.getText(), // Pass the raw password here
+                        UserRole.valueOf(roleTF.getText().toUpperCase())
+                ));
+                showAlertSuccess("Success", "Sign up successful", "Account is Ready!");
+                MainNavigations.getInstance().openSignIn();
 
-        try {
-            userService.ajouter(new User(nomTF.getText(),prenomTF.getText(),usernameTF.getText(),emailTF.getText(),pwdTF.getText(),
-                    UserRole.valueOf(roleTF.getText().toUpperCase())));
-            showAlertSuccess("Success","Sign up successful","Account is Ready!");
-            MainNavigations.getInstance().openSignIn();
-
+            } catch (SQLException e) {
+                showAlertError("Error", "", e.getMessage());
+            }
+        } else {
+            showAlertError("Validation error", "", validationError);
         }
-        catch (SQLException e){
-            showAlertError("Error","",e.getMessage());
-        }
-          }else
-           {showAlertError("Validation error","",validationError);}
-
-
     }
+
 
     @FXML
     void naviguer(ActionEvent event){
