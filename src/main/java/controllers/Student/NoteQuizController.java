@@ -14,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.scene.control.Alert;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class NoteQuizController {
@@ -55,6 +56,9 @@ public class NoteQuizController {
 
             for (int i = 0; i < questionsLists.size(); i++) {
                 Questions question = questionsLists.get(i);
+                System.out.println("list questions: "+ questionsLists.get(i).toString());
+                System.out.println("list suggestions fi west questions : "+ questionsLists.get(i).getSuggestionsQuestion().toString());
+
                 doc.addTitle("Question " + (i + 1));
                 doc.add(new com.itextpdf.text.Paragraph(question.getQuestion()));
                 doc.add(new Paragraph(" "));
@@ -71,13 +75,17 @@ public class NoteQuizController {
                     if (ratio > 1) {
                         image.scaleToFit(maxWidth / ratio, maxHeight / ratio);
                     }
+                    image.setAlignment(Element.ALIGN_CENTER);
+
                     doc.add(image);
                 }
 
                 doc.add(new Paragraph(" "));
 
+                suggestionLists=questionsLists.get(i).getSuggestionsQuestion();
                 for (int j = 0; j < suggestionLists.size(); j++) {
                     Suggestion suggestion = suggestionLists.get(j);
+                    //System.out.println("list des suggestion : "+suggestionLists.get(j).toString());
                     String userAnswer = useranswers.get(i);
                     String[] parts = userAnswer.split(" ");
                     String selectedAnswer = parts[2];

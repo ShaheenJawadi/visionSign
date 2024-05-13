@@ -39,13 +39,11 @@ public class QuizService implements IGestionQuiz<Quiz> {
 
     @Override
     public void modifierGestionQuiz(Quiz quiz) throws SQLException {
-        String sql = "UPDATE quiz SET nom=?, duree=?, coursId=? , userId=? WHERE id=?";
+        String sql = "UPDATE quiz SET nom=?, duree=? WHERE id=?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, quiz.getNom());
         ps.setString(2, quiz.getDuree());
-        ps.setInt(3, quiz.getCoursId());
-        ps.setInt(4, quiz.getUserId());
-        ps.setInt(5, quiz.getId());
+        ps.setInt(3, quiz.getId());
         ps.executeUpdate();
     }
 

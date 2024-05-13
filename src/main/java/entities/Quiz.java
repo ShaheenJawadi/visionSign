@@ -11,6 +11,12 @@ public class Quiz {
     private List<Questions> quizQuestions;
     public Quiz(){}
 
+    public Quiz(int id, String nom, String duree) {
+        this.id = id;
+        this.nom = nom;
+        this.duree = duree;
+    }
+
     public Quiz(int id, String nom, String duree, int coursId, int userId) {
         this.id = id;
         this.nom = nom;
