@@ -1,7 +1,10 @@
 package entities;
 
 public class Reactions {
-    private int user_id,pub_id,jaime,dislike;
+    private int user_id;
+    private int pub_id;
+    private int jaime;
+    private int dislike;
 
     public Reactions(int user_id, int pub_id, int jaime, int dislike) {
         this.user_id = user_id;

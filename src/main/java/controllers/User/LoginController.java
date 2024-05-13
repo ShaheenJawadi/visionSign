@@ -61,33 +61,25 @@ public class LoginController {
 
     }
     @FXML
-    void login(ActionEvent event)throws SQLException {
+    void login(ActionEvent event) throws SQLException {
         String username = usernameTF.getText();
         String password = pwdTF.getText();
-        if(username.isEmpty() || password.isEmpty()) return;
-        System.out.println(PasswordHashing.hashPassword(password));
-        if (userService.login(username, PasswordHashing.hashPassword(password)) != null) {
+        if (username.isEmpty() || password.isEmpty()) return;
+
+        if (userService.login(username, password) != null) {
             if (userService.getCurrent().getRole() == UserRole.ADMIN) {
                 MainNavigations.getInstance().openAdminProfile();
             } else {
-
                 MainNavigations.getInstance().openMainHomePage();
-               /* System.out.println("currentUser" + userService.getCurrent());
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/UserProfile.fxml"));
-                Parent userProfileRoot = loader.load();
-                ScrollPane userProfileScrollPane = new ScrollPane(userProfileRoot);
-                userProfileScrollPane.setFitToWidth(true);
-                userProfileScrollPane.setFitToHeight(true);
-                usernameTF.getScene().setRoot(userProfileScrollPane);*/
-                //UserProfileController userProfileController = loader.getController();
             }
-        }else {
-            Alert alert=new Alert(Alert.AlertType.ERROR);
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Login failed.");
             alert.setContentText("Invalid Username or password");
             alert.showAndWait();
         }
     }
+
     @FXML
     void naviguer(ActionEvent event){
         try {

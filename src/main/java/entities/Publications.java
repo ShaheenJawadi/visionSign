@@ -8,35 +8,46 @@ public class Publications {
     private String titre;
     private String contenu,images;
     private Date date_creation;
-    private int userId,jaime,dislike;
+    private int userId,jaime,dislike,nbClicks;
     private String userName;
     private List<Commentaires> pubCommentaires;
 
     public Publications() {
     }
 
-    public Publications(int id, String titre, String contenu, Date date_creation,String images, int userId) {
+    public Publications(int id, String titre, String contenu, Date date_creation,String images, int userId,int nbClicks) {
         this.id = id;
         this.titre = titre;
         this.contenu = contenu;
         this.images=images;
         this.date_creation = date_creation;
         this.userId = userId;
+        this.nbClicks=nbClicks;
     }
 
-    public Publications(String titre, String contenu, Date date_creation,String images, int userId) {
+    public Publications(String titre, String contenu, Date date_creation,String images, int userId,int nbClicks) {
         this.titre = titre;
         this.contenu = contenu;
         this.images=images;
         this.date_creation = date_creation;
         this.userId = userId;
+        this.nbClicks=nbClicks;
     }
 
-    public Publications(String titre, String contenu, Date date_creation, int userId) {
+    public Publications(String titre, String contenu, Date date_creation, int userId,int nbClicks) {
         this.titre = titre;
         this.contenu = contenu;
         this.date_creation = date_creation;
         this.userId = userId;
+        this.nbClicks=nbClicks;
+    }
+
+    public int getNbClicks() {
+        return nbClicks;
+    }
+
+    public void setNbClicks(int nbClicks) {
+        this.nbClicks = nbClicks;
     }
 
     public int getId() {
@@ -108,6 +119,7 @@ public class Publications {
     }
 
     public void setJaime(int jaime) {
+
         this.jaime = jaime;
     }
 
@@ -118,7 +130,6 @@ public class Publications {
     public void setDislike(int dislike) {
         this.dislike = dislike;
     }
-
     @Override
     public String toString() {
         String result = "Publications:\n{" +
@@ -127,7 +138,9 @@ public class Publications {
                 ", contenu='" + contenu + '\'' +
                 ", images='" + images+ '\'' +
                 ", date_creation=" + date_creation +
-                ", userId=" + userId;
+                ", userId=" + userId+
+                ", NBCLICKS=" + nbClicks;
+
 
         if (pubCommentaires != null && !pubCommentaires.isEmpty()) {
             result += ",\ncommentaires=[\n";

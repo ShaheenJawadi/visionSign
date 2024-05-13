@@ -16,13 +16,15 @@ public class PublicationsService implements IForum<Publications> {
 
     @Override
     public void addPublicationOrCommentaire(Publications publications) throws SQLException {
-        String sql = "INSERT INTO publications (titre, contenu,images, date_creation,user_id) VALUES (?, ?,?, ?,?)";
+        String sql = "INSERT INTO publications (titre, contenu,images, date_creation,user_id,nbClicks) VALUES (?, ?,?, ?,?,?)";
         PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, publications.getTitre());
         ps.setString(2, publications.getContenu());
         ps.setString(3, publications.getImages());
         ps.setTimestamp(4, new Timestamp(publications.getDate_creation().getTime()));
         ps.setInt(5, publications.getUserId());
+        ps.setInt(6, publications.getNbClicks());
+
         int affectedRows = ps.executeUpdate();
 
         if (affectedRows == 0) {
@@ -41,14 +43,16 @@ public class PublicationsService implements IForum<Publications> {
 
     @Override
     public void updatePublicationOrCommentaire(Publications publications) throws SQLException {
-        String sql = "UPDATE publications SET titre=?, contenu=?,images=?, date_creation=? , user_id=?  WHERE id=?";
+        String sql = "UPDATE publications SET titre=?, contenu=?,images=?, date_creation=? , user_id=? ,nbClicks=? WHERE id=?";
         PreparedStatement ps = connection.prepareStatement(sql);
         ps.setString(1, publications.getTitre());
         ps.setString(2, publications.getContenu());
         ps.setString(3, publications.getImages());
         ps.setTimestamp(4, new Timestamp(publications.getDate_creation().getTime()));
         ps.setInt(5, publications.getUserId());
-        ps.setInt(6, publications.getId());
+        ps.setInt(6, publications.getNbClicks());
+        ps.setInt(7, publications.getId());
+
         ps.executeUpdate();
     }
 
@@ -77,6 +81,7 @@ public class PublicationsService implements IForum<Publications> {
             publication.setImages(rs.getString("images"));
             publication.setDate_creation(rs.getTimestamp("date_creation"));
             publication.setUserId(rs.getInt("user_id"));
+            publication.setNbClicks(rs.getInt("nbClicks"));
             publication.setUserName(rs.getString("username"));
             publication.setPubCommentaires(cs.getCommentairesByPublicationId(publication.getId()));
         }
@@ -103,7 +108,10 @@ public class PublicationsService implements IForum<Publications> {
             publication.setImages(rs.getString("images"));
             publication.setDate_creation(rs.getTimestamp("date_creation"));
             publication.setUserId(rs.getInt("user_id"));
+            publication.setNbClicks(rs.getInt("nbClicks"));
+
             publication.setUserName(rs.getString("username"));
+
             publication.setJaime(rs.getInt("jaime_count"));
             publication.setDislike(rs.getInt("dislike_count"));
             publication.setPubCommentaires(cs.getCommentairesByPublicationId(publication.getId()));
@@ -130,6 +138,8 @@ public class PublicationsService implements IForum<Publications> {
             publication.setImages(rs.getString("images"));
             publication.setDate_creation(rs.getTimestamp("date_creation"));
             publication.setUserId(rs.getInt("user_id"));
+            publication.setNbClicks(rs.getInt("nbClicks"));
+
             publication.setPubCommentaires(cs.getCommentairesByPublicationId(publication.getId()));
 
             matchingPublications.add(publication);
@@ -153,6 +163,8 @@ public class PublicationsService implements IForum<Publications> {
             publication.setImages(rs.getString("images"));
             publication.setDate_creation(rs.getTimestamp("date_creation"));
             publication.setUserId(rs.getInt("user_id"));
+            publication.setNbClicks(rs.getInt("nbClicks"));
+
             publication.setPubCommentaires(cs.getCommentairesByPublicationId(publication.getId()));
 
             userPublications.add(publication);

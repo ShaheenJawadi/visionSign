@@ -169,7 +169,7 @@ public class AddPublicationController extends BaseForumController {
                         String imageUrls = String.join(";", selectedImagePaths);
                         //todo USErid=6
 
-                        pubs.addPublicationOrCommentaire(new Publications(titreText, questionText, new Date(), imageUrls, 18));
+                        pubs.addPublicationOrCommentaire(new Publications(titreText, questionText, new Date(), imageUrls, userId,0));
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Succès!");
                         alert.setContentText("Publication ajoutée!");

@@ -108,7 +108,7 @@
                         </HBox>
                         <ScrollPane fitToWidth="true" style="-fx-background-color: white;" VBox.vgrow="ALWAYS">
                            <content>
-                              <VBox fx:id="allpubid" style="-fx-background-color: #000;" />
+                              <VBox fx:id="allpubid" style="-fx-background-color: #fff;" />
                            </content>
                         </ScrollPane>
                      </children>
