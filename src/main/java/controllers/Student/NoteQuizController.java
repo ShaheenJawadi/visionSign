@@ -1,5 +1,6 @@
 package controllers.Student;
 
+import State.MainNavigations;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import entities.Questions;
@@ -61,8 +62,8 @@ public class NoteQuizController {
                 String imageUrl = question.getImage();
                 if (imageUrl != null && !imageUrl.isEmpty()) {
                     Image image = Image.getInstance(imageUrl);
-                    float maxWidth = 500f;
-                    float maxHeight = 500f;
+                    float maxWidth = 300f;
+                    float maxHeight = 300f;
                     float widthRatio = image.getWidth() / maxWidth;
                     float heightRatio = image.getHeight() / maxHeight;
                     float ratio = Math.max(widthRatio, heightRatio);
@@ -139,6 +140,6 @@ public class NoteQuizController {
 
     @FXML
     public void retourAccueil(){
-        //TODO à changer apres pour etre dynamique integration
+        MainNavigations.getInstance().openMainHomePage();
     }
 }

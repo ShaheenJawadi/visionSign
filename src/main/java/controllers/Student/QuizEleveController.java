@@ -314,18 +314,11 @@ public class QuizEleveController {
             try {
                 notesService.ajouterNote(new Notes(noteSur20, usserId, quizId)); // à changer apres pour etre dynamique integration
                 quizCompleted=true;
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/Student/NoteQuiz.fxml"));
-                Parent root = loader.load();
 
-                NoteQuizController noteQuizController = loader.getController();
-                noteQuizController.setNoteQuiz(noteSur20);
-                noteQuizController.setNombreQuestions(questionsList.size());
-                noteQuizController.setDownload(questionsList,suggestionList,answers);
+                MainNavigations.getInstance().openQuizzNotePage(noteSur20,questionsList.size(),questionsList, suggestionList, answers);
 
 
-                questionLabel.getScene().setRoot(root);
-
-            } catch (SQLException | IOException e) {
+            } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         }

@@ -78,6 +78,11 @@
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                     </Button>
+                                    <Button mnemonicParsing="false" onAction="#openQuizPage" style="-fx-background-color: #fff;" text="Quiz">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </Button>
                                  </children>
                                  <cursor>
                                     <Cursor fx:constant="DEFAULT" />

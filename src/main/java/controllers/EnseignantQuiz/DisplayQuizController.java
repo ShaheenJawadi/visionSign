@@ -1,5 +1,6 @@
 package controllers.EnseignantQuiz;
 
+import State.MainNavigations;
 import State.TeacherNavigations;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -132,7 +133,7 @@ public class DisplayQuizController {
 
             List<Questions> quizQuestions = questionsService.getAllQuizQuestionsByQuizId(quizId);
             for (int i = 0; i < quizQuestions.size(); i++) {
-                    Pane pane = createQuestionPane(quizQuestions.get(i),i);
+                Pane pane = createQuestionPane(quizQuestions.get(i),i);
                 listeQuestionsOfQuiz.getChildren().add(pane);
                 listeQuestionsOfQuiz.setSpacing(10);
                 Separator separator = new Separator();
@@ -145,14 +146,16 @@ public class DisplayQuizController {
             throw new RuntimeException(e);
         }
     }
-     public Pane createQuestionPane(Questions question,int i){
+    public Pane createQuestionPane(Questions question,int i){
         Pane pane = new Pane();
-        pane.setPrefSize(668, 278);
-        // pane.setPrefSize(-1,-1);
-    //pane.setPrefHeight(278);
-         pane.setStyle("-fx-background-color: white;");
-        pane.setLayoutY(0+i * (90));
-        // pane.setLayoutY(-1);
+        pane.setPrefSize(668, 378);
+        // pane.setPrefSize(800, 878);
+
+        //pane.setPrefHeight(278);
+        pane.setStyle("-fx-background-color: white;");
+        // pane.setLayoutY(0+i * (90));
+
+
         Text questionLabel = new Text("Question:");
         questionLabel.setLayoutX(27);
         questionLabel.setLayoutY(32);
@@ -362,7 +365,7 @@ public class DisplayQuizController {
         deleteButton.setPrefSize(120, 40);
         deleteButton.setStyle("-fx-background-color: #00aeef; -fx-background-radius: 50; -fx-border-radius: 50; -fx-text-fill: white;");
         deleteButton.setFont(Font.font("System Bold", 13));
-       // deleteButton.setCursor(Cursor.HAND);
+        // deleteButton.setCursor(Cursor.HAND);
         deleteButton.setOnAction(event -> {
             QuestionsService qs = new QuestionsService();
             SuggestionService ss = new SuggestionService();
@@ -734,7 +737,7 @@ public class DisplayQuizController {
                     //QuestionsService qs=new QuestionsService();
                     QuizService quizService1=new QuizService();
 
-                   // qs.deleteAllQuestionsByQuizId(myQuiz.get(index).getId());
+                    // qs.deleteAllQuestionsByQuizId(myQuiz.get(index).getId());
 
                     quizService1.supprimerGestionQuiz(myQuiz.get(index).getId());
                     myQuiz.remove(index);
@@ -809,7 +812,7 @@ public class DisplayQuizController {
 
     @FXML
     void quitterAction(ActionEvent event){
-//TODO à changer apres pour etre dynamique integration
+        MainNavigations.getInstance().openMainHomePage();
     }
 
 
