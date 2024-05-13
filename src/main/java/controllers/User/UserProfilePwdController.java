@@ -49,7 +49,8 @@ void initialize(){
     void modifier(ActionEvent event) {
         String validationError = validateInputs();
         User user=userService.getCurrent();
-        String oldPassword= PasswordHashing.hashPassword(oldPwdTF.getText().trim());
+       // String oldPassword= PasswordHashing.hashPassword(oldPwdTF.getText().trim());
+        String oldPassword= oldPwdTF.getText().trim();
         System.out.println( user +":" + user.getPassword());
         System.out.println(oldPassword);
         try{

@@ -65,8 +65,8 @@ public class LoginController {
         String username = usernameTF.getText();
         String password = pwdTF.getText();
         if(username.isEmpty() || password.isEmpty()) return;
-        System.out.println(PasswordHashing.hashPassword(password));
-        if (userService.login(username, PasswordHashing.hashPassword(password)) != null) {
+         if (userService.login(username, password) != null) {
+            //if (userService.login(username, PasswordHashing.hashPassword(password)) != null) {
             if (userService.getCurrent().getRole() == UserRole.ADMIN) {
                 MainNavigations.getInstance().openAdminProfile();
             } else {

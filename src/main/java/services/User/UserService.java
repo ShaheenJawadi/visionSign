@@ -41,7 +41,8 @@ public class UserService implements IUserServices<User>{
         ps.setString(2, user.getPrenom());
         ps.setString(3, user.getUsername());
         ps.setString(4, user.getEmail());
-        ps.setString(5, PasswordHashing.hashPassword(user.getPassword()));
+        //ps.setString(5, PasswordHashing.hashPassword(user.getPassword()));
+        ps.setString(5,user.getPassword());
         ps.setString(6, user.getRole().name().toUpperCase());
         ps.setString(7,user.getToken());
         ps.executeUpdate();
@@ -74,7 +75,8 @@ public class UserService implements IUserServices<User>{
         System.out.println(user.getPassword());
         String sql="update user set password=? where id=?";
         PreparedStatement ps= connection.prepareStatement(sql);
-        ps.setString(1, PasswordHashing.hashPassword(user.getPassword()));
+        //ps.setString(1, PasswordHashing.hashPassword(user.getPassword()));
+        ps.setString(1,user.getPassword());
         ps.setInt(2,user.getId());
         ps.executeUpdate();
         setCurrent_User(user);
