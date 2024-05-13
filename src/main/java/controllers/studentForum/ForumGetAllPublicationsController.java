@@ -1,5 +1,6 @@
 package controllers.studentForum;
 
+import State.MainNavigations;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 
@@ -15,6 +16,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -52,8 +56,9 @@ public class ForumGetAllPublicationsController extends BaseForumController {
         try {
             mypub = pubs.getPublicationsByUserId(userId); //todo userId
             mypub.sort(Comparator.comparing(Publications::getDate_creation).reversed());
-
+            System.out.println(mypub.toString());
             if (mypub.isEmpty()) {
+                System.out.println("are u here");
                 Text emptyText = new Text("Vous n'avez pas encore publié!");
                 emptyText.setFont(new Font("System", 15));
                 emptyText.setFill(Color.GRAY);
@@ -61,17 +66,20 @@ public class ForumGetAllPublicationsController extends BaseForumController {
                 emptyText.setLayoutY(172);
                 listepubid.getChildren().add(emptyText);
             } else {
+                System.out.println("or here");
                 for (int i = 0; i < mypub.size(); i++) {
                     Pane pane = createPublicationPane(mypub.get(i), i, false);
                     listepubid.getChildren().add(pane);
                 }
-            }
+            }System.out.println("got here");
             listepubid.setPrefHeight(mypub.isEmpty() ? 100 : mypub.size() * 85);
+            System.out.println("pubsssssssssssssssssssssssssssssss");
 
             allPub = pubs.getAllPublications();
+
+
             allPub.sort(Comparator.comparing(Publications::getDate_creation).reversed());
             allpubid.getChildren().clear();
-
             if (allPub.isEmpty()) {
                 Text emptyText = new Text("Aucune publication n'a été publiée.");
                 emptyText.setFont(new Font("System", 16));
@@ -85,8 +93,7 @@ public class ForumGetAllPublicationsController extends BaseForumController {
                     allpubid.getChildren().add(pane);
                 }
             }
-            allpubid.setPrefHeight(allPub.isEmpty() ? 100 : allPub.size() * 165);
-
+            allpubid.setPrefHeight(allPub.isEmpty() ? 100 : allPub.size() * 200);
         } catch (SQLException e) {
             System.out.println(e);
             throw new RuntimeException(e);

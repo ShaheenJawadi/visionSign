@@ -88,7 +88,7 @@ public class BaseForumController {
                     if (event.getClickCount() == 1) {
 
 
-                            MainNavigations.getInstance().openPublicationDetailsForumPage(publication.getId());
+                        MainNavigations.getInstance().openPublicationDetailsForumPage(publication.getId());
                     }
                 }
             }
@@ -152,99 +152,11 @@ public class BaseForumController {
             commentButton.setGraphic(commentIcon);
 
 
-            Button likeButton = new Button(publication.getJaime() + " Like");
-            likeButton.setLayoutX(160);
-            likeButton.setLayoutY(publication.getImages().isEmpty() ? 121 :205);
-            likeButton.setPrefSize(90, 27);
-            likeButton.setStyle("-fx-background-color: white;");
-            likeButton.setTextFill(Color.web("#34364a"));
-            FontAwesomeIconView likeIcon = new FontAwesomeIconView(FontAwesomeIcon.THUMBS_UP);
-            likeIcon.setFill(Color.web("#008000"));
-            likeIcon.setSize("14");
-            likeButton.setGraphic(likeIcon);
-
-
-            Platform.runLater(() -> {
-                try {
-                    //TODO USERID
-                    boolean isLiked = reactionsService.isLikedByUser(userId, publication.getId());
-
-                    if (isLiked) {
-                        likeButton.setStyle("-fx-background-color: #E2FFE2;-fx-background-radius: 200;");
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            });
 
 
 
 
-            Button dislikeButton = new Button(publication.getDislike() + " Dislike");
-            dislikeButton.setLayoutX(250);
-            dislikeButton.setLayoutY(publication.getImages().isEmpty() ? 121 :205);
 
-            dislikeButton.setPrefSize(90, 27);
-            dislikeButton.setStyle("-fx-background-color: white;");
-            dislikeButton.setTextFill(Color.web("#34364a"));
-            FontAwesomeIconView dislikeIcon = new FontAwesomeIconView(FontAwesomeIcon.THUMBS_DOWN);
-            dislikeIcon.setFill(Color.web("#FF0000"));
-            dislikeIcon.setSize("14");
-            dislikeButton.setGraphic(dislikeIcon);
-            likeButton.setOnAction(event -> {
-                try {
-                    //todo USErid=6
-                    reactionsService.addLike(userId, publication.getId(), 1, 0);
-
-                    int updatedLikes = reactionsService.getLikesCount(publication.getId());
-                    int updatedDislikes = reactionsService.getDislikesCounts(publication.getId());
-
-                    likeButton.setText(updatedLikes + " Like");
-                    dislikeButton.setText(updatedDislikes + " Dislike");
-
-                    likeButton.setStyle("-fx-background-color: #E2FFE2;-fx-background-radius: 200;");
-                    dislikeButton.setStyle("-fx-background-color: white;");
-                    playSound("https://res.cloudinary.com/dkdx59xe9/video/upload/v1709508219/Facebook_Like_Sound_Effect_nbc6ju.mp3");
-
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-            dislikeButton.setOnAction(event -> {
-                try {
-                    //todo USErid=6
-
-                    reactionsService.addLike(userId, publication.getId(), 0, 1);
-
-                    int updatedLikes = reactionsService.getLikesCount(publication.getId());
-                    int updatedDislikes = reactionsService.getDislikesCounts(publication.getId());
-
-                    likeButton.setText(updatedLikes + " Like");
-                    dislikeButton.setText(updatedDislikes + " Dislike");
-
-                    dislikeButton.setStyle("-fx-background-color: #FFE2E2;-fx-background-radius: 200;");
-                    likeButton.setStyle("-fx-background-color: white;");
-
-                    playSound("https://res.cloudinary.com/dkdx59xe9/video/upload/v1709508219/Facebook_Like_Sound_Effect_nbc6ju.mp3");
-
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-
-            Platform.runLater(() -> {
-                try {
-                    //todo USErid=6
-
-                    boolean isdisliked = reactionsService.isDislikedByUser(userId, publication.getId());
-
-                    if (isdisliked) {
-                        dislikeButton.setStyle("-fx-background-color: #FFE2E2;-fx-background-radius: 200;");
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            });
 
             if (publication.getImages() != null && !publication.getImages().isEmpty()) {
                 AnchorPane imagesPane = new AnchorPane();
@@ -286,7 +198,8 @@ public class BaseForumController {
             }
 
 
-            pane.getChildren().addAll(titreText, iconPane, userIdText, roleText, contenuText, dateText, commentButton,likeButton,dislikeButton);
+            pane.getChildren().addAll(titreText, iconPane, userIdText, roleText, contenuText, dateText, commentButton);
+
         } else {
             Button modifyButton = new Button();
             modifyButton.setLayoutX(202);
@@ -303,7 +216,7 @@ public class BaseForumController {
                 @Override
                 public void handle(ActionEvent event) {
                     MainNavigations.getInstance().openModifyPublicationForumPage(mypub.get(index).getId());
-                     refreshPublications();
+                    refreshPublications();
 
                 }
             });
@@ -351,6 +264,7 @@ public class BaseForumController {
             });
 
             pane.getChildren().addAll(titreText, dateText, modifyButton, deleteButton);
+
         }
 
         return pane;

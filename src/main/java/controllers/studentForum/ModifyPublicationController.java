@@ -267,7 +267,7 @@ public class ModifyPublicationController extends BaseForumController  {
                 //todo USErid=6
 
                 // Update the publication with the new image URLs
-                pubs.updatePublicationOrCommentaire(new Publications(pubId, titreText, questionText, new Date(), imageUrls, userId));
+                pubs.updatePublicationOrCommentaire(new Publications(pubId, titreText, questionText, new Date(), imageUrls, userId,0));
 
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success!");
