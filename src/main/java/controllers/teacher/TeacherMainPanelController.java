@@ -44,7 +44,9 @@ public class TeacherMainPanelController  implements Initializable {
         TeacherNavigations.getInstance().openCoursListPage();
 
     }
-
+    public void openQuizPage(){
+        TeacherNavigations.getInstance().openQuizz();
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

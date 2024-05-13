@@ -177,7 +177,28 @@ public class TeacherNavigations {
             System.out.println(ex.toString());
         }
     }
+    public void openQuizz(){
+        try
+        {
 
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/teacher/quiz/DisplayQuiz.fxml"));
+            Parent root = loader.load();
+
+            DisplayQuizController displayQuizController = loader.getController();
+
+
+
+
+
+
+            mainPageHolder.getChildren().clear();
+            mainPageHolder.getChildren().add(displayQuizController.getRootId());
+        }
+        catch (IOException ex)
+        {
+            System.out.println(ex.toString());
+        }
+    }
 
 
 
