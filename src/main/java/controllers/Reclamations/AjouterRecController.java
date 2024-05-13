@@ -38,7 +38,7 @@ public class AjouterRecController {
     @FXML
     private TextField searchField1;
     @FXML
-    private TextField statFx,userid;
+    private TextField userid;
     @FXML
     public AnchorPane rootId;
     public AnchorPane getRootBox(){
@@ -79,7 +79,7 @@ public class AjouterRecController {
         try {
             String typeReclamation = typeCombo.getValue();
             //TODO userid=1
-            Reclamations nouvelleReclamation = new Reclamations(typeReclamation, desFx.getText(), statFx.getText(), usserId);
+            Reclamations nouvelleReclamation = new Reclamations(typeReclamation, desFx.getText(),"pending" , usserId);
             reclamationsServices.ajouterRec(nouvelleReclamation, typeReclamation); // Utilisation de la méthode ajouterRec
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Information");

@@ -55,8 +55,7 @@ public class AvisCoursController implements Initializable {
     private VBox rootId;
 
     private int CoursId;
-    private int userId;
-
+    private int userId=State.UserSessionManager.getInstance().getCurrentUser().getId();
     public VBox getRoot() {
         return this.rootId;
     }
@@ -165,7 +164,6 @@ public class AvisCoursController implements Initializable {
                 return;
             }
 
-            int userId = 3; // Utilisateur fictif pour l'exemple
             Avis nouvelAvis = new Avis(note, message, userId, CoursId);
 
             AvisServices avisServices = new AvisServices();
