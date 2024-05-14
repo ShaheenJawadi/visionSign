@@ -75,7 +75,7 @@ public class SignUpController {
                         usernameTF.getText(),
                         emailTF.getText(),
                         pwdTF.getText(), // Pass the raw password here
-                        UserRole.valueOf(roleTF.getText().toUpperCase())
+                        UserRole.valueOf("ELEVE")
                 ));
                 showAlertSuccess("Success", "Sign up successful", "Account is Ready!");
                 MainNavigations.getInstance().openSignIn();

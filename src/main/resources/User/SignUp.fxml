@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import io.github.palexdev.materialfx.controls.MFXComboBox?>
-<?import io.github.palexdev.materialfx.controls.MFXPasswordField?>
-<?import io.github.palexdev.materialfx.controls.MFXTextField?>
-<?import javafx.scene.control.Hyperlink?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import io.github.palexdev.materialfx.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="rootId" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.User.SignUpController">
+<AnchorPane fx:id="rootId" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.User.SignUpController">
     <children>
         <AnchorPane prefHeight="600.0" prefWidth="460.0" style="-fx-background-color: #081f30;">
             <children>
@@ -48,7 +44,7 @@
                 <MFXTextField fx:id="prenomTF" floatingTextGap="1.0" layoutX="39.0" layoutY="176.0" prefHeight="46.0" prefWidth="282.0" promptText="Prenom" />
                 <MFXTextField fx:id="usernameTF" floatingTextGap="1.0" layoutX="39.0" layoutY="230.0" prefHeight="46.0" prefWidth="282.0" promptText="Alias" />
                 <MFXTextField fx:id="emailTF" floatingTextGap="1.0" layoutX="39.0" layoutY="287.0" prefHeight="46.0" prefWidth="282.0" promptText="Email" />
-                <MFXComboBox fx:id="roleTF" layoutX="39.0" layoutY="395.0" prefHeight="46.0" prefWidth="282.0" promptText="Role" />
+                <MFXComboBox fx:id="roleTF" layoutX="39.0" layoutY="395.0" prefHeight="46.0" prefWidth="282.0" promptText="Role" visible="false" />
                 <Label layoutX="25.0" layoutY="578.0" prefHeight="18.0" prefWidth="146.0" text="Already have an account ?" />
                 <Hyperlink fx:id="hpId1" layoutX="171.0" layoutY="575.0" onAction="#naviguer" text="Login" />
             </children></AnchorPane>
